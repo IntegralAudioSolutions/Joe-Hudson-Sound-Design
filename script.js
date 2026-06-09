@@ -47,27 +47,27 @@
   AudioContext is created lazily — only on the first user gesture.
   Chrome (and most modern browsers) block AudioContext creation until
   the user has interacted with the page. Creating it on page load
-  triggers 376 "not allowed to start" warnings and no audio plays.
+  triggers hundreds of "not allowed to start" warnings.
 
   audioCtx starts as null. The first time resumeAudio() is called
-  (which happens on every mouseenter and click), it creates the context
-  if it doesn't exist yet, then loads all the sound files.
-  Every subsequent call just ensures it isn't suspended.
+  it creates the context and silently pre-loads all sound files into
+  the buffer cache. No sounds play during loading — playback only
+  happens when playBuffer() is explicitly called from a hover or click.
 */
 let audioCtx     = null;
-const audioBuffers = {}; // cache: { 'hover': AudioBuffer, 'gold': AudioBuffer, ... }
-let soundsLoaded = false; // flag so we only call loadAllSounds() once
+const audioBuffers = {};
+let soundsLoading = false; // prevents loadAllSounds() firing more than once
 
 /**
  * Create the AudioContext on first user gesture, or resume if suspended.
- * Called at the start of every sound function.
+ * Triggers a silent background load of all sound files on first call.
  */
 function resumeAudio() {
   if (!audioCtx) {
-    // First interaction — create the context and load all sounds
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (!soundsLoaded) {
-      soundsLoaded = true;
+    if (!soundsLoading) {
+      soundsLoading = true;
+      // Load files silently in the background — no playback triggered here
       loadAllSounds();
     }
   } else if (audioCtx.state === 'suspended') {
@@ -89,10 +89,16 @@ function resumeAudio() {
  */
 async function loadSound(name, url) {
   try {
-    const response     = await fetch(url);
-    const arrayBuffer  = await response.arrayBuffer();
-    // audioCtx is guaranteed to exist here because loadAllSounds()
-    // is only ever called from inside resumeAudio() after context creation
+    const response    = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+
+    /*
+      decodeAudioData() decodes the file into a raw PCM AudioBuffer.
+      We store it in the cache but do NOT call source.start() here —
+      that was causing all sounds to fire simultaneously on first load.
+      Playback only happens when playBuffer() is explicitly called
+      from a user interaction event (mouseenter / click).
+    */
     audioBuffers[name] = await audioCtx.decodeAudioData(arrayBuffer);
   } catch (err) {
     /*
@@ -157,11 +163,19 @@ async function loadAllSounds() {
  * @param {number} volume - Gain multiplier (0.0 to 1.0)
  */
 function playBuffer(name, volume = 1.0) {
-  resumeAudio();
+  /*
+    Do NOT call resumeAudio() here — that creates the AudioContext and
+    triggers loadAllSounds(). If resumeAudio() were called from inside
+    playBuffer, every decoded buffer completion would re-enter here and
+    fire all cached sounds simultaneously (the "all sounds at once" bug).
 
-  if (!audioCtx) return; // context creation failed — skip silently
+    resumeAudio() is called only from the event binding layer below.
+    Context management and playback are strictly separate.
+  */
+  if (!audioCtx || audioCtx.state === 'suspended') return;
+
   const buffer = audioBuffers[name];
-  if (!buffer) return; // file not loaded yet — skip silently
+  if (!buffer) return; // still decoding — skip silently
 
   const source = audioCtx.createBufferSource();
   const gain   = audioCtx.createGain();
@@ -309,15 +323,15 @@ if (tickerItems.length > 0) {
 
 // Nav links
 [...document.querySelectorAll('.nav-link')].forEach(el => {
-  el.addEventListener('mouseenter', playHover);
-  el.addEventListener('click', () => { playClick('cyan'); setActiveNav(el); });
+  el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
+  el.addEventListener('click', () => { resumeAudio(); playClick('cyan'); setActiveNav(el); });
 });
 
 // Logo block
 const logoBlock = document.querySelector('.nav-logo-block');
 if (logoBlock) {
-  logoBlock.addEventListener('mouseenter', playHover);
-  logoBlock.addEventListener('click', () => playClick('gold'));
+  logoBlock.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
+  logoBlock.addEventListener('click', () => { resumeAudio(); playClick('gold'); });
 }
 
 // LCARS pills
