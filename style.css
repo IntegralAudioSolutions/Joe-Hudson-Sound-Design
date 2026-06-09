@@ -119,6 +119,9 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
+  /* Constrain overall site width — prevents over-stretching on wide monitors */
+  max-width: 1400px;
+  margin: 0 auto;
   /* Subtle scanline overlay across the entire page — the LCARS feel */
   background-image: repeating-linear-gradient(
     0deg,
@@ -181,9 +184,9 @@ h1, h2, h3 {
   border-bottom: 2px solid var(--color-gold);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* Links sit immediately after the logo, not pushed to far right */
+  justify-content: flex-start;
   height: 48px;
-  /* Stick to top of viewport as user scrolls */
   position: sticky;
   top: 0;
   z-index: 100;
@@ -283,6 +286,7 @@ h1, h2, h3 {
   border: none;
   cursor: pointer;
   padding: 0;
+  margin-left: auto;  /* pushes hamburger to right on mobile */
   margin-right: var(--space-md);
 }
 
@@ -709,13 +713,17 @@ h1, h2, h3 {
   gap: 8px;
 }
 
-/* Small rectangular blocks in the sidebar */
+/* Small rectangular blocks in the sidebar.
+   Can be a <div> (decorative) or <a> (navigational) — both need
+   display: block so they respect width and height correctly. */
 .lb {
+  display: block;
   width: 48px;
   border-radius: 3px;
   cursor: pointer;
   transition: filter var(--transition-fast);
   flex-shrink: 0;
+  text-decoration: none;
 }
 
 .lb:hover { filter: brightness(1.5); }

@@ -200,15 +200,15 @@
     }
 
     /*
-      The image grid.
-      Uses CSS Grid with auto-fill — fills as many columns as fit
-      at a minimum of 200px each. On wide screens this gives 4-5
-      columns; on tablet 3; on mobile 2.
+      The image grid — fixed 6 columns.
+      max-width constrains the overall site width so it doesn't
+      sprawl across ultra-wide monitors.
     */
     .image-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(6, 1fr);
       gap: 3px;
+      max-width: 1200px;
     }
 
     /* Individual grid cell */
@@ -298,7 +298,7 @@
 
     @media (max-width: 900px) {
       .image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
