@@ -43,16 +43,34 @@
    to load on first play.
 ---------------------------------------------------------------- */
 
-const audioCtx     = new (window.AudioContext || window.webkitAudioContext)();
+/*
+  AudioContext is created lazily — only on the first user gesture.
+  Chrome (and most modern browsers) block AudioContext creation until
+  the user has interacted with the page. Creating it on page load
+  triggers 376 "not allowed to start" warnings and no audio plays.
+
+  audioCtx starts as null. The first time resumeAudio() is called
+  (which happens on every mouseenter and click), it creates the context
+  if it doesn't exist yet, then loads all the sound files.
+  Every subsequent call just ensures it isn't suspended.
+*/
+let audioCtx     = null;
 const audioBuffers = {}; // cache: { 'hover': AudioBuffer, 'gold': AudioBuffer, ... }
+let soundsLoaded = false; // flag so we only call loadAllSounds() once
 
 /**
- * Resume the AudioContext if the browser suspended it.
- * Browsers suspend audio until the first user interaction (click/tap).
- * Call this at the start of any playback function.
+ * Create the AudioContext on first user gesture, or resume if suspended.
+ * Called at the start of every sound function.
  */
 function resumeAudio() {
-  if (audioCtx.state === 'suspended') {
+  if (!audioCtx) {
+    // First interaction — create the context and load all sounds
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!soundsLoaded) {
+      soundsLoaded = true;
+      loadAllSounds();
+    }
+  } else if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
 }
@@ -73,6 +91,8 @@ async function loadSound(name, url) {
   try {
     const response     = await fetch(url);
     const arrayBuffer  = await response.arrayBuffer();
+    // audioCtx is guaranteed to exist here because loadAllSounds()
+    // is only ever called from inside resumeAudio() after context creation
     audioBuffers[name] = await audioCtx.decodeAudioData(arrayBuffer);
   } catch (err) {
     /*
@@ -115,9 +135,8 @@ async function loadAllSounds() {
   ]);
 }
 
-// Kick off loading immediately on page load — by the time the user
-// first hovers anything the files should already be decoded and cached
-loadAllSounds();
+// Sound files are loaded on first user interaction via resumeAudio()
+// — see the lazy AudioContext creation at the top of this file.
 
 
 /* ----------------------------------------------------------------
@@ -140,6 +159,7 @@ loadAllSounds();
 function playBuffer(name, volume = 1.0) {
   resumeAudio();
 
+  if (!audioCtx) return; // context creation failed — skip silently
   const buffer = audioBuffers[name];
   if (!buffer) return; // file not loaded yet — skip silently
 
