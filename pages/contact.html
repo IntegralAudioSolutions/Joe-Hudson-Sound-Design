@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact — Joe Hudson · Senior Technical Sound Designer</title>
+  <meta name="description" content="Get in touch — project enquiries, collaborations, and availability. Senior Technical Sound Designer specialising in UE5 world-building audio." />
+
+  <meta property="og:title"       content="Contact — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="Project enquiries, availability, and collaborations." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/contact.html" />
+  <meta property="og:type"        content="website" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/contact.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ── PAGE HEADER ─────────────────────────────────────────── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong {
+      font-weight: 600;
+      color: var(--color-gold-bright);
+    }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────── */
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .contact-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .contact-content {
+      padding: var(--space-xl);
+      /* Two-column layout: form on left, info panels on right */
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* ── CONTACT FORM ────────────────────────────────────────── */
+    /*
+      Note on form submission:
+      A plain HTML form can't send email on its own — it needs a
+      backend service. For GitHub Pages (static hosting), the easiest
+      options are:
+        - Formspree (https://formspree.io) — free tier available
+        - Netlify Forms — if you ever move to Netlify hosting
+        - EmailJS — sends email directly from JavaScript
+      
+      The form action is set to "#" as a placeholder.
+      Replace with your Formspree endpoint once set up:
+        action="https://formspree.io/f/YOUR_FORM_ID"
+      
+      Instructions are in the README.md.
+    */
+
+    .contact-form-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .form-label-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: var(--space-md);
+    }
+
+    .form-section-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .form-section-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(212, 172, 80, 0.15);
+    }
+
+    /* Form field group — label + input stacked */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /*
+      Input and textarea base styles.
+      We use a common class .form-input for both so styling is consistent.
+    */
+    .form-input {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 10px 12px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-text);
+      outline: none;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+      width: 100%;
+    }
+
+    .form-input::placeholder {
+      color: var(--color-text-deep);
+      font-size: 12px;
+    }
+
+    .form-input:hover {
+      border-color: rgba(212, 172, 80, 0.2);
+    }
+
+    /* Focused state — cyan glow border */
+    .form-input:focus {
+      border-color: var(--color-cyan-border);
+      background: #0c0f18;
+      box-shadow: 0 0 0 2px rgba(0, 200, 224, 0.06);
+    }
+
+    textarea.form-input {
+      resize: vertical;       /* allow vertical resize only */
+      min-height: 140px;
+      line-height: 1.65;
+    }
+
+    /* Select dropdown */
+    select.form-input {
+      appearance: none;       /* remove browser default arrow */
+      cursor: pointer;
+      /* Custom arrow using background SVG — keeps the LCARS aesthetic */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%233a4a5a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    select.form-input option {
+      background: var(--color-bg-surface);
+      color: var(--color-text);
+    }
+
+    /* Submit button — full width, gold accent */
+    .form-submit {
+      width: 100%;
+      padding: 12px;
+      background: rgba(212, 172, 80, 0.1);
+      border: 1px solid var(--color-gold-border);
+      border-radius: 2px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-gold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background var(--transition-med), border-color var(--transition-med);
+      margin-top: var(--space-sm);
+    }
+
+    .form-submit:hover {
+      background: rgba(212, 172, 80, 0.2);
+      border-color: rgba(212, 172, 80, 0.5);
+    }
+
+    .form-submit:active {
+      background: rgba(212, 172, 80, 0.3);
+    }
+
+    /* Success message — shown by JS after form submission */
+    .form-success {
+      display: none;
+      background: rgba(0, 200, 224, 0.06);
+      border: 1px solid var(--color-cyan-border);
+      border-left: 3px solid var(--color-cyan);
+      border-radius: 2px;
+      padding: var(--space-md) var(--space-lg);
+      margin-top: var(--space-md);
+    }
+
+    .form-success.is-visible { display: block; }
+
+    .form-success-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-cyan);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .form-success-text {
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    /* ── RIGHT COLUMN — info panels ─────────────────────────── */
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Info panel — a contained block for a contact method or note */
+    .info-panel {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color var(--transition-fast);
+    }
+
+    .info-panel:hover { border-color: rgba(212, 172, 80, 0.2); }
+
+    .info-panel--gold  { border-left: 3px solid var(--color-gold); }
+    .info-panel--cyan  { border-left: 3px solid var(--color-cyan); }
+    .info-panel--purp  { border-left: 3px solid var(--color-purp); }
+    .info-panel--coral { border-left: 3px solid var(--color-coral); }
+
+    .info-panel-header {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--color-border);
+      font-family: var(--font-mono);
+      font-size: 7px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .info-panel--gold  .info-panel-header { color: var(--color-gold);       background: var(--color-gold-faint); }
+    .info-panel--cyan  .info-panel-header { color: var(--color-cyan);        background: var(--color-cyan-faint); }
+    .info-panel--purp  .info-panel-header { color: var(--color-purp-light);  background: var(--color-purp-faint); }
+    .info-panel--coral .info-panel-header { color: var(--color-coral);       background: var(--color-coral-faint); }
+
+    .info-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+    }
+
+    .info-panel--gold  .info-dot { background: var(--color-gold); }
+    .info-panel--cyan  .info-dot { background: var(--color-cyan); }
+    .info-panel--purp  .info-dot { background: var(--color-purp-light); }
+    .info-panel--coral .info-dot { background: var(--color-coral); }
+
+    .info-panel-body {
+      padding: 12px 14px;
+    }
+
+    .info-panel-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 4px;
+    }
+
+    .info-panel-note {
+      font-size: 11px;
+      color: var(--color-text-dim);
+      line-height: 1.55;
+    }
+
+    /* External link inside an info panel */
+    .info-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-cyan);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      transition: color var(--transition-fast);
+    }
+
+    .info-link:hover { color: var(--color-gold); }
+
+    /* Availability indicator */
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(0, 200, 224, 0.04);
+      border: 1px solid var(--color-cyan-border);
+      border-radius: 2px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .availability-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-cyan);
+      flex-shrink: 0;
+      /* Pulsing animation — shows system is "live" */
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    .availability-text {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-sidebar { display: none; }
+      .contact-content { padding: var(--space-md); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="reel.html"        class="nav-link">Reel</a>
+      <a href="disciplines.html" class="nav-link">Disciplines</a>
+      <a href="contact.html"     class="nav-link active">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Project Enquiries &nbsp;·&nbsp; Availability &nbsp;·&nbsp; Collaboration</p>
+      <h1 class="page-title">Get in <strong>Touch</strong></h1>
+      <p class="page-subtitle">Remote · UK-Based · Currently Taking Select Projects</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="contact-layout">
+
+    <aside class="contact-sidebar" aria-hidden="true">
+      <div class="lb lb--gold"></div>
+      <div class="lb lb--cyan"></div>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--purp"></div>
+      <div class="lb lb--coral"></div>
+      <span class="sidebar-label">Contact</span>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--gold"></div>
+    </aside>
+
+    <main class="contact-content" id="main-content">
+
+      <!-- ── LEFT COLUMN: FORM ── -->
+      <div class="contact-form-section">
+
+        <div class="form-label-row">
+          <span class="form-section-tag">Send a Message</span>
+          <div class="form-section-line"></div>
+        </div>
+
+        <!--
+          FORM SETUP FOR GITHUB PAGES:
+          
+          GitHub Pages is static — it can't process forms itself.
+          The simplest solution is Formspree:
+          
+          1. Go to https://formspree.io and create a free account
+          2. Create a new form — it gives you an endpoint URL like:
+               https://formspree.io/f/xabc1234
+          3. Replace action="#" below with that URL
+          4. Change method="post" (already set)
+          5. That's it — Formspree handles delivery to your email
+          
+          Alternatively, leave as-is and the JS below will intercept
+          the submit and show the success message (demo mode).
+        -->
+        <form
+          id="contactForm"
+          action="#"
+          method="post"
+          novalidate
+          aria-label="Contact form"
+        >
+
+          <!-- Name -->
+          <div class="field">
+            <label class="field-label" for="name">Name</label>
+            <input
+              class="form-input"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your name or studio name"
+              required
+              autocomplete="name"
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <label class="field-label" for="email">Email</label>
+            <input
+              class="form-input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@studio.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <!-- Project type -->
+          <div class="field">
+            <label class="field-label" for="project-type">Project Type</label>
+            <select class="form-input" id="project-type" name="project_type">
+              <option value="">Select type…</option>
+              <option value="ue5-world-building">UE5 World Building</option>
+              <option value="sfx-design">SFX Design</option>
+              <option value="implementation">Audio Implementation</option>
+              <option value="full-pipeline">Full Audio Pipeline</option>
+              <option value="consultancy">Consultancy</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Budget / engagement type -->
+          <div class="field">
+            <label class="field-label" for="engagement">Engagement Type</label>
+            <select class="form-input" id="engagement" name="engagement">
+              <option value="">Select engagement…</option>
+              <option value="retainer">Monthly Retainer</option>
+              <option value="fixed-fee">Fixed Fee</option>
+              <option value="day-rate">Day Rate</option>
+              <option value="unsure">Not Sure Yet</option>
+            </select>
+          </div>
+
+          <!-- Message -->
+          <div class="field">
+            <label class="field-label" for="message">Message</label>
+            <textarea
+              class="form-input"
+              id="message"
+              name="message"
+              placeholder="Tell me about the project — scope, engine, timeline, and anything else relevant."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="formSubmit">
+            Send Message →
+          </button>
+
+        </form>
+
+        <!-- Success message (shown by JS after send) -->
+        <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+          <p class="form-success-label">// Transmission Received</p>
+          <p class="form-success-text">
+            Thanks for getting in touch. I'll come back to you within one working day.
+          </p>
+        </div>
+
+      </div>
+      <!-- /form column -->
+
+
+      <!-- ── RIGHT COLUMN: INFO PANELS ── -->
+      <div class="contact-info">
+
+        <!-- Availability indicator -->
+        <div class="availability">
+          <div class="availability-dot" aria-hidden="true"></div>
+          <span class="availability-text">Currently taking select projects</span>
+        </div>
+
+        <!-- Direct email -->
+        <div class="info-panel info-panel--gold">
+          <div class="info-panel-header">
+            <div class="info-dot"></div>
+            Direct Email
+          </div>
+          <div class="info-panel-body">
+            <!--
+              Replace with your actual email address.
+              The mailto: link opens the user's email client directly.
+            -->
+            <p class="info-panel-value">hello@integralaudio.co.uk</p>
+            <p class="info-panel-note">Quickest route for time-sensitive enquiries.</p>
+            <a href="mailto:hello@integralaudio.co.uk" class="info-link">
+              Send Email →
+            </a>
+          </div>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="info-panel info-panel--cyan">
+          <div class="info-panel-header">
+            <div class="info-dot"></div>
+            LinkedIn
+          </div>
+          <div class="info-panel-body">
+            <p class="info-panel-value">Joe Hudson</p>
+            <p class="info-panel-note">Professional profile, credits, and recommendations.</p>
+            <!--
+              Replace # with your actual LinkedIn URL.
+              Example: https://linkedin.com/in/joe-hudson-audio
+            -->
+            <a href="#" class="info-link" target="_blank" rel="noopener noreferrer">
+              View Profile →
+            </a>
+          </div>
+        </div>
+
+        <!-- IMDb -->
+        <div class="info-panel info-panel--purp">
+          <div class="info-panel-header">
+            <div class="info-dot"></div>
+            IMDb
+          </div>
+          <div class="info-panel-body">
+            <p class="info-panel-value">Joe Hudson</p>
+            <p class="info-panel-note">Game credits and production history.</p>
+            <!--
+              Replace # with your actual IMDb URL.
+              Example: https://imdb.com/name/nmXXXXXXXX
+            -->
+            <a href="#" class="info-link" target="_blank" rel="noopener noreferrer">
+              View Credits →
+            </a>
+          </div>
+        </div>
+
+        <!-- Location / remote note -->
+        <div class="info-panel info-panel--coral">
+          <div class="info-panel-header">
+            <div class="info-dot"></div>
+            Location
+          </div>
+          <div class="info-panel-body">
+            <p class="info-panel-value">United Kingdom</p>
+            <p class="info-panel-note">
+              Fully remote. Available for UK-based on-site work by arrangement.
+              GMT / BST timezone.
+            </p>
+          </div>
+        </div>
+
+        <!-- Integral Audio Solutions link -->
+        <div class="info-panel info-panel--gold">
+          <div class="info-panel-header">
+            <div class="info-dot"></div>
+            Company
+          </div>
+          <div class="info-panel-body">
+            <p class="info-panel-value">Integral Audio Solutions Ltd</p>
+            <p class="info-panel-note">Registered in England &amp; Wales. All contracts and invoicing via the company.</p>
+            <a href="https://integralaudio.co.uk" class="info-link" target="_blank" rel="noopener noreferrer">
+              integralaudio.co.uk →
+            </a>
+          </div>
+        </div>
+
+      </div>
+      <!-- /info panels -->
+
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <script>
+
+    /* ── FORM INTERACTION SOUNDS ───────────────────────────── */
+
+    // Play a subtle tick when the user focuses any form field
+    document.querySelectorAll('.form-input').forEach(input => {
+      input.addEventListener('focus', () => {
+        if (typeof playClick === 'function') playClick('dim');
+      });
+    });
+
+    // Submit button sounds and demo interception
+    const form        = document.getElementById('contactForm');
+    const submitBtn   = document.getElementById('formSubmit');
+    const successMsg  = document.getElementById('formSuccess');
+
+    if (form) {
+      submitBtn.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+
+      form.addEventListener('submit', (e) => {
+        /*
+          If the form action is still "#" (i.e. Formspree hasn't been
+          set up yet), we intercept the submit, play the sound, and
+          show the success message as a demo.
+          
+          Once you add a real Formspree action URL, remove the
+          e.preventDefault() line and this whole block — Formspree
+          handles the redirect / success state itself.
+        */
+        if (form.action.endsWith('#')) {
+          e.preventDefault();
+
+          if (typeof playClick === 'function') playClick('gold');
+
+          // Brief button flash
+          submitBtn.style.background = 'rgba(212,172,80,0.4)';
+          submitBtn.style.color = '#fff';
+          setTimeout(() => {
+            submitBtn.style.background = '';
+            submitBtn.style.color = '';
+          }, 300);
+
+          // Show success message
+          setTimeout(() => {
+            successMsg.classList.add('is-visible');
+            form.style.opacity = '0.4';
+            form.style.pointerEvents = 'none';
+          }, 400);
+        } else {
+          // Real submission — just play the sound
+          if (typeof playClick === 'function') playClick('gold');
+        }
+      });
+    }
+
+    /* ── INFO PANEL SOUNDS ─────────────────────────────────── */
+
+    const panelColours = ['gold', 'cyan', 'purp', 'coral', 'gold'];
+
+    document.querySelectorAll('.info-panel').forEach((panel, i) => {
+      panel.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      panel.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick(panelColours[i % panelColours.length]);
+      });
+    });
+
+  </script>
+
+</body>
+</html>

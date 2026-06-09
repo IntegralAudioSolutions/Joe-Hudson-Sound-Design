@@ -1,0 +1,1159 @@
+/* ================================================================
+   JOE HUDSON — PERSONAL PORTFOLIO
+   style.css — Global Stylesheet
+   
+   Design language: LCARS-inspired (Star Trek TNG console aesthetic)
+   Colour palette:
+     Background:  #080a0f  (deep space black)
+     Surface:     #0d1018  (card/panel backgrounds)
+     Gold:        #d4ac50  (structural borders, logo, LCARS elbows)
+     Bright gold: #f0d060  (name highlight, large numerals)
+     Cyan:        #00c8e0  (active states, data readouts, links)
+     Purple:      #7060c8  (secondary accent, role label)
+     Coral:       #e87040  (status tab, warnings, highlights)
+     Body text:   #dce8f0  (off-white)
+     Muted text:  #8090a8
+   
+   Structure:
+     1.  CSS Custom Properties (variables)
+     2.  Reset & base styles
+     3.  Typography
+     4.  Navigation
+     5.  Hero section
+     6.  Readout / status bar
+     7.  Ticker
+     8.  Image ribbon
+     9.  Main content grid
+     10. Work cards
+     11. Buttons
+     12. Footer
+     13. Utility classes
+     14. Animations & keyframes
+     15. Media queries (responsive / mobile)
+================================================================ */
+
+
+/* ----------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES (VARIABLES)
+   Define all colours and shared values here so they can be
+   changed in one place and cascade throughout the whole file.
+---------------------------------------------------------------- */
+:root {
+  /* Colours */
+  --color-bg:          #080a0f;
+  --color-bg-nav:      #0b0d14;
+  --color-bg-surface:  #0d1018;
+  --color-bg-deep:     #060809;
+
+  --color-gold:        #d4ac50;
+  --color-gold-bright: #f0d060;
+  --color-gold-dim:    #7a6030;
+  --color-gold-faint:  rgba(212, 172, 80, 0.1);
+  --color-gold-border: rgba(212, 172, 80, 0.25);
+
+  --color-cyan:        #00c8e0;
+  --color-cyan-faint:  rgba(0, 200, 224, 0.08);
+  --color-cyan-border: rgba(0, 200, 224, 0.25);
+
+  --color-purp:        #7060c8;
+  --color-purp-light:  #a090e0;
+  --color-purp-faint:  rgba(112, 96, 200, 0.08);
+  --color-purp-border: rgba(112, 96, 200, 0.25);
+
+  --color-coral:       #e87040;
+  --color-coral-faint: rgba(232, 112, 64, 0.08);
+  --color-coral-border:rgba(232, 112, 64, 0.25);
+
+  --color-text:        #dce8f0;
+  --color-text-muted:  #8090a8;
+  --color-text-dim:    #3a4a5a;
+  --color-text-deep:   #1e2a38;
+
+  --color-border:      rgba(255, 255, 255, 0.06);
+  --color-border-gold: rgba(212, 172, 80, 0.2);
+
+  /* Typography */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Spacing — consistent scale used throughout */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* LCARS sidebar width — used in hero and content grid */
+  --sidebar-width: 72px;
+
+  /* Transition timing — used for hover effects */
+  --transition-fast: 0.15s ease;
+  --transition-med:  0.25s ease;
+}
+
+
+/* ----------------------------------------------------------------
+   2. RESET & BASE STYLES
+   Remove browser default margins/padding, set box-sizing so
+   padding is included in width calculations (much easier to work with).
+---------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Smooth scrolling when clicking anchor links */
+  scroll-behavior: smooth;
+  /* Prevent font size inflation on mobile rotation */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* Subtle scanline overlay across the entire page — the LCARS feel */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Remove list dots — we use <ul> for tags but don't want bullet points */
+ul { list-style: none; }
+
+/* Make images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Remove default link styling — we style links explicitly */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Horizontal rule reset */
+hr {
+  border: none;
+}
+
+
+/* ----------------------------------------------------------------
+   3. TYPOGRAPHY
+   Base type styles. The monospaced font is used for all
+   HUD-style labels, data readouts, and navigation items.
+---------------------------------------------------------------- */
+h1, h2, h3 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+/* Monospaced utility class — apply to any element that needs the HUD look */
+.mono {
+  font-family: var(--font-mono);
+}
+
+
+/* ----------------------------------------------------------------
+   4. NAVIGATION
+---------------------------------------------------------------- */
+
+/* Outer nav bar — spans full width, fixed height */
+.nav {
+  background: var(--color-bg-nav);
+  border-bottom: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  /* Stick to top of viewport as user scrolls */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Gold LCARS logo block — the rounded-corner pill on the left */
+.nav-logo-block {
+  background: var(--color-gold);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  /* Bottom-right radius only — creates the LCARS elbow shape */
+  border-radius: 0 0 28px 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.nav-logo-block:hover,
+.nav-logo-block:focus-visible {
+  background: var(--color-gold-bright);
+  outline: none;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-bg);
+  letter-spacing: 0.14em;
+}
+
+/* Nav links container */
+.nav-links {
+  display: flex;
+  height: 100%;
+  align-items: stretch;
+}
+
+/* Individual nav link */
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-dim);
+  padding: 0 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid var(--color-border-gold);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  user-select: none;
+}
+
+/* Animated underline on nav link hover/active */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-cyan);
+  /* scaleX(0) = invisible, scaleX(1) = full width */
+  transform: scaleX(0);
+  transition: transform var(--transition-med);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--color-cyan);
+  background: var(--color-cyan-faint);
+  outline: none;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link.active {
+  color: var(--color-cyan);
+  background: var(--color-cyan-faint);
+}
+
+/* Mobile hamburger toggle — hidden by default on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: var(--space-md);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-gold);
+  border-radius: 1px;
+  transition: transform var(--transition-med), opacity var(--transition-fast);
+}
+
+
+/* ----------------------------------------------------------------
+   5. HERO SECTION
+---------------------------------------------------------------- */
+
+/* Three-column grid: sidebar | content | photo */
+.hero {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr 200px;
+  min-height: 300px;
+  border-bottom: 1px solid var(--color-gold-border);
+  /* Subtle grid pattern behind hero — the Interstellar HUD feel */
+  background-image:
+    linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── LCARS Left Sidebar ── */
+.hero-sidebar {
+  background: var(--color-bg-nav);
+  border-right: 2px solid var(--color-gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0 0;
+  gap: 8px;
+}
+
+/*
+  LCARS pill shapes — the rounded bars in the sidebar.
+  Base class + modifier classes for each colour variant.
+*/
+.lp {
+  width: 48px;
+  height: 26px;
+  border-radius: 13px;         /* fully rounded = pill shape */
+  cursor: pointer;
+  transition: filter var(--transition-fast), transform var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Colour variants */
+.lp--gold  { background: var(--color-gold); }
+.lp--cyan  { background: var(--color-cyan);  height: 18px; }
+.lp--purp  { background: var(--color-purp);  height: 16px; width: 40px; }
+.lp--coral { background: var(--color-coral); height: 14px; width: 36px; }
+.lp--dim   { background: #2a3040;            height: 20px; }
+
+.lp:hover  { filter: brightness(1.5); transform: scaleX(1.05); }
+
+/* Thin vertical bar that fills space between pills */
+.lbar {
+  width: 6px;
+  flex: 1;
+  background: rgba(212, 172, 80, 0.1);
+  border-radius: 3px;
+  margin: 4px 0;
+}
+
+/* Large LCARS elbow — bottom of sidebar, classic quarter-circle shape */
+.lelbow {
+  width: var(--sidebar-width);
+  height: 48px;
+  border-radius: 48px 0 0 0;  /* top-left radius only = elbow */
+  background: var(--color-gold);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* ── Hero Text Content ── */
+.hero-content {
+  padding: var(--space-xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Small label above the name — "// Sound Design · UE5" */
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--color-cyan);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0.8;
+}
+
+/* Large name — "Joe Hudson" */
+.hero-name {
+  font-size: clamp(36px, 5vw, 52px); /* clamp() scales between min and max based on viewport */
+  font-weight: 300;
+  color: #eef2f8;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+/* The surname "Hudson" — brighter gold */
+.hero-name strong {
+  font-weight: 600;
+  color: var(--color-gold-bright);
+}
+
+/* Monospaced role label — "Senior Technical Sound Designer" */
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-purp-light);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+}
+
+/* Horizontal divider line — fades to transparent on the right */
+.hero-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-gold) 0%, rgba(212, 172, 80, 0) 80%);
+  margin-bottom: var(--space-lg);
+}
+
+/* Tagline paragraph */
+.hero-tagline {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: var(--space-lg);
+}
+
+/* Hero CTA button row */
+.hero-cta {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ── Hero Right Panel (photo) ── */
+.hero-right {
+  border-left: 1px solid var(--color-border-gold);
+  background: #0a0c12;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--space-md) 14px;
+}
+
+/* Photo placeholder — replaced with <img> once photo is ready */
+.hero-photo-placeholder {
+  flex: 1;
+  background: #0f1118;
+  border: 1px solid rgba(212, 172, 80, 0.12);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 200px;
+}
+
+.placeholder-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: #1e2430;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Actual photo when added */
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* fills the box without distorting the image */
+  border-radius: 3px;
+}
+
+/* Small coloured bar blocks beneath the photo */
+.hero-right-blocks {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.hrb {
+  height: 18px;
+  border-radius: 2px;
+  flex: 1;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.hrb:hover { filter: brightness(1.6); }
+
+.hrb--gold  { background: var(--color-gold);  opacity: 0.5; }
+.hrb--cyan  { background: var(--color-cyan);  opacity: 0.4; }
+.hrb--coral { background: var(--color-coral); opacity: 0.5; flex: 0.5; }
+
+
+/* ----------------------------------------------------------------
+   6. READOUT / STATUS BAR
+---------------------------------------------------------------- */
+
+.readout {
+  background: #0a0c12;
+  border-bottom: 1px solid var(--color-border-gold);
+  display: flex;
+  align-items: stretch;
+}
+
+/* Orange LCARS tab on the left — the rounded-bottom-right elbow */
+.readout-tab {
+  background: var(--color-coral);
+  width: var(--sidebar-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 24px 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.readout-tab:hover { filter: brightness(1.3); }
+
+/* Rotated "Status" label inside the tab */
+.readout-tab span {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--color-bg);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  /* Rotate text to read bottom-to-top */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Container for the four stat blocks */
+.readout-stats {
+  display: flex;
+  flex: 1;
+  padding: 10px 20px;
+}
+
+/* Individual stat block */
+.readout-stat {
+  flex: 1;
+  padding: 0 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border-radius: 2px;
+}
+
+.readout-stat:hover     { background: rgba(255, 255, 255, 0.03); }
+.readout-stat:first-child { padding-left: 4px; }
+.readout-stat:last-child  { border-right: none; }
+
+/* Large number / value */
+.readout-num {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Colour variants for each stat */
+.readout-num--gold  { color: var(--color-gold-bright); }
+.readout-num--cyan  { color: var(--color-cyan); }
+.readout-num--purp  { color: var(--color-purp-light); }
+.readout-num--coral { color: var(--color-coral); }
+
+/* Small label below the number */
+.readout-desc {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-deep);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+
+/* ----------------------------------------------------------------
+   7. TICKER
+   Auto-scrolling marquee strip — uses CSS animation only,
+   no JavaScript required for the scroll itself.
+---------------------------------------------------------------- */
+
+.ticker {
+  background: #0a0c12;
+  border-top: 1px solid rgba(212, 172, 80, 0.08);
+  border-bottom: 1px solid rgba(212, 172, 80, 0.08);
+  padding: 5px 0;
+  overflow: hidden;   /* hides the text that scrolls out of view */
+}
+
+/* The inner track — wider than its container, animates left */
+.ticker-track {
+  display: flex;
+  gap: 60px;
+  white-space: nowrap; /* keeps all items on one line */
+  animation: tickerScroll 22s linear infinite;
+}
+
+/* Pause scrolling if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
+
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  flex-shrink: 0;
+}
+
+/* Colour variants */
+.ticker-item--gold  { color: var(--color-gold-dim); }
+.ticker-item--cyan  { color: #006878; }
+.ticker-item--coral { color: #783820; }
+
+
+/* ----------------------------------------------------------------
+   8. IMAGE RIBBON
+   Horizontally scrolling gallery of project images.
+---------------------------------------------------------------- */
+
+.ribbon {
+  border-bottom: 1px solid rgba(212, 172, 80, 0.1);
+  padding: 12px 0;
+  overflow: hidden;
+}
+
+/* Scrolling track */
+.ribbon-track {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  animation: ribbonScroll 30s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-track { animation: none; }
+}
+
+/* Individual ribbon item (placeholder or image) */
+.ribbon-item {
+  width: 148px;
+  height: 80px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: filter var(--transition-fast), transform var(--transition-fast);
+  overflow: hidden;
+}
+
+.ribbon-item:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.4);
+}
+
+/* Images inside ribbon items fill the box */
+.ribbon-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Colour variants */
+.ribbon-item--dim   { background: #0f1118; color: #1e2a38; border-color: var(--color-border); }
+.ribbon-item--gold  { background: var(--color-gold-faint); border-color: var(--color-gold-border); color: var(--color-gold); border-top: 2px solid var(--color-gold); }
+.ribbon-item--cyan  { background: var(--color-cyan-faint); border-color: var(--color-cyan-border); color: var(--color-cyan); border-top: 2px solid var(--color-cyan); }
+.ribbon-item--coral { background: var(--color-coral-faint); border-color: var(--color-coral-border); color: var(--color-coral); border-top: 2px solid var(--color-coral); }
+
+
+/* ----------------------------------------------------------------
+   9. MAIN CONTENT GRID
+   Two columns: LCARS sidebar | main content
+---------------------------------------------------------------- */
+
+.content-grid {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+}
+
+/* Left LCARS sidebar (in main content area) */
+.lcars-sidebar {
+  background: var(--color-bg-nav);
+  border-right: 2px solid var(--color-gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 8px;
+}
+
+/* Small rectangular blocks in the sidebar */
+.lb {
+  width: 48px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.lb:hover { filter: brightness(1.5); }
+
+/* Colour + height variants */
+.lb--gold  { background: var(--color-gold);  height: 30px; }
+.lb--cyan  { background: var(--color-cyan);  height: 20px; }
+.lb--purp  { background: var(--color-purp);  height: 16px; }
+.lb--coral { background: var(--color-coral); height: 14px; width: 36px; }
+.lb--dim   { background: #1e2838;            height: 22px; }
+
+/* Vertical rotated label in the sidebar */
+.sidebar-label {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: var(--color-text-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 10px 0;
+}
+
+
+/* ----------------------------------------------------------------
+   10. WORK CARDS
+---------------------------------------------------------------- */
+
+.works {
+  padding: var(--space-lg) var(--space-xl);
+}
+
+/* Section header row: label + horizontal rule */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--color-cyan);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Line that extends to the right of the section label */
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 200, 224, 0.15);
+}
+
+/* Three-column card grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+/* Individual card */
+.card {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--transition-med), transform var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-cyan-border);
+}
+
+/* Muted / placeholder card variant */
+.card--dim { opacity: 0.6; }
+.card--dim:hover { opacity: 0.8; }
+
+/* Coloured header strip at top of card */
+.card-header {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Colour variants */
+.card-header--gold { color: var(--color-gold);       background: var(--color-gold-faint); }
+.card-header--cyan { color: var(--color-cyan);        background: var(--color-cyan-faint); }
+.card-header--purp { color: var(--color-purp-light);  background: var(--color-purp-faint); }
+
+/* Small circular status dot */
+.card-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+
+.card-dot--gold { background: var(--color-gold); }
+.card-dot--cyan { background: var(--color-cyan); }
+.card-dot--purp { background: var(--color-purp-light); }
+
+.card-body {
+  padding: 12px;
+}
+
+.card-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: #c8d8e8;
+  margin-bottom: 5px;
+  line-height: 1.35;
+}
+
+.card-title--dim { color: var(--color-text-dim); }
+
+.card-meta {
+  font-size: 11px;
+  color: var(--color-text-dim);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Tag list */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.tag--cyan  { background: var(--color-cyan-faint);  color: #00a0b4; border: 1px solid rgba(0, 200, 224, 0.15); }
+.tag--gold  { background: var(--color-gold-faint);  color: #a08030; border: 1px solid rgba(212, 172, 80, 0.15); }
+.tag--purp  { background: var(--color-purp-faint);  color: #8878c0; border: 1px solid rgba(112, 96, 200, 0.15); }
+
+
+/* ----------------------------------------------------------------
+   11. BUTTONS
+---------------------------------------------------------------- */
+
+/* Base button — shared styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 10px 22px;
+  border-radius: 2px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-med), border-color var(--transition-med), color var(--transition-fast);
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+/* Primary button — cyan */
+.btn--cyan {
+  background: var(--color-cyan-faint);
+  color: var(--color-cyan);
+  border-color: var(--color-cyan-border);
+}
+
+.btn--cyan:hover,
+.btn--cyan:focus-visible {
+  background: rgba(0, 200, 224, 0.2);
+  border-color: rgba(0, 200, 224, 0.6);
+  outline: none;
+}
+
+/* Ghost button — subtle, for secondary actions */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-dim);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  color: var(--color-purp-light);
+  border-color: var(--color-purp-border);
+  outline: none;
+}
+
+/* CTA row that holds the buttons */
+.cta {
+  padding: 0 var(--space-xl) var(--space-lg);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* ----------------------------------------------------------------
+   12. FOOTER
+---------------------------------------------------------------- */
+
+.footer {
+  border-top: 2px solid rgba(212, 172, 80, 0.3);
+  background: #090b10;
+  display: flex;
+  align-items: stretch;
+  height: 44px;
+}
+
+/* Gold LCARS elbow — top-right radius only */
+.footer-elbow {
+  width: var(--sidebar-width);
+  height: 100%;
+  background: var(--color-gold);
+  border-radius: 0 28px 0 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+
+.footer-elbow:hover { filter: brightness(1.3); }
+
+.footer-inner {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+}
+
+.footer-text {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-deep);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover { color: var(--color-gold); }
+
+
+/* ----------------------------------------------------------------
+   13. UTILITY CLASSES
+   Small reusable helpers.
+---------------------------------------------------------------- */
+
+/* Visually hidden — for screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+/* ----------------------------------------------------------------
+   14. ANIMATIONS & KEYFRAMES
+---------------------------------------------------------------- */
+
+/* Ticker scroll — moves the track left continuously */
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% works because track is 2× its visible width */
+}
+
+/* Ribbon scroll */
+@keyframes ribbonScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Status dot pulse — gentle on/off blink */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* Button press flash — triggered via JS class add */
+@keyframes btnPressCyan {
+  0%   { background: rgba(0, 200, 224, 0.5); color: #fff; box-shadow: 0 0 16px rgba(0, 200, 224, 0.6); }
+  100% { background: var(--color-cyan-faint); color: var(--color-cyan); box-shadow: none; }
+}
+
+@keyframes btnPressGhost {
+  0%   { background: rgba(112, 96, 200, 0.3); color: #fff; }
+  100% { background: transparent; color: var(--color-text-dim); }
+}
+
+/* Card border glow on click */
+@keyframes cardFlash {
+  0%   { box-shadow: 0 0 0 1px rgba(0, 200, 224, 0); }
+  40%  { box-shadow: 0 0 12px 2px rgba(0, 200, 224, 0.4); border-color: rgba(0, 200, 224, 0.6); }
+  100% { box-shadow: 0 0 0 1px rgba(0, 200, 224, 0); }
+}
+
+/* LCARS pill flash on click */
+@keyframes pillFlash {
+  0%   { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+/* Nav link flash on click */
+@keyframes navFlash {
+  0%   { background: rgba(0, 200, 224, 0.3); color: #fff; }
+  100% { background: var(--color-cyan-faint); color: var(--color-cyan); }
+}
+
+/* Applied via JS */
+.btn--cyan.is-pressed   { animation: btnPressCyan  0.35s ease; }
+.btn--ghost.is-pressed  { animation: btnPressGhost 0.35s ease; }
+.card.is-flashing       { animation: cardFlash     0.5s ease; }
+.nav-link.is-flashing   { animation: navFlash      0.3s ease; }
+
+
+/* ----------------------------------------------------------------
+   15. MEDIA QUERIES — RESPONSIVE / MOBILE
+   Mobile-first approach: these rules override the desktop styles
+   on smaller screens (max-width = "up to this width").
+---------------------------------------------------------------- */
+
+/* Tablet — up to 900px wide */
+@media (max-width: 900px) {
+
+  /* Collapse hero to two columns — hide photo panel */
+  .hero {
+    grid-template-columns: var(--sidebar-width) 1fr;
+  }
+
+  .hero-right { display: none; }
+
+  /* Two-column card grid instead of three */
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile — up to 600px wide */
+@media (max-width: 600px) {
+
+  /* Show hamburger button, hide nav links by default */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 48px;       /* directly below the nav bar */
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-bg-nav);
+    border-bottom: 2px solid var(--color-gold);
+    z-index: 99;
+    height: auto;
+  }
+
+  /* When JS adds this class, the menu slides open */
+  .nav-links.is-open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: var(--space-md) var(--space-lg);
+    border-left: none;
+    border-bottom: 1px solid var(--color-border-gold);
+    font-size: 12px;
+  }
+
+  /* Single column layout — hide LCARS sidebars to save space */
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-sidebar { display: none; }
+
+  .hero-content { padding: var(--space-lg); }
+
+  /* Single column cards */
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Single column content — hide sidebar */
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lcars-sidebar { display: none; }
+
+  /* Readout stats wrap on very small screens */
+  .readout-stats {
+    flex-wrap: wrap;
+    padding: 8px 12px;
+  }
+
+  .readout-stat {
+    flex: 1 1 40%;
+    padding: 6px 8px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Smaller hero text on mobile */
+  .hero-name { font-size: 36px; }
+}

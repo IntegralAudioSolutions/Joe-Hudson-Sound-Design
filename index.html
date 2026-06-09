@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    Viewport meta tag: makes the site scale correctly on mobile devices.
+    width=device-width  → use the device's actual screen width
+    initial-scale=1.0   → don't zoom in or out by default
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO: what search engines and browser tabs display -->
+  <title>Joe Hudson — Senior Technical Sound Designer</title>
+  <meta name="description" content="Senior Technical Sound Designer specialising in UE5 world-building audio, MetaSounds, and AAA game audio implementation. Formerly Epic Games / Fortnite." />
+
+  <!-- Open Graph: controls how the link looks when shared on LinkedIn, Discord, etc. -->
+  <meta property="og:title"       content="Joe Hudson — Senior Technical Sound Designer" />
+  <meta property="og:description" content="12 years building the sonic worlds players live in. UE5 specialist. Fortnite Battle Royale." />
+  <meta property="og:url"         content="https://joehudson.co.uk" />
+  <meta property="og:type"        content="website" />
+
+  <!-- Canonical URL: tells search engines this is the authoritative version of the page -->
+  <link rel="canonical" href="https://joehudson.co.uk" />
+
+  <!--
+    Google Fonts:
+    - Inter        → clean sans-serif for body text and headings
+    - JetBrains Mono → monospaced font for the HUD / LCARS labels and data readouts
+    The 'display=swap' parameter means text shows immediately in a fallback font
+    while the custom fonts load in the background — avoids invisible text flicker.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Global stylesheet — all visual styling lives in style.css -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION BAR
+       The logo block is the gold LCARS elbow element on the left.
+       Nav links are the page sections.
+       ============================================================ -->
+  <header class="nav" role="banner">
+
+    <!-- Logo / name block — gold LCARS rounded-corner pill shape -->
+    <a href="index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <!--
+      Mobile menu toggle button — hidden on desktop, visible on small screens.
+      aria-expanded and aria-controls are accessibility attributes that tell
+      screen readers whether the menu is open and which element it controls.
+    -->
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Navigation links -->
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="index.html"            class="nav-link active">About</a>
+      <a href="pages/work.html"       class="nav-link">Work</a>
+      <a href="pages/reel.html"       class="nav-link">Reel</a>
+      <a href="pages/disciplines.html" class="nav-link">Disciplines</a>
+      <a href="pages/contact.html"    class="nav-link">Contact</a>
+    </nav>
+
+  </header>
+
+
+  <!-- ============================================================
+       HERO SECTION
+       Full-width opening panel with name, title, and tagline.
+       The grid is split into three columns:
+         1. LCARS sidebar (decorative pill/block stack)
+         2. Main hero text
+         3. Studio photo placeholder (right panel)
+       ============================================================ -->
+  <section class="hero" aria-label="Introduction">
+
+    <!-- Left LCARS decorative sidebar — purely visual, hidden from screen readers -->
+    <aside class="hero-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--purp"></div>
+      <div class="lp lp--coral"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <!-- Hero text content -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">// Sound Design &nbsp;·&nbsp; Unreal Engine 5 &nbsp;·&nbsp; joehudson.co.uk</p>
+      <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
+      <p class="hero-role">Senior Technical Sound Designer</p>
+      <hr class="hero-rule" />
+      <p class="hero-tagline">
+        12 years building the sonic worlds players live in.
+        UE5 specialist. Fortnite Battle Royale.
+        Now taking select projects.
+      </p>
+      <!-- CTA buttons in hero -->
+      <div class="hero-cta">
+        <a href="pages/reel.html"    class="btn btn--cyan">View Reel →</a>
+        <a href="pages/contact.html" class="btn btn--ghost">Get in Touch →</a>
+      </div>
+    </div>
+
+    <!-- Right panel: studio photo -->
+    <div class="hero-right" aria-hidden="true">
+      <!--
+        Replace the placeholder div below with an <img> tag once you have your studio photo.
+        Example:
+          <img src="assets/images/joe-hudson-studio.jpg"
+               alt="Joe Hudson in his studio"
+               class="hero-photo" />
+      -->
+      <div class="hero-photo-placeholder">
+        <span class="placeholder-label">Studio Photo</span>
+      </div>
+      <!-- Decorative colour blocks below photo — LCARS panel feel -->
+      <div class="hero-right-blocks" aria-hidden="true">
+        <div class="hrb hrb--gold"></div>
+        <div class="hrb hrb--cyan"></div>
+        <div class="hrb hrb--coral"></div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       STATUS / READOUT BAR
+       Data strip showing key career stats in HUD readout style.
+       ============================================================ -->
+  <section class="readout" aria-label="Career statistics">
+
+    <!-- Orange LCARS tab on the left — labelled "Status" -->
+    <div class="readout-tab" aria-hidden="true"><span>Status</span></div>
+
+    <!-- Four stat blocks -->
+    <div class="readout-stats">
+
+      <div class="readout-stat">
+        <span class="readout-num readout-num--gold">12+</span>
+        <span class="readout-desc">Years Active</span>
+      </div>
+
+      <div class="readout-stat">
+        <span class="readout-num readout-num--cyan">6</span>
+        <span class="readout-desc">Years · Epic Games</span>
+      </div>
+
+      <div class="readout-stat">
+        <span class="readout-num readout-num--purp">AAA</span>
+        <span class="readout-desc">Production Scale</span>
+      </div>
+
+      <div class="readout-stat">
+        <span class="readout-num readout-num--coral">UE5</span>
+        <span class="readout-desc">Engine Specialism</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER / MARQUEE
+       Auto-scrolling text strip — credits, tools, keywords.
+       The content is duplicated so the scroll loops seamlessly.
+       aria-hidden="true" because it's decorative / supplementary.
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- First copy -->
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+      <!-- Duplicate copy — creates seamless infinite scroll loop -->
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       IMAGE RIBBON
+       Auto-scrolling horizontal gallery of project screenshots.
+       Replace the placeholder divs with <img> tags as assets arrive.
+       ============================================================ -->
+  <section class="ribbon" aria-label="Project images">
+    <div class="ribbon-track" aria-hidden="true">
+      <!--
+        To add a real image, replace a placeholder div with:
+          <div class="ribbon-item ribbon-item--gold">
+            <img src="../assets/images/fortnite-map.jpg" alt="Fortnite map audio work" />
+          </div>
+      -->
+      <div class="ribbon-item ribbon-item--gold">Fortnite BR</div>
+      <div class="ribbon-item ribbon-item--cyan">Epic Games</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--coral">Sweet Justice SG</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--cyan">Project Image</div>
+      <!-- Duplicates for seamless loop -->
+      <div class="ribbon-item ribbon-item--gold">Fortnite BR</div>
+      <div class="ribbon-item ribbon-item--cyan">Epic Games</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--coral">Sweet Justice SG</div>
+      <div class="ribbon-item ribbon-item--dim">Project Image</div>
+      <div class="ribbon-item ribbon-item--cyan">Project Image</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MAIN CONTENT AREA
+       Two-column grid:
+         Left  → LCARS decorative sidebar
+         Right → Selected work cards + CTA buttons
+       ============================================================ -->
+  <main class="content-grid" id="main-content">
+
+    <!-- Left LCARS sidebar — decorative, hidden from screen readers -->
+    <aside class="lcars-sidebar" aria-hidden="true">
+      <div class="lb lb--gold"></div>
+      <div class="lb lb--cyan"></div>
+      <div class="lb lb--purp"></div>
+      <div class="lb lb--coral"></div>
+      <div class="lb lb--dim"></div>
+      <span class="sidebar-label">Selected Credits</span>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--cyan"></div>
+    </aside>
+
+    <!-- Right column: work cards + CTAs -->
+    <div class="content-main">
+
+      <!-- Selected Work -->
+      <section class="works" aria-labelledby="works-heading">
+
+        <div class="section-header">
+          <h2 class="section-tag" id="works-heading">Selected Work</h2>
+          <div class="section-line" aria-hidden="true"></div>
+        </div>
+
+        <!-- Work cards grid -->
+        <div class="cards">
+
+          <!-- Card 1: Epic Games / Fortnite -->
+          <article class="card" aria-label="Epic Games — Fortnite Battle Royale">
+            <div class="card-header card-header--gold">
+              <div class="card-dot card-dot--gold" aria-hidden="true"></div>
+              Epic Games
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Fortnite Battle Royale — Map Audio</h3>
+              <p class="card-meta">2019–2026 · World-building, environmental SFX, UE5 Blueprint systems</p>
+              <ul class="tags" aria-label="Skills used">
+                <li class="tag tag--cyan">UE5</li>
+                <li class="tag tag--purp">World Building</li>
+                <li class="tag tag--gold">AAA</li>
+                <li class="tag tag--cyan">MetaSounds</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 2: Sweet Justice Sound Group -->
+          <article class="card" aria-label="Sweet Justice Sound Group — long-term collaboration">
+            <div class="card-header card-header--cyan">
+              <div class="card-dot card-dot--cyan" aria-hidden="true"></div>
+              Sweet Justice Sound Group
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Long-Term SFX Collaboration</h3>
+              <p class="card-meta">12-year ongoing relationship · Sound effects design across multiple titles</p>
+              <ul class="tags" aria-label="Skills used">
+                <li class="tag tag--gold">SFX Design</li>
+                <li class="tag tag--cyan">Reaper</li>
+                <li class="tag tag--purp">Soundminer</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 3: Placeholder for additional credits -->
+          <article class="card card--dim" aria-label="Additional credits — coming soon">
+            <div class="card-header card-header--purp">
+              <div class="card-dot card-dot--purp" aria-hidden="true"></div>
+              Additional Credits
+            </div>
+            <div class="card-body">
+              <h3 class="card-title card-title--dim">More titles to be listed</h3>
+              <p class="card-meta">Project credits, studios, and roles — to be added</p>
+              <ul class="tags" aria-label="Skills used">
+                <li class="tag tag--purp">Coming Soon</li>
+              </ul>
+            </div>
+          </article>
+
+        </div>
+        <!-- /cards -->
+
+      </section>
+      <!-- /works -->
+
+      <!-- Call-to-action buttons -->
+      <div class="cta">
+        <a href="pages/reel.html" class="btn btn--cyan">View Full Reel →</a>
+        <a href="pages/work.html" class="btn btn--ghost">View All Work →</a>
+      </div>
+
+    </div>
+    <!-- /content-main -->
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+       Gold LCARS elbow on the left, company info and links right.
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+
+    <!-- Gold elbow block — LCARS structural element -->
+    <div class="footer-elbow" aria-hidden="true"></div>
+
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <!--
+          Replace # with your actual URLs when ready:
+          LinkedIn: https://linkedin.com/in/your-handle
+          IMDb:     https://imdb.com/name/your-id
+        -->
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="pages/contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       All interactivity: sounds, animations, mobile nav toggle.
+       Loaded at the end of <body> so the HTML is parsed first —
+       this means the script can find all the elements it needs.
+       ============================================================ -->
+  <script src="script.js"></script>
+
+</body>
+</html>

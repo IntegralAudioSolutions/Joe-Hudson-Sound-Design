@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Reel — Joe Hudson · Senior Technical Sound Designer</title>
+  <meta name="description" content="Demo reel — world-building audio, UE5 implementation, SFX design. Senior Technical Sound Designer with 12 years AAA experience." />
+
+  <meta property="og:title"       content="Reel — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="Demo reel — UE5 world-building audio, Fortnite, AAA SFX design." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/reel.html" />
+  <meta property="og:type"        content="website" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/reel.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ── PAGE HEADER ─────────────────────────────────────────── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-purp-light);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong {
+      font-weight: 600;
+      color: var(--color-gold-bright);
+    }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────── */
+
+    .reel-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .reel-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .reel-content {
+      padding: var(--space-xl);
+    }
+
+    /* ── FEATURED REEL (primary embed) ───────────────────────── */
+    /*
+      The main demo reel sits at the top — large, prominent.
+      The video is wrapped in a ratio-preserving container so it
+      stays 16:9 on all screen sizes without JavaScript.
+      
+      How the ratio trick works:
+        - The wrapper has padding-bottom: 56.25% (= 9/16 × 100%)
+        - This creates height proportional to the width
+        - The iframe is absolutely positioned to fill that space
+    */
+
+    .reel-featured {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .reel-featured-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: var(--space-md);
+    }
+
+    .reel-featured-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-purp-light);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .reel-featured-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(112, 96, 200, 0.2);
+    }
+
+    /* 16:9 ratio container */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;   /* 16:9 ratio */
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    /* Placeholder shown before a YouTube URL is added */
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--color-bg-surface);
+    }
+
+    .video-placeholder-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1px solid rgba(112, 96, 200, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-placeholder-icon::after {
+      /* CSS-only play triangle */
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent var(--color-purp-light);
+      margin-left: 4px; /* optical centering */
+    }
+
+    .video-placeholder-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .video-placeholder-code {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(112, 96, 200, 0.4);
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    /* The actual iframe — shown once URL is added */
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Title and description below the featured video */
+    .reel-featured-meta {
+      padding: var(--space-md) 0 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      margin-top: var(--space-sm);
+    }
+
+    .reel-featured-info h2 {
+      font-size: 16px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 6px;
+    }
+
+    .reel-featured-info p {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    .reel-featured-duration {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── SECONDARY REELS GRID ─────────────────────────────────── */
+
+    .reel-grid-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: var(--space-md);
+    }
+
+    .reel-grid-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .reel-grid-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(0, 200, 224, 0.15);
+    }
+
+    /* Two-column grid for supplementary reels */
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      margin-bottom: var(--space-2xl);
+    }
+
+    /* Individual reel card */
+    .reel-card {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color var(--transition-med);
+      cursor: pointer;
+    }
+
+    .reel-card:hover {
+      border-color: var(--color-cyan-border);
+    }
+
+    /* Colour top accent — matches category */
+    .reel-card--purp  { border-top: 2px solid var(--color-purp); }
+    .reel-card--cyan  { border-top: 2px solid var(--color-cyan); }
+    .reel-card--gold  { border-top: 2px solid var(--color-gold); }
+    .reel-card--coral { border-top: 2px solid var(--color-coral); }
+
+    /* Thumbnail area — 16:9 ratio, same trick as featured */
+    .reel-card-thumb {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0a0c12;
+    }
+
+    .reel-card-thumb iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Placeholder for cards without a URL yet */
+    .reel-card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .reel-card-placeholder::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 14px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.08);
+    }
+
+    .reel-card-placeholder span {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      color: #1e2430;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Text below the reel card thumbnail */
+    .reel-card-body {
+      padding: 10px 12px;
+    }
+
+    .reel-card-category {
+      font-family: var(--font-mono);
+      font-size: 7px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .reel-card--purp  .reel-card-category { color: var(--color-purp-light); }
+    .reel-card--cyan  .reel-card-category { color: var(--color-cyan); }
+    .reel-card--gold  .reel-card-category { color: var(--color-gold); }
+    .reel-card--coral .reel-card-category { color: var(--color-coral); }
+
+    .reel-card-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .reel-card-meta {
+      font-size: 11px;
+      color: var(--color-text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── AUDIO SAMPLES SECTION ───────────────────────────────── */
+    /*
+      Optional section for short audio previews.
+      Uses the browser's native <audio> element styled to match the palette.
+      Files go in assets/audio/ — MP3 or OGG recommended for web.
+    */
+
+    .audio-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .audio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .audio-item {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      transition: border-color var(--transition-med);
+    }
+
+    .audio-item:hover {
+      border-color: rgba(212, 172, 80, 0.2);
+    }
+
+    .audio-item-index {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+      width: 24px;
+      flex-shrink: 0;
+    }
+
+    .audio-item-info {
+      flex: 1;
+    }
+
+    .audio-item-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 2px;
+    }
+
+    .audio-item-desc {
+      font-size: 11px;
+      color: var(--color-text-dim);
+    }
+
+    /*
+      Native <audio> element styling.
+      Full cross-browser custom styling of audio controls isn't possible —
+      this is as far as CSS can take it. For deeper control, a custom
+      player could be built with JavaScript later.
+    */
+    .audio-item audio {
+      flex-shrink: 0;
+      height: 28px;
+      accent-color: var(--color-cyan); /* tints the progress bar in modern browsers */
+      filter: invert(0.8) hue-rotate(170deg); /* gives the controls a cyan-ish tint */
+    }
+
+    /* ── NOTE PANEL ──────────────────────────────────────────── */
+    /*
+      Small informational panel explaining the private reel setup.
+      Useful context for audio directors who land on this page.
+    */
+
+    .reel-note {
+      background: var(--color-bg-nav);
+      border: 1px solid rgba(112, 96, 200, 0.2);
+      border-left: 3px solid var(--color-purp);
+      border-radius: 2px;
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .reel-note-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-purp-light);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .reel-note-text {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+    @media (max-width: 900px) {
+      .reel-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .reel-layout { grid-template-columns: 1fr; }
+      .reel-sidebar { display: none; }
+      .reel-content { padding: var(--space-md); }
+
+      .reel-featured-meta { flex-direction: column; gap: var(--space-sm); }
+
+      .audio-item { flex-wrap: wrap; }
+      .audio-item audio { width: 100%; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="reel.html"        class="nav-link active">Reel</a>
+      <a href="disciplines.html" class="nav-link">Disciplines</a>
+      <a href="contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--purp"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Audio Samples &nbsp;·&nbsp; Demo Reel &nbsp;·&nbsp; Private Links</p>
+      <h1 class="page-title">Demo <strong>Reel</strong></h1>
+      <p class="page-subtitle">World Building · SFX Design · UE5 Implementation</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="reel-layout">
+
+    <!-- LCARS sidebar -->
+    <aside class="reel-sidebar" aria-hidden="true">
+      <div class="lb lb--purp"></div>
+      <div class="lb lb--cyan"></div>
+      <div class="lb lb--gold"></div>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--coral"></div>
+      <span class="sidebar-label">Reel</span>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--purp"></div>
+    </aside>
+
+    <main class="reel-content" id="main-content">
+
+      <!-- ── NOTE PANEL ── -->
+      <!--
+        This explains to visiting audio directors that reels are
+        hosted privately — professional and reassuring.
+      -->
+      <div class="reel-note" role="note">
+        <p class="reel-note-label">// Access Note</p>
+        <p class="reel-note-text">
+          Demo reels are hosted as private YouTube links — visible via this page
+          but not discoverable through YouTube search. If a reel isn't loading,
+          <a href="contact.html" style="color:var(--color-purp-light)">get in touch</a>
+          and a direct link will be sent over promptly.
+        </p>
+      </div>
+
+
+      <!-- ── FEATURED REEL ── -->
+      <div class="reel-featured">
+
+        <div class="reel-featured-label">
+          <span class="reel-featured-tag">Primary Reel</span>
+          <div class="reel-featured-line"></div>
+        </div>
+
+        <!--
+          HOW TO ADD YOUR YOUTUBE REEL:
+          
+          1. Go to your private YouTube video
+          2. Click Share → Embed
+          3. Copy the src URL — it looks like:
+               https://www.youtube.com/embed/XXXXXXXXXXX
+          4. Replace the entire <div class="video-placeholder"> block below with:
+          
+               <iframe
+                 src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                 title="Joe Hudson — Primary Demo Reel"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                 allowfullscreen>
+               </iframe>
+        -->
+        <div class="video-wrapper">
+          <div class="video-placeholder" aria-label="Video placeholder — add YouTube embed URL">
+            <div class="video-placeholder-icon" aria-hidden="true"></div>
+            <p class="video-placeholder-text">
+              Primary Demo Reel<br />
+              YouTube embed to be added
+            </p>
+            <p class="video-placeholder-code">// replace this block with &lt;iframe src="..."&gt;</p>
+          </div>
+        </div>
+
+        <div class="reel-featured-meta">
+          <div class="reel-featured-info">
+            <h2>Primary Demo Reel — World Building &amp; SFX Design</h2>
+            <p>
+              <!--
+                Add a short description of your primary reel here.
+                What does it showcase? Which projects are featured?
+                What should an audio director pay particular attention to?
+              -->
+              Reel description to be added. Cover what the reel demonstrates —
+              world-building systems, SFX design approach, UE5 implementation work.
+            </p>
+          </div>
+          <span class="reel-featured-duration">// Duration: 0:00</span>
+        </div>
+
+      </div>
+
+
+      <!-- ── SECONDARY REELS GRID ── -->
+      <div class="reel-grid-label">
+        <span class="reel-grid-tag">Additional Reels</span>
+        <div class="reel-grid-line"></div>
+      </div>
+
+      <div class="reel-grid">
+
+        <!--
+          REEL CARD TEMPLATE:
+          Copy this block to add more reels.
+          Replace the placeholder div with an <iframe> once you have the URL.
+          Change reel-card--[colour] to: purp | cyan | gold | coral
+        -->
+
+        <!-- Reel card 1: UE5 / World Building -->
+        <article class="reel-card reel-card--purp" aria-label="UE5 World Building reel">
+          <div class="reel-card-thumb">
+            <!--
+              Replace this placeholder with:
+              <iframe
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                title="UE5 World Building Reel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            -->
+            <div class="reel-card-placeholder" aria-label="Video placeholder">
+              <span>UE5 World Building</span>
+            </div>
+          </div>
+          <div class="reel-card-body">
+            <p class="reel-card-category">UE5 · World Building</p>
+            <h3 class="reel-card-title">World Building &amp; Ambience Systems</h3>
+            <p class="reel-card-meta">Attenuation, reverb zones, layered ambience — UE5</p>
+          </div>
+        </article>
+
+        <!-- Reel card 2: SFX Design -->
+        <article class="reel-card reel-card--cyan" aria-label="SFX Design reel">
+          <div class="reel-card-thumb">
+            <!--
+              Replace this placeholder with your SFX design reel iframe.
+            -->
+            <div class="reel-card-placeholder" aria-label="Video placeholder">
+              <span>SFX Design</span>
+            </div>
+          </div>
+          <div class="reel-card-body">
+            <p class="reel-card-category">SFX Design</p>
+            <h3 class="reel-card-title">Sound Effects Design</h3>
+            <p class="reel-card-meta">Original SFX — weapons, environments, UI</p>
+          </div>
+        </article>
+
+        <!-- Reel card 3: Implementation -->
+        <article class="reel-card reel-card--gold" aria-label="Implementation reel">
+          <div class="reel-card-thumb">
+            <!--
+              Replace this placeholder with your implementation reel iframe.
+            -->
+            <div class="reel-card-placeholder" aria-label="Video placeholder">
+              <span>Implementation</span>
+            </div>
+          </div>
+          <div class="reel-card-body">
+            <p class="reel-card-category">Implementation · Blueprint</p>
+            <h3 class="reel-card-title">Audio Implementation</h3>
+            <p class="reel-card-meta">MetaSounds, Blueprint scripting, Wwise / FMOD</p>
+          </div>
+        </article>
+
+        <!-- Reel card 4: Fortnite / Epic -->
+        <article class="reel-card reel-card--coral" aria-label="Fortnite map audio reel">
+          <div class="reel-card-thumb">
+            <!--
+              Replace this placeholder with your Fortnite / Epic reel iframe.
+              Check with Epic Games what footage is cleared for public use.
+            -->
+            <div class="reel-card-placeholder" aria-label="Video placeholder">
+              <span>Fortnite / Epic</span>
+            </div>
+          </div>
+          <div class="reel-card-body">
+            <p class="reel-card-category">Epic Games · Fortnite</p>
+            <h3 class="reel-card-title">Fortnite Map Audio</h3>
+            <p class="reel-card-meta">Battle Royale map audio — subject to Epic clearance</p>
+          </div>
+        </article>
+
+      </div>
+      <!-- /reel-grid -->
+
+
+      <!-- ── AUDIO SAMPLES ── -->
+      <!--
+        Optional section for short standalone audio clips.
+        Useful for showcasing individual SFX without a video context.
+        
+        TO ADD AN AUDIO FILE:
+          1. Export your clip as MP3 (good browser support) or OGG
+          2. Place the file in assets/audio/
+          3. Replace the src="#" placeholder with the correct path:
+               src="../assets/audio/your-file-name.mp3"
+      -->
+      <div class="audio-section">
+
+        <div class="reel-grid-label" style="margin-bottom:var(--space-md)">
+          <span class="reel-grid-tag" style="color:var(--color-gold)">Audio Samples</span>
+          <div class="reel-grid-line" style="background:rgba(212,172,80,0.15)"></div>
+        </div>
+
+        <div class="audio-list">
+
+          <div class="audio-item">
+            <span class="audio-item-index">01</span>
+            <div class="audio-item-info">
+              <p class="audio-item-title">Sample Title — to be added</p>
+              <p class="audio-item-desc">Description · Category · Duration</p>
+            </div>
+            <!--
+              Replace src="#" with the real file path once audio is ready.
+              Example: src="../assets/audio/environmental-ambience-01.mp3"
+            -->
+            <audio controls src="#" aria-label="Audio sample 01 — placeholder">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="audio-item">
+            <span class="audio-item-index">02</span>
+            <div class="audio-item-info">
+              <p class="audio-item-title">Sample Title — to be added</p>
+              <p class="audio-item-desc">Description · Category · Duration</p>
+            </div>
+            <audio controls src="#" aria-label="Audio sample 02 — placeholder">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+          <div class="audio-item">
+            <span class="audio-item-index">03</span>
+            <div class="audio-item-info">
+              <p class="audio-item-title">Sample Title — to be added</p>
+              <p class="audio-item-desc">Description · Category · Duration</p>
+            </div>
+            <audio controls src="#" aria-label="Audio sample 03 — placeholder">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /audio-section -->
+
+
+      <!-- CTA -->
+      <div class="cta" style="padding-left:0">
+        <a href="work.html"    class="btn btn--ghost">View Credits →</a>
+        <a href="contact.html" class="btn btn--cyan">Get in Touch →</a>
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <!-- Page-specific JS -->
+  <script>
+
+    /* ── REEL CARD SOUNDS ──────────────────────────────────── */
+
+    document.querySelectorAll('.reel-card').forEach((card, i) => {
+      const colours = ['purp', 'cyan', 'gold', 'coral'];
+      const colour  = colours[i % colours.length];
+
+      card.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+
+      card.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick(colour);
+        // Subtle flash on the card border
+        card.style.borderColor = 'rgba(0,200,224,0.5)';
+        setTimeout(() => { card.style.borderColor = ''; }, 300);
+      });
+    });
+
+    /* ── AUDIO ITEM SOUNDS ─────────────────────────────────── */
+
+    document.querySelectorAll('.audio-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+
+      // When the native audio player starts playing, fire the UI sound
+      const audioEl = item.querySelector('audio');
+      if (audioEl) {
+        audioEl.addEventListener('play', () => {
+          if (typeof playClick === 'function') playClick('gold');
+        });
+      }
+    });
+
+    /* ── NOTE PANEL SOUND ──────────────────────────────────── */
+
+    const reelNote = document.querySelector('.reel-note');
+    if (reelNote) {
+      reelNote.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+    }
+
+  </script>
+
+</body>
+</html>

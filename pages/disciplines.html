@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Disciplines — Joe Hudson · Senior Technical Sound Designer</title>
+  <meta name="description" content="Skills, tools, and specialisms — UE5 MetaSounds, Blueprint audio, SFX design, Reaper, Soundminer, Wwise, FMOD, world-building audio." />
+
+  <meta property="og:title"       content="Disciplines — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="UE5 MetaSounds, Blueprint audio integration, SFX design, Reaper, Soundminer, Wwise, FMOD." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/disciplines.html" />
+  <meta property="og:type"        content="website" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/disciplines.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ── PAGE HEADER ─────────────────────────────────────────── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong {
+      font-weight: 600;
+      color: var(--color-gold-bright);
+    }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────── */
+
+    .disc-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .disc-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .disc-content {
+      padding: var(--space-xl);
+    }
+
+    /* ── DISCIPLINE CATEGORY BLOCK ───────────────────────────── */
+    /*
+      Each major skill area is a "category block" — a titled section
+      containing a grid of individual skill chips.
+      
+      Structure:
+        .disc-category
+          .disc-category-header  ← coloured label strip
+          .disc-category-body    ← grid of skill items
+    */
+
+    .disc-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .disc-category {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    /* Coloured left border per category */
+    .disc-category--gold  { border-left: 3px solid var(--color-gold); }
+    .disc-category--cyan  { border-left: 3px solid var(--color-cyan); }
+    .disc-category--purp  { border-left: 3px solid var(--color-purp); }
+    .disc-category--coral { border-left: 3px solid var(--color-coral); }
+
+    /* Header strip — category name + icon */
+    .disc-category-header {
+      padding: 9px 16px;
+      border-bottom: 1px solid var(--color-border);
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .disc-category--gold  .disc-category-header { color: var(--color-gold);       background: var(--color-gold-faint); }
+    .disc-category--cyan  .disc-category-header { color: var(--color-cyan);        background: var(--color-cyan-faint); }
+    .disc-category--purp  .disc-category-header { color: var(--color-purp-light);  background: var(--color-purp-faint); }
+    .disc-category--coral .disc-category-header { color: var(--color-coral);       background: var(--color-coral-faint); }
+
+    .disc-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .disc-category--gold  .disc-dot { background: var(--color-gold); }
+    .disc-category--cyan  .disc-dot { background: var(--color-cyan); }
+    .disc-category--purp  .disc-dot { background: var(--color-purp-light); }
+    .disc-category--coral .disc-dot { background: var(--color-coral); }
+
+    /* Grid of skill chips inside each category */
+    .disc-category-body {
+      padding: 14px 16px;
+      display: grid;
+      /* auto-fit: fills as many columns as fit at minimum 180px each */
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+    }
+
+    /* Individual skill item */
+    .disc-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      background: var(--color-bg-nav);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+      user-select: none;
+    }
+
+    .disc-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(212, 172, 80, 0.15);
+    }
+
+    .disc-item-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: #c8d8e8;
+      letter-spacing: 0.06em;
+    }
+
+    .disc-item-desc {
+      font-size: 11px;
+      color: var(--color-text-dim);
+      line-height: 1.5;
+    }
+
+    /*
+      Proficiency bar — a thin coloured bar showing relative experience level.
+      Width is set via inline style (e.g. style="--bar-width: 95%")
+      so the percentage can be set per-skill without extra CSS classes.
+    */
+    .disc-item-bar {
+      height: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1px;
+      margin-top: 4px;
+      overflow: hidden;
+    }
+
+    .disc-item-bar-fill {
+      height: 100%;
+      width: var(--bar-width, 50%);
+      border-radius: 1px;
+      transition: width 0.6s ease;
+    }
+
+    .disc-category--gold  .disc-item-bar-fill { background: var(--color-gold); }
+    .disc-category--cyan  .disc-item-bar-fill { background: var(--color-cyan); }
+    .disc-category--purp  .disc-item-bar-fill { background: var(--color-purp-light); }
+    .disc-category--coral .disc-item-bar-fill { background: var(--color-coral); }
+
+    /* ── TOOLS PIPELINE SECTION ──────────────────────────────── */
+    /*
+      A separate "pipeline" block showing the typical workflow
+      from field recording through to in-engine delivery.
+      Keeps it practical for visiting audio directors.
+    */
+
+    .pipeline-section {
+      margin-bottom: var(--space-2xl);
+    }
+
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2px;
+      margin-top: var(--space-md);
+    }
+
+    .pipeline-step {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 14px 12px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color var(--transition-fast);
+    }
+
+    .pipeline-step:hover {
+      border-color: rgba(212, 172, 80, 0.2);
+    }
+
+    /* Step number in top-right corner */
+    .pipeline-step-num {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+      position: absolute;
+      top: 8px;
+      right: 10px;
+    }
+
+    .pipeline-step-name {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    /* Each step uses a different colour */
+    .pipeline-step:nth-child(1) .pipeline-step-name { color: var(--color-gold); }
+    .pipeline-step:nth-child(2) .pipeline-step-name { color: var(--color-cyan); }
+    .pipeline-step:nth-child(3) .pipeline-step-name { color: var(--color-cyan); }
+    .pipeline-step:nth-child(4) .pipeline-step-name { color: var(--color-purp-light); }
+    .pipeline-step:nth-child(5) .pipeline-step-name { color: var(--color-coral); }
+    .pipeline-step:nth-child(6) .pipeline-step-name { color: var(--color-gold); }
+
+    .pipeline-step-tool {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── ENGAGEMENT INFO ─────────────────────────────────────── */
+
+    .engagement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: var(--space-md);
+    }
+
+    .engagement-card {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color var(--transition-fast);
+    }
+
+    .engagement-card:hover {
+      border-color: var(--color-gold-border);
+    }
+
+    .engagement-card-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .engagement-card-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 5px;
+    }
+
+    .engagement-card-note {
+      font-size: 11px;
+      color: var(--color-text-dim);
+      line-height: 1.55;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .disc-layout { grid-template-columns: 1fr; }
+      .disc-sidebar { display: none; }
+      .disc-content { padding: var(--space-md); }
+
+      .disc-category-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="reel.html"        class="nav-link">Reel</a>
+      <a href="disciplines.html" class="nav-link active">Disciplines</a>
+      <a href="contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--purp"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Skills &nbsp;·&nbsp; Tools &nbsp;·&nbsp; Specialisms</p>
+      <h1 class="page-title">Disciplines &amp; <strong>Tools</strong></h1>
+      <p class="page-subtitle">UE5 · MetaSounds · Blueprint · Reaper · Soundminer · Wwise · FMOD</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="disc-layout">
+
+    <aside class="disc-sidebar" aria-hidden="true">
+      <div class="lb lb--cyan"></div>
+      <div class="lb lb--purp"></div>
+      <div class="lb lb--gold"></div>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--coral"></div>
+      <span class="sidebar-label">Skills</span>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--cyan"></div>
+    </aside>
+
+    <main class="disc-content" id="main-content">
+
+
+      <!-- ── DISCIPLINE CATEGORIES ── -->
+      <div class="disc-categories">
+
+
+        <!-- CATEGORY 1: Engine & Implementation -->
+        <div class="disc-category disc-category--gold">
+          <div class="disc-category-header">
+            <div class="disc-dot"></div>
+            Engine &amp; Implementation
+          </div>
+          <div class="disc-category-body">
+
+            <div class="disc-item">
+              <span class="disc-item-name">Unreal Engine 5</span>
+              <span class="disc-item-desc">Full audio pipeline from asset integration to in-engine delivery</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:98%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">MetaSounds</span>
+              <span class="disc-item-desc">Procedural audio graph design — dynamic, reactive soundscapes</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:92%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Blueprint Scripting</span>
+              <span class="disc-item-desc">Audio-driven Blueprint logic — triggers, states, parameters</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:80%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Attenuation Systems</span>
+              <span class="disc-item-desc">Spatially coherent distance falloff — near, mid, far zones</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:95%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Reverb Zones</span>
+              <span class="disc-item-desc">Dynamic reverb switching between interior and exterior spaces</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:95%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Wwise</span>
+              <span class="disc-item-desc">Event-driven audio — states, switches, RTPC, busses</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:85%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">FMOD</span>
+              <span class="disc-item-desc">Studio and integration — timeline events, parameters</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:75%"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- CATEGORY 2: Sound Design -->
+        <div class="disc-category disc-category--cyan">
+          <div class="disc-category-header">
+            <div class="disc-dot"></div>
+            Sound Design
+          </div>
+          <div class="disc-category-body">
+
+            <div class="disc-item">
+              <span class="disc-item-name">World-Building Audio</span>
+              <span class="disc-item-desc">Large-scale environments — layered ambiences, dynamic systems</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:98%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">SFX Design</span>
+              <span class="disc-item-desc">Original sound effects from concept through to game-ready asset</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:95%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Environmental Ambience</span>
+              <span class="disc-item-desc">Biome-specific layers — weather, fauna, topology, time of day</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:96%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Field Recording</span>
+              <span class="disc-item-desc">Location sound capture for bespoke, authentic source material</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:82%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Audio Direction</span>
+              <span class="disc-item-desc">Creative vision, tone setting, and team-level audio decisions</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:78%"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- CATEGORY 3: DAW & Asset Pipeline -->
+        <div class="disc-category disc-category--purp">
+          <div class="disc-category-header">
+            <div class="disc-dot"></div>
+            DAW &amp; Asset Pipeline
+          </div>
+          <div class="disc-category-body">
+
+            <div class="disc-item">
+              <span class="disc-item-name">Reaper</span>
+              <span class="disc-item-desc">Primary DAW — editing, processing, SFX design, mix</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:97%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Soundminer</span>
+              <span class="disc-item-desc">Audio asset management, metadata tagging, search workflow</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:92%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Asset Management</span>
+              <span class="disc-item-desc">Naming conventions, version control, delivery pipelines</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:90%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Audio Processing</span>
+              <span class="disc-item-desc">EQ, compression, layering, pitch, transient design</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:94%"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- CATEGORY 4: Collaboration & Process -->
+        <div class="disc-category disc-category--coral">
+          <div class="disc-category-header">
+            <div class="disc-dot"></div>
+            Collaboration &amp; Process
+          </div>
+          <div class="disc-category-body">
+
+            <div class="disc-item">
+              <span class="disc-item-name">Remote Working</span>
+              <span class="disc-item-desc">12+ years fully remote — async communication, self-directed</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:99%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">AAA Production</span>
+              <span class="disc-item-desc">Large studio pipelines, milestone delivery, cross-discipline review</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:90%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Indie Collaboration</span>
+              <span class="disc-item-desc">Smaller teams, broader scope, flexible engagement</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:85%"></div></div>
+            </div>
+
+            <div class="disc-item">
+              <span class="disc-item-name">Technical Documentation</span>
+              <span class="disc-item-desc">Audio design docs, handoff notes, integration guides</span>
+              <div class="disc-item-bar"><div class="disc-item-bar-fill" style="--bar-width:80%"></div></div>
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+      <!-- /disc-categories -->
+
+
+      <!-- ── PIPELINE SECTION ── -->
+      <div class="pipeline-section">
+
+        <div class="section-header">
+          <h2 class="section-tag">Typical Pipeline</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="pipeline-steps">
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">01</span>
+            <p class="pipeline-step-name">Brief</p>
+            <p class="pipeline-step-tool">Creative direction · Tone reference · Scope</p>
+          </div>
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">02</span>
+            <p class="pipeline-step-name">Source</p>
+            <p class="pipeline-step-tool">Field recording · Library · Synthesis</p>
+          </div>
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">03</span>
+            <p class="pipeline-step-name">Design</p>
+            <p class="pipeline-step-tool">Reaper · Soundminer · Processing</p>
+          </div>
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">04</span>
+            <p class="pipeline-step-name">Implement</p>
+            <p class="pipeline-step-tool">UE5 · MetaSounds · Wwise / FMOD</p>
+          </div>
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">05</span>
+            <p class="pipeline-step-name">Integrate</p>
+            <p class="pipeline-step-tool">Blueprint · Parameters · States</p>
+          </div>
+
+          <div class="pipeline-step">
+            <span class="pipeline-step-num">06</span>
+            <p class="pipeline-step-name">Deliver</p>
+            <p class="pipeline-step-tool">Review · Iteration · Sign-off</p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ── ENGAGEMENT INFO ── -->
+      <div class="pipeline-section">
+
+        <div class="section-header">
+          <h2 class="section-tag">Engagement</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="engagement-grid">
+
+          <div class="engagement-card">
+            <p class="engagement-card-label">Monthly Retainer</p>
+            <p class="engagement-card-value">Ongoing collaboration</p>
+            <p class="engagement-card-note">Dedicated availability across a project's lifecycle. Suited to studios needing consistent audio support over multiple months.</p>
+          </div>
+
+          <div class="engagement-card">
+            <p class="engagement-card-label">Fixed Fee</p>
+            <p class="engagement-card-value">Per-project scope</p>
+            <p class="engagement-card-note">Defined deliverables, agreed upfront. Works well for contained scopes — a level, a system, a full SFX pass.</p>
+          </div>
+
+          <div class="engagement-card">
+            <p class="engagement-card-label">Day Rate</p>
+            <p class="engagement-card-value">£500 – £600 / day</p>
+            <p class="engagement-card-note">Flexible engagement for short-term work, crunch support, or consultancy. Remote or UK-based.</p>
+          </div>
+
+        </div>
+
+        <div style="margin-top:var(--space-lg)">
+          <a href="contact.html" class="btn btn--cyan">Discuss a Project →</a>
+        </div>
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <script>
+    /* ── DISCIPLINE ITEMS ──────────────────────────────────── */
+
+    document.querySelectorAll('.disc-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      item.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+
+    /* ── PIPELINE STEPS ────────────────────────────────────── */
+
+    const stepColours = ['gold', 'cyan', 'cyan', 'purp', 'coral', 'gold'];
+
+    document.querySelectorAll('.pipeline-step').forEach((step, i) => {
+      step.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      step.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick(stepColours[i] || 'gold');
+        step.style.borderColor = 'rgba(212,172,80,0.4)';
+        setTimeout(() => { step.style.borderColor = ''; }, 300);
+      });
+    });
+
+    /* ── ENGAGEMENT CARDS ──────────────────────────────────── */
+
+    document.querySelectorAll('.engagement-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      card.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+  </script>
+
+</body>
+</html>

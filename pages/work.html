@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Work — Joe Hudson · Senior Technical Sound Designer</title>
+  <meta name="description" content="Selected credits and past projects — Fortnite Battle Royale map audio, Sweet Justice Sound Group, and AAA game audio work by Joe Hudson." />
+
+  <meta property="og:title"       content="Work — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="12 years of AAA game audio. Fortnite, Epic Games, Sweet Justice Sound Group." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/work.html" />
+  <meta property="og:type"        content="website" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/work.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!--
+    Note the ../ prefix on these paths.
+    Pages in the /pages/ subfolder need to go one level up (../)
+    to reach the root files style.css and script.js.
+  -->
+  <link rel="stylesheet" href="../style.css" />
+
+  <!-- Page-specific styles that extend style.css for this page only -->
+  <style>
+
+    /* ── PAGE HEADER ─────────────────────────────────────────── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Left LCARS sidebar in page header */
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-coral);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong {
+      font-weight: 600;
+      color: var(--color-gold-bright);
+    }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────── */
+
+    /* Same two-column grid as index — sidebar + content */
+    .work-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .work-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .work-content {
+      padding: var(--space-xl);
+    }
+
+    /* ── FILTER BAR ──────────────────────────────────────────── */
+    /*
+      Lets visitors filter projects by type.
+      Active filter is highlighted; clicking sends a playClick() sound.
+    */
+
+    .filter-bar {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      padding: 5px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: transparent;
+      color: var(--color-text-dim);
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+      user-select: none;
+    }
+
+    .filter-btn:hover {
+      color: var(--color-cyan);
+      border-color: var(--color-cyan-border);
+    }
+
+    .filter-btn.is-active {
+      color: var(--color-cyan);
+      border-color: var(--color-cyan-border);
+      background: var(--color-cyan-faint);
+    }
+
+    /* ── PROJECT ENTRIES ─────────────────────────────────────── */
+    /*
+      Each project is a full-width entry — more detailed than the
+      homepage cards. Structure:
+        - Coloured left border (accent by client type)
+        - Header row: client name + date range
+        - Title + role
+        - Description paragraph
+        - Tag list
+        - Optional expandable detail panel
+    */
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px; /* tight stacking — LCARS panel feel */
+    }
+
+    .project-entry {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: border-color var(--transition-med);
+      cursor: pointer;
+    }
+
+    .project-entry:hover {
+      border-color: rgba(212, 172, 80, 0.2);
+    }
+
+    /* Colour accent on left edge */
+    .project-entry--gold  { border-left: 3px solid var(--color-gold); }
+    .project-entry--cyan  { border-left: 3px solid var(--color-cyan); }
+    .project-entry--purp  { border-left: 3px solid var(--color-purp); }
+    .project-entry--coral { border-left: 3px solid var(--color-coral); }
+
+    /* Top strip inside each entry */
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 0;
+    }
+
+    .project-client {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Client name colours match accent */
+    .project-entry--gold  .project-client { color: var(--color-gold); }
+    .project-entry--cyan  .project-client { color: var(--color-cyan); }
+    .project-entry--purp  .project-client { color: var(--color-purp-light); }
+    .project-entry--coral .project-client { color: var(--color-coral); }
+
+    .project-date {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    /* Main body of each project entry */
+    .project-body {
+      padding: 8px 16px 14px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: #c8d8e8;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .project-role {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 12px;
+    }
+
+    /* Expandable detail section — hidden by default */
+    .project-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .project-detail.is-open {
+      max-height: 400px; /* large enough for any content */
+    }
+
+    .project-detail-inner {
+      padding: 12px 0 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .detail-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .detail-text {
+      font-size: 12px;
+      color: var(--color-text-dim);
+      line-height: 1.7;
+      max-width: 640px;
+    }
+
+    /* Expand toggle button */
+    .project-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 6px 0 0;
+      background: none;
+      border: none;
+      transition: color var(--transition-fast);
+      user-select: none;
+    }
+
+    .project-toggle:hover { color: var(--color-cyan); }
+
+    /* The ▸ / ▾ chevron that flips when open */
+    .project-toggle-icon {
+      display: inline-block;
+      transition: transform var(--transition-med);
+      font-style: normal;
+    }
+
+    .project-entry.is-expanded .project-toggle-icon {
+      transform: rotate(90deg);
+    }
+
+    /* ── DISCIPLINE SUMMARY ───────────────────────────────────── */
+    /*
+      A summary panel at the bottom listing core skills —
+      acts as a teaser for the Disciplines page.
+    */
+
+    .disciplines-teaser {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(212, 172, 80, 0.12);
+    }
+
+    .disciplines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 8px;
+      margin-top: var(--space-md);
+    }
+
+    .discipline-chip {
+      background: var(--color-bg-nav);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 2px;
+      padding: 10px 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color var(--transition-fast), border-color var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .discipline-chip:hover {
+      color: var(--color-gold);
+      border-color: var(--color-gold-border);
+    }
+
+    .discipline-chip-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+
+    @media (max-width: 600px) {
+      .page-header {
+        grid-template-columns: 1fr;
+      }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .work-layout {
+        grid-template-columns: 1fr;
+      }
+      .work-sidebar { display: none; }
+      .work-content { padding: var(--space-md); }
+
+      .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION — identical across all pages
+       The active class is on "Work" this time.
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"         class="nav-link">About</a>
+      <a href="work.html"             class="nav-link active">Work</a>
+      <a href="reel.html"             class="nav-link">Reel</a>
+      <a href="disciplines.html"      class="nav-link">Disciplines</a>
+      <a href="contact.html"          class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--coral"></div>
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Selected Credits &nbsp;·&nbsp; 2012–Present</p>
+      <h1 class="page-title">Past <strong>Work</strong></h1>
+      <p class="page-subtitle">AAA · Indie · Freelance · Implementation</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER — same as homepage
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+      <span class="ticker-item ticker-item--gold">● EPIC GAMES</span>
+      <span class="ticker-item">// FORTNITE BATTLE ROYALE MAP AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● UE5 METASOUNDS</span>
+      <span class="ticker-item">// BLUEPRINT AUDIO INTEGRATION</span>
+      <span class="ticker-item ticker-item--coral">● SWEET JUSTICE SOUND GROUP</span>
+      <span class="ticker-item">// WORLD-BUILDING AMBIENCES</span>
+      <span class="ticker-item ticker-item--gold">● 12+ YEARS ACTIVE</span>
+      <span class="ticker-item">// ATTENUATION &amp; REVERB ZONES</span>
+      <span class="ticker-item ticker-item--cyan">● AVAILABLE FOR NEW PROJECTS</span>
+      <span class="ticker-item">// REAPER · SOUNDMINER · WWISE · FMOD</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="work-layout">
+
+    <!-- LCARS sidebar -->
+    <aside class="work-sidebar" aria-hidden="true">
+      <div class="lb lb--coral"></div>
+      <div class="lb lb--gold"></div>
+      <div class="lb lb--cyan"></div>
+      <div class="lb lb--purp"></div>
+      <div class="lb lb--dim"></div>
+      <span class="sidebar-label">Credits</span>
+      <div class="lb lb--dim"></div>
+      <div class="lb lb--gold"></div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="work-content" id="main-content">
+
+      <!-- ── FILTER BAR ── -->
+      <div class="filter-bar" role="group" aria-label="Filter projects by type">
+        <button class="filter-btn is-active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="ue5">UE5</button>
+        <button class="filter-btn" data-filter="sfx">SFX Design</button>
+        <button class="filter-btn" data-filter="implementation">Implementation</button>
+        <button class="filter-btn" data-filter="aaa">AAA</button>
+      </div>
+
+
+      <!-- ── PROJECT LIST ── -->
+      <div class="project-list" id="projectList">
+
+
+        <!-- ── PROJECT 1: Epic Games / Fortnite ── -->
+        <!--
+          data-tags attribute is used by the JS filter function.
+          Add as many space-separated tags as apply to each project.
+        -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="ue5 implementation aaa"
+                 aria-label="Epic Games — Fortnite Battle Royale">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold);animation:dotPulse 2.5s ease-in-out infinite" aria-hidden="true"></div>
+              Epic Games
+            </div>
+            <span class="project-date">Sept 2019 — Dec 2026</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">Fortnite Battle Royale — Map Audio</h2>
+            <p class="project-role">Senior Audio Designer</p>
+            <p class="project-desc">
+              Responsible for the full audio pipeline for Fortnite Battle Royale map environments —
+              one of the most-played games on the planet. Designed and implemented world-building
+              audio at scale, from initial concepting through to in-engine delivery inside Unreal Engine 5.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--purp">World Building</li>
+              <li class="tag tag--purp">Attenuation Systems</li>
+              <li class="tag tag--gold">AAA</li>
+              <li class="tag tag--gold">Blueprint Scripting</li>
+            </ul>
+
+            <!-- Expand toggle -->
+            <button class="project-toggle" aria-expanded="false" aria-controls="detail-epic">
+              <i class="project-toggle-icon" aria-hidden="true">▸</i>
+              Details
+            </button>
+
+            <!-- Expandable detail -->
+            <div class="project-detail" id="detail-epic">
+              <div class="project-detail-inner">
+                <p class="detail-label">Scope &amp; Responsibilities</p>
+                <p class="detail-text">
+                  <!--
+                    Add more specific detail here once cleared with Epic Games
+                    for public disclosure. Examples of what to include:
+                    specific map seasons worked on, technical systems built,
+                    team size, pipeline contributions.
+                  -->
+                  Full details to be added — please check what is cleared for
+                  public disclosure with Epic Games before publishing.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+
+        <!-- ── PROJECT 2: Sweet Justice Sound Group ── -->
+        <article class="project-entry project-entry--cyan"
+                 data-tags="sfx implementation"
+                 aria-label="Sweet Justice Sound Group — long-term collaboration">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-cyan);animation:dotPulse 2.5s ease-in-out infinite 0.4s" aria-hidden="true"></div>
+              Sweet Justice Sound Group
+            </div>
+            <span class="project-date">2012 — Present</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">Long-Term SFX Collaboration</h2>
+            <p class="project-role">Freelance Sound Designer</p>
+            <p class="project-desc">
+              Ongoing retained freelance relationship spanning 12 years and multiple shipped titles.
+              Sound effects design, audio implementation, and creative consultation across a range
+              of game genres and platforms.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--gold">SFX Design</li>
+              <li class="tag tag--cyan">Reaper</li>
+              <li class="tag tag--cyan">Soundminer</li>
+              <li class="tag tag--purp">Field Recording</li>
+              <li class="tag tag--gold">Wwise</li>
+            </ul>
+
+            <button class="project-toggle" aria-expanded="false" aria-controls="detail-sjsg">
+              <i class="project-toggle-icon" aria-hidden="true">▸</i>
+              Details
+            </button>
+
+            <div class="project-detail" id="detail-sjsg">
+              <div class="project-detail-inner">
+                <p class="detail-label">Scope &amp; Responsibilities</p>
+                <p class="detail-text">
+                  <!--
+                    Add specific titles, genres, and responsibilities
+                    once confirmed with Sweet Justice Sound Group.
+                  -->
+                  Specific titles and project details to be added — confirm
+                  with Sweet Justice Sound Group what can be listed publicly.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+
+        <!-- ── PROJECT 3: Placeholder — add your own credits here ── -->
+        <!--
+          TEMPLATE — copy this block and fill in your own details.
+          Change project-entry--[colour] to: gold | cyan | purp | coral
+          Change data-tags to any combination of: ue5 sfx implementation aaa
+        -->
+        <article class="project-entry project-entry--purp"
+                 data-tags="sfx aaa"
+                 aria-label="Additional credit placeholder">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-purp-light)" aria-hidden="true"></div>
+              Studio / Client Name
+            </div>
+            <span class="project-date">Year — Year</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title" style="color:var(--color-text-dim)">Project Title — To Be Added</h2>
+            <p class="project-role" style="color:#2a3a4a">Role · Platform</p>
+            <p class="project-desc" style="color:#2a3a4a">
+              Add your project description here. What did you do? What was the scope?
+              What made this project technically interesting?
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Placeholder</li>
+            </ul>
+
+          </div>
+        </article>
+
+
+      </div>
+      <!-- /project-list -->
+
+
+      <!-- ── DISCIPLINES TEASER ── -->
+      <div class="disciplines-teaser">
+
+        <div class="section-header">
+          <h2 class="section-tag">Core Disciplines</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="disciplines-grid">
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-gold)"></div>
+            UE5 MetaSounds
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-cyan)"></div>
+            Blueprint Audio
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-purp)"></div>
+            World Building
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-coral)"></div>
+            SFX Design
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-gold)"></div>
+            Reaper / Soundminer
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-cyan)"></div>
+            Wwise / FMOD
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-purp)"></div>
+            Reverb &amp; Attenuation
+          </div>
+          <div class="discipline-chip">
+            <div class="discipline-chip-dot" style="background:var(--color-coral)"></div>
+            Field Recording
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-lg)">
+          <a href="disciplines.html" class="btn btn--ghost">Full Disciplines →</a>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER — identical across all pages
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <!-- Script path goes up one level, same as style.css -->
+  <script src="../script.js"></script>
+
+  <!-- Page-specific JS for work.html only -->
+  <script>
+
+    /* ── PROJECT EXPAND / COLLAPSE ─────────────────────────── */
+    /*
+      When a project-toggle button is clicked:
+        1. Find the sibling .project-detail panel
+        2. Toggle its is-open class (CSS handles the animation)
+        3. Flip the aria-expanded attribute for accessibility
+        4. Rotate the chevron icon via the parent's is-expanded class
+    */
+
+    document.querySelectorAll('.project-toggle').forEach(toggle => {
+      toggle.addEventListener('click', () => {
+
+        // Find the parent entry and the detail panel
+        const entry  = toggle.closest('.project-entry');
+        const detail = document.getElementById(toggle.getAttribute('aria-controls'));
+
+        if (!detail) return;
+
+        const isOpen = detail.classList.toggle('is-open');
+        entry.classList.toggle('is-expanded', isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+        // Sound — cyan for open, dim for close
+        if (typeof playClick === 'function') {
+          playClick(isOpen ? 'cyan' : 'dim');
+        }
+      });
+
+      // Hover sound
+      toggle.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+    });
+
+
+    /* ── PROJECT FILTER ────────────────────────────────────── */
+    /*
+      Each project article has a data-tags attribute listing its
+      categories (e.g. data-tags="ue5 implementation aaa").
+      
+      Clicking a filter button:
+        1. Marks it as is-active
+        2. Shows projects whose tags include the selected filter
+        3. Hides projects that don't match
+        4. "all" filter shows everything
+    */
+
+    const filterBtns   = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-entry');
+
+    filterBtns.forEach(btn => {
+
+      btn.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+
+      btn.addEventListener('click', () => {
+        // Play sound
+        if (typeof playClick === 'function') playClick('cyan');
+
+        // Update active state
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const filter = btn.dataset.filter;
+
+        // Show / hide projects
+        projectItems.forEach(item => {
+          if (filter === 'all') {
+            item.style.display = '';
+          } else {
+            const tags = item.dataset.tags || '';
+            // Show if the item's tags include the selected filter
+            item.style.display = tags.includes(filter) ? '' : 'none';
+          }
+        });
+      });
+
+    });
+
+
+    /* ── DISCIPLINE CHIPS ──────────────────────────────────── */
+
+    document.querySelectorAll('.discipline-chip').forEach(chip => {
+      chip.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      chip.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+
+  </script>
+
+</body>
+</html>
