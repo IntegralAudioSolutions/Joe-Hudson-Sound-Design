@@ -371,7 +371,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 20% top;    /* pulls image left to show more of the frame */
+      object-position: 5% top;     /* far left — shows full width of shot */
       display: block;
       filter: saturate(0.85) brightness(0.9);
       transition: filter var(--transition-med);
@@ -398,8 +398,23 @@
       display: grid;
       grid-template-columns: var(--sidebar-width) 1fr 72px;
       background: var(--color-bg);
-      border-bottom: 2px solid var(--color-gold);
-      align-items: stretch;   /* makes all columns fill the full row height */
+      align-items: stretch;
+      position: relative;
+    }
+
+    /*
+      Horizontal separator as a pseudo-element so we can control its width.
+      It runs from the left edge to 72px from the right — stopping exactly
+      at the left edge of the elbow column, so separator + elbow read as one piece.
+    */
+    .index-reel::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 72px;   /* stops where the elbow column begins */
+      height: 2px;
+      background: var(--color-gold);
     }
 
     /* Left column — continues the gold sidebar line from the hero */
@@ -476,9 +491,9 @@
       width: 72px;
       height: 48px;
       background: var(--color-gold);
-      border-radius: 0 0 48px 0;  /* bottom-right — true mirror of top-left hero elbow */
+      border-radius: 0 0 48px 0;  /* bottom-right curve */
       align-self: flex-end;       /* pins to very bottom of grid row */
-      justify-self: end;          /* pins to right edge of column */
+      justify-self: start;        /* pins to LEFT edge — separator terminates here */
       margin-top: auto;
     }
 
