@@ -231,7 +231,7 @@ h1, h2, h3 {
 .nav-link {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--color-text-dim);
+  color: #ffffff;           /* white text on nav links */
   padding: 0 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;

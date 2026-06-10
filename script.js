@@ -190,11 +190,11 @@ function playBuffer(name, volume = 1.0) {
 }
 
 /**
- * Hover sound removed — kept as no-op so existing calls don't error.
- * The hover.ogg file remains in assets/audio/ui/ for future use.
+ * Play the hover sound — active on nav links and side pills only.
+ * Not used on image grid cards.
  */
 function playHover() {
-  // intentionally silent
+  playBuffer('hover', 0.4);
 }
 
 /**
@@ -320,8 +320,9 @@ if (tickerItems.length > 0) {
    6. EVENT BINDING
 ---------------------------------------------------------------- */
 
-// Nav links — click for desktop, touchend for mobile
+// Nav links — hover sound + click-cyan
 [...document.querySelectorAll('.nav-link')].forEach(el => {
+  el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
   function handleNav() { resumeAudio(); playClick('cyan'); setActiveNav(el); }
   el.addEventListener('click',    handleNav);
   el.addEventListener('touchend', handleNav, { passive: true });
@@ -330,6 +331,7 @@ if (tickerItems.length > 0) {
 // Logo block
 const logoBlock = document.querySelector('.nav-logo-block');
 if (logoBlock) {
+  logoBlock.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
   function handleLogo() { resumeAudio(); playClick('gold'); }
   logoBlock.addEventListener('click',    handleLogo);
   logoBlock.addEventListener('touchend', handleLogo, { passive: true });

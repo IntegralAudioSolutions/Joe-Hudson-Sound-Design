@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fortnite — Chapter 5: Absolute Doom — Joe Hudson</title>
+  <meta name="description" content="Map audio design for Fortnite Chapter 5 Season 4. This season brought Marvel's Doctor Doom to the Battle Royale island — a dark, dramatic aesthetic that informed every aspect of the environmental audio design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,172,80,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 12px 0 0; gap: 8px;
+    }
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-gold);
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-title {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 300; color: #eef2f8;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+    .page-subtitle {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+    .project-sidebar {
+      background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
+    }
+    .project-content {
+      padding: var(--space-xl);
+      display: grid; grid-template-columns: 1fr 380px;
+      gap: var(--space-2xl); align-items: start;
+    }
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+    .project-media { display: flex; flex-direction: column; gap: var(--space-md); }
+    .video-wrapper {
+      position: relative; width: 100%; padding-bottom: 56.25%;
+      background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px; overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-placeholder {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
+    .video-caption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.1em; text-align: center;
+    }
+    .project-keyart {
+      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
+      filter: saturate(0.8) brightness(0.9);
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    }
+    .back-link:hover { color: var(--color-gold); }
+    @media (max-width: 900px) { .project-content { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav" role="banner">
+    <a href="../../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../../index.html"   class="nav-link">About</a>
+      <a href="../work.html"       class="nav-link active">Work</a>
+      <a href="../reel.html"       class="nav-link">Reel</a>
+      <a href="../disciplines.html" class="nav-link">Disciplines</a>
+      <a href="../contact.html"    class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header" aria-label="Project header">
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
+      <h1 class="page-title"><strong>Fortnite — Chapter 5: Absolute Doom</strong></h1>
+      <p class="page-subtitle">Audio Designer</p>
+    </div>
+  </section>
+
+  <div class="project-layout">
+    <aside class="project-sidebar" aria-hidden="true">
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <span class="sidebar-label">Project</span>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+    </aside>
+
+    <main class="project-content" id="main-content">
+
+      <div class="project-text">
+
+        <a href="../../index.html" class="back-link">&larr; Back to Credits</a>
+
+        <div class="project-meta">
+          <div class="meta-row">
+            <span class="meta-label">Studio</span>
+            <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">Audio Designer</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Platform</span>
+            <span class="meta-value">To be added</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Year</span>
+            <span class="meta-value">To be added</span>
+          </div>
+        </div>
+
+        <p class="project-desc">Map audio design for Fortnite Chapter 5 Season 4. This season brought Marvel's Doctor Doom to the Battle Royale island — a dark, dramatic aesthetic that informed every aspect of the environmental audio design.</p>
+
+        <div>
+          <p class="project-section-label">// Scope &amp; Responsibilities</p>
+          <p class="project-detail-text">
+            <!--
+              Add specific detail here about your work on this project.
+              What systems did you build? What was technically interesting?
+              What was the team structure? Any notable challenges?
+            -->
+            Detailed project notes to be added.
+          </p>
+        </div>
+
+        <div>
+          <p class="project-section-label">// Tools &amp; Pipeline</p>
+          <p class="project-detail-text">
+            Tools and pipeline details to be added.
+          </p>
+        </div>
+
+        <div class="cta" style="padding:0">
+          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+        </div>
+
+      </div>
+
+      <div class="project-media">
+        <div class="video-wrapper">
+          <!--
+            HOW TO ADD VIDEO:
+            Replace this placeholder with:
+              <iframe
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                title="Fortnite — Chapter 5: Absolute Doom"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+          -->
+          <div class="video-placeholder">
+            <div class="video-play"></div>
+            <p class="video-label">Project Video<br />YouTube embed — to be added</p>
+          </div>
+        </div>
+        <p class="video-caption">// Fortnite — Chapter 5: Absolute Doom &nbsp;&middot;&nbsp; Audio Designer</p>
+        <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" />
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="../contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+  <script>
+    document.querySelectorAll('.nav-link').forEach(el => {
+      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      el.addEventListener('click',    () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
+      el.addEventListener('touchend', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); }, { passive: true });
+    });
+    document.querySelectorAll('.lb').forEach(el => {
+      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      el.addEventListener('click',    () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); });
+      el.addEventListener('touchend', () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); }, { passive: true });
+    });
+    document.querySelectorAll('.btn--cyan, .back-link, .footer-link').forEach(el => {
+      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      el.addEventListener('click', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
+    });
+  </script>
+
+</body>
+</html>

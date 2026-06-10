@@ -18,15 +18,18 @@
   <style>
 
     /* ================================================================
-       INDEX PAGE — ADDITIONAL STYLES
+       INDEX PAGE STYLES
     ================================================================ */
 
-    /* ── HERO ───────────────────────────────────────────────────── */
-
+    /* ── HERO ── */
+    /*
+      Three-column grid: sidebar | text+video | (video fills right side)
+      The hero now contains a video embed box top-right within the hero bounds.
+    */
     .hero {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr;
-      min-height: 260px;
+      grid-template-columns: var(--sidebar-width) 1fr 380px;
+      min-height: 300px;
       border-bottom: 1px solid var(--color-gold-border);
       background-image:
         linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
@@ -44,15 +47,15 @@
       gap: 10px;
     }
 
-    /* Functional nav pills — each routes to a page */
+    /* Side nav pills — 20% bigger than before (was 52px wide, 8px+4px padding) */
     .side-pill {
-      width: 52px;
+      width: 62px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       border-radius: 4px;
-      padding: 8px 4px;
+      padding: 10px 4px;
       cursor: pointer;
       text-decoration: none;
       transition: filter var(--transition-fast), transform var(--transition-fast);
@@ -60,15 +63,19 @@
       flex-shrink: 0;
     }
 
-    .side-pill:hover  { filter: brightness(1.4); transform: scaleX(1.04); }
-    .side-pill--work  { background: var(--color-gold); }
-    .side-pill--reel  { background: var(--color-purp); }
-    .side-pill--disc  { background: var(--color-cyan); }
-    .side-pill--cont  { background: var(--color-coral); }
+    .side-pill:hover {
+      filter: brightness(1.5);
+      transform: scaleX(1.05);
+    }
+
+    .side-pill--work { background: var(--color-gold); }
+    .side-pill--reel { background: var(--color-purp); }
+    .side-pill--disc { background: var(--color-cyan); }
+    .side-pill--cont { background: var(--color-coral); }
 
     .side-pill-label {
       font-family: var(--font-mono);
-      font-size: 6px;
+      font-size: 7px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -77,7 +84,7 @@
     }
 
     .side-pill-icon {
-      width: 14px;
+      width: 16px;
       height: 2px;
       border-radius: 1px;
       background: rgba(0,0,0,0.25);
@@ -104,8 +111,9 @@
 
     .lelbow:hover { filter: brightness(1.3); }
 
+    /* Hero text column */
     .hero-content {
-      padding: 36px 40px;
+      padding: 36px 32px 36px 40px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -115,14 +123,14 @@
       font-family: var(--font-mono);
       font-size: 9px;
       color: var(--color-cyan);
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 16px;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     .hero-name {
-      font-size: clamp(38px, 5vw, 56px);
+      font-size: clamp(36px, 4vw, 52px);
       font-weight: 300;
       color: #eef2f8;
       line-height: 1.0;
@@ -150,16 +158,106 @@
     }
 
     .hero-tagline {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--color-text-muted);
       line-height: 1.75;
-      max-width: 480px;
-      margin-bottom: 28px;
+      max-width: 400px;
+      margin-bottom: 24px;
     }
 
     .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
 
-    /* ── IMAGE GRID ─────────────────────────────────────────────── */
+    /* ── HERO VIDEO PANEL ── */
+    /*
+      Sits in the third column of the hero grid.
+      Stays within the hero's top/bottom borders — no overflow.
+      Border-left separates it from the text column.
+    */
+    .hero-video-panel {
+      border-left: 1px solid rgba(212,172,80,0.15);
+      background: #0a0c12;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+      gap: 10px;
+    }
+
+    /*
+      16:9 ratio wrapper for the YouTube embed.
+      padding-bottom: 56.25% trick — see reel.html for explanation.
+    */
+    .hero-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .hero-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Placeholder shown until YouTube URL is added */
+    .hero-video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .hero-video-placeholder:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* CSS-only play triangle */
+    .hero-video-play {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 0 14px 24px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.2);
+      margin-left: 4px;
+      transition: border-color var(--transition-fast);
+    }
+
+    .hero-video-placeholder:hover .hero-video-play {
+      border-color: transparent transparent transparent rgba(255,255,255,0.5);
+    }
+
+    .hero-video-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .hero-video-caption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ── IMAGE GRID ── */
 
     .grid-section {
       display: grid;
@@ -178,29 +276,30 @@
 
     .grid-content { padding: var(--space-xl); }
 
-    /*
-      Fixed 6-column grid. Max-width keeps it from sprawling
-      on ultra-wide monitors.
-    */
     .image-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 3px;
+      gap: 4px;         /* slightly more gap so borders read clearly on all sides */
       max-width: 1200px;
     }
 
-    /* Individual grid cell — 16:9 ratio enforced via aspect-ratio */
+    /*
+      Individual grid cell.
+      gap: 4px between cells already creates visual separation.
+      The border is now solid on all 4 sides equally.
+    */
     .grid-cell {
       position: relative;
       aspect-ratio: 16 / 9;
       overflow: hidden;
       background: var(--color-bg-surface);
       cursor: pointer;
-      /*
-        Uniform white border on all cards — no colour variants.
-        A thin consistent border gives the grid a clean, framed look.
-      */
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);  /* even on all 4 sides */
+      transition: border-color var(--transition-fast);
+    }
+
+    .grid-cell:hover {
+      border-color: rgba(255,255,255,0.5);
     }
 
     .grid-cell img {
@@ -212,17 +311,15 @@
       filter: saturate(0.75) brightness(0.85);
     }
 
-    /* On hover — full colour, slight zoom */
     .grid-cell:hover img {
       transform: scale(1.04);
       filter: saturate(1.0) brightness(1.0);
     }
 
-    /* Dark overlay with text — fades in on hover */
     .grid-cell-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(8,10,15,0.7);
+      background: rgba(8,10,15,0.72);
       opacity: 0;
       transition: opacity 0.3s ease;
       display: flex;
@@ -234,13 +331,13 @@
 
     .grid-cell:hover .grid-cell-overlay { opacity: 1; }
 
-    /* White top accent line on hover — consistent across all cards */
+    /* White top accent line on hover */
     .grid-cell::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.7);
       z-index: 2;
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -265,7 +362,12 @@
       margin-top: 2px;
     }
 
-    /* ── RESPONSIVE ─────────────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: var(--sidebar-width) 1fr; }
+      .hero-video-panel { display: none; }
+    }
 
     @media (max-width: 900px) {
       .image-grid { grid-template-columns: repeat(4, 1fr); }
@@ -286,9 +388,7 @@
 
 <body>
 
-  <!-- ============================================================
-       NAVIGATION
-       ============================================================ -->
+  <!-- NAV -->
   <header class="nav" role="banner">
     <a href="index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
       <span class="nav-logo">JOE HUDSON</span>
@@ -308,34 +408,37 @@
   </header>
 
 
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
+  <!-- HERO -->
   <section class="hero" aria-label="Introduction">
 
+    <!-- Left sidebar nav pills -->
     <aside class="hero-sidebar" aria-hidden="true">
-      <a href="pages/work.html"        class="side-pill side-pill--work"  title="Work">
+      <a href="pages/work.html"        class="side-pill side-pill--work" title="Work">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Work</span>
       </a>
-      <a href="pages/reel.html"        class="side-pill side-pill--reel"  title="Reel">
+      <a href="pages/reel.html"        class="side-pill side-pill--reel" title="Reel">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Reel</span>
       </a>
-      <a href="pages/disciplines.html" class="side-pill side-pill--disc"  title="Disciplines">
+      <a href="pages/disciplines.html" class="side-pill side-pill--disc" title="Disciplines">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Skills</span>
       </a>
-      <a href="pages/contact.html"     class="side-pill side-pill--cont"  title="Contact">
+      <a href="pages/contact.html"     class="side-pill side-pill--cont" title="Contact">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Contact</span>
       </a>
       <div class="lbar"></div>
-      <div class="lelbow" onclick="window.scrollTo({top:0,behavior:'smooth'})"></div>
+      <div class="lelbow" id="scrollTop"></div>
     </aside>
 
+    <!-- Hero text -->
     <div class="hero-content">
-      <p class="hero-eyebrow">// Sound Design &nbsp;·&nbsp; Unreal Engine 5 &nbsp;·&nbsp; joehudson.co.uk</p>
+      <!--
+        Eyebrow updated to include "Sounds & Implementation"
+      -->
+      <p class="hero-eyebrow">// Sound Design &nbsp;·&nbsp; Sounds &amp; Implementation &nbsp;·&nbsp; Unreal Engine 5 &nbsp;·&nbsp; joehudson.co.uk</p>
       <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
       <p class="hero-role">Senior Technical Sound Designer</p>
       <hr class="hero-rule" />
@@ -350,25 +453,42 @@
       </div>
     </div>
 
+    <!-- Hero video panel — top right within hero bounds -->
+    <div class="hero-video-panel">
+      <div class="hero-video-wrapper">
+        <!--
+          HOW TO ADD YOUR REEL VIDEO:
+          Replace the placeholder div below with:
+            <iframe
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="Joe Hudson — Demo Reel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+        -->
+        <div class="hero-video-placeholder" id="heroVideoPlaceholder">
+          <div class="hero-video-play"></div>
+          <p class="hero-video-label">Demo Reel<br />YouTube embed — to be added</p>
+        </div>
+      </div>
+      <p class="hero-video-caption">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</p>
+    </div>
+
   </section>
 
 
-  <!-- ============================================================
-       IMAGE GRID
-       Card order matches the business site — most recent / prominent
-       credits first, then non-Fortnite, then chronological Fortnite.
-       ============================================================ -->
+  <!-- IMAGE GRID -->
   <div class="grid-section">
 
     <aside class="grid-sidebar" aria-hidden="true">
-      <div class="lb lb--gold"></div>
-      <div class="lb lb--cyan"></div>
-      <div class="lb lb--purp"></div>
-      <div class="lb lb--coral"></div>
-      <div class="lb lb--dim"></div>
+      <a href="index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="index.html" class="lb lb--coral" aria-label="Back to home"></a>
+      <a href="index.html" class="lb lb--dim" aria-label="Back to home"></a>
       <span class="sidebar-label">Credits</span>
-      <div class="lb lb--dim"></div>
-      <div class="lb lb--gold"></div>
+      <a href="index.html" class="lb lb--dim" aria-label="Back to home"></a>
+      <a href="index.html" class="lb lb--gold" aria-label="Back to home"></a>
     </aside>
 
     <main class="grid-content" id="main-content">
@@ -380,15 +500,15 @@
 
       <div class="image-grid" role="list" aria-label="Project key art">
 
-        <!-- ── FEATURED ROW — most recent/prominent first ── -->
+        <!-- ── FEATURED — most recent / prominent ── -->
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/galactic-battle.html" class="grid-cell" role="listitem" aria-label="Fortnite — Galactic Battle">
           <img src="assets/images/c6-galactic-battle-keyart.jpg" alt="Fortnite — Galactic Battle" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Fortnite — Galactic Battle</span>
             <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
-        </div>
+        </a>
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG" loading="lazy" />
@@ -406,31 +526,31 @@
           </div>
         </div>
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/simpsons.html" class="grid-cell" role="listitem" aria-label="Fortnite — The Simpsons">
           <img src="assets/images/c6s2-simpsons-season-keyart.jpg" alt="Fortnite — The Simpsons" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Fortnite — The Simpsons</span>
             <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
-        </div>
+        </a>
 
         <!-- ── NON-FORTNITE CREDITS ── -->
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/alyx.html" class="grid-cell" role="listitem" aria-label="Half-Life: Alyx">
           <img src="assets/images/half_life_alyx-keyart.jpg" alt="Half-Life: Alyx" loading="lazy" style="object-position: center top;" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Half-Life: Alyx</span>
             <span class="grid-cell-sub">Valve · Supervising Foley Editor</span>
           </div>
-        </div>
+        </a>
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/battlefield1.html" class="grid-cell" role="listitem" aria-label="Battlefield 1">
           <img src="assets/images/bf1-keyart.png" alt="Battlefield 1" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Battlefield 1</span>
             <span class="grid-cell-sub">DICE / EA · Technical Sound Designer</span>
           </div>
-        </div>
+        </a>
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/mirrorsedge-keyart.png" alt="Mirror's Edge Catalyst" loading="lazy" />
@@ -440,21 +560,21 @@
           </div>
         </div>
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/cuphead.html" class="grid-cell" role="listitem" aria-label="Cuphead">
           <img src="assets/images/cuphead-keyart.png" alt="Cuphead" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Cuphead</span>
             <span class="grid-cell-sub">Studio MDHR · Sound Designer</span>
           </div>
-        </div>
+        </a>
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/ascent.html" class="grid-cell" role="listitem" aria-label="The Ascent">
           <img src="assets/images/ascent-keyart.jpg" alt="The Ascent" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">The Ascent</span>
             <span class="grid-cell-sub">Neon Giant · Sound Designer</span>
           </div>
-        </div>
+        </a>
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/marvel-keyart.png" alt="Marvel Powers United VR" loading="lazy" />
@@ -496,7 +616,7 @@
           </div>
         </div>
 
-        <!-- ── FORTNITE — CHRONOLOGICAL ── -->
+        <!-- ── FORTNITE CHRONOLOGICAL ── -->
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/c6s1-oni-hunters-keyart.jpg" alt="Fortnite Chapter 6 Season 1" loading="lazy" />
@@ -506,13 +626,13 @@
           </div>
         </div>
 
-        <div class="grid-cell" role="listitem">
-          <img src="assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite Chapter 5 Season 4" loading="lazy" />
+        <a href="pages/projects/absolute-doom.html" class="grid-cell" role="listitem" aria-label="Fortnite — Absolute Doom">
+          <img src="assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite Chapter 5 Season 4 — Absolute Doom" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Fortnite C5S4 — Absolute Doom</span>
             <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
-        </div>
+        </a>
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/c5s4-Wrecked-keyart.jpg" alt="Fortnite Chapter 5 Season 3" loading="lazy" />
@@ -522,13 +642,13 @@
           </div>
         </div>
 
-        <div class="grid-cell" role="listitem">
+        <a href="pages/projects/myths-and-mortals.html" class="grid-cell" role="listitem" aria-label="Fortnite — Myths and Mortals">
           <img src="assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite Chapter 5 Season 2" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Fortnite C5S2 — Myths &amp; Mortals</span>
             <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
-        </div>
+        </a>
 
         <div class="grid-cell" role="listitem">
           <img src="assets/images/c5s1-underground-keyart.jpg" alt="Fortnite Chapter 5 Season 1" loading="lazy" />
@@ -626,8 +746,6 @@
           </div>
         </div>
 
-        <!-- ── EARLIER EPIC TITLES ── -->
-
         <div class="grid-cell" role="listitem">
           <img src="assets/images/paragon-keyart.png" alt="Paragon" loading="lazy" />
           <div class="grid-cell-overlay">
@@ -652,8 +770,7 @@
           </div>
         </div>
 
-      </div>
-      <!-- /image-grid -->
+      </div><!-- /image-grid -->
 
       <div class="cta" style="padding: var(--space-xl) 0 0;">
         <a href="pages/work.html"    class="btn btn--ghost">Full Credits →</a>
@@ -664,11 +781,9 @@
   </div>
 
 
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
+  <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
-    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-elbow" id="footerElbow" aria-hidden="true"></div>
     <div class="footer-inner">
       <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
       <nav class="footer-links" aria-label="Social and contact links">
@@ -683,56 +798,43 @@
 
   <script>
     /*
-      PAGE-SPECIFIC JS — index.html only
+      INDEX PAGE SOUNDS & INTERACTIONS
 
-      Changes from previous version:
-        1. Hover sound removed from grid cells and sidebar pills
-        2. Click sounds remain on all interactive elements
-        3. Touch events added alongside click for mobile support —
-           mobile browsers don't reliably fire click on non-anchor
-           elements, so we bind 'touchend' as well.
+      Sound rules:
+        - Hover sound:  nav links (top + side pills) only
+        - Card click:   click-gold
+        - Nav click:    click-cyan
+        - Buttons (CTA, footer links): click-cyan
     */
 
-    /* ── GRID CELLS ────────────────────────────────────────────── */
-
+    /* ── GRID CELLS — click-gold, no hover sound ── */
     document.querySelectorAll('.grid-cell').forEach(cell => {
-      function handleActivate() {
-        resumeAudio();
-        if (typeof playClick === 'function') playClick('dim');
-      }
-      // Both click (desktop) and touchend (mobile)
-      cell.addEventListener('click',    handleActivate);
-      cell.addEventListener('touchend', handleActivate, { passive: true });
+      function go() { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); }
+      cell.addEventListener('click',    go);
+      cell.addEventListener('touchend', go, { passive: true });
     });
 
-    /* ── SIDEBAR PILLS ─────────────────────────────────────────── */
-
+    /* ── SIDE PILLS — hover + click-cyan ── */
     document.querySelectorAll('.side-pill').forEach(pill => {
-      function handleActivate() {
-        resumeAudio();
-        if (typeof playClick === 'function') {
-          const sound = pill.classList.contains('side-pill--work') ? 'gold'
-                      : pill.classList.contains('side-pill--reel') ? 'purp'
-                      : pill.classList.contains('side-pill--disc') ? 'cyan'
-                      : 'coral';
-          playClick(sound);
-        }
-      }
-      pill.addEventListener('click',    handleActivate);
-      pill.addEventListener('touchend', handleActivate, { passive: true });
+      function handleClick() { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); }
+      pill.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      pill.addEventListener('click',    handleClick);
+      pill.addEventListener('touchend', handleClick, { passive: true });
     });
 
-    /* ── LELBOW ────────────────────────────────────────────────── */
+    /* ── LELBOW scroll to top ── */
+    const scrollTop = document.getElementById('scrollTop');
+    if (scrollTop) {
+      scrollTop.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      scrollTop.addEventListener('click',    () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); window.scrollTo({top:0,behavior:'smooth'}); });
+      scrollTop.addEventListener('touchend', () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); window.scrollTo({top:0,behavior:'smooth'}); }, { passive: true });
+    }
 
-    const lelbow = document.querySelector('.lelbow');
-    if (lelbow) {
-      function handleElbow() {
-        resumeAudio();
-        if (typeof playClick === 'function') playClick('gold');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      lelbow.addEventListener('click',    handleElbow);
-      lelbow.addEventListener('touchend', handleElbow, { passive: true });
+    /* ── HERO VIDEO PLACEHOLDER ── */
+    const hvp = document.getElementById('heroVideoPlaceholder');
+    if (hvp) {
+      hvp.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
+      hvp.addEventListener('click', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
     }
   </script>
 
