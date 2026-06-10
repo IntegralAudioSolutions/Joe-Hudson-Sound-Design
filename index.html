@@ -28,7 +28,7 @@
     */
     .hero {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 380px;
+      grid-template-columns: var(--sidebar-width) 1fr 570px;
       min-height: 300px;
       border-bottom: 1px solid var(--color-gold-border);
       background-image:
@@ -75,20 +75,16 @@
 
     .side-pill-label {
       font-family: var(--font-mono);
-      font-size: 7px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--color-bg);
       line-height: 1;
     }
 
-    .side-pill-icon {
-      width: 16px;
-      height: 2px;
-      border-radius: 1px;
-      background: rgba(0,0,0,0.25);
-    }
+    /* side-pill-icon removed — no dash inside pills */
+    .side-pill-icon { display: none; }
 
     .lbar {
       width: 6px;
@@ -364,7 +360,7 @@
 
     /* ── RESPONSIVE ── */
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1300px) {
       .hero { grid-template-columns: var(--sidebar-width) 1fr; }
       .hero-video-panel { display: none; }
     }
@@ -438,14 +434,14 @@
       <!--
         Eyebrow updated to include "Sounds & Implementation"
       -->
-      <p class="hero-eyebrow">// Sound Design &nbsp;·&nbsp; Sounds &amp; Implementation &nbsp;·&nbsp; Unreal Engine 5 &nbsp;·&nbsp; joehudson.co.uk</p>
+      <p class="hero-eyebrow">// SOUND DESIGN &nbsp;·&nbsp; IMPLEMENTATION &nbsp;·&nbsp; UNREAL ENGINE &nbsp;·&nbsp; JOEHUDSON.CO.UK</p>
       <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
       <p class="hero-role">Senior Technical Sound Designer</p>
       <hr class="hero-rule" />
       <p class="hero-tagline">
         12 years building the sonic worlds players live in.
         UE5 specialist. Fortnite Battle Royale.
-        Now taking select projects.
+        Now open to projects.
       </p>
       <div class="hero-cta">
         <a href="pages/reel.html"    class="btn btn--cyan">View Reel →</a>
@@ -808,10 +804,31 @@
     */
 
     /* ── GRID CELLS — click-gold, no hover sound ── */
+    /*
+      Anchor grid cells (<a> tags) navigate on click — same AudioContext
+      tear-down issue as nav links. We use preventDefault + 120ms delay
+      so the sound completes before navigation fires.
+      Plain div cells have no href so they just play the sound.
+    */
     document.querySelectorAll('.grid-cell').forEach(cell => {
-      function go() { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); }
-      cell.addEventListener('click',    go);
-      cell.addEventListener('touchend', go, { passive: true });
+      cell.addEventListener('click', (e) => {
+        resumeAudio();
+        if (typeof playClick === 'function') playClick('gold');
+        const href = cell.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          setTimeout(() => { window.location.href = href; }, 120);
+        }
+      });
+      cell.addEventListener('touchend', (e) => {
+        resumeAudio();
+        if (typeof playClick === 'function') playClick('gold');
+        const href = cell.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          setTimeout(() => { window.location.href = href; }, 120);
+        }
+      }, { passive: true });
     });
 
     /* ── SIDE PILLS — hover + click-cyan ── */
