@@ -28,7 +28,7 @@
     */
     .hero {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 570px;
+      grid-template-columns: var(--sidebar-width) 1fr;
       min-height: 300px;
       border-bottom: 1px solid var(--color-gold-border);
       background-image:
@@ -359,17 +359,34 @@
     }
 
     /* ── INDEX REEL SECTION ── */
+    /*
+      Three-column grid mirroring the hero:
+        [sidebar] [video content] [elbow]
+      Left edge of video aligns with the vertical gold separator.
+      Bottom-right elbow mirrors the top-left LCARS elbow.
+    */
     .index-reel {
-      padding: 10px var(--space-xl);
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr 48px;
       background: var(--color-bg);
-      border-bottom: 1px solid var(--color-gold-border);
+      border-bottom: 2px solid var(--color-gold-border);
+      position: relative;
     }
-    .index-reel-inner {
-      max-width: 1200px;
+
+    /* Left column — continues the gold sidebar line from the hero */
+    .index-reel-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+    }
+
+    /* Main video content column */
+    .index-reel-content {
+      padding: 10px 10px 10px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+
     .index-reel-label {
       font-family: var(--font-mono);
       font-size: 8px;
@@ -377,6 +394,8 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
     }
+
+    /* 16:9 video wrapper — full width of content column */
     .index-reel-wrapper {
       position: relative;
       width: 100%;
@@ -386,9 +405,15 @@
       border-radius: 2px;
       overflow: hidden;
     }
+
     .index-reel-wrapper iframe {
-      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
+
     .index-reel-placeholder {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
@@ -397,6 +422,7 @@
       transition: background var(--transition-fast);
     }
     .index-reel-placeholder:hover { background: rgba(255,255,255,0.02); }
+
     .index-reel-play {
       width: 0; height: 0; border-style: solid;
       border-width: 18px 0 18px 30px;
@@ -411,12 +437,23 @@
       letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.7;
     }
 
+    /*
+      Mirrored LCARS elbow — bottom-right corner of the reel section.
+      The hero has a top-left elbow (border-radius: 48px 0 0 0).
+      This one is bottom-right (border-radius: 0 0 48px 0) — flipped both axes.
+      Sits in the third column, aligned to the bottom.
+    */
+    .index-reel-elbow {
+      width: 48px;
+      align-self: flex-end;    /* pins to the bottom of the row */
+      aspect-ratio: 1;
+      background: var(--color-gold);
+      border-radius: 0 0 0 48px;  /* bottom-left radius — mirror of top-right elbow */
+    }
+
     /* ── RESPONSIVE ── */
 
-    @media (max-width: 1300px) {
-      .hero { grid-template-columns: var(--sidebar-width) 1fr; }
-      .hero-video-panel { display: none; }
-    }
+
 
     @media (max-width: 900px) {
       .image-grid { grid-template-columns: repeat(4, 1fr); }
@@ -502,26 +539,7 @@
       </div>
     </div>
 
-    <!-- Hero video panel — top right within hero bounds -->
-    <div class="hero-video-panel">
-      <div class="hero-video-wrapper">
-        <!--
-          HOW TO ADD YOUR REEL VIDEO:
-          Replace the placeholder div below with:
-            <iframe
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-              title="Joe Hudson — Demo Reel"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-        -->
-        <div class="hero-video-placeholder" id="heroVideoPlaceholder">
-          <div class="hero-video-play"></div>
-          <p class="hero-video-label">Demo Reel<br />YouTube embed — to be added</p>
-        </div>
-      </div>
-      <p class="hero-video-caption">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</p>
-    </div>
+
 
   </section>
 
@@ -538,7 +556,13 @@
       </iframe>
   -->
   <div class="index-reel">
-    <div class="index-reel-inner">
+    <!--
+      LCARS layout: gold sidebar column on left (matches hero sidebar width)
+      then the video fills the remaining space, mirroring the hero structure.
+      Bottom-right elbow mirrors the top-left elbow — LCARS console framing.
+    -->
+    <div class="index-reel-sidebar" aria-hidden="true"></div>
+    <div class="index-reel-content">
       <span class="index-reel-label">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</span>
       <div class="index-reel-wrapper">
         <div class="index-reel-placeholder" id="indexReelPlaceholder">
@@ -549,6 +573,8 @@
         </div>
       </div>
     </div>
+    <!-- Mirrored elbow — bottom right corner, flipped horizontally and vertically -->
+    <div class="index-reel-elbow" aria-hidden="true"></div>
   </div>
 
 
