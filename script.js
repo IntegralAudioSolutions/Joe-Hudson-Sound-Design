@@ -195,7 +195,7 @@ let masterGain   = null;  // global output ceiling — all audio passes through 
   listener at approximately -24 dB — matching broadcast/game UI standards.
   Adjust upward if sounds become too quiet after re-normalising in Reaper.
 */
-const MASTER_GAIN_LEVEL = 0.063; // ≈ -24 dB ceiling
+const MASTER_GAIN_LEVEL = 1.0; // unity — no JS gain reduction, let the files set the level
 
 /**
  * Build a synthetic impulse response and load it into a ConvolverNode.
