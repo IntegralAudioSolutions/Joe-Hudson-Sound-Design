@@ -84,9 +84,14 @@
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 75%;  /* taller than 16:9 — more cinematic presence */
+      /*
+        padding-bottom: 120% gives a tall portrait-ish box — fills the
+        available column height right up to the separators as shown
+        in the mockup. Adjust down if too tall on your screen.
+      */
+      padding-bottom: 120%;
       background: var(--color-bg-surface);
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -129,7 +134,11 @@
     }
     .back-link:hover { color: var(--color-gold); }
 
-    @media (max-width: 900px) { .project-content { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .project-content { grid-template-columns: 1fr; }
+      .project-media { grid-column: 1; grid-row: 1; }
+      .project-text  { grid-column: 1; grid-row: 2; }
+    }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
       .page-header-sidebar { display: none; }
