@@ -344,7 +344,9 @@ if (logoBlock) {
                : el.classList.contains('lp--coral') ? 'coral'
                : el.classList.contains('lp--dim')   ? 'dim'
                : 'gold';
-  el.addEventListener('click', () => { playClick(colour); pulsePill(el); });
+  el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
+  el.addEventListener('click', () => { resumeAudio(); playClick(colour); pulsePill(el); });
+  el.addEventListener('touchend', () => { resumeAudio(); playClick(colour); }, { passive: true });
 });
 
 // LCARS sidebar blocks
@@ -354,7 +356,9 @@ if (logoBlock) {
                : el.classList.contains('lb--coral') ? 'coral'
                : el.classList.contains('lb--dim')   ? 'dim'
                : 'gold';
-  el.addEventListener('click', () => { playClick(colour); pulsePill(el); });
+  el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
+  el.addEventListener('click', () => { resumeAudio(); playClick(colour); pulsePill(el); });
+  el.addEventListener('touchend', () => { resumeAudio(); playClick(colour); }, { passive: true });
 });
 
 // Hero right decorative bars

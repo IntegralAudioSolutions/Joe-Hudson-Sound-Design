@@ -252,22 +252,6 @@
   </footer>
 
   <script src="../../script.js"></script>
-  <script>
-    document.querySelectorAll('.nav-link').forEach(el => {
-      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
-      el.addEventListener('click',    () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
-      el.addEventListener('touchend', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); }, { passive: true });
-    });
-    document.querySelectorAll('.lb').forEach(el => {
-      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
-      el.addEventListener('click',    () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); });
-      el.addEventListener('touchend', () => { resumeAudio(); if (typeof playClick === 'function') playClick('gold'); }, { passive: true });
-    });
-    document.querySelectorAll('.btn--cyan, .back-link, .footer-link').forEach(el => {
-      el.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
-      el.addEventListener('click', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
-    });
-  </script>
 
 </body>
 </html>
