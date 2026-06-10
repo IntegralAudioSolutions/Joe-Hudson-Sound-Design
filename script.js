@@ -178,7 +178,24 @@ const REVERB_WET      = 0.25;  // 25% wet mix
   then reused for every subsequent playBuffer() call.
   We store it at module scope so we don't rebuild it on every click.
 */
-let reverbNode = null;
+let reverbNode   = null;
+let masterGain   = null;  // global output ceiling — all audio passes through this
+
+/*
+  Master gain level.
+  Web Audio API gain values map roughly to linear amplitude:
+    1.0  =  0 dB  (unity)
+    0.5  = -6 dB
+    0.25 = -12 dB
+    0.125 = -18 dB
+    0.09 = ~-21 dB
+    0.063 = ~-24 dB
+
+  Setting this to 0.063 means even a 0 dBFS file will arrive at the
+  listener at approximately -24 dB — matching broadcast/game UI standards.
+  Adjust upward if sounds become too quiet after re-normalising in Reaper.
+*/
+const MASTER_GAIN_LEVEL = 0.063; // ≈ -24 dB ceiling
 
 /**
  * Build a synthetic impulse response and load it into a ConvolverNode.
@@ -195,34 +212,36 @@ let reverbNode = null;
 function buildReverb() {
   if (!audioCtx || reverbNode) return; // already built
 
+  /*
+    Master gain node — sits at the very end of every signal chain,
+    just before audioCtx.destination. Acts as a global output ceiling.
+    All dry and wet paths connect through this node.
+  */
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(MASTER_GAIN_LEVEL, audioCtx.currentTime);
+  masterGain.connect(audioCtx.destination);
+
+  // Build synthetic impulse response
   const sampleRate  = audioCtx.sampleRate;
   const length      = Math.floor(sampleRate * REVERB_DURATION);
   const irBuffer    = audioCtx.createBuffer(2, length, sampleRate);
 
-  // Fill both channels (left + right) with decaying noise
   for (let channel = 0; channel < 2; channel++) {
     const data = irBuffer.getChannelData(channel);
     for (let i = 0; i < length; i++) {
-      /*
-        Math.random() * 2 - 1  →  white noise in range [-1, 1]
-        Math.pow(1 - i/length, REVERB_DECAY)  →  exponential decay envelope
-        Multiplying them gives a noise burst that starts loud and fades
-        to silence — the same shape as a natural room impulse response.
-      */
       data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, REVERB_DECAY);
     }
   }
 
   reverbNode = audioCtx.createConvolver();
   reverbNode.buffer = irBuffer;
-  reverbNode.normalize = true; // normalise IR so volume stays consistent
+  reverbNode.normalize = true;
 
-  // Connect the reverb output to destination via a wet gain node
-  // This node is shared — it stays connected permanently
+  // Wet path: reverbNode → wetGain → masterGain → destination
   const wetGain = audioCtx.createGain();
   wetGain.gain.setValueAtTime(REVERB_WET, audioCtx.currentTime);
   reverbNode.connect(wetGain);
-  wetGain.connect(audioCtx.destination);
+  wetGain.connect(masterGain);  // through master gain, not direct to destination
 }
 
 /**
@@ -255,11 +274,11 @@ function playBuffer(name, volume = 1.0) {
   source.buffer = buffer;
   dryGain.gain.setValueAtTime(volume, audioCtx.currentTime);
 
-  // Dry path — full volume direct to output
+  // Dry path → dryGain → masterGain → destination
   source.connect(dryGain);
-  dryGain.connect(audioCtx.destination);
+  dryGain.connect(masterGain || audioCtx.destination); // fallback if reverb not built yet
 
-  // Wet path — into shared reverb node (already connected to wetGain → destination)
+  // Wet path → reverbNode → wetGain → masterGain → destination
   if (reverbNode) {
     source.connect(reverbNode);
   }
