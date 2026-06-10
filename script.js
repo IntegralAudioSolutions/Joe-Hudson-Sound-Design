@@ -190,12 +190,11 @@ function playBuffer(name, volume = 1.0) {
 }
 
 /**
- * Play the hover sound.
- * Called on mouseenter of any interactive element.
- * Keep hover volume low — it fires very frequently.
+ * Hover sound removed — kept as no-op so existing calls don't error.
+ * The hover.ogg file remains in assets/audio/ui/ for future use.
  */
 function playHover() {
-  playBuffer('hover', 0.5);
+  // intentionally silent
 }
 
 /**
@@ -321,17 +320,19 @@ if (tickerItems.length > 0) {
    6. EVENT BINDING
 ---------------------------------------------------------------- */
 
-// Nav links
+// Nav links — click for desktop, touchend for mobile
 [...document.querySelectorAll('.nav-link')].forEach(el => {
-  el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
-  el.addEventListener('click', () => { resumeAudio(); playClick('cyan'); setActiveNav(el); });
+  function handleNav() { resumeAudio(); playClick('cyan'); setActiveNav(el); }
+  el.addEventListener('click',    handleNav);
+  el.addEventListener('touchend', handleNav, { passive: true });
 });
 
 // Logo block
 const logoBlock = document.querySelector('.nav-logo-block');
 if (logoBlock) {
-  logoBlock.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
-  logoBlock.addEventListener('click', () => { resumeAudio(); playClick('gold'); });
+  function handleLogo() { resumeAudio(); playClick('gold'); }
+  logoBlock.addEventListener('click',    handleLogo);
+  logoBlock.addEventListener('touchend', handleLogo, { passive: true });
 }
 
 // LCARS pills
@@ -341,7 +342,6 @@ if (logoBlock) {
                : el.classList.contains('lp--coral') ? 'coral'
                : el.classList.contains('lp--dim')   ? 'dim'
                : 'gold';
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => { playClick(colour); pulsePill(el); });
 });
 
@@ -352,7 +352,6 @@ if (logoBlock) {
                : el.classList.contains('lb--coral') ? 'coral'
                : el.classList.contains('lb--dim')   ? 'dim'
                : 'gold';
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => { playClick(colour); pulsePill(el); });
 });
 
@@ -361,14 +360,12 @@ if (logoBlock) {
   const colour = el.classList.contains('hrb--cyan')  ? 'cyan'
                : el.classList.contains('hrb--coral') ? 'coral'
                : 'gold';
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => playClick(colour));
 });
 
 // Readout tab
 const readoutTab = document.querySelector('.readout-tab');
 if (readoutTab) {
-  readoutTab.addEventListener('mouseenter', playHover);
   readoutTab.addEventListener('click', () => {
     playClick('coral');
     readoutTab.style.filter = 'brightness(1.8)';
@@ -379,7 +376,6 @@ if (readoutTab) {
 // Readout stats
 [...document.querySelectorAll('.readout-stat')].forEach((el, i) => {
   const colours = ['gold', 'cyan', 'purp', 'coral'];
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => playClick(colours[i % colours.length]));
 });
 
@@ -389,37 +385,37 @@ if (readoutTab) {
                : el.classList.contains('ribbon-item--cyan')  ? 'cyan'
                : el.classList.contains('ribbon-item--coral') ? 'coral'
                : 'dim';
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => { playClick(colour); flashRibbonItem(el); });
 });
 
 // Work cards
 [...document.querySelectorAll('.card')].forEach((el, i) => {
   const colours = ['gold', 'cyan', 'purp'];
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => { playClick(colours[i % colours.length]); flashCard(el); });
 });
 
-// CTA buttons
+// CTA buttons — click + touchend for mobile
 [...document.querySelectorAll('.btn--cyan')].forEach(el => {
-  el.addEventListener('mouseenter', playHover);
-  el.addEventListener('click', () => { playClick('cyan'); pressButton(el); });
+  function handleCyan() { resumeAudio(); playClick('cyan'); pressButton(el); }
+  el.addEventListener('click',    handleCyan);
+  el.addEventListener('touchend', handleCyan, { passive: true });
 });
 
 [...document.querySelectorAll('.btn--ghost')].forEach(el => {
-  el.addEventListener('mouseenter', playHover);
-  el.addEventListener('click', () => { playClick('purp'); pressButton(el); });
+  function handleGhost() { resumeAudio(); playClick('purp'); pressButton(el); }
+  el.addEventListener('click',    handleGhost);
+  el.addEventListener('touchend', handleGhost, { passive: true });
 });
 
 // Footer elbow
 const footerElbow = document.querySelector('.footer-elbow');
 if (footerElbow) {
-  footerElbow.addEventListener('mouseenter', playHover);
-  footerElbow.addEventListener('click', () => playClick('gold'));
+  function handleElbow() { resumeAudio(); playClick('gold'); }
+  footerElbow.addEventListener('click',    handleElbow);
+  footerElbow.addEventListener('touchend', handleElbow, { passive: true });
 }
 
 // Footer links
 [...document.querySelectorAll('.footer-link')].forEach(el => {
-  el.addEventListener('mouseenter', playHover);
   el.addEventListener('click', () => playClick('cyan'));
 });

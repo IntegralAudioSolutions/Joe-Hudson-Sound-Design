@@ -19,9 +19,6 @@
 
     /* ================================================================
        INDEX PAGE — ADDITIONAL STYLES
-       Simplified landing page layout.
-       style.css handles all shared/global styles.
-       This block covers index-specific layout only.
     ================================================================ */
 
     /* ── HERO ───────────────────────────────────────────────────── */
@@ -37,7 +34,6 @@
       background-size: 40px 40px;
     }
 
-    /* Left LCARS sidebar */
     .hero-sidebar {
       background: var(--color-bg-nav);
       border-right: 2px solid var(--color-gold);
@@ -48,7 +44,7 @@
       gap: 10px;
     }
 
-    /* Functional nav pills — each routes somewhere */
+    /* Functional nav pills — each routes to a page */
     .side-pill {
       width: 52px;
       display: flex;
@@ -64,16 +60,11 @@
       flex-shrink: 0;
     }
 
-    .side-pill:hover {
-      filter: brightness(1.4);
-      transform: scaleX(1.04);
-    }
-
-    /* Colour variants */
-    .side-pill--work  { background: var(--color-gold);       }
-    .side-pill--reel  { background: var(--color-purp);       }
-    .side-pill--disc  { background: var(--color-cyan);       }
-    .side-pill--cont  { background: var(--color-coral);      }
+    .side-pill:hover  { filter: brightness(1.4); transform: scaleX(1.04); }
+    .side-pill--work  { background: var(--color-gold); }
+    .side-pill--reel  { background: var(--color-purp); }
+    .side-pill--disc  { background: var(--color-cyan); }
+    .side-pill--cont  { background: var(--color-coral); }
 
     .side-pill-label {
       font-family: var(--font-mono);
@@ -85,7 +76,6 @@
       line-height: 1;
     }
 
-    /* Small icon shape inside each pill */
     .side-pill-icon {
       width: 14px;
       height: 2px;
@@ -114,7 +104,6 @@
 
     .lelbow:hover { filter: brightness(1.3); }
 
-    /* Hero text */
     .hero-content {
       padding: 36px 40px;
       display: flex;
@@ -141,10 +130,7 @@
       margin-bottom: 8px;
     }
 
-    .hero-name strong {
-      font-weight: 600;
-      color: var(--color-gold-bright);
-    }
+    .hero-name strong { font-weight: 600; color: var(--color-gold-bright); }
 
     .hero-role {
       font-family: var(--font-mono);
@@ -171,11 +157,7 @@
       margin-bottom: 28px;
     }
 
-    .hero-cta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
 
     /* ── IMAGE GRID ─────────────────────────────────────────────── */
 
@@ -184,7 +166,6 @@
       grid-template-columns: var(--sidebar-width) 1fr;
     }
 
-    /* Continuation of the LCARS sidebar below the hero */
     .grid-sidebar {
       background: var(--color-bg-nav);
       border-right: 2px solid var(--color-gold);
@@ -195,14 +176,11 @@
       gap: 8px;
     }
 
-    .grid-content {
-      padding: var(--space-xl);
-    }
+    .grid-content { padding: var(--space-xl); }
 
     /*
-      The image grid — fixed 6 columns.
-      max-width constrains the overall site width so it doesn't
-      sprawl across ultra-wide monitors.
+      Fixed 6-column grid. Max-width keeps it from sprawling
+      on ultra-wide monitors.
     */
     .image-grid {
       display: grid;
@@ -211,56 +189,68 @@
       max-width: 1200px;
     }
 
-    /* Individual grid cell */
+    /* Individual grid cell — 16:9 ratio enforced via aspect-ratio */
     .grid-cell {
       position: relative;
-      aspect-ratio: 16 / 9;   /* forces all cells to the same ratio */
+      aspect-ratio: 16 / 9;
       overflow: hidden;
       background: var(--color-bg-surface);
       cursor: pointer;
+      /*
+        Uniform white border on all cards — no colour variants.
+        A thin consistent border gives the grid a clean, framed look.
+      */
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* The image itself */
     .grid-cell img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       transition: transform 0.4s ease, filter 0.3s ease;
-      filter: saturate(0.7) brightness(0.85);
+      filter: saturate(0.75) brightness(0.85);
     }
 
-    /* On hover: sharpen up, slight zoom */
+    /* On hover — full colour, slight zoom */
     .grid-cell:hover img {
       transform: scale(1.04);
       filter: saturate(1.0) brightness(1.0);
     }
 
-    /*
-      Overlay — sits above the image, below the label.
-      Invisible by default, dark tint appears on hover.
-    */
+    /* Dark overlay with text — fades in on hover */
     .grid-cell-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(8, 10, 15, 0.6);
+      background: rgba(8,10,15,0.7);
       opacity: 0;
       transition: opacity 0.3s ease;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-end;
-      padding: 12px;
+      padding: 10px;
     }
 
-    .grid-cell:hover .grid-cell-overlay {
-      opacity: 1;
+    .grid-cell:hover .grid-cell-overlay { opacity: 1; }
+
+    /* White top accent line on hover — consistent across all cards */
+    .grid-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.6);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    /* Label shown on hover */
+    .grid-cell:hover::before { opacity: 1; }
+
     .grid-cell-label {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 8px;
       color: #eef2f8;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -269,54 +259,26 @@
 
     .grid-cell-sub {
       font-family: var(--font-mono);
-      font-size: 8px;
-      color: var(--color-text-dim);
+      font-size: 7px;
+      color: rgba(255,255,255,0.5);
       letter-spacing: 0.08em;
       margin-top: 2px;
     }
 
-    /* Colour accent strip on top of each cell — LCARS panel feel */
-    .grid-cell::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      z-index: 2;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .grid-cell:hover::before { opacity: 1; }
-
-    /* Colour variants for the top accent */
-    .grid-cell--gold::before  { background: var(--color-gold); }
-    .grid-cell--cyan::before  { background: var(--color-cyan); }
-    .grid-cell--purp::before  { background: var(--color-purp); }
-    .grid-cell--coral::before { background: var(--color-coral); }
-
     /* ── RESPONSIVE ─────────────────────────────────────────────── */
 
     @media (max-width: 900px) {
-      .image-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .image-grid { grid-template-columns: repeat(4, 1fr); }
     }
 
     @media (max-width: 600px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
+      .hero { grid-template-columns: 1fr; }
       .hero-sidebar { display: none; }
       .hero-content { padding: var(--space-lg); }
-
       .grid-section { grid-template-columns: 1fr; }
       .grid-sidebar { display: none; }
       .grid-content { padding: var(--space-md); }
-
-      .image-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2px;
-      }
+      .image-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
     }
 
   </style>
@@ -351,38 +313,27 @@
        ============================================================ -->
   <section class="hero" aria-label="Introduction">
 
-    <!--
-      Left LCARS sidebar — four functional nav pills.
-      Each pill routes to a page section. No decorative-only buttons.
-    -->
     <aside class="hero-sidebar" aria-hidden="true">
-
-      <a href="pages/work.html" class="side-pill side-pill--work" title="Work">
+      <a href="pages/work.html"        class="side-pill side-pill--work"  title="Work">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Work</span>
       </a>
-
-      <a href="pages/reel.html" class="side-pill side-pill--reel" title="Reel">
+      <a href="pages/reel.html"        class="side-pill side-pill--reel"  title="Reel">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Reel</span>
       </a>
-
-      <a href="pages/disciplines.html" class="side-pill side-pill--disc" title="Disciplines">
+      <a href="pages/disciplines.html" class="side-pill side-pill--disc"  title="Disciplines">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Skills</span>
       </a>
-
-      <a href="pages/contact.html" class="side-pill side-pill--cont" title="Contact">
+      <a href="pages/contact.html"     class="side-pill side-pill--cont"  title="Contact">
         <div class="side-pill-icon"></div>
         <span class="side-pill-label">Contact</span>
       </a>
-
       <div class="lbar"></div>
       <div class="lelbow" onclick="window.scrollTo({top:0,behavior:'smooth'})"></div>
-
     </aside>
 
-    <!-- Hero text -->
     <div class="hero-content">
       <p class="hero-eyebrow">// Sound Design &nbsp;·&nbsp; Unreal Engine 5 &nbsp;·&nbsp; joehudson.co.uk</p>
       <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
@@ -404,8 +355,8 @@
 
   <!-- ============================================================
        IMAGE GRID
-       Static grid of project key art.
-       Grouped by client — Fortnite seasons together, then others.
+       Card order matches the business site — most recent / prominent
+       credits first, then non-Fortnite, then chronological Fortnite.
        ============================================================ -->
   <div class="grid-section">
 
@@ -429,290 +380,287 @@
 
       <div class="image-grid" role="list" aria-label="Project key art">
 
-        <!-- ── FORTNITE SEASONS ── -->
-        <!-- Chapter 2 -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c2s2-keyart.jpg"                   alt="Fortnite Chapter 2 Season 2" loading="lazy" />
+        <!-- ── FEATURED ROW — most recent/prominent first ── -->
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c6-galactic-battle-keyart.jpg" alt="Fortnite — Galactic Battle" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C2S2</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Fortnite — Galactic Battle</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c2s4-fortnitemares-2020-keyart.jpg" alt="Fortnite Chapter 2 Season 4 — Fortnitemares" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C2S4</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c2s7-invasion-keyart.jpg"           alt="Fortnite Chapter 2 Season 7 — Invasion" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C2S7 — Invasion</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c2s8-cubed-keyart.jpg"              alt="Fortnite Chapter 2 Season 8 — Cubed" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C2S8 — Cubed</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <!-- Chapter 3 -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c3s2-resistance-keyart.jpg"         alt="Fortnite Chapter 3 Season 2 — Resistance" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C3S2 — Resistance</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c3s3-vibin-keyart.jpg"              alt="Fortnite Chapter 3 Season 3 — Vibin" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C3S3 — Vibin'</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c3s4-paradise-keyart.jpg"           alt="Fortnite Chapter 3 Season 4 — Paradise" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C3S4 — Paradise</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <!-- Chapter 4 -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c4s1-chapter4-launch-keyart.jpg"   alt="Fortnite Chapter 4 Launch" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C4 Launch</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c4s1-lawless-keyart.jpg"            alt="Fortnite Chapter 4 Season 1 — Lawless" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C4S1 — Lawless</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c4s2-mega-keyart.jpg"               alt="Fortnite Chapter 4 Season 2 — Mega" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C4S2 — Mega</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c4s3-Wilds-keyart.jpg"              alt="Fortnite Chapter 4 Season 3 — Wilds" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C4S3 — Wilds</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c4s5-fortnite-og-keyart.jpg"        alt="Fortnite OG" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Fortnite OG</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Level Designer</span>
           </div>
         </div>
 
-        <!-- Chapter 5 -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c5s1-underground-keyart.jpg"        alt="Fortnite Chapter 5 Season 1 — Underground" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/ballistic-keyart.jpg" alt="Ballistic — UEFN" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C5S1 — Underground</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Ballistic (UEFN)</span>
+            <span class="grid-cell-sub">Epic Games · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c5s2-myths-and-mortals-keyart.jpg"  alt="Fortnite Chapter 5 Season 2 — Myths and Mortals" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c6s2-simpsons-season-keyart.jpg" alt="Fortnite — The Simpsons" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C5S2 — Myths &amp; Mortals</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Fortnite — The Simpsons</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c5s4-Wrecked-keyart.jpg"            alt="Fortnite Chapter 5 Season 4 — Wrecked" loading="lazy" />
+        <!-- ── NON-FORTNITE CREDITS ── -->
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/half_life_alyx-keyart.jpg" alt="Half-Life: Alyx" loading="lazy" style="object-position: center top;" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C5S4 — Wrecked</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Half-Life: Alyx</span>
+            <span class="grid-cell-sub">Valve · Supervising Foley Editor</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c5s4-absolute-doom-keyart.jpg"      alt="Fortnite Chapter 5 — Absolute Doom" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/bf1-keyart.png" alt="Battlefield 1" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C5 — Absolute Doom</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Battlefield 1</span>
+            <span class="grid-cell-sub">DICE / EA · Technical Sound Designer</span>
           </div>
         </div>
 
-        <!-- Chapter 6 -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c6-galactic-battle-keyart.jpg"      alt="Fortnite Chapter 6 — Galactic Battle" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/mirrorsedge-keyart.png" alt="Mirror's Edge Catalyst" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C6 — Galactic Battle</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Mirror's Edge Catalyst</span>
+            <span class="grid-cell-sub">DICE / EA · Dialogue Editor / Mixer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c6s1-oni-hunters-keyart.jpg"        alt="Fortnite Chapter 6 Season 1 — Oni Hunters" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/cuphead-keyart.png" alt="Cuphead" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C6S1 — Oni Hunters</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
+            <span class="grid-cell-label">Cuphead</span>
+            <span class="grid-cell-sub">Studio MDHR · Sound Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/c6s2-simpsons-season-keyart.jpg"    alt="Fortnite Chapter 6 Season 2 — Simpsons Season" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite C6S2 — Simpsons</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <!-- General Fortnite BR + Star Wars -->
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/fnbr-keyart.jpg"                    alt="Fortnite Battle Royale" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite Battle Royale</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--gold" role="listitem">
-          <img src="assets/images/fnstw-keyart.jpg"                   alt="Fortnite x Star Wars" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Fortnite × Star Wars</span>
-            <span class="grid-cell-sub">Epic Games · Map Audio</span>
-          </div>
-        </div>
-
-        <!-- ── OTHER EPIC TITLES ── -->
-        <div class="grid-cell grid-cell--coral" role="listitem">
-          <img src="assets/images/paragon-keyart.png"                 alt="Paragon" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Paragon</span>
-            <span class="grid-cell-sub">Epic Games · Sound Design</span>
-          </div>
-        </div>
-
-        <div class="grid-cell grid-cell--coral" role="listitem">
-          <img src="assets/images/ballistic-keyart.jpg"               alt="Ballistic — Fortnite UEFN" loading="lazy" />
-          <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Ballistic</span>
-            <span class="grid-cell-sub">Epic Games · UEFN · Sound Design &amp; Implementation</span>
-          </div>
-        </div>
-
-        <!-- ── SWEET JUSTICE SOUND GROUP ── -->
-        <div class="grid-cell grid-cell--cyan" role="listitem">
-          <img src="assets/images/ascent-keyart.jpg"                  alt="The Ascent" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/ascent-keyart.jpg" alt="The Ascent" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">The Ascent</span>
-            <span class="grid-cell-sub">Sweet Justice · Sound Design &amp; Implementation</span>
+            <span class="grid-cell-sub">Neon Giant · Sound Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--cyan" role="listitem">
-          <img src="assets/images/smoke-keyart.png"                   alt="Smoke — Nintendo Switch" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/marvel-keyart.png" alt="Marvel Powers United VR" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Marvel Powers United VR</span>
+            <span class="grid-cell-sub">Sanzuru Games · Technical Sound Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/apes-keyart.png" alt="Crisis on the Planet of the Apes VR" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Crisis: Planet of the Apes VR</span>
+            <span class="grid-cell-sub">Imaginati Studios · Technical Sound Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/mortal-kombat-11-keyart.jpg" alt="Mortal Kombat 11" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Mortal Kombat 11</span>
+            <span class="grid-cell-sub">NetherRealm Studios · Dialogue Supervisor</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/injustice2-keyart.jpg" alt="Injustice 2" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Injustice 2</span>
+            <span class="grid-cell-sub">NetherRealm Studios · Supervising Foley Editor</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/smoke-keyart.png" alt="Smoke" loading="lazy" />
           <div class="grid-cell-overlay">
             <span class="grid-cell-label">Smoke</span>
             <span class="grid-cell-sub">Sweet Justice · Nintendo Switch · SFX &amp; Implementation</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--cyan" role="listitem">
-          <img src="assets/images/half_life_alyx-keyart.jpg"          alt="Half-Life: Alyx" loading="lazy" />
+        <!-- ── FORTNITE — CHRONOLOGICAL ── -->
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c6s1-oni-hunters-keyart.jpg" alt="Fortnite Chapter 6 Season 1" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Half-Life: Alyx</span>
-            <span class="grid-cell-sub">Sweet Justice · In-Game Cinematics</span>
+            <span class="grid-cell-label">Fortnite C6S1 — Oni Hunters</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--cyan" role="listitem">
-          <img src="assets/images/mirrorsedge-keyart.png"             alt="Mirror's Edge" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite Chapter 5 Season 4" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Mirror's Edge</span>
-            <span class="grid-cell-sub">Sweet Justice · In-Game Cinematics</span>
+            <span class="grid-cell-label">Fortnite C5S4 — Absolute Doom</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--cyan" role="listitem">
-          <img src="assets/images/bf1-keyart.png"                     alt="Battlefield 1" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c5s4-Wrecked-keyart.jpg" alt="Fortnite Chapter 5 Season 3" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Battlefield 1</span>
-            <span class="grid-cell-sub">Sweet Justice · In-Game Cinematics</span>
+            <span class="grid-cell-label">Fortnite C5S4 — Wrecked</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--purp" role="listitem">
-          <img src="assets/images/apes-keyart.png"                    alt="Planet of the Apes" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite Chapter 5 Season 2" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Planet of the Apes</span>
-            <span class="grid-cell-sub">Sweet Justice · Sound Design &amp; Implementation</span>
+            <span class="grid-cell-label">Fortnite C5S2 — Myths &amp; Mortals</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--purp" role="listitem">
-          <img src="assets/images/marvel-keyart.png"                  alt="Marvel" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c5s1-underground-keyart.jpg" alt="Fortnite Chapter 5 Season 1" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Marvel</span>
-            <span class="grid-cell-sub">Sweet Justice · Sound Design &amp; Implementation</span>
+            <span class="grid-cell-label">Fortnite C5S1 — Underground</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--purp" role="listitem">
-          <img src="assets/images/cuphead-keyart.png"                 alt="Cuphead" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c4s3-Wilds-keyart.jpg" alt="Fortnite Chapter 4 Season 3" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Cuphead</span>
-            <span class="grid-cell-sub">Sweet Justice · Sound Design</span>
+            <span class="grid-cell-label">Fortnite C4S3 — Wilds</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--purp" role="listitem">
-          <img src="assets/images/injustice2-keyart.jpg"              alt="Injustice 2" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c4s2-mega-keyart.jpg" alt="Fortnite Chapter 4 Season 2" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Injustice 2</span>
-            <span class="grid-cell-sub">Sweet Justice · Supervising Foley Editor · Cinematics</span>
+            <span class="grid-cell-label">Fortnite C4S2 — Mega</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
           </div>
         </div>
 
-        <div class="grid-cell grid-cell--purp" role="listitem">
-          <img src="assets/images/mortal-kombat-11-keyart.jpg"        alt="Mortal Kombat 11" loading="lazy" />
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c4s1-lawless-keyart.jpg" alt="Fortnite Chapter 4 Season 1" loading="lazy" />
           <div class="grid-cell-overlay">
-            <span class="grid-cell-label">Mortal Kombat 11</span>
-            <span class="grid-cell-sub">Sweet Justice · Foley &amp; Dialogue Editorial · Cinematics</span>
+            <span class="grid-cell-label">Fortnite C4S1 — Lawless</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c4s1-chapter4-launch-keyart.jpg" alt="Fortnite Chapter 4 Launch" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite — Chapter 4 Launch</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c3s4-paradise-keyart.jpg" alt="Fortnite Chapter 3 Season 4" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C3S4 — Paradise</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c3s3-vibin-keyart.jpg" alt="Fortnite Chapter 3 Season 3" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C3S3 — Vibin'</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c3s2-resistance-keyart.jpg" alt="Fortnite Chapter 3 Season 2" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C3S2 — Resistance</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c2s8-cubed-keyart.jpg" alt="Fortnite Chapter 2 Season 8" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C2S8 — Cubed</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c2s7-invasion-keyart.jpg" alt="Fortnite Chapter 2 Season 7" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C2S7 — Invasion</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c2s4-fortnitemares-2020-keyart.jpg" alt="Fortnite Chapter 2 Season 4" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C2S4 — Fortnitemares</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/c2s2-keyart.jpg" alt="Fortnite Chapter 2 Season 2" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite C2S2</span>
+            <span class="grid-cell-sub">Sweet Justice / Epic · Audio Designer</span>
+          </div>
+        </div>
+
+        <!-- ── EARLIER EPIC TITLES ── -->
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/paragon-keyart.png" alt="Paragon" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Paragon</span>
+            <span class="grid-cell-sub">Epic Games · UI Sound Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/fnstw-keyart.jpg" alt="Fortnite Save the World" loading="lazy" style="object-position: top;" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite Save the World</span>
+            <span class="grid-cell-sub">Epic Games · Technical Sound Designer</span>
+          </div>
+        </div>
+
+        <div class="grid-cell" role="listitem">
+          <img src="assets/images/fnbr-keyart.jpg" alt="Fortnite Battle Royale" loading="lazy" />
+          <div class="grid-cell-overlay">
+            <span class="grid-cell-label">Fortnite Battle Royale</span>
+            <span class="grid-cell-sub">Epic Games · Map Audio</span>
           </div>
         </div>
 
       </div>
       <!-- /image-grid -->
 
-      <!-- CTA below the grid -->
       <div class="cta" style="padding: var(--space-xl) 0 0;">
         <a href="pages/work.html"    class="btn btn--ghost">Full Credits →</a>
         <a href="pages/contact.html" class="btn btn--cyan">Get in Touch →</a>
       </div>
 
     </main>
-
   </div>
 
 
@@ -734,64 +682,57 @@
   <script src="script.js"></script>
 
   <script>
-    /* ── GRID CELL SOUNDS ──────────────────────────────────── */
+    /*
+      PAGE-SPECIFIC JS — index.html only
 
-    const colourMap = {
-      'grid-cell--gold':  'gold',
-      'grid-cell--cyan':  'cyan',
-      'grid-cell--purp':  'purp',
-      'grid-cell--coral': 'coral',
-    };
+      Changes from previous version:
+        1. Hover sound removed from grid cells and sidebar pills
+        2. Click sounds remain on all interactive elements
+        3. Touch events added alongside click for mobile support —
+           mobile browsers don't reliably fire click on non-anchor
+           elements, so we bind 'touchend' as well.
+    */
+
+    /* ── GRID CELLS ────────────────────────────────────────────── */
 
     document.querySelectorAll('.grid-cell').forEach(cell => {
-      const colour = Object.keys(colourMap).find(c => cell.classList.contains(c));
-      const sound  = colourMap[colour] || 'dim';
-
-      cell.addEventListener('mouseenter', () => {
-        if (typeof playHover === 'function') playHover();
-      });
-
-      cell.addEventListener('click', () => {
-        if (typeof playClick === 'function') playClick(sound);
-      });
+      function handleActivate() {
+        resumeAudio();
+        if (typeof playClick === 'function') playClick('dim');
+      }
+      // Both click (desktop) and touchend (mobile)
+      cell.addEventListener('click',    handleActivate);
+      cell.addEventListener('touchend', handleActivate, { passive: true });
     });
 
-    /* ── SIDEBAR PILLS ─────────────────────────────────────── */
+    /* ── SIDEBAR PILLS ─────────────────────────────────────────── */
 
     document.querySelectorAll('.side-pill').forEach(pill => {
-      pill.addEventListener('mouseenter', () => {
-        if (typeof playHover === 'function') playHover();
-      });
-      pill.addEventListener('click', () => {
+      function handleActivate() {
+        resumeAudio();
         if (typeof playClick === 'function') {
-          const sound = pill.classList.contains('side-pill--work')  ? 'gold'
-                      : pill.classList.contains('side-pill--reel')  ? 'purp'
-                      : pill.classList.contains('side-pill--disc')  ? 'cyan'
+          const sound = pill.classList.contains('side-pill--work') ? 'gold'
+                      : pill.classList.contains('side-pill--reel') ? 'purp'
+                      : pill.classList.contains('side-pill--disc') ? 'cyan'
                       : 'coral';
           playClick(sound);
         }
-      });
+      }
+      pill.addEventListener('click',    handleActivate);
+      pill.addEventListener('touchend', handleActivate, { passive: true });
     });
 
-    /* ── FOOTER ELBOW — scroll to top ──────────────────────── */
-
-    const footerElbowEl = document.querySelector('.footer-elbow');
-    if (footerElbowEl) {
-      footerElbowEl.addEventListener('mouseenter', () => {
-        if (typeof playHover === 'function') playHover();
-      });
-    }
-
-    /* ── LELBOW — scroll to top ────────────────────────────── */
+    /* ── LELBOW ────────────────────────────────────────────────── */
 
     const lelbow = document.querySelector('.lelbow');
     if (lelbow) {
-      lelbow.addEventListener('mouseenter', () => {
-        if (typeof playHover === 'function') playHover();
-      });
-      lelbow.addEventListener('click', () => {
+      function handleElbow() {
+        resumeAudio();
         if (typeof playClick === 'function') playClick('gold');
-      });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      lelbow.addEventListener('click',    handleElbow);
+      lelbow.addEventListener('touchend', handleElbow, { passive: true });
     }
   </script>
 
