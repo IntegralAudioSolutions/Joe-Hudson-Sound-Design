@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Battlefield 1 — Joe Hudson</title>
-  <meta name="description" content="Additional sound design and dialogue editing on Battlefield 1. Working within DICE's established audio pipeline to deliver high-quality supplementary sound design and dialogue editorial for one of EA's flagship FPS titles." />
+  <meta name="description" content="Supervising Dialogue Editor on Battlefield 1 in-game cinematics, working via Sweet Justice Sound Group. Overseeing the full dialogue editorial pipeline for cinematic sequences within one of EA's flagship World War I shooters." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -70,11 +70,24 @@
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
     }
     .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-    .project-media { display: flex; flex-direction: column; gap: var(--space-md); }
+    .project-media {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      /*
+        10px padding so the video sits exactly 10px from the right border
+        and 10px from the top/bottom separators — as requested
+      */
+      padding: 10px 10px 10px 0;
+    }
     .video-wrapper {
-      position: relative; width: 100%; padding-bottom: 75%;
-      background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 2px; overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;  /* taller than 16:9 — more cinematic presence */
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .video-placeholder {
@@ -145,9 +158,9 @@
       <div class="lelbow"></div>
     </aside>
     <div class="page-header-content">
-      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; DICE / Electronic Arts</p>
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice / DICE / Electronic Arts</p>
       <h1 class="page-title"><strong>Battlefield 1</strong></h1>
-      <p class="page-subtitle">Technical Sound Designer</p>
+      <p class="page-subtitle">Supervising Dialogue Editor · Cinematics</p>
     </div>
   </section>
 
@@ -171,11 +184,11 @@
         <div class="project-meta">
           <div class="meta-row">
             <span class="meta-label">Studio</span>
-            <span class="meta-value">DICE / Electronic Arts</span>
+            <span class="meta-value">Sweet Justice / DICE / Electronic Arts</span>
           </div>
           <div class="meta-row">
             <span class="meta-label">Role</span>
-            <span class="meta-value">Technical Sound Designer</span>
+            <span class="meta-value">Supervising Dialogue Editor · Cinematics</span>
           </div>
           <div class="meta-row">
             <span class="meta-label">Platform</span>
@@ -187,7 +200,7 @@
           </div>
         </div>
 
-        <p class="project-desc">Additional sound design and dialogue editing on Battlefield 1. Working within DICE's established audio pipeline to deliver high-quality supplementary sound design and dialogue editorial for one of EA's flagship FPS titles.</p>
+        <p class="project-desc">Supervising Dialogue Editor on Battlefield 1 in-game cinematics, working via Sweet Justice Sound Group. Overseeing the full dialogue editorial pipeline for cinematic sequences within one of EA's flagship World War I shooters.</p>
 
         <div>
           <p class="project-section-label">// Scope &amp; Responsibilities</p>
@@ -232,7 +245,7 @@
             <p class="video-label">Project Video<br />YouTube embed — to be added</p>
           </div>
         </div>
-        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Technical Sound Designer</p>
+        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Supervising Dialogue Editor · Cinematics</p>
         <img class="project-keyart" src="../../assets/images/bf1-keyart.png" alt="Battlefield 1 key art" loading="lazy" />
       </div>
 

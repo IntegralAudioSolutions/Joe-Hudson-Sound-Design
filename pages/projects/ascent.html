@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Ascent — Joe Hudson</title>
-  <meta name="description" content="Sound design and implementation on The Ascent — Neon Giant's cyberpunk action RPG. World-building audio across a dense, layered sci-fi environment, delivered via Sweet Justice Sound Group." />
+  <meta name="description" content="Technical Sound Designer on The Ascent via Sweet Justice Sound Group. A dense cyberpunk open-world RPG developed by Neon Giant — full audio implementation across layered sci-fi environments, from weapon systems through to world-building ambiences." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -70,11 +70,24 @@
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
     }
     .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-    .project-media { display: flex; flex-direction: column; gap: var(--space-md); }
+    .project-media {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      /*
+        10px padding so the video sits exactly 10px from the right border
+        and 10px from the top/bottom separators — as requested
+      */
+      padding: 10px 10px 10px 0;
+    }
     .video-wrapper {
-      position: relative; width: 100%; padding-bottom: 75%;
-      background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 2px; overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;  /* taller than 16:9 — more cinematic presence */
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .video-placeholder {
@@ -145,9 +158,9 @@
       <div class="lelbow"></div>
     </aside>
     <div class="page-header-content">
-      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Neon Giant</p>
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice / Neon Giant</p>
       <h1 class="page-title"><strong>The Ascent</strong></h1>
-      <p class="page-subtitle">Sound Designer</p>
+      <p class="page-subtitle">Technical Sound Designer</p>
     </div>
   </section>
 
@@ -171,11 +184,11 @@
         <div class="project-meta">
           <div class="meta-row">
             <span class="meta-label">Studio</span>
-            <span class="meta-value">Neon Giant</span>
+            <span class="meta-value">Sweet Justice / Neon Giant</span>
           </div>
           <div class="meta-row">
             <span class="meta-label">Role</span>
-            <span class="meta-value">Sound Designer</span>
+            <span class="meta-value">Technical Sound Designer</span>
           </div>
           <div class="meta-row">
             <span class="meta-label">Platform</span>
@@ -187,7 +200,7 @@
           </div>
         </div>
 
-        <p class="project-desc">Sound design and implementation on The Ascent — Neon Giant's cyberpunk action RPG. World-building audio across a dense, layered sci-fi environment, delivered via Sweet Justice Sound Group.</p>
+        <p class="project-desc">Technical Sound Designer on The Ascent via Sweet Justice Sound Group. A dense cyberpunk open-world RPG developed by Neon Giant — full audio implementation across layered sci-fi environments, from weapon systems through to world-building ambiences.</p>
 
         <div>
           <p class="project-section-label">// Scope &amp; Responsibilities</p>
@@ -232,7 +245,7 @@
             <p class="video-label">Project Video<br />YouTube embed — to be added</p>
           </div>
         </div>
-        <p class="video-caption">// The Ascent &nbsp;&middot;&nbsp; Sound Designer</p>
+        <p class="video-caption">// The Ascent &nbsp;&middot;&nbsp; Technical Sound Designer</p>
         <img class="project-keyart" src="../../assets/images/ascent-keyart.jpg" alt="The Ascent key art" loading="lazy" />
       </div>
 

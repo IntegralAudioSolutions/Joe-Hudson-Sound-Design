@@ -82,9 +82,13 @@
     .video-block { display: flex; flex-direction: column; gap: 6px; }
 
     .video-wrapper {
-      position: relative; width: 100%; padding-bottom: 75%;
-      background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 2px; overflow: hidden;
+      position: relative;
+      width: 100%;
+      padding-bottom: 75%;  /* taller than 16:9 — more cinematic presence */
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
     .video-placeholder {
