@@ -70,6 +70,8 @@ function resumeAudio() {
       // Load files silently in the background — no playback triggered here
       loadAllSounds();
     }
+    // Build the reverb impulse response immediately after context creation
+    buildReverb();
   } else if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
@@ -149,42 +151,118 @@ async function loadAllSounds() {
    2. SOUND FUNCTIONS
 ---------------------------------------------------------------- */
 
+/* ── REVERB ENGINE ──────────────────────────────────────────────
+   Signal chain for every sound:
+
+     BufferSource ──→ dryGain  (1.0 = 100%) ──────────────────→ Destination
+                  ↘→ ConvolverNode → wetGain (0.25 = 25% wet) ↗
+
+   The ConvolverNode uses a synthetically generated impulse response —
+   a short burst of exponentially-decaying noise that mimics a small
+   reflective room. No external IR file needed.
+
+   Tuning constants:
+     REVERB_DURATION  — length of the synthetic IR in seconds
+                        shorter = tighter room, longer = bigger space
+     REVERB_DECAY     — how fast the IR decays (higher = faster fade)
+     REVERB_WET       — wet mix level (0.0 = dry only, 1.0 = fully wet)
+                        0.25 = 25% wet, 75% dry — subtle room feel
+---------------------------------------------------------------- */
+
+const REVERB_DURATION = 0.4;   // seconds — short room, not a hall
+const REVERB_DECAY    = 4.0;   // decay speed — higher = faster, tighter
+const REVERB_WET      = 0.25;  // 25% wet mix
+
+/*
+  reverbNode is created once after the AudioContext is initialised,
+  then reused for every subsequent playBuffer() call.
+  We store it at module scope so we don't rebuild it on every click.
+*/
+let reverbNode = null;
+
 /**
- * Play a loaded audio buffer.
+ * Build a synthetic impulse response and load it into a ConvolverNode.
+ *
+ * An impulse response (IR) is a recording of how a space responds to
+ * a single instantaneous sound. We generate one mathematically:
+ *   - Fill a stereo buffer with random noise (white noise)
+ *   - Apply an exponential decay envelope to each sample
+ * The result is a short burst that decays naturally, mimicking room
+ * reflections when convolved with a dry signal.
+ *
+ * Called once from resumeAudio() after the AudioContext is created.
+ */
+function buildReverb() {
+  if (!audioCtx || reverbNode) return; // already built
+
+  const sampleRate  = audioCtx.sampleRate;
+  const length      = Math.floor(sampleRate * REVERB_DURATION);
+  const irBuffer    = audioCtx.createBuffer(2, length, sampleRate);
+
+  // Fill both channels (left + right) with decaying noise
+  for (let channel = 0; channel < 2; channel++) {
+    const data = irBuffer.getChannelData(channel);
+    for (let i = 0; i < length; i++) {
+      /*
+        Math.random() * 2 - 1  →  white noise in range [-1, 1]
+        Math.pow(1 - i/length, REVERB_DECAY)  →  exponential decay envelope
+        Multiplying them gives a noise burst that starts loud and fades
+        to silence — the same shape as a natural room impulse response.
+      */
+      data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, REVERB_DECAY);
+    }
+  }
+
+  reverbNode = audioCtx.createConvolver();
+  reverbNode.buffer = irBuffer;
+  reverbNode.normalize = true; // normalise IR so volume stays consistent
+
+  // Connect the reverb output to destination via a wet gain node
+  // This node is shared — it stays connected permanently
+  const wetGain = audioCtx.createGain();
+  wetGain.gain.setValueAtTime(REVERB_WET, audioCtx.currentTime);
+  reverbNode.connect(wetGain);
+  wetGain.connect(audioCtx.destination);
+}
+
+/**
+ * Play a loaded audio buffer with reverb.
  *
  * Signal chain:
- *   BufferSource → GainNode → AudioContext destination (speakers)
+ *   BufferSource → dryGain (100%) → Destination
+ *               ↘ reverbNode → wetGain (25%) → Destination
  *
- * A new BufferSource node is created for each playback — this is
- * correct Web Audio API usage. BufferSources are cheap, designed
- * to be created once, played once, then garbage collected.
+ * A new BufferSource + dryGain is created per playback.
+ * The reverbNode and wetGain are shared and stay connected permanently.
  *
  * @param {string} name   - Key in audioBuffers cache
- * @param {number} volume - Gain multiplier (0.0 to 1.0)
+ * @param {number} volume - Dry gain multiplier (0.0 to 1.0)
  */
 function playBuffer(name, volume = 1.0) {
   /*
-    Do NOT call resumeAudio() here — that creates the AudioContext and
-    triggers loadAllSounds(). If resumeAudio() were called from inside
-    playBuffer, every decoded buffer completion would re-enter here and
-    fire all cached sounds simultaneously (the "all sounds at once" bug).
-
-    resumeAudio() is called only from the event binding layer below.
-    Context management and playback are strictly separate.
+    Do NOT call resumeAudio() here — context management stays
+    strictly in the event binding layer to avoid the "all sounds
+    at once" bug from AudioContext creation triggering decode callbacks.
   */
   if (!audioCtx || audioCtx.state === 'suspended') return;
 
   const buffer = audioBuffers[name];
   if (!buffer) return; // still decoding — skip silently
 
-  const source = audioCtx.createBufferSource();
-  const gain   = audioCtx.createGain();
-
-  source.connect(gain);
-  gain.connect(audioCtx.destination);
+  const source  = audioCtx.createBufferSource();
+  const dryGain = audioCtx.createGain();
 
   source.buffer = buffer;
-  gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+  dryGain.gain.setValueAtTime(volume, audioCtx.currentTime);
+
+  // Dry path — full volume direct to output
+  source.connect(dryGain);
+  dryGain.connect(audioCtx.destination);
+
+  // Wet path — into shared reverb node (already connected to wetGain → destination)
+  if (reverbNode) {
+    source.connect(reverbNode);
+  }
 
   source.start();
 }
@@ -198,13 +276,27 @@ function playHover() {
 }
 
 /**
- * Play the click sound for a given colour zone.
- * Each colour has its own distinct sound character.
+ * Play the click sound.
  *
- * @param {string} colour - 'gold' | 'cyan' | 'purp' | 'coral' | 'dim'
+ * Two sounds in use:
+ *   'cyan' — nav links across the top, side pills, project page nav links
+ *   'gold' — everything else (cards, sidebar blocks, buttons, footer)
+ *
+ * All other colour names ('purp', 'coral', 'dim') route to gold.
+ * Their OGG files remain in assets/audio/ui/ for future use.
+ *
+ * Navigation cut-off note:
+ *   The browser tears down AudioContext on page navigation. To let the
+ *   sound complete, anchor click handlers use e.preventDefault() + a
+ *   short setTimeout before navigating. Keep click-gold.ogg and
+ *   click-cyan.ogg trimmed to ~80ms in Reaper — then the 90ms delay
+ *   is tight enough to feel instant.
+ *
+ * @param {string} colour - 'gold' | 'cyan' (others remapped to gold)
  */
 function playClick(colour) {
-  playBuffer(colour, 1.0);
+  const sound = (colour === 'cyan') ? 'cyan' : 'gold';
+  playBuffer(sound, 1.0);
 }
 
 
@@ -321,20 +413,45 @@ if (tickerItems.length > 0) {
 ---------------------------------------------------------------- */
 
 // Nav links — hover sound + click-cyan
+// Uses a short navigation delay so the click sound completes before
+// the browser navigates away (fixes audio cut-off on link clicks).
 [...document.querySelectorAll('.nav-link')].forEach(el => {
   el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
-  function handleNav() { resumeAudio(); playClick('cyan'); setActiveNav(el); }
-  el.addEventListener('click',    handleNav);
-  el.addEventListener('touchend', handleNav, { passive: true });
+
+  el.addEventListener('click', (e) => {
+    const href = el.getAttribute('href');
+    // Only delay real page navigations — not hash links or javascript:
+    if (href && !href.startsWith('#') && !href.startsWith('javascript')) {
+      e.preventDefault();
+      resumeAudio();
+      playClick('cyan');
+      setActiveNav(el);
+      // 120ms delay — enough for a short OGG to complete
+      setTimeout(() => { window.location.href = href; }, 90);
+    } else {
+      resumeAudio();
+      playClick('cyan');
+      setActiveNav(el);
+    }
+  });
 });
 
 // Logo block
 const logoBlock = document.querySelector('.nav-logo-block');
 if (logoBlock) {
   logoBlock.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
-  function handleLogo() { resumeAudio(); playClick('gold'); }
-  logoBlock.addEventListener('click',    handleLogo);
-  logoBlock.addEventListener('touchend', handleLogo, { passive: true });
+  logoBlock.addEventListener('click', (e) => {
+    const href = logoBlock.getAttribute('href');
+    if (href && !href.startsWith('#')) {
+      e.preventDefault();
+      resumeAudio();
+      playClick('gold');
+      setTimeout(() => { window.location.href = href; }, 90);
+    } else {
+      resumeAudio();
+      playClick('gold');
+    }
+  });
 }
 
 // LCARS pills
@@ -351,14 +468,21 @@ if (logoBlock) {
 
 // LCARS sidebar blocks
 [...document.querySelectorAll('.lb')].forEach(el => {
-  const colour = el.classList.contains('lb--cyan')  ? 'cyan'
-               : el.classList.contains('lb--purp')  ? 'purp'
-               : el.classList.contains('lb--coral') ? 'coral'
-               : el.classList.contains('lb--dim')   ? 'dim'
-               : 'gold';
   el.addEventListener('mouseenter', () => { resumeAudio(); playHover(); });
-  el.addEventListener('click', () => { resumeAudio(); playClick(colour); pulsePill(el); });
-  el.addEventListener('touchend', () => { resumeAudio(); playClick(colour); }, { passive: true });
+  el.addEventListener('click', (e) => {
+    const href = el.getAttribute('href');
+    if (href && !href.startsWith('#')) {
+      e.preventDefault();
+      resumeAudio();
+      playClick('gold');
+      pulsePill(el);
+      setTimeout(() => { window.location.href = href; }, 90);
+    } else {
+      resumeAudio();
+      playClick('gold');
+      pulsePill(el);
+    }
+  });
 });
 
 // Hero right decorative bars
