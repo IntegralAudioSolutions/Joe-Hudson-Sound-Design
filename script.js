@@ -446,7 +446,7 @@ if (tickerItems.length > 0) {
       playClick('cyan');
       setActiveNav(el);
       // 120ms delay — enough for a short OGG to complete
-      setTimeout(() => { window.location.href = href; }, 90);
+      setTimeout(() => { window.location.href = href; }, 120);
     } else {
       resumeAudio();
       playClick('cyan');
@@ -465,7 +465,7 @@ if (logoBlock) {
       e.preventDefault();
       resumeAudio();
       playClick('gold');
-      setTimeout(() => { window.location.href = href; }, 90);
+      setTimeout(() => { window.location.href = href; }, 120);
     } else {
       resumeAudio();
       playClick('gold');
@@ -495,7 +495,7 @@ if (logoBlock) {
       resumeAudio();
       playClick('gold');
       pulsePill(el);
-      setTimeout(() => { window.location.href = href; }, 90);
+      setTimeout(() => { window.location.href = href; }, 120);
     } else {
       resumeAudio();
       playClick('gold');
