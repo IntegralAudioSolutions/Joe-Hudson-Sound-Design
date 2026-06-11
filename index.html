@@ -28,7 +28,7 @@
     */
     .hero {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 336px;
+      grid-template-columns: var(--sidebar-width) 1fr;
       min-height: 300px;
       border-bottom: 1px solid var(--color-gold-border);
       background-image:
@@ -358,39 +358,35 @@
       margin-top: 2px;
     }
 
-    /* ── HERO PHOTO PANEL ── */
+    /* ── HERO PHOTO ── */
     /*
-      Third column of the hero grid — sits top-right next to the hero text.
-      object-fit: contain shows the whole photo with no cropping.
-      Background fills any letterbox space with the dark palette.
+      Photo floated right inside the hero content column.
+      Takes up roughly 35% of the hero width, text wraps around it.
     */
-    .hero-photo-panel {
-      background: #0a0c12;
-      border-left: 1px solid rgba(212,172,80,0.15);
+    .hero-photo-float {
+      float: right;
+      width: 35%;
+      max-width: 320px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border-radius: 2px;
+      border: 1px solid rgba(212,172,80,0.15);
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .hero-photo-panel img {
+    .hero-photo-float img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;        /* whole image always visible — no cropping */
-      object-position: left center;   /* shift image left within panel */
+      height: auto;
       display: block;
       filter: saturate(0.85) brightness(0.9);
       transition: filter var(--transition-med);
     }
 
-    .hero-photo-panel img:hover {
+    .hero-photo-float img:hover {
       filter: saturate(1.0) brightness(1.0);
     }
 
-    /* Hide on smaller screens — hero collapses to 2 columns */
-    @media (max-width: 1000px) {
-      .hero { grid-template-columns: var(--sidebar-width) 1fr !important; }
-      .hero-photo-panel { display: none; }
+    @media (max-width: 700px) {
+      .hero-photo-float { display: none; }
     }
 
     /* ── INDEX REEL SECTION ── */
@@ -402,7 +398,7 @@
     */
     .index-reel {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 336px;
+      grid-template-columns: var(--sidebar-width) 1fr;
       background: var(--color-bg);
       align-items: stretch;
       border-bottom: 2px solid var(--color-gold);
@@ -419,10 +415,11 @@
     /* Main video content column */
     .index-reel-content {
       /*
-        Right padding matches the photo panel width (336px) so the
-        video box right edge lines up with the photo panel right edge above.
+        Right padding matches .grid-content padding so the video box
+        right edge lines up with the card grid right edge below.
+        var(--space-xl) = 32px
       */
-      padding: 10px 336px 10px 16px;
+      padding: 10px var(--space-xl) 10px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -551,6 +548,15 @@
       <!--
         Eyebrow updated to include "Sounds & Implementation"
       -->
+      <!-- Studio photo — floated right inside hero content -->
+      <div class="hero-photo-float">
+        <img
+          src="assets/images/joe-hudson-studio.jpg"
+          alt="Joe Hudson in his studio"
+          loading="eager"
+        />
+      </div>
+
       <p class="hero-eyebrow">// SOUND DESIGN &nbsp;·&nbsp; IMPLEMENTATION &nbsp;·&nbsp; UNREAL ENGINE &nbsp;·&nbsp; JOEHUDSON.CO.UK</p>
       <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
       <p class="hero-role">Senior Technical Sound Designer</p>
@@ -568,14 +574,7 @@
 
 
 
-    <!-- Studio photo — third column of hero grid, top right -->
-    <div class="hero-photo-panel">
-      <img
-        src="assets/images/joe-hudson-studio.jpg"
-        alt="Joe Hudson in his studio"
-        loading="eager"
-      />
-    </div>
+
 
   </section>
 
