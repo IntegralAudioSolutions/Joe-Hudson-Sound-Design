@@ -257,7 +257,7 @@
 
     .grid-section {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 336px;
+      grid-template-columns: var(--sidebar-width) 1fr;
     }
 
     .grid-sidebar {
@@ -418,7 +418,11 @@
 
     /* Main video content column */
     .index-reel-content {
-      padding: 10px 10px 10px 16px;
+      /*
+        Right padding matches the photo panel width (336px) so the
+        video box right edge lines up with the photo panel right edge above.
+      */
+      padding: 10px 336px 10px 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
