@@ -28,7 +28,7 @@
     */
     .hero {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 220px;
+      grid-template-columns: var(--sidebar-width) 1fr;
       min-height: 300px;
       border-bottom: 1px solid var(--color-gold-border);
       background-image:
@@ -359,19 +359,24 @@
     }
 
     /* ── HERO PHOTO PANEL ── */
+    /*
+      Full-width photo strip spanning the hero content column.
+      Fixed height with contain so the whole photo is always visible.
+      Sits below the hero text naturally in the flow.
+    */
     .hero-photo-panel {
-      border-left: 1px solid rgba(212,172,80,0.15);
+      grid-column: 2;          /* spans the content column only, not the sidebar */
       background: #0a0c12;
-      display: flex;
-      flex-direction: column;
+      border-top: 1px solid rgba(212,172,80,0.12);
       overflow: hidden;
+      height: 280px;           /* fixed height — shows full photo on desktop */
     }
 
     .hero-photo-panel img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: right top;  /* anchors to right side — keeps face in frame */
+      object-fit: contain;     /* contain = whole image visible, no cropping */
+      object-position: center top;
       display: block;
       filter: saturate(0.85) brightness(0.9);
       transition: filter var(--transition-med);
@@ -381,10 +386,11 @@
       filter: saturate(1.0) brightness(1.0);
     }
 
-    /* Hide photo panel on narrower screens */
-    @media (max-width: 1100px) {
-      .hero { grid-template-columns: var(--sidebar-width) 1fr; }
-      .hero-photo-panel { display: none; }
+    @media (max-width: 600px) {
+      .hero-photo-panel {
+        grid-column: 1;        /* full width on mobile */
+        height: 200px;
+      }
     }
 
     /* ── INDEX REEL SECTION ── */
@@ -396,26 +402,13 @@
     */
     .index-reel {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr 72px;
+      grid-template-columns: var(--sidebar-width) 1fr;
       background: var(--color-bg);
       align-items: stretch;
-      position: relative;
+      border-bottom: 2px solid var(--color-gold);
     }
 
-    /*
-      Horizontal separator as a pseudo-element so we can control its width.
-      It runs from the left edge to 72px from the right — stopping exactly
-      at the left edge of the elbow column, so separator + elbow read as one piece.
-    */
-    .index-reel::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 72px;   /* stops where the elbow column begins */
-      height: 2px;
-      background: var(--color-gold);
-    }
+
 
     /* Left column — continues the gold sidebar line from the hero */
     .index-reel-sidebar {
@@ -479,22 +472,6 @@
     .index-reel-placeholder-text {
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
       letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.7;
-    }
-
-    /*
-      Mirrored LCARS elbow — sits just below the horizontal gold separator,
-      right-aligned to where the reel content ends.
-      Uses negative margin-top to pull it down over the border line,
-      mirroring exactly how the hero elbow sits at the bottom of the sidebar.
-    */
-    .index-reel-elbow {
-      width: 72px;
-      height: 48px;
-      background: var(--color-gold);
-      border-radius: 0 0 48px 0;  /* bottom-right curve */
-      align-self: flex-end;       /* pins to very bottom of grid row */
-      justify-self: start;        /* pins to LEFT edge — separator terminates here */
-      margin-top: auto;
     }
 
     /* ── RESPONSIVE ── */
@@ -587,14 +564,8 @@
 
 
 
-    <!-- Studio photo — right panel of hero -->
+    <!-- Studio photo — full width strip below hero text -->
     <div class="hero-photo-panel">
-      <!--
-        Photo file: assets/images/joe-hudson-studio.jpg
-        Copy your studio photo to that path and it will appear here.
-        The image is cropped to fill the panel with object-position: center top
-        so your face stays in frame.
-      -->
       <img
         src="assets/images/joe-hudson-studio.jpg"
         alt="Joe Hudson in his studio"
@@ -634,8 +605,6 @@
         </div>
       </div>
     </div>
-    <!-- Mirrored elbow — bottom right corner, flipped horizontally and vertically -->
-    <div class="index-reel-elbow" aria-hidden="true"></div>
   </div>
 
 
