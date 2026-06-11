@@ -1098,6 +1098,23 @@ h1, h2, h3 {
 /* Mobile — up to 600px wide */
 @media (max-width: 600px) {
 
+  /*
+    Global fix for monospaced elements on mobile.
+    Wide letter-spacing on narrow viewports causes each word to break
+    onto its own line. Tighten all mono letter-spacing on mobile.
+  */
+  .mono,
+  [class*="mono"],
+  .nav-link,
+  .nav-logo,
+  .readout-desc,
+  .sidebar-label,
+  .section-tag,
+  .footer-text,
+  .footer-link {
+    letter-spacing: 0.05em;
+  }
+
   /* Show hamburger button, hide nav links by default */
   .nav-toggle {
     display: flex;

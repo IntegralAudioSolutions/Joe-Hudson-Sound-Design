@@ -484,13 +484,97 @@
     }
 
     @media (max-width: 600px) {
+
+      /* ── HERO ── */
       .hero { grid-template-columns: 1fr; }
       .hero-sidebar { display: none; }
-      .hero-content { padding: var(--space-lg); }
+      .hero-content {
+        padding: 20px 16px;
+        /* Clear the float so content doesn't squeeze alongside photo */
+        overflow: hidden;
+      }
+
+      /* Eyebrow — reduce letter-spacing so it fits on one line */
+      .hero-eyebrow {
+        font-size: 8px;
+        letter-spacing: 0.08em;  /* tighter on mobile — stops word-per-line breaking */
+        margin-bottom: 10px;
+        /* Allow wrapping but keep words together */
+        word-spacing: 0.1em;
+      }
+
+      /* Name — scale down slightly */
+      .hero-name {
+        font-size: 36px;
+        margin-bottom: 6px;
+      }
+
+      /* Role label — tighter spacing */
+      .hero-role {
+        font-size: 9px;
+        letter-spacing: 0.08em;
+        margin-bottom: 14px;
+        white-space: normal;
+        word-break: normal;
+      }
+
+      /* Tagline — normal body text, reads fine on mobile */
+      .hero-tagline {
+        font-size: 13px;
+        max-width: 100%;
+        margin-bottom: 20px;
+      }
+
+      /* CTA buttons — side by side, not stacking */
+      .hero-cta {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 8px;
+      }
+
+      .btn {
+        font-size: 8px;
+        padding: 8px 12px;
+        letter-spacing: 0.06em;
+        white-space: nowrap;  /* prevents button text breaking across lines */
+      }
+
+      /* Studio photo — show on mobile, full width below text */
+      .hero-photo-float {
+        float: none;          /* remove float on mobile */
+        width: 100%;
+        max-width: 100%;
+        margin: 16px 0 0 0;
+        border-radius: 2px;
+      }
+
+      /* ── REEL SECTION ── */
+      .index-reel {
+        grid-template-columns: 1fr;  /* single column — hide sidebar on mobile */
+      }
+      .index-reel-sidebar { display: none; }
+      .index-reel-content {
+        padding: 10px 12px;
+      }
+      /* Reel label — tighter spacing on mobile */
+      .index-reel-label {
+        font-size: 7px;
+        letter-spacing: 0.08em;
+        word-spacing: 0.05em;
+      }
+
+      /* ── CREDITS GRID ── */
       .grid-section { grid-template-columns: 1fr; }
       .grid-sidebar { display: none; }
       .grid-content { padding: var(--space-md); }
       .image-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+
+      /* Section tag — tighter spacing */
+      .section-tag {
+        font-size: 7px;
+        letter-spacing: 0.1em;
+      }
     }
 
   </style>
