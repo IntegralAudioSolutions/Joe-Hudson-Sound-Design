@@ -360,13 +360,14 @@
 
     /* ── HERO PHOTO ── */
     /*
-      Photo floated right inside the hero content column.
-      Takes up roughly 35% of the hero width, text wraps around it.
+      Desktop: floated right so all hero text wraps around the left side.
+      Must be the first element in hero-content for the float to work.
+      Mobile: float removed, shows as a contained image at the top.
     */
     .hero-photo-float {
       float: right;
-      width: 35%;
-      max-width: 320px;
+      width: 38%;
+      max-width: 340px;
       margin: 0 0 var(--space-md) var(--space-lg);
       border-radius: 2px;
       border: 1px solid rgba(212,172,80,0.15);
@@ -383,10 +384,6 @@
 
     .hero-photo-float img:hover {
       filter: saturate(1.0) brightness(1.0);
-    }
-
-    @media (max-width: 700px) {
-      .hero-photo-float { display: none; }
     }
 
     /* ── INDEX REEL SECTION ── */
@@ -540,13 +537,14 @@
         white-space: nowrap;  /* prevents button text breaking across lines */
       }
 
-      /* Studio photo — show on mobile, full width below text */
+      /* Studio photo — show at top on mobile, full width, no float */
       .hero-photo-float {
-        float: none;          /* remove float on mobile */
+        float: none;
         width: 100%;
         max-width: 100%;
-        margin: 16px 0 0 0;
+        margin: 0 0 16px 0;   /* margin below photo, above text */
         border-radius: 2px;
+        display: block;
       }
 
       /* ── REEL SECTION ── */
@@ -629,10 +627,7 @@
 
     <!-- Hero text -->
     <div class="hero-content">
-      <!--
-        Eyebrow updated to include "Sounds & Implementation"
-      -->
-      <!-- Studio photo — floated right inside hero content -->
+      <!-- Photo floated right — MUST be first element for text wrapping to work -->
       <div class="hero-photo-float">
         <img
           src="assets/images/joe-hudson-studio.jpg"
@@ -640,7 +635,9 @@
           loading="eager"
         />
       </div>
-
+      <!--
+        Eyebrow updated to include "Sounds & Implementation"
+      -->
       <p class="hero-eyebrow">// SOUND DESIGN &nbsp;·&nbsp; IMPLEMENTATION &nbsp;·&nbsp; UNREAL ENGINE &nbsp;·&nbsp; JOEHUDSON.CO.UK</p>
       <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
       <p class="hero-role">Senior Technical Sound Designer</p>
