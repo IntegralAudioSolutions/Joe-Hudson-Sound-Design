@@ -600,8 +600,8 @@
       <div class="reel-note" role="note">
         <p class="reel-note-label">// Access Note</p>
         <p class="reel-note-text">
-          Demo reels are hosted as private YouTube links — visible via this page
-          but not discoverable through YouTube search. If a reel isn't loading,
+          Demo reels are hosted as private Vimeo links — visible via this page
+          but not publicly discoverable. If a reel isn't loading,
           <a href="contact.html" style="color:var(--color-purp-light)">get in touch</a>
           and a direct link will be sent over promptly.
         </p>
@@ -616,31 +616,14 @@
           <div class="reel-featured-line"></div>
         </div>
 
-        <!--
-          HOW TO ADD YOUR YOUTUBE REEL:
-          
-          1. Go to your private YouTube video
-          2. Click Share → Embed
-          3. Copy the src URL — it looks like:
-               https://www.youtube.com/embed/XXXXXXXXXXX
-          4. Replace the entire <div class="video-placeholder"> block below with:
-          
-               <iframe
-                 src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                 title="Joe Hudson — Primary Demo Reel"
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 allowfullscreen>
-               </iframe>
-        -->
+        <!-- Vimeo demo reel embed — video ID: 1200862765 -->
         <div class="video-wrapper">
-          <div class="video-placeholder" aria-label="Video placeholder — add YouTube embed URL">
-            <div class="video-placeholder-icon" aria-hidden="true"></div>
-            <p class="video-placeholder-text">
-              Primary Demo Reel<br />
-              YouTube embed to be added
-            </p>
-            <p class="video-placeholder-code">// replace this block with &lt;iframe src="..."&gt;</p>
-          </div>
+          <iframe
+            src="https://player.vimeo.com/video/1200862765?badge=0&autopause=0&player_id=0&app_id=58479"
+            title="Joe Hudson — Primary Demo Reel"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            allowfullscreen>
+          </iframe>
         </div>
 
         <div class="reel-featured-meta">
