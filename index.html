@@ -24,6 +24,39 @@
        INDEX PAGE STYLES
     ================================================================ */
 
+    /* ── CONSTRUCTION BANNER ── */
+    /*
+      Thin strip between the nav and hero.
+      Gold left accent bar, monospaced text — keeps the LCARS feel.
+      To remove later: delete the .site-banner HTML block and this CSS section.
+    */
+    .site-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      background: rgba(212, 172, 80, 0.06);
+      border-bottom: 1px solid rgba(212, 172, 80, 0.2);
+    }
+
+    .site-banner-bar {
+      width: 3px;
+      height: 16px;
+      background: var(--color-gold);
+      border-radius: 2px;
+      flex-shrink: 0;
+      opacity: 0.8;
+    }
+
+    .site-banner-text {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
     /* ── HERO ── */
     /*
       Three-column grid: sidebar | text+video | (video fills right side)
@@ -603,6 +636,13 @@
   </header>
 
 
+  <!-- CONSTRUCTION BANNER — remove this block when the site is ready to launch -->
+  <div class="site-banner" role="status" aria-live="polite">
+    <div class="site-banner-bar" aria-hidden="true"></div>
+    <span class="site-banner-text">// Site under construction &nbsp;·&nbsp; Content and reels being added shortly</span>
+  </div>
+
+
   <!-- HERO -->
   <section class="hero" aria-label="Introduction">
 
@@ -665,8 +705,14 @@
 
   <!-- REEL VIDEO — sits between hero and credits grid -->
   <!--
-    DEMO REEL: Vimeo embed — video ID 1200862765
-    To update, replace the iframe src with the new Vimeo player URL.
+    HOW TO ADD YOUR REEL:
+    Replace the placeholder div inside .index-reel-wrapper with:
+      <iframe
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        title="Joe Hudson — Demo Reel"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
   -->
   <div class="index-reel">
     <!--
@@ -678,13 +724,12 @@
     <div class="index-reel-content">
       <span class="index-reel-label">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</span>
       <div class="index-reel-wrapper">
-        <!-- Vimeo demo reel embed — video ID: 1200862765 -->
-        <iframe
-          src="https://player.vimeo.com/video/1200862765?badge=0&autopause=0&player_id=0&app_id=58479"
-          title="Joe Hudson — Demo Reel"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-          allowfullscreen>
-        </iframe>
+        <div class="index-reel-placeholder" id="indexReelPlaceholder">
+          <div class="index-reel-play"></div>
+          <p class="index-reel-placeholder-text">
+            Demo Reel &nbsp;·&nbsp; YouTube embed to be added
+          </p>
+        </div>
       </div>
     </div>
   </div>
