@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fortnite C6S1 — Oni Hunters — Joe Hudson</title>
+  <meta name="description" content="Map audio design for Fortnite Chapter 6 Season 1 — Oni Hunters. World-building audio, UE5 implementation, and environmental SFX design for the Demons Domain POI and surrounding areas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,172,80,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 12px 0 0; gap: 8px;
+    }
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-gold);
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-title {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 300; color: #eef2f8;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+    .page-subtitle {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+    .project-sidebar {
+      background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
+    }
+    .project-content {
+      padding: var(--space-xl);
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /* ── LEFT: TEXT COLUMN ── */
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    }
+    .back-link:hover { color: var(--color-gold); }
+
+    /* ── RIGHT: MEDIA COLUMN ── */
+    /*
+      Three video boxes stacked vertically, each 16:9.
+      More videos than a standard project page — this season has rich footage.
+    */
+    .project-media {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: 10px;
+    }
+
+    .video-block { display: flex; flex-direction: column; gap: 6px; }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .video-wrapper iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+
+    /* Placeholder shown when no iframe is present yet */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
+    .video-caption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── IMAGE RIBBON ── */
+    /*
+      Auto-scrolling horizontal ribbon of location screenshots.
+      Uses CSS animation — no JS required.
+      The track is duplicated in HTML so the loop is seamless.
+    */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+
+    .ribbon-track-wrap { overflow: hidden; }
+
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+
+    /* Pause on hover so visitors can look at individual shots */
+    .ribbon-track:hover { animation-play-state: paused; }
+
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); } /* moves one full set width — seamless loop */
+    }
+
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .ribbon-img:hover {
+      filter: saturate(1.0) brightness(1.0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .project-content { grid-template-columns: 1fr; }
+      .project-media { grid-column: 1; grid-row: 1; }
+      .project-text  { grid-column: 1; grid-row: 2; }
+    }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <a href="../../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
+      <a href="../disciplines.html" class="nav-link">Disciplines</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header" aria-label="Project header">
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
+      <h1 class="page-title"><strong>Fortnite C6S1 — Oni Hunters</strong></h1>
+      <p class="page-subtitle">Audio Designer</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="project-layout">
+    <aside class="project-sidebar" aria-hidden="true">
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <span class="sidebar-label">Project</span>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+    </aside>
+
+    <main class="project-content" id="main-content">
+
+      <!-- LEFT: TEXT -->
+      <div class="project-text">
+
+        <a href="../../index.html" class="back-link">&larr; Back to Credits</a>
+
+        <div class="project-meta">
+          <div class="meta-row">
+            <span class="meta-label">Studio</span>
+            <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">Audio Designer</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Platform</span>
+            <span class="meta-value">PC · Console · Mobile</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Year</span>
+            <span class="meta-value">2024 – 2025</span>
+          </div>
+        </div>
+
+        <p class="project-desc">
+          World-building audio for Fortnite Chapter 6 Season 1 — Oni Hunters. A Japanese-inspired season
+          with a dark supernatural edge, the map introduced dense new POIs including Demon's Domain —
+          a corrupted feudal citadel surrounded by lava fields and towering obsidian spires.
+          Audio systems had to sell both the serene beauty of the setting and the creeping demonic corruption beneath.
+        </p>
+
+        <div>
+          <p class="project-section-label">// Scope &amp; Responsibilities</p>
+          <p class="project-detail-text">
+            <!--
+              Add specific detail here — which POIs did you cover?
+              What ambient systems did you build in UE5 MetaSounds?
+              Any notable technical challenges with the corruption audio?
+            -->
+            Detailed project notes to be added.
+          </p>
+        </div>
+
+        <div>
+          <p class="project-section-label">// Tools &amp; Pipeline</p>
+          <p class="project-detail-text">
+            <!--
+              Reaper, Soundminer, UE5 MetaSounds, Blueprint scripting.
+              Add pipeline specifics here.
+            -->
+            Tools and pipeline details to be added.
+          </p>
+        </div>
+
+        <div class="cta" style="padding:0">
+          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: MEDIA — three video boxes -->
+      <div class="project-media">
+
+        <!-- Video 1: Demons Domain Ambience reel -->
+        <div class="video-block">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/bUo27KGpchM"
+              title="Fortnite C6S1 — Demon's Domain Ambience"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="video-caption">// Demon's Domain — Ambience Reel</p>
+        </div>
+
+        <!-- Video 2: placeholder — add second video URL when ready -->
+        <div class="video-block">
+          <div class="video-wrapper">
+            <!--
+              Add second video here when ready:
+              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="..." allowfullscreen></iframe>
+            -->
+            <div class="video-placeholder">
+              <div class="video-play"></div>
+              <p class="video-label">Video 2<br />YouTube embed — to be added</p>
+            </div>
+          </div>
+          <p class="video-caption">// C6S1 — To be added</p>
+        </div>
+
+        <!-- Video 3: placeholder — add third video URL when ready -->
+        <div class="video-block">
+          <div class="video-wrapper">
+            <!--
+              Add third video here when ready:
+              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="..." allowfullscreen></iframe>
+            -->
+            <div class="video-placeholder">
+              <div class="video-play"></div>
+              <p class="video-label">Video 3<br />YouTube embed — to be added</p>
+            </div>
+          </div>
+          <p class="video-caption">// C6S1 — To be added</p>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+
+  <!-- LOCATION SCREENSHOT RIBBON -->
+  <!--
+    Auto-scrolling ribbon of in-engine location shots.
+    The image set is duplicated so the scroll loops seamlessly.
+    Hover pauses the animation so visitors can study individual shots.
+  -->
+  <section class="ribbon-section" aria-label="Location screenshots">
+    <p class="ribbon-label">// Location Screenshots &nbsp;&middot;&nbsp; Fortnite C6S1 — Oni Hunters</p>
+    <div class="ribbon-track-wrap">
+      <div class="ribbon-track" role="list" aria-label="Scrolling location screenshots">
+
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp"   alt="Demon's Domain — overview"         loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp"      alt="Demon's Domain — promo shot"       loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp"             alt="Demon Spire"                       loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp"       alt="The Citadel — main room"           loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp"           alt="The Citadel — masks"               loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp"       alt="The Citadel — top floor"           loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp"     alt="Kintsugi Corruption background"    loading="lazy" role="listitem" />
+
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp"   alt="Demon's Domain — overview"         loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp"      alt="Demon's Domain — promo shot"       loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp"             alt="Demon Spire"                       loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp"       alt="The Citadel — main room"           loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp"           alt="The Citadel — masks"               loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp"       alt="The Citadel — top floor"           loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp"     alt="Kintsugi Corruption background"    loading="lazy" role="listitem" aria-hidden="true" />
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="../contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+
+</body>
+</html>

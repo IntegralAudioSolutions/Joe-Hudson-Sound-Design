@@ -303,6 +303,14 @@
 
     .project-toggle:hover { color: var(--color-cyan); }
 
+    /* Project title links — subtle, inherits title colour, arrow hints at clickability */
+    .project-title-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+    .project-title-link:hover { color: var(--color-gold-bright); }
+
     /* The ▸ / ▾ chevron that flips when open */
     .project-toggle-icon {
       display: inline-block;
@@ -494,6 +502,42 @@
 
       <!-- ── PROJECT LIST ── -->
       <div class="project-list" id="projectList">
+
+
+        <!-- ── PROJECT 0: Fortnite C6S1 — Oni Hunters ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="ue5 implementation aaa"
+                 aria-label="Fortnite C6S1 — Oni Hunters">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold);animation:dotPulse 2.5s ease-in-out infinite" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2024 — 2025</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/hunters.html" class="project-title-link">Fortnite C6S1 — Oni Hunters →</a>
+            </h2>
+            <p class="project-role">Audio Designer · UE5 · World Building</p>
+            <p class="project-desc">
+              World-building audio for Fortnite Chapter 6 Season 1. A Japanese-inspired season with a dark
+              supernatural edge — Demon's Domain, corrupted lava fields, obsidian spires, and the Citadel interior.
+              Full ambient systems designed and implemented in UE5 MetaSounds.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--purp">World Building</li>
+              <li class="tag tag--gold">AAA</li>
+              <li class="tag tag--gold">Fortnite</li>
+            </ul>
+
+          </div>
+        </article>
 
 
         <!-- ── PROJECT 1: Epic Games / Fortnite ── -->
