@@ -48,43 +48,23 @@
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
+    /* ── LAYOUT ── */
+    /*
+      Single-column: video full-width at top (16:9), then a two-column
+      body grid (text left, keyart right) below it.
+      Matches the aspect ratio of the index page reel box.
+    */
     .project-content {
       padding: var(--space-xl);
-      display: grid; grid-template-columns: 1fr 380px;
-      gap: var(--space-2xl); align-items: start;
-    }
-    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
-    .project-meta {
-      display: flex; flex-direction: column; gap: 6px;
-      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .meta-row { display: flex; gap: 12px; align-items: baseline; }
-    .meta-label {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
-    }
-    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
-    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
-    .project-section-label {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
-      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
-    }
-    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-    .project-media {
       display: flex;
       flex-direction: column;
-      gap: var(--space-md);
-      padding: 10px;  /* 10px breathing room from all separators */
+      gap: var(--space-xl);
     }
+    .project-video-top { width: 100%; }
     .video-wrapper {
       position: relative;
       width: 100%;
-      /*
-        padding-bottom: 120% gives a tall portrait-ish box — fills the
-        available column height right up to the separators as shown
-        in the mockup. Adjust down if too tall on your screen.
-      */
-      padding-bottom: 120%;
+      padding-bottom: 56.25%; /* 16:9 — matches index reel box */
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
@@ -106,20 +86,25 @@
     }
     .video-caption {
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.1em; text-align: center;
+      letter-spacing: 0.1em; margin-top: 8px;
     }
-    .project-keyart {
-      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
-      filter: saturate(0.8) brightness(0.9);
+    .project-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-2xl);
+      align-items: start;
     }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
-      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
-      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    @media (max-width: 900px) {
+      .project-body-grid { grid-template-columns: 1fr; }
     }
-    .back-link:hover { color: var(--color-gold); }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+    }
     @media (max-width: 900px) {
       .project-content { grid-template-columns: 1fr; }
       .project-media { grid-column: 1; grid-row: 1; }
@@ -182,62 +167,11 @@
 
     <main class="project-content" id="main-content">
 
-      <div class="project-text">
-
-        <a href="../../index.html" class="back-link">&larr; Back to Credits</a>
-
-        <div class="project-meta">
-          <div class="meta-row">
-            <span class="meta-label">Studio</span>
-            <span class="meta-value">Valve Corporation</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Role</span>
-            <span class="meta-value">Supervising Foley Editor</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Platform</span>
-            <span class="meta-value">To be added</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Year</span>
-            <span class="meta-value">To be added</span>
-          </div>
-        </div>
-
-        <p class="project-desc">Supervising Foley Editor on Half-Life: Alyx — Valve's flagship VR title. VR-first Foley editorial supervision across a full AAA production pipeline, ensuring spatial accuracy and presence for a fully immersive first-person experience.</p>
-
-        <div>
-          <p class="project-section-label">// Scope &amp; Responsibilities</p>
-          <p class="project-detail-text">
-            <!--
-              Add specific detail here about your work on this project.
-              What systems did you build? What was technically interesting?
-              What was the team structure? Any notable challenges?
-            -->
-            Detailed project notes to be added.
-          </p>
-        </div>
-
-        <div>
-          <p class="project-section-label">// Tools &amp; Pipeline</p>
-          <p class="project-detail-text">
-            Tools and pipeline details to be added.
-          </p>
-        </div>
-
-        <div class="cta" style="padding:0">
-          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-        </div>
-
-      </div>
-
-      <div class="project-media">
+      <!-- ── VIDEO (full-width, 16:9) ── -->
+      <div class="project-video-top">
         <div class="video-wrapper">
           <!--
-            HOW TO ADD VIDEO:
-            Replace this placeholder with:
+            Add video: replace the placeholder div below with:
               <iframe
                 src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
                 title="Half-Life: Alyx"
@@ -247,11 +181,70 @@
           -->
           <div class="video-placeholder">
             <div class="video-play"></div>
-            <p class="video-label">Project Video<br />YouTube embed — to be added</p>
+            <p class="video-label">Project Video<br />Embed — to be added</p>
           </div>
         </div>
         <p class="video-caption">// Half-Life: Alyx &nbsp;&middot;&nbsp; Supervising Foley Editor</p>
-        <img class="project-keyart" src="../../assets/images/half_life_alyx-keyart.jpg" alt="Half-Life: Alyx key art" loading="lazy" />
+      </div>
+
+      <!-- ── BODY: text left, keyart right ── -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <a href="../work.html" class="back-link">&larr; Back to Credits</a>
+
+          <div class="project-meta">
+                    <div class="meta-row">
+                      <span class="meta-label">Studio</span>
+                      <span class="meta-value">Valve Corporation</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Role</span>
+                      <span class="meta-value">Supervising Foley Editor</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Platform</span>
+                      <span class="meta-value">To be added</span>
+                    </div>
+                    <div class="meta-row">
+                      <span class="meta-label">Year</span>
+                      <span class="meta-value">To be added</span>
+                    </div>
+                  </div>
+
+          <p class="project-desc">Supervising Foley Editor on Half-Life: Alyx — Valve's flagship VR title. VR-first Foley editorial supervision across a full AAA production pipeline, ensuring spatial accuracy and presence for a fully immersive first-person experience.</p>
+
+          <div>
+                    <p class="project-section-label">// Scope &amp; Responsibilities</p>
+                    <p class="project-detail-text">
+                      <!--
+                        Add specific detail here about your work on this project.
+                        What systems did you build? What was technically interesting?
+                        What was the team structure? Any notable challenges?
+                      -->
+                      Detailed project notes to be added.
+                    </p>
+                  </div>
+
+          <div>
+                    <p class="project-section-label">// Tools &amp; Pipeline</p>
+                    <p class="project-detail-text">
+                      Tools and pipeline details to be added.
+                    </p>
+                  </div>
+
+          <div class="cta" style="padding:0">
+          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+        </div>
+
+        </div>
+
+        <div>
+          <img class="project-keyart" src="../../assets/images/half_life_alyx-keyart.jpg" alt="Half-Life: Alyx key art" loading="lazy" />
+        </div>
+
       </div>
 
     </main>

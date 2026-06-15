@@ -49,47 +49,28 @@
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
+
+    /* ── LAYOUT ── */
+    /*
+      Single-column: videos full-width at top (16:9, stacked), then a
+      two-column body grid (text left, keyart right) below.
+    */
     .project-content {
       padding: var(--space-xl);
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: var(--space-2xl);
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
     }
-
-    /* ── LEFT: text + meta ── */
-    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
-    .project-meta {
-      display: flex; flex-direction: column; gap: 6px;
-      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
+    .project-videos-top {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
     }
-    .meta-row { display: flex; gap: 12px; align-items: baseline; }
-    .meta-label {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
-    }
-    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
-    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
-    .project-section-label {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
-      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
-    }
-    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-
-    /* ── RIGHT: two video boxes + keyart ── */
-    .project-media { display: flex; flex-direction: column; gap: var(--space-lg); }
-
     .video-block { display: flex; flex-direction: column; gap: 6px; }
-
     .video-wrapper {
       position: relative;
       width: 100%;
-      /*
-        padding-bottom: 120% gives a tall portrait-ish box — fills the
-        available column height right up to the separators as shown
-        in the mockup. Adjust down if too tall on your screen.
-      */
-      padding-bottom: 120%;
+      padding-bottom: 56.25%; /* 16:9 — matches index reel box */
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
@@ -111,16 +92,36 @@
     }
     .video-caption {
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.1em; margin-top: 4px;
     }
-
-    /* Divider between the two video blocks */
     .video-divider {
       width: 100%;
       height: 1px;
       background: linear-gradient(90deg, rgba(212,172,80,0.3) 0%, rgba(212,172,80,0) 100%);
     }
-
+    .project-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
     .project-keyart {
       width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
       border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
@@ -133,11 +134,8 @@
       transition: color var(--transition-fast); margin-bottom: var(--space-md);
     }
     .back-link:hover { color: var(--color-gold); }
-
     @media (max-width: 900px) {
-      .project-content { grid-template-columns: 1fr; }
-      .project-media { grid-column: 1; grid-row: 1; }
-      .project-text  { grid-column: 1; grid-row: 2; }
+      .project-body-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
@@ -197,70 +195,13 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- LEFT: text -->
-      <div class="project-text">
+      <!-- ── VIDEOS (full-width, 16:9, stacked) ── -->
+      <div class="project-videos-top">
 
-        <a href="../../index.html" class="back-link">&larr; Back to Credits</a>
-
-        <div class="project-meta">
-          <div class="meta-row">
-            <span class="meta-label">Studio</span>
-            <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Role</span>
-            <span class="meta-value">Audio Level Designer</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Platform</span>
-            <span class="meta-value">To be added</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Year</span>
-            <span class="meta-value">2023</span>
-          </div>
-        </div>
-
-        <p class="project-desc">
-          Map audio design for Fortnite OG — the return of the original
-          Battle Royale island that launched the phenomenon. One of the most
-          anticipated Fortnite seasons ever, bringing back the classic map
-          in its entirety and requiring audio that matched the nostalgia and
-          scale of the moment.
-        </p>
-
-        <div>
-          <p class="project-section-label">// Scope &amp; Responsibilities</p>
-          <p class="project-detail-text">
-            <!-- Add specific detail about your work on Fortnite OG here -->
-            Detailed project notes to be added.
-          </p>
-        </div>
-
-        <div>
-          <p class="project-section-label">// Tools &amp; Pipeline</p>
-          <p class="project-detail-text">
-            <!-- Add tools and pipeline details specific to this project -->
-            Tools and pipeline details to be added.
-          </p>
-        </div>
-
-        <div class="cta" style="padding:0">
-          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-        </div>
-
-      </div>
-
-      <!-- RIGHT: two video boxes + keyart -->
-      <div class="project-media">
-
-        <!-- Video box 1 -->
         <div class="video-block">
           <div class="video-wrapper">
             <!--
-              HOW TO ADD VIDEO 1:
-              Replace this placeholder with:
+              Add video 1: replace the placeholder div below with:
                 <iframe
                   src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
                   title="Fortnite OG — Video 1"
@@ -270,7 +211,7 @@
             -->
             <div class="video-placeholder">
               <div class="video-play"></div>
-              <p class="video-label">Video 1<br />YouTube embed — to be added</p>
+              <p class="video-label">Video 1<br />Embed — to be added</p>
             </div>
           </div>
           <p class="video-caption">// Fortnite OG &nbsp;·&nbsp; Video 1</p>
@@ -278,12 +219,10 @@
 
         <div class="video-divider"></div>
 
-        <!-- Video box 2 -->
         <div class="video-block">
           <div class="video-wrapper">
             <!--
-              HOW TO ADD VIDEO 2:
-              Replace this placeholder with:
+              Add video 2: replace the placeholder div below with:
                 <iframe
                   src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
                   title="Fortnite OG — Video 2"
@@ -293,19 +232,79 @@
             -->
             <div class="video-placeholder">
               <div class="video-play"></div>
-              <p class="video-label">Video 2<br />YouTube embed — to be added</p>
+              <p class="video-label">Video 2<br />Embed — to be added</p>
             </div>
           </div>
           <p class="video-caption">// Fortnite OG &nbsp;·&nbsp; Video 2</p>
         </div>
 
-        <!-- Key art below both videos -->
-        <img
-          class="project-keyart"
-          src="../../assets/images/c4s5-fortnite-og-keyart.jpg"
-          alt="Fortnite OG key art"
-          loading="lazy"
-        />
+      </div>
+
+      <!-- ── BODY: text left, keyart right ── -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <a href="../work.html" class="back-link">&larr; Back to Credits</a>
+
+          <div class="project-meta">
+            <div class="meta-row">
+              <span class="meta-label">Studio</span>
+              <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Role</span>
+              <span class="meta-value">Audio Level Designer</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value">To be added</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Year</span>
+              <span class="meta-value">2023</span>
+            </div>
+          </div>
+
+          <p class="project-desc">
+            Map audio design for Fortnite OG — the return of the original
+            Battle Royale island that launched the phenomenon. One of the most
+            anticipated Fortnite seasons ever, bringing back the classic map
+            in its entirety and requiring audio that matched the nostalgia and
+            scale of the moment.
+          </p>
+
+          <div>
+            <p class="project-section-label">// Scope &amp; Responsibilities</p>
+            <p class="project-detail-text">
+              <!-- Add specific detail about your work on Fortnite OG here -->
+              Detailed project notes to be added.
+            </p>
+          </div>
+
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">
+              <!-- Add tools and pipeline details specific to this project -->
+              Tools and pipeline details to be added.
+            </p>
+          </div>
+
+          <div class="cta" style="padding:0">
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+        </div>
+
+        <div>
+          <img
+            class="project-keyart"
+            src="../../assets/images/c4s5-fortnite-og-keyart.jpg"
+            alt="Fortnite OG key art"
+            loading="lazy"
+          />
+        </div>
 
       </div>
 
