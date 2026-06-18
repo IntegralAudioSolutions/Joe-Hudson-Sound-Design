@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cuphead — Joe Hudson</title>
-  <meta name="description" content="Sound design on Cuphead — Studio MDHR's hand-drawn 1930s jazz-era action game. Designing SFX to match the unique visual aesthetic required deep research into period-accurate instrumentation, foley techniques, and vintage recording character." />
+  <meta name="description" content="Sound Designer on Cuphead — Studio MDHR / Sweet Justice Sound Group. Foley and SFX design for the acclaimed hand-drawn action game." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -48,31 +48,29 @@
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
-    /* ── LAYOUT ── */
-    /*
-      Single-column: video full-width at top (16:9), then a two-column
-      body grid (text left, keyart right) below it.
-      Matches the aspect ratio of the index page reel box.
-    */
+    /* Single-column flex: video full-width at top, body-grid below */
     .project-content {
       padding: var(--space-xl);
       display: flex;
       flex-direction: column;
       gap: var(--space-xl);
     }
+    /* Full-width 16:9 video */
     .project-video-top { width: 100%; }
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 — matches index reel box */
+      padding-bottom: 56.25%;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
       overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
     .video-placeholder {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 10px;
     }
     .video-play {
@@ -88,12 +86,79 @@
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
       letter-spacing: 0.1em; margin-top: 8px;
     }
+    /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
       gap: var(--space-2xl);
       align-items: start;
     }
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+    .project-keyart {
+      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
+      filter: saturate(0.8) brightness(0.9);
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    }
+    .back-link:hover { color: var(--color-gold); }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
     }
@@ -104,19 +169,7 @@
       .project-layout { grid-template-columns: 1fr; }
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
-    }
-    @media (max-width: 900px) {
-      .project-content { grid-template-columns: 1fr; }
-      .project-media { grid-column: 1; grid-row: 1; }
-      .project-text  { grid-column: 1; grid-row: 2; }
-    }
-    @media (max-width: 600px) {
-      .page-header { grid-template-columns: 1fr; }
-      .page-header-sidebar { display: none; }
-      .page-header-content { padding: var(--space-lg); }
-      .project-layout { grid-template-columns: 1fr; }
-      .project-sidebar { display: none; }
-      .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
     }
   </style>
 </head>
@@ -131,11 +184,11 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
-      <a href="../../index.html"   class="nav-link">About</a>
-      <a href="../work.html"       class="nav-link active">Work</a>
-      <a href="../reel.html"       class="nav-link">Reel</a>
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
       <a href="../disciplines.html" class="nav-link">Disciplines</a>
-      <a href="../contact.html"    class="nav-link">Contact</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
     </nav>
   </header>
 
@@ -148,7 +201,7 @@
       <div class="lelbow"></div>
     </aside>
     <div class="page-header-content">
-      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Studio MDHR</p>
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Studio MDHR</p>
       <h1 class="page-title"><strong>Cuphead</strong></h1>
       <p class="page-subtitle">Sound Designer</p>
     </div>
@@ -167,27 +220,18 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- ── VIDEO (full-width, 16:9) ── -->
+      <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <!--
-            Add video: replace the placeholder div below with:
-              <iframe
-                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                title="Cuphead"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-          -->
           <div class="video-placeholder">
             <div class="video-play"></div>
-            <p class="video-label">Project Video<br />Embed — to be added</p>
+            <p class="video-label">Video — to be added</p>
           </div>
         </div>
         <p class="video-caption">// Cuphead &nbsp;&middot;&nbsp; Sound Designer</p>
       </div>
 
-      <!-- ── BODY: text left, keyart right ── -->
+      <!-- Body: text left, keyart right -->
       <div class="project-body-grid">
 
         <div class="project-text">
@@ -195,54 +239,45 @@
           <a href="../work.html" class="back-link">&larr; Back to Credits</a>
 
           <div class="project-meta">
-                    <div class="meta-row">
-                      <span class="meta-label">Studio</span>
-                      <span class="meta-value">Studio MDHR</span>
-                    </div>
-                    <div class="meta-row">
-                      <span class="meta-label">Role</span>
-                      <span class="meta-value">Sound Designer</span>
-                    </div>
-                    <div class="meta-row">
-                      <span class="meta-label">Platform</span>
-                      <span class="meta-value">To be added</span>
-                    </div>
-                    <div class="meta-row">
-                      <span class="meta-label">Year</span>
-                      <span class="meta-value">To be added</span>
-                    </div>
-                  </div>
+            <div class="meta-row">
+              <span class="meta-label">Studio</span>
+              <span class="meta-value">Sweet Justice Sound Group / Studio MDHR</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Role</span>
+              <span class="meta-value">Sound Designer</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value">PC · Console</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Year</span>
+              <span class="meta-value">2017</span>
+            </div>
+          </div>
 
-          <p class="project-desc">Sound design on Cuphead — Studio MDHR's hand-drawn 1930s jazz-era action game. Designing SFX to match the unique visual aesthetic required deep research into period-accurate instrumentation, foley techniques, and vintage recording character.</p>
-
-          <div>
-                    <p class="project-section-label">// Scope &amp; Responsibilities</p>
-                    <p class="project-detail-text">
-                      <!--
-                        Add specific detail here about your work on this project.
-                        What systems did you build? What was technically interesting?
-                        What was the team structure? Any notable challenges?
-                      -->
-                      Detailed project notes to be added.
-                    </p>
-                  </div>
+          <p class="project-desc">Sound design for Cuphead's DLC and ongoing updates. The game's 1930s rubber-hose animation aesthetic demanded a very specific foley and SFX approach — analogue character, period-appropriate textures, and expressive exaggeration.</p>
 
           <div>
-                    <p class="project-section-label">// Tools &amp; Pipeline</p>
-                    <p class="project-detail-text">
-                      Tools and pipeline details to be added.
-                    </p>
-                  </div>
+            <p class="project-section-label">// Scope &amp; Responsibilities</p>
+            <p class="project-detail-text">Detailed project notes to be added.</p>
+          </div>
+
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+          </div>
 
           <div class="cta" style="padding:0">
-          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-        </div>
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
 
         </div>
 
         <div>
-          <img class="project-keyart" src="../../assets/images/cuphead-keyart.png" alt="Cuphead key art" loading="lazy" />
+          <img class="project-keyart" src="../../assets/images/cuphead-keyart.png" alt="Cuphead — Joe Hudson" loading="lazy" />
         </div>
 
       </div>
@@ -250,34 +285,15 @@
     </main>
   </div>
 
-
-  <!-- LOCATION SCREENSHOT RIBBON -->
-  <!--
-    Auto-scrolling ribbon of in-engine location shots.
-    Images live in: assets/images/YOUR-FOLDER/
-    Replace the src paths and alt text below, then duplicate Set 1 into Set 2.
-    The track must be duplicated for the seamless loop to work.
-    Minimum 5 images recommended for wide screens.
-  -->
-  <section class="ribbon-section" aria-label="Location screenshots">
-    <p class="ribbon-label">// Location Screenshots \&nbsp;\&middot;\&nbsp; Cuphead</p>
+  <!-- Screenshot / character ribbon -->
+  <section class="ribbon-section" aria-label="Project screenshots">
+    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Cuphead</p>
     <div class="ribbon-track-wrap">
-      <div class="ribbon-track" role="list" aria-label="Scrolling location screenshots">
-
-        <!-- Set 1 — add your images here -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" />
-
-        <!-- Set 2 — exact duplicate of Set 1 for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-
+      <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/cuphead-keyart.png" alt="Cuphead key art" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/cuphead-keyart.png" alt="Cuphead key art" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>

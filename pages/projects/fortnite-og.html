@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fortnite OG — Joe Hudson</title>
-  <meta name="description" content="Audio Level Designer on Fortnite OG — the return of the original Fortnite Battle Royale island. Map audio design via Sweet Justice Sound Group for Epic Games." />
+  <meta name="description" content="Audio Level Designer on Fortnite OG — a celebration of the original Battle Royale island." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -43,42 +43,34 @@
       font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
       letter-spacing: 0.14em; text-transform: uppercase;
     }
-
     .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
     .project-sidebar {
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
-
-    /* ── LAYOUT ── */
-    /*
-      Single-column: videos full-width at top (16:9, stacked), then a
-      two-column body grid (text left, keyart right) below.
-    */
+    /* Single-column flex: video full-width at top, body-grid below */
     .project-content {
       padding: var(--space-xl);
       display: flex;
       flex-direction: column;
       gap: var(--space-xl);
     }
-    .project-videos-top {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-lg);
-    }
-    .video-block { display: flex; flex-direction: column; gap: 6px; }
+    /* Full-width 16:9 video */
+    .project-video-top { width: 100%; }
     .video-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 — matches index reel box */
+      padding-bottom: 56.25%;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
       overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
     .video-placeholder {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 10px;
     }
     .video-play {
@@ -92,13 +84,9 @@
     }
     .video-caption {
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.1em; margin-top: 4px;
+      letter-spacing: 0.1em; margin-top: 8px;
     }
-    .video-divider {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(212,172,80,0.3) 0%, rgba(212,172,80,0) 100%);
-    }
+    /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -134,6 +122,43 @@
       transition: color var(--transition-fast); margin-bottom: var(--space-md);
     }
     .back-link:hover { color: var(--color-gold); }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
     }
@@ -144,6 +169,7 @@
       .project-layout { grid-template-columns: 1fr; }
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
     }
   </style>
 </head>
@@ -175,14 +201,13 @@
       <div class="lelbow"></div>
     </aside>
     <div class="page-header-content">
-      <p class="page-eyebrow">// Project Detail &nbsp;·&nbsp; Sweet Justice Sound Group / Epic Games</p>
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
       <h1 class="page-title"><strong>Fortnite OG</strong></h1>
       <p class="page-subtitle">Audio Level Designer</p>
     </div>
   </section>
 
   <div class="project-layout">
-
     <aside class="project-sidebar" aria-hidden="true">
       <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
       <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
@@ -195,52 +220,18 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- ── VIDEOS (full-width, 16:9, stacked) ── -->
-      <div class="project-videos-top">
-
-        <div class="video-block">
-          <div class="video-wrapper">
-            <!--
-              Add video 1: replace the placeholder div below with:
-                <iframe
-                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  title="Fortnite OG — Video 1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-            -->
-            <div class="video-placeholder">
-              <div class="video-play"></div>
-              <p class="video-label">Video 1<br />Embed — to be added</p>
-            </div>
+      <!-- Full-width 16:9 video — matches Absolute Doom layout -->
+      <div class="project-video-top">
+        <div class="video-wrapper">
+          <div class="video-placeholder">
+            <div class="video-play"></div>
+            <p class="video-label">Video — to be added</p>
           </div>
-          <p class="video-caption">// Fortnite OG &nbsp;·&nbsp; Video 1</p>
         </div>
-
-        <div class="video-divider"></div>
-
-        <div class="video-block">
-          <div class="video-wrapper">
-            <!--
-              Add video 2: replace the placeholder div below with:
-                <iframe
-                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  title="Fortnite OG — Video 2"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-            -->
-            <div class="video-placeholder">
-              <div class="video-play"></div>
-              <p class="video-label">Video 2<br />Embed — to be added</p>
-            </div>
-          </div>
-          <p class="video-caption">// Fortnite OG &nbsp;·&nbsp; Video 2</p>
-        </div>
-
+        <p class="video-caption">// Fortnite OG &nbsp;&middot;&nbsp; Audio Level Designer</p>
       </div>
 
-      <!-- ── BODY: text left, keyart right ── -->
+      <!-- Body: text left, keyart right -->
       <div class="project-body-grid">
 
         <div class="project-text">
@@ -258,7 +249,7 @@
             </div>
             <div class="meta-row">
               <span class="meta-label">Platform</span>
-              <span class="meta-value">To be added</span>
+              <span class="meta-value">PC · Console · Mobile</span>
             </div>
             <div class="meta-row">
               <span class="meta-label">Year</span>
@@ -266,28 +257,16 @@
             </div>
           </div>
 
-          <p class="project-desc">
-            Map audio design for Fortnite OG — the return of the original
-            Battle Royale island that launched the phenomenon. One of the most
-            anticipated Fortnite seasons ever, bringing back the classic map
-            in its entirety and requiring audio that matched the nostalgia and
-            scale of the moment.
-          </p>
+          <p class="project-desc">Fortnite OG brought back the original Chapter 1 island for a limited-time event. Audio work focused on faithfully restoring the sonic character of the classic map whilst integrating it with the current engine pipeline.</p>
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">
-              <!-- Add specific detail about your work on Fortnite OG here -->
-              Detailed project notes to be added.
-            </p>
+            <p class="project-detail-text">Detailed project notes to be added.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">
-              <!-- Add tools and pipeline details specific to this project -->
-              Tools and pipeline details to be added.
-            </p>
+            <p class="project-detail-text">Tools and pipeline details to be added.</p>
           </div>
 
           <div class="cta" style="padding:0">
@@ -298,12 +277,7 @@
         </div>
 
         <div>
-          <img
-            class="project-keyart"
-            src="../../assets/images/c4s5-fortnite-og-keyart.jpg"
-            alt="Fortnite OG key art"
-            loading="lazy"
-          />
+          <img class="project-keyart" src="../../assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG — Joe Hudson" loading="lazy" />
         </div>
 
       </div>
@@ -311,34 +285,15 @@
     </main>
   </div>
 
-
-  <!-- LOCATION SCREENSHOT RIBBON -->
-  <!--
-    Auto-scrolling ribbon of in-engine location shots.
-    Images live in: assets/images/YOUR-FOLDER/
-    Replace the src paths and alt text below, then duplicate Set 1 into Set 2.
-    The track must be duplicated for the seamless loop to work.
-    Minimum 5 images recommended for wide screens.
-  -->
-  <section class="ribbon-section" aria-label="Location screenshots">
-    <p class="ribbon-label">// Location Screenshots \&nbsp;\&middot;\&nbsp; Fortnite OG</p>
+  <!-- Screenshot / character ribbon -->
+  <section class="ribbon-section" aria-label="Project screenshots">
+    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite OG</p>
     <div class="ribbon-track-wrap">
-      <div class="ribbon-track" role="list" aria-label="Scrolling location screenshots">
-
-        <!-- Set 1 — add your images here -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" />
-
-        <!-- Set 2 — exact duplicate of Set 1 for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-
+      <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG key art" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG key art" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>
@@ -346,7 +301,7 @@
   <footer class="footer" role="contentinfo">
     <div class="footer-elbow" aria-hidden="true"></div>
     <div class="footer-inner">
-      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
       <nav class="footer-links" aria-label="Social and contact links">
         <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>

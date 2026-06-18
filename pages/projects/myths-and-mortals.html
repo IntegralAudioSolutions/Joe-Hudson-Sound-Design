@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fortnite — Chapter 5: Myths &amp; Mortals — Joe Hudson</title>
-  <meta name="description" content="Map audio design for Fortnite Chapter 5 Season 2. A Greek mythology theme brought new environmental challenges — ancient ruins, divine energy fields, and mythological creature audio all built from the ground up." />
+  <title>Fortnite C5S2 — Myths &amp; Mortals — Joe Hudson</title>
+  <meta name="description" content="Audio Designer on Fortnite Chapter 5 Season 2 — Myths and Mortals. Greek mythology-themed environmental audio design." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -48,10 +48,50 @@
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
+    /* Single-column flex: video full-width at top, body-grid below */
     .project-content {
       padding: var(--space-xl);
-      display: grid; grid-template-columns: 1fr 380px;
-      gap: var(--space-2xl); align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    /* Full-width 16:9 video */
+    .project-video-top { width: 100%; }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
+    .video-caption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.1em; margin-top: 8px;
+    }
+    /* Body: text left, keyart right */
+    .project-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-2xl);
+      align-items: start;
     }
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
@@ -70,44 +110,6 @@
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
     }
     .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-    .project-media {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-      padding: 10px;  /* 10px breathing room from all separators */
-    }
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      /*
-        padding-bottom: 120% gives a tall portrait-ish box — fills the
-        available column height right up to the separators as shown
-        in the mockup. Adjust down if too tall on your screen.
-      */
-      padding-bottom: 120%;
-      background: var(--color-bg-surface);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-    .video-placeholder {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
-    }
-    .video-play {
-      width: 0; height: 0; border-style: solid;
-      border-width: 12px 0 12px 20px;
-      border-color: transparent transparent transparent rgba(255,255,255,0.15);
-    }
-    .video-label {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
-    }
-    .video-caption {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
-      letter-spacing: 0.1em; text-align: center;
-    }
     .project-keyart {
       width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
       border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
@@ -120,10 +122,45 @@
       transition: color var(--transition-fast); margin-bottom: var(--space-md);
     }
     .back-link:hover { color: var(--color-gold); }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Responsive */
     @media (max-width: 900px) {
-      .project-content { grid-template-columns: 1fr; }
-      .project-media { grid-column: 1; grid-row: 1; }
-      .project-text  { grid-column: 1; grid-row: 2; }
+      .project-body-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
@@ -132,6 +169,7 @@
       .project-layout { grid-template-columns: 1fr; }
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
     }
   </style>
 </head>
@@ -146,11 +184,11 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
-      <a href="../../index.html"   class="nav-link">About</a>
-      <a href="../work.html"       class="nav-link active">Work</a>
-      <a href="../reel.html"       class="nav-link">Reel</a>
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
       <a href="../disciplines.html" class="nav-link">Disciplines</a>
-      <a href="../contact.html"    class="nav-link">Contact</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
     </nav>
   </header>
 
@@ -164,7 +202,7 @@
     </aside>
     <div class="page-header-content">
       <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
-      <h1 class="page-title"><strong>Fortnite — Chapter 5: Myths &amp; Mortals</strong></h1>
+      <h1 class="page-title"><strong>Fortnite C5S2 — Myths &amp; Mortals</strong></h1>
       <p class="page-subtitle">Audio Designer</p>
     </div>
   </section>
@@ -182,109 +220,80 @@
 
     <main class="project-content" id="main-content">
 
-      <div class="project-text">
-
-        <a href="../../index.html" class="back-link">&larr; Back to Credits</a>
-
-        <div class="project-meta">
-          <div class="meta-row">
-            <span class="meta-label">Studio</span>
-            <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Role</span>
-            <span class="meta-value">Audio Designer</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Platform</span>
-            <span class="meta-value">To be added</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-label">Year</span>
-            <span class="meta-value">To be added</span>
-          </div>
-        </div>
-
-        <p class="project-desc">Map audio design for Fortnite Chapter 5 Season 2. A Greek mythology theme brought new environmental challenges — ancient ruins, divine energy fields, and mythological creature audio all built from the ground up.</p>
-
-        <div>
-          <p class="project-section-label">// Scope &amp; Responsibilities</p>
-          <p class="project-detail-text">
-            <!--
-              Add specific detail here about your work on this project.
-              What systems did you build? What was technically interesting?
-              What was the team structure? Any notable challenges?
-            -->
-            Detailed project notes to be added.
-          </p>
-        </div>
-
-        <div>
-          <p class="project-section-label">// Tools &amp; Pipeline</p>
-          <p class="project-detail-text">
-            Tools and pipeline details to be added.
-          </p>
-        </div>
-
-        <div class="cta" style="padding:0">
-          <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-          <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-        </div>
-
-      </div>
-
-      <div class="project-media">
+      <!-- Full-width 16:9 video — matches Absolute Doom layout -->
+      <div class="project-video-top">
         <div class="video-wrapper">
-          <!--
-            HOW TO ADD VIDEO:
-            Replace this placeholder with:
-              <iframe
-                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                title="Fortnite — Chapter 5: Myths &amp; Mortals"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-          -->
           <div class="video-placeholder">
             <div class="video-play"></div>
-            <p class="video-label">Project Video<br />YouTube embed — to be added</p>
+            <p class="video-label">Video — to be added</p>
           </div>
         </div>
-        <p class="video-caption">// Fortnite — Chapter 5: Myths &amp; Mortals &nbsp;&middot;&nbsp; Audio Designer</p>
-        <img class="project-keyart" src="../../assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite — Chapter 5: Myths &amp; Mortals key art" loading="lazy" />
+        <p class="video-caption">// Fortnite C5S2 — Myths &amp; Mortals &nbsp;&middot;&nbsp; Audio Designer</p>
+      </div>
+
+      <!-- Body: text left, keyart right -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <a href="../work.html" class="back-link">&larr; Back to Credits</a>
+
+          <div class="project-meta">
+            <div class="meta-row">
+              <span class="meta-label">Studio</span>
+              <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Role</span>
+              <span class="meta-value">Audio Designer</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value">PC · Console · Mobile</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Year</span>
+              <span class="meta-value">2024</span>
+            </div>
+          </div>
+
+          <p class="project-desc">Map audio design for Fortnite Chapter 5 Season 2, themed around Greek mythology. Ancient ruins, Olympian POIs, and mythological characters shaped the environmental audio palette for this season.</p>
+
+          <div>
+            <p class="project-section-label">// Scope &amp; Responsibilities</p>
+            <p class="project-detail-text">Detailed project notes to be added.</p>
+          </div>
+
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+          </div>
+
+          <div class="cta" style="padding:0">
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+        </div>
+
+        <div>
+          <img class="project-keyart" src="../../assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite C5S2 — Myths &amp; Mortals — Joe Hudson" loading="lazy" />
+        </div>
+
       </div>
 
     </main>
   </div>
 
-
-  <!-- LOCATION SCREENSHOT RIBBON -->
-  <!--
-    Auto-scrolling ribbon of in-engine location shots.
-    Images live in: assets/images/YOUR-FOLDER/
-    Replace the src paths and alt text below, then duplicate Set 1 into Set 2.
-    The track must be duplicated for the seamless loop to work.
-    Minimum 5 images recommended for wide screens.
-  -->
-  <section class="ribbon-section" aria-label="Location screenshots">
-    <p class="ribbon-label">// Location Screenshots \&nbsp;\&middot;\&nbsp; Fortnite C5S2 — Myths and Mortals</p>
+  <!-- Screenshot / character ribbon -->
+  <section class="ribbon-section" aria-label="Project screenshots">
+    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite C5S2 — Myths &amp; Mortals</p>
     <div class="ribbon-track-wrap">
-      <div class="ribbon-track" role="list" aria-label="Scrolling location screenshots">
-
-        <!-- Set 1 — add your images here -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" />
-
-        <!-- Set 2 — exact duplicate of Set 1 for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-01.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-02.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-03.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-04.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/YOUR-FOLDER/image-05.webp" alt="Description" loading="lazy" role="listitem" aria-hidden="true" />
-
+      <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite C5S2 — Myths and Mortals key art" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite C5S2 — Myths and Mortals key art" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>

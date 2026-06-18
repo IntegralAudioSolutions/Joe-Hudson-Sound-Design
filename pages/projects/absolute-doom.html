@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fortnite — Chapter 5: Absolute Doom — Joe Hudson</title>
-  <meta name="description" content="Map audio design for Fortnite Chapter 5 Season 4. This season brought Marvel's Doctor Doom to the Battle Royale island — a dark, dramatic aesthetic that informed every aspect of the environmental audio design." />
+  <meta name="description" content="Map audio design for Fortnite Chapter 5 Season 4 — Absolute Doom. Doctor Doom's arrival shaped the entire environmental audio palette." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -48,25 +48,15 @@
       background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
       display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
     }
-    /*
-      Single-column layout: video sits full-width at the top, content below.
-      The old two-column grid (1fr 380px) is replaced with a flex column.
-    */
+    /* Single-column flex: video full-width at top, body-grid below */
     .project-content {
       padding: var(--space-xl);
       display: flex;
       flex-direction: column;
       gap: var(--space-xl);
     }
-
-    /* ── VIDEO (full-width, 16:9) ── */
-    /*
-      Matches the aspect ratio of the index page reel box.
-      padding-bottom: 56.25% = 9/16 = standard widescreen.
-    */
-    .project-video-top {
-      width: 100%;
-    }
+    /* Full-width 16:9 video */
+    .project-video-top { width: 100%; }
     .video-wrapper {
       position: relative;
       width: 100%;
@@ -77,15 +67,26 @@
       overflow: hidden;
     }
     .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
     .video-caption {
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
       letter-spacing: 0.1em; margin-top: 8px;
     }
-
-    /* ── CONTENT BELOW VIDEO ── */
-    /*
-      Two-column grid for meta + text side by side, with keyart at the bottom.
-    */
+    /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
       grid-template-columns: 1fr 380px;
@@ -121,7 +122,43 @@
       transition: color var(--transition-fast); margin-bottom: var(--space-md);
     }
     .back-link:hover { color: var(--color-gold); }
-
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
     }
@@ -132,6 +169,7 @@
       .project-layout { grid-template-columns: 1fr; }
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
     }
   </style>
 </head>
@@ -146,11 +184,11 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
-      <a href="../../index.html"   class="nav-link">About</a>
-      <a href="../work.html"       class="nav-link active">Work</a>
-      <a href="../reel.html"       class="nav-link">Reel</a>
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
       <a href="../disciplines.html" class="nav-link">Disciplines</a>
-      <a href="../contact.html"    class="nav-link">Contact</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
     </nav>
   </header>
 
@@ -182,13 +220,12 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- ── VIDEO (full-width, 16:9) ── -->
+      <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <!-- YouTube embed — video ID: _i4c_8kxIxQ -->
           <iframe
             src="https://www.youtube.com/embed/_i4c_8kxIxQ"
-            title="Fortnite — Chapter 5: Absolute Doom — Audio Showcase"
+            title="Fortnite — Chapter 5: Absolute Doom &nbsp;&middot;&nbsp; Audio Designer"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
@@ -196,21 +233,7 @@
         <p class="video-caption">// Fortnite — Chapter 5: Absolute Doom &nbsp;&middot;&nbsp; Audio Designer</p>
       </div>
 
-      <!-- ── VIDEO 2 ── -->
-      <div class="project-video-top">
-        <div class="video-wrapper">
-          <!-- YouTube embed — Doom Castle Head Explosion -->
-          <iframe
-            src="https://www.youtube.com/embed/pAy1Ypq1fmw"
-            title="Fortnite — Chapter 5: Absolute Doom — Doom Castle Head Explosion"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <p class="video-caption">// Doom Castle Head Explosion &nbsp;&middot;&nbsp; Audio Designer</p>
-      </div>
-
-      <!-- ── BODY: meta + text left, keyart right ── -->
+      <!-- Body: text left, keyart right -->
       <div class="project-body-grid">
 
         <div class="project-text">
@@ -228,11 +251,11 @@
             </div>
             <div class="meta-row">
               <span class="meta-label">Platform</span>
-              <span class="meta-value">To be added</span>
+              <span class="meta-value">PC · Console · Mobile</span>
             </div>
             <div class="meta-row">
               <span class="meta-label">Year</span>
-              <span class="meta-value">To be added</span>
+              <span class="meta-value">2024</span>
             </div>
           </div>
 
@@ -240,21 +263,12 @@
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">
-              <!--
-                Add specific detail here about your work on this project.
-                What systems did you build? What was technically interesting?
-                What was the team structure? Any notable challenges?
-              -->
-              Detailed project notes to be added.
-            </p>
+            <p class="project-detail-text">Detailed project notes to be added.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">
-              Tools and pipeline details to be added.
-            </p>
+            <p class="project-detail-text">Tools and pipeline details to be added.</p>
           </div>
 
           <div class="cta" style="padding:0">
@@ -264,15 +278,27 @@
 
         </div>
 
-        <!-- Key art sits in the right column alongside the text -->
         <div>
-          <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" />
+          <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom — Joe Hudson" loading="lazy" />
         </div>
 
       </div>
 
     </main>
   </div>
+
+  <!-- Screenshot / character ribbon -->
+  <section class="ribbon-section" aria-label="Project screenshots">
+    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite — Chapter 5: Absolute Doom</p>
+    <div class="ribbon-track-wrap">
+      <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" aria-hidden="true" />
+      </div>
+    </div>
+  </section>
 
   <footer class="footer" role="contentinfo">
     <div class="footer-elbow" aria-hidden="true"></div>
