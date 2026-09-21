@@ -202,8 +202,12 @@
       onto a second line rather than squashing below 110px.
     */
     .chain-stage {
-      flex: 1 1 120px;
-      min-width: 110px;
+      /*
+        Basis dropped to 100px so eight stages fit across a desktop
+        column. The row still wraps cleanly on narrower screens.
+      */
+      flex: 1 1 100px;
+      min-width: 94px;
       background: var(--color-bg-surface);
       border: 1px solid rgba(212,172,80,0.22);
       border-top: 2px solid var(--color-gold);
@@ -272,7 +276,7 @@
 
     .chain-name {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       color: var(--color-gold-bright);
       letter-spacing: 0.03em;
       line-height: 1.35;
@@ -502,8 +506,8 @@
 
                 <div class="chain-stage">
                   <span class="chain-num">01</span>
-                  <span class="chain-name">Denoise</span>
-                  <span class="chain-fn">Broadband Pass</span>
+                  <span class="chain-name">Sonnox Oxford DeNoiser</span>
+                  <span class="chain-fn">Broadband Denoise</span>
                 </div>
 
                 <div class="chain-arrow" aria-hidden="true"></div>
@@ -542,6 +546,14 @@
 
                 <div class="chain-stage">
                   <span class="chain-num">06</span>
+                  <span class="chain-name">FabFilter Pro-Q</span>
+                  <span class="chain-fn">Tonal Balance</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">07</span>
                   <span class="chain-name">McDSP ML4000</span>
                   <span class="chain-fn">Peak Limiting</span>
                 </div>
@@ -549,33 +561,41 @@
                 <div class="chain-arrow" aria-hidden="true"></div>
 
                 <div class="chain-stage chain-stage--bus">
-                  <span class="chain-num">07</span>
+                  <span class="chain-num">08</span>
                   <span class="chain-name">Avid Pro Compressor</span>
                   <span class="chain-fn">Dialogue Bus</span>
                 </div>
 
               </div>
 
-              <p class="chain-note">Stage 00 is offline, rendered to the clip. Stages 01 to 06 are inserts on the dialogue channel. Stage 07 sits across the dialogue bus, treating the whole stem rather than individual lines.</p>
+              <p class="chain-note">Stage 00 is offline, rendered to the clip. Stages 01 to 07 are inserts on the dialogue channel. Stage 08 sits across the dialogue bus, treating the whole stem rather than individual lines.</p>
             </div>
 
             <p class="project-subhead">Why the order matters</p>
 
             <p class="project-detail-text">The de-click happens offline, on the item file, before any of it. Clicks, ticks and crackle are faults baked into a specific take. They aren't a decision you want to keep revisiting, so you fix them once at source and render it in. Leaving a de-clicker as a live insert means every pass recomputes the same repair on the same file forever, and it clutters a chain that should only hold things you actually want to keep adjusting.</p>
 
-            <p class="project-detail-text">Then the denoise, and that goes before the compressor. A compressor pulls the loud and quiet parts of a signal closer together, then make-up gain lifts the whole lot back up. Room tone, hiss and air handling noise all live in the quiet parts. Compress first and you aren't just leaving that noise in, you're actively hauling it up in the gaps between words and then modulating it every time the actor speaks. That's where the breathing, pumping noise floor comes from, and nothing downstream really fixes it. Clean it while the floor is still steady and the compressor never knows it was there.</p>
+            <p class="project-detail-text">Then the Oxford DeNoiser, and that goes before the compressor. A compressor pulls the loud and quiet parts of a signal closer together, then make-up gain lifts the whole lot back up. Room tone, hiss and air handling noise all live in the quiet parts. Compress first and you aren't just leaving that noise in, you're actively hauling it up in the gaps between words and then modulating it every time the actor speaks. That's where the breathing, pumping noise floor comes from, and nothing downstream really fixes it. Clean it while the floor is still steady and the compressor never knows it was there.</p>
 
             <p class="project-detail-text">De-essing sits after the compressor rather than before it, and that catches people out. A compressor mostly reacts to the body of the voice, which means sibilance slips underneath it and then gets lifted by the make-up gain along with everything else. Tame the esses first and the compressor just hands them straight back to you. Let the level settle, then deal with what's left.</p>
 
-            <p class="project-detail-text">Pro-Q comes next, once the level and the top end are behaving. Carve a resonance too early and you're shaping something that's still moving around under you. By this point the voice is consistent enough that an EQ decision made on one line holds up across the batch.</p>
+            <p class="project-subhead">Two EQs, doing two different jobs</p>
+
+            <p class="project-detail-text">The first Pro-Q goes in after the de-esser and it's the surgical one. Room resonances, proximity build-up on a close mic, rumble under the take, the odd honk where a booth has coloured something. All of it is corrective, and it wants to happen once the level and the top end have stopped moving around, because an EQ decision made on an unstable signal doesn't hold up across a batch of a few thousand files.</p>
+
+            <p class="project-detail-text">The second one goes after WNS and before the limiter, and that placement is the whole point of it. Any suppressor takes energy out of the spectrum, and even a well shaped one leaves the voice slightly duller and a bit more closed in than it went in. The second EQ is there to put that back. It's broad, gentle, mostly a little air and presence, nothing surgical. You're restoring what the cleaning cost you rather than fixing a fault.</p>
+
+            <p class="project-detail-text">There's a practical reason it has to sit before the ML4000 as well. EQ changes peak level. Boost anything after a limiter and you've just walked straight back through the ceiling you set, which defeats the point of having put one there. Last tonal decision, then limit, in that order.</p>
 
             <p class="project-subhead">Two passes at the noise, not one</p>
 
-            <p class="project-detail-text">WNS goes late, right on the edge before the limiter, and it's doing a different job from the first denoise. The pass up front is deliberately gentle. Hit a raw take hard with suppression and you pull the life out of it, so the aim early on is to get the floor down far enough that the compressor behaves, and no further.</p>
+            <p class="project-detail-text">WNS goes late, right on the edge before the final EQ and the limiter, and it's doing a different job from the Oxford pass up front. That first pass is deliberately gentle. Hit a raw take hard with suppression and you pull the life out of it, so the aim early on is to get the floor down far enough that the compressor behaves, and no further.</p>
 
             <p class="project-detail-text">That leaves something behind, and the compressor then lifts it. So WNS gets a second, targeted go at the residue at a point where the signal is already level and predictable. That matters more than it sounds. A suppressor works off per-band thresholds, and thresholds only behave consistently when the material arriving at them is consistent. Put it first and you're constantly chasing it from line to line. Put it after the compressor and the de-esser and one setting holds across a whole delivery.</p>
 
             <p class="project-detail-text">ML4000 then goes last on the channel, catching plosives and the odd overshoot so nothing reaches the bus with a rogue peak on it. The bus compressor does the gluing, and that's the only stage where I'm treating the dialogue as one thing rather than as a few thousand separate files.</p>
+
+            <p class="project-detail-text">None of this is a preset. It's a starting position that gets pulled apart per actor, per session and occasionally per line. But the order of it stays put, because the order is the part that stops each stage undoing the one before it.</p>
 
             <p class="project-subhead">What WNS is actually doing</p>
 
