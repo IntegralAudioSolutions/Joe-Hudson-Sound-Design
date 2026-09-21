@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fortnite — Galactic Battle — Joe Hudson</title>
-  <meta name="description" content="Map audio design for Fortnite's Galactic Battle season — large-scale sci-fi environments and spatial audio systems." />
+  <meta name="description" content="Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -139,7 +139,7 @@
       display: flex;
       gap: 8px;
       width: max-content;
-      animation: ribbonScroll 30s linear infinite;
+      animation: ribbonScroll 43s linear infinite;
     }
     .ribbon-track:hover { animation-play-state: paused; }
     @keyframes ribbonScroll {
@@ -158,6 +158,173 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+
+    /* Spacing between consecutive paragraphs in a detail block */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
+    /* Sub-heading inside a detail section */
+    .project-subhead {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: var(--space-lg) 0 8px;
+    }
+
+    /* ================================================================
+       AMBIENCE LAYER STACK
+       ----------------------------------------------------------------
+       A vertical diagram showing the three layers an ambience is built
+       from. Deliberately stacked rather than left-to-right, because
+       these layers sit on top of each other rather than feeding into
+       each other in sequence.
+
+       Pure HTML and CSS, no images, so it stays sharp at any size.
+    ================================================================ */
+
+    .layer-stack {
+      border: 1px solid var(--color-gold-border);
+      background: var(--color-bg-nav);
+      border-radius: 2px;
+      padding: var(--space-lg) var(--space-md) var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .layer-caption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    /*
+      One layer. The coloured bar on the left is the only thing
+      distinguishing the three, which keeps it calm rather than busy.
+    */
+    .layer-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+
+    .layer-row--emitters { border-left-color: var(--color-cyan); }
+    .layer-row--volumes  { border-left-color: var(--color-coral); }
+
+    .layer-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.04em;
+      flex: 0 0 132px;
+      line-height: 1.4;
+    }
+
+    .layer-row--emitters .layer-name { color: var(--color-cyan); }
+    .layer-row--volumes  .layer-name { color: var(--color-coral); }
+
+    .layer-desc {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      flex: 1 1 auto;
+    }
+
+    /* ================================================================
+       POI BREAKDOWN BLOCKS
+       ----------------------------------------------------------------
+       Full-width sections below the main grid, one per location.
+       The image floats so the copy wraps around it. Floats alternate
+       left and right down the page so it doesn't read as a list.
+    ================================================================ */
+
+    .poi-block {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+      /*
+        Floats are taken out of normal flow, so without this the next
+        block would slide up alongside the previous block's image.
+      */
+      overflow: hidden;
+    }
+
+    .poi-figure {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+
+    /* Alternate side down the page */
+    .poi-figure--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+
+    .poi-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+
+    .poi-figure img:hover { filter: saturate(1.0) brightness(1.0); }
+
+    .poi-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .poi-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* Small ownership tag sat next to the location name */
+    .poi-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-cyan);
+      border: 1px solid rgba(0,200,224,0.3);
+      border-radius: 2px;
+      padding: 2px 6px;
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    .poi-tag--collab {
+      color: var(--color-coral);
+      border-color: rgba(232,112,64,0.35);
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -170,6 +337,20 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+
+      /* Layer stack: name above description rather than beside it */
+      .layer-row { flex-direction: column; gap: 4px; }
+      .layer-name { flex: 0 0 auto; }
+
+      /* POI images go full width above the copy rather than floated */
+      .poi-figure,
+      .poi-figure--left {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 var(--space-md) 0;
+      }
+      .poi-tag { display: inline-block; margin: 6px 0 0 0; }
     }
   </style>
 </head>
@@ -223,12 +404,20 @@
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <!--
+            TEMP EMBED — official season trailer.
+            To be replaced with Joe's own in-engine walkthrough once it's
+            cut and uploaded. Only the video ID below needs changing.
+          -->
+          <iframe
+            src="https://www.youtube.com/embed/yR7-FBMCJn0"
+            title="Fortnite — Galactic Battle cinematic trailer"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
         </div>
-        <p class="video-caption">// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Audio Designer</p>
+        <p class="video-caption">// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Official season trailer &nbsp;&middot;&nbsp; Courtesy of IGN</p>
       </div>
 
       <!-- Body: text left, keyart right -->
@@ -257,16 +446,80 @@
             </div>
           </div>
 
-          <p class="project-desc">Map audio design for Fortnite's Galactic Battle season. Large-scale sci-fi environments demanded cohesive spatial audio systems — from the scale of the battle above to the ground-level action below.</p>
+          <p class="project-desc">Ambient audio on Fortnite's Galactic Battle season. A set of locations I owned outright, plus a wider pass across the island making the new areas sit properly against everything already there.</p>
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+
+            <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
+
+            <p class="project-detail-text">Three of those were mine end to end. On Outpost Enclave a colleague did the main thrust, setting up the volumes and interiors, and I worked alongside him fixing bugs and helping get it singing. That's how the good ones tend to go. One person owns it and knows every inch of it, another comes in with fresh ears and no attachment to any of the decisions, and the location ends up better than either of you would have managed on your own.</p>
+
+            <p class="project-detail-text">First Order Base and Resistance Base are the interesting pair, because they had to read as opposites the moment you landed in either one, without either of them leaning on the obvious.</p>
+
+            <p class="project-detail-text">Owning a location means deciding what it sounds like when nothing is happening. That's the part nobody consciously notices and everybody notices the absence of. What is the air doing. What machinery is running, and how far away. What is overhead. Is there water, wind, anything alive, and how does all of that change as you move through the place rather than past it.</p>
+
+            <p class="project-detail-text">The wider pass is a different problem. Fortnite's island isn't a set of separate levels, it's one continuous space that players cross at speed. Drop a new area into it and it has to belong. It can't announce itself with a hard edge where one ambience stops and the next starts, because somebody sprinting that boundary will hear the join, and once you've heard a join you can't unhear it.</p>
+
+            <p class="project-detail-text">That's the constraint that shapes everything else. You aren't mixing a location, you're mixing every possible route a player might take through it, including the ones that cut straight across a seam you'd rather they didn't.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+
+            <p class="project-detail-text">Built in Unreal from hand-placed emitters and audio volumes rather than anything generated. Slower, but it's the only way to get intent into a space.</p>
+
+            <!-- ── AMBIENCE LAYER STACK ── -->
+            <div class="layer-stack">
+              <p class="layer-caption">// Ambience &nbsp;&middot;&nbsp; Layer Stack</p>
+
+              <div class="layer-row">
+                <span class="layer-name">01 &nbsp;Ambient Bed</span>
+                <span class="layer-desc">Carries the overall character of an area. Broad, and featureless by design. If you can pick out an individual sound in the bed, it's doing too much.</span>
+              </div>
+
+              <div class="layer-row layer-row--emitters">
+                <span class="layer-name">02 &nbsp;Point Emitters</span>
+                <span class="layer-desc">Where the actual work happens. A generator behind a wall, wind through a structure, something creaking at the top of a tower. Each at a real position with its own attenuation curve.</span>
+              </div>
+
+              <div class="layer-row layer-row--volumes">
+                <span class="layer-name">03 &nbsp;Audio Volumes</span>
+                <span class="layer-desc">Interiors and transitions. Stepping inside should close the world down without a noticeable switch, so boundaries get pulled and crossfades stretched until the edge can't be caught.</span>
+              </div>
+            </div>
+
+            <p class="project-detail-text">The emitters are what separate a place from a texture. Because each one sits at a real position with its own falloff, moving through the space changes what you hear for the honest reason that you are nearer one thing and further from another. A looping stereo bed can't do that. It sounds the same standing still as it does running, and players read that instantly even if they couldn't tell you why.</p>
+
+            <p class="project-subhead">Most of it is walking</p>
+
+            <p class="project-detail-text">The real work is iteration in engine. Place something, play, walk it, move it, walk it again. You can't judge an ambient mix from a DAW, because the thing being mixed isn't a piece of audio, it's a player's path through a space, and there are as many paths as there are players.</p>
+
+            <p class="project-detail-text">So you walk the boundaries deliberately, looking for the joins. You approach each location from every direction it can be approached from, including the stupid ones, because on a map this size somebody will land on the roof and drop straight in through the middle of it.</p>
+
+            <p class="project-subhead">What we were allowed to build from</p>
+
+            <p class="project-detail-text">The rule on this season was that everything had to come from the original source content. No substituting a library recording because it was quicker, no building a hum from a synth because it got you there faster. If it ended up in the game it started life in the material we were given.</p>
+
+            <p class="project-detail-text">That's a tighter brief than it sounds. Original source content is decades old in places, recorded and mastered for cinema rather than for a game engine, and a lot of it does not survive being dropped into a world where it has to compete with everything else going on and still read through a phone speaker.</p>
+
+            <p class="project-detail-text">So cleaning and polishing was allowed and necessary. Denoising and limiting to get the recordings behaving, then spectral enhancement through Ozone 12 to brighten the top end. That last part matters more than it sounds. A recording can be perfectly good and still sit dull once it's inside the engine competing for the same space as everything else, and a bit of top end is what buys it translation across the range of systems people actually play on, from a full setup down to a handset.</p>
+
+            <p class="project-detail-text">Editing gave us more room. We could pitch and filter the source material to generate new tones, which is how you build out the technology of a space that doesn't have a canonical sound of its own. A door, a console, a piece of machinery nobody has heard before, all derived from something that already existed. Take an original tone, move it and shape it, and what comes out is a new sound that still carries the character of where it came from. That's the whole reason the method works, and it's why the results go on belonging in the universe rather than sitting next to it.</p>
+
+            <p class="project-subhead">Beds and transitions</p>
+
+            <p class="project-detail-text">From the polished material we built quad and stereo ambient beds covering every area of each location. Quad where the space needed to wrap around the player properly, stereo where it didn't need to and the budget was better spent elsewhere.</p>
+
+            <p class="project-detail-text">Then the interior and exterior transitions, which is where a new area either joins the island or doesn't. These places weren't dropped onto empty ground. They sit inside biome ambience established seasons earlier, which is already running and already familiar to anyone who plays regularly. So the beds had to be mixed against what was already there rather than over the top of it, and the boundaries had to be worked until stepping in or out of a structure reads as a change in the space rather than a change in the audio.</p>
+
+            <p class="project-subhead">Working with licensed source material</p>
+
+            <p class="project-detail-text">This season ran on original source content supplied by the licensor, and that changes how you work before you've opened a single session.</p>
+
+            <p class="project-detail-text">Material like that arrives with conditions attached. Where it is allowed to live, who can open it, what can leave the building, what can be shown and when. None of it is negotiable, and none of it is interesting to talk about, which is rather the point. The measure of having handled it properly is that there is nothing to report. Nothing leaked, nothing appeared early, nothing ended up somewhere it shouldn't have.</p>
+
+            <p class="project-detail-text">It's worth saying plainly because it's the part of a credit that never shows up in a reel. Bringing someone in on licensed IP means handing them material that belongs to somebody else, under an agreement you have signed and they haven't. Being straightforward to trust with it is part of the job, and it is a large part of why the same people get asked back.</p>
           </div>
 
           <div class="cta" style="padding:0">
@@ -282,18 +535,119 @@
 
       </div>
 
+      <!-- ══ POI BREAKDOWNS ══ -->
+
+      <section class="poi-block" aria-label="First Order Base">
+        <p class="poi-name">First Order Base <span class="poi-tag">Owned</span></p>
+
+        <figure class="poi-figure">
+          <img src="../../assets/images/GalacticBattle/GB_POI_FirstOrder.webp" alt="A TIE fighter inside the First Order Base hangar" loading="lazy" />
+          <figcaption>// First Order Base &nbsp;&middot;&nbsp; Hangar interior</figcaption>
+        </figure>
+
+        <p class="project-detail-text">Snow, stone and hard metal. The base is cut into a mountainside, so the exterior carries weather and exposure while the interior is all flat surfaces and enclosed air, and the two need to be obviously different the moment you cross the threshold.</p>
+
+        <p class="project-detail-text">Interiors like this are the easiest place to get ambience wrong, because the temptation is to fill them. A corridor that hums everywhere at the same level stops sounding like a corridor and starts sounding like a wall of noise. The interior beds sit low and the emitters do the shaping, so walking deeper into the base gets quieter and tighter rather than busier.</p>
+
+        <p class="project-detail-text">The hangar is the exception. It's the one space that earns scale, with the volume above you and hard surfaces on every side, so it's the place where the wrap of a quad bed does real work rather than being spent on a room nobody lingers in.</p>
+      </section>
+
+      <section class="poi-block" aria-label="Resistance Base">
+        <p class="poi-name">Resistance Base <span class="poi-tag">Owned</span></p>
+
+        <figure class="poi-figure poi-figure--left">
+          <img src="../../assets/images/GalacticBattle/GB_POI_Resistance.webp" alt="Interiors of the Resistance Base, including the hangar and holographic map room" loading="lazy" />
+          <figcaption>// Resistance Base &nbsp;&middot;&nbsp; Hangar and interior spaces</figcaption>
+        </figure>
+
+        <p class="project-detail-text">The opposite problem, and the more interesting one. Where the First Order is machined and cold, the Resistance is dug into a green valley, improvised, and surrounded by a living biome that was already on the island long before this season arrived.</p>
+
+        <p class="project-detail-text">That existing biome is the constraint. The base has to sound like it was put there by people working with what they had, inside a landscape that carries on regardless. So the exterior beds lean on what was already established and the new material sits underneath it, with the technology audible but never loud enough to push the valley out of the way.</p>
+
+        <p class="project-detail-text">Inside is where it flips. Step into the tunnels and the biome drops away and you're left with the equipment, which is where the pitched and filtered source content does most of its work, building out consoles and machinery that have no canonical sound of their own but still have to read as belonging.</p>
+      </section>
+
+      <section class="poi-block" aria-label="Vader Samurai's Solitude">
+        <p class="poi-name">Vader Samurai's Solitude <span class="poi-tag">Owned</span></p>
+
+        <figure class="poi-figure">
+          <img src="../../assets/images/GalacticBattle/GB_POI_Samurai.webp" alt="A shuttle on a rocky outcrop surrounded by red maple trees" loading="lazy" />
+          <figcaption>// Vader Samurai's Solitude &nbsp;&middot;&nbsp; Exterior approach</figcaption>
+        </figure>
+
+        <p class="project-detail-text">The one with the most restraint in it. A shuttle set down on a rocky outcrop among red maples, more shrine than base, and the whole point of the place is that it's quiet.</p>
+
+        <p class="project-detail-text">Quiet is harder than busy. With nothing much running you have very little to hide behind, so every emitter has to earn its place and any loop that repeats audibly will be noticed within seconds. The bed is thin on purpose and the detail is sparse and widely spaced, which means the placement has to be right rather than approximately right.</p>
+
+        <p class="project-detail-text">It also has to hold two ideas at once, the Japanese-inflected setting the chapter had already established and the Imperial hardware sitting in the middle of it, without either one cancelling the other out.</p>
+      </section>
+
+      <section class="poi-block" aria-label="Outpost Enclave">
+        <p class="poi-name">Outpost Enclave <span class="poi-tag poi-tag--collab">Collaboration</span></p>
+
+        <figure class="poi-figure poi-figure--left">
+          <img src="../../assets/images/GalacticBattle/GB_POI_Outpost.webp" alt="The desert Outpost Enclave, with domed structures, droids and a docked vessel" loading="lazy" />
+          <figcaption>// Outpost Enclave &nbsp;&middot;&nbsp; Desert settlement</figcaption>
+        </figure>
+
+        <p class="project-detail-text">A desert settlement of domes and scrap, the most lived-in of the four. This one wasn't mine. A colleague set up the volumes and interiors and did the main thrust of the design, and I came in alongside him to fix bugs and help get it singing.</p>
+
+        <p class="project-detail-text">That's a genuinely different job from owning a location. You're arriving in someone else's work with no attachment to any of the decisions, which is exactly what makes the second pair of ears useful. You hear the join they've stopped hearing, the emitter that reads fine from the approach they always take and wrong from the one they never do.</p>
+
+        <p class="project-detail-text">The trick is to fix what's broken without quietly redesigning it around your own preferences. It was his location and it should sound like his location, only without the problems.</p>
+      </section>
+
     </main>
   </div>
 
   <!-- Screenshot / character ribbon -->
   <section class="ribbon-section" aria-label="Project screenshots">
-    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite — Galactic Battle</p>
+    <p class="ribbon-label">// Locations &nbsp;&middot;&nbsp; Fortnite — Galactic Battle</p>
     <div class="ribbon-track-wrap">
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
         <!-- Set 1 -->
-        <img class="ribbon-img" src="../../assets/images/c6-galactic-battle-keyart.jpg" alt="Fortnite — Galactic Battle key art" loading="lazy" role="listitem" />
-        <!-- Set 2 — duplicate for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/c6-galactic-battle-keyart.jpg" alt="Fortnite — Galactic Battle key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Aerial.webp" alt="First Order Base seen from the air, cut into a snowy mountainside" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Interior.webp" alt="A TIE fighter viewed from inside the First Order hangar" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_SamuraiSolitude.webp" alt="An Imperial shuttle on a rocky outcrop among red maples" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_OutpostDomes.webp" alt="Domed structures and scrap across the desert outpost" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceAerial.webp" alt="Resistance Base from above, dug into a green valley" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Hangar.webp" alt="A TIE fighter suspended in the First Order hangar" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_StarDestroyerLake.webp" alt="A downed Star Destroyer reflected in still water" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceQuad.webp" alt="Resistance Base interiors, hangar and holographic map room" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Entrance.webp" alt="The snowbound entrance to First Order Base" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_SamuraiVillage.webp" alt="A village of red maples and tiled roofs at sunset" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_CloneShip.webp" alt="A crashed clone gunship in open grassland" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Exit.webp" alt="The hangar mouth of First Order Base in the snow" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_OutpostEnclave.webp" alt="Outpost Enclave, its droids, domes and docked vessel" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_EmpireCinematic.webp" alt="Star Destroyers hanging over the island" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceInterior.webp" alt="A workshop interior at Resistance Base" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_EatEat.webp" alt="An AT-AT converted into a roadside diner" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_Hilltop.webp" alt="Figures gathered on a hilltop under an open sky" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceQuad2.webp" alt="Resistance Base exteriors and tunnel entrances" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Double.webp" alt="First Order Base interior corridor and exterior approach" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_POIGrid.webp" alt="The season’s four Star Wars locations side by side" loading="lazy" role="listitem" />
+
+        <!-- Set 2 — exact duplicate for the seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Aerial.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Interior.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_SamuraiSolitude.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_OutpostDomes.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceAerial.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Hangar.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_StarDestroyerLake.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceQuad.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Entrance.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_SamuraiVillage.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_CloneShip.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Exit.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_OutpostEnclave.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_EmpireCinematic.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceInterior.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_EatEat.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_Hilltop.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_ResistanceQuad2.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_FOB_Double.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/GalacticBattle/GB_POIGrid.webp" alt="" loading="lazy" aria-hidden="true" />
       </div>
     </div>
   </section>
