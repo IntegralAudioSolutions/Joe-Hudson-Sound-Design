@@ -624,13 +624,53 @@
 
   <!-- Screenshot / character ribbon -->
   <section class="ribbon-section" aria-label="Project screenshots">
-    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Mirror's Edge Catalyst</p>
+    <p class="ribbon-label">// Game Stills &nbsp;&middot;&nbsp; Mirror's Edge Catalyst</p>
     <div class="ribbon-track-wrap">
+      <!--
+        SEAMLESS SCROLL LOOP
+        The track animates from translateX(0) to translateX(-50%), so it
+        slides left by exactly the width of Set 1 and then snaps back.
+        For that to look continuous, Set 1 must be at least as wide as the
+        visitor's screen, otherwise a gap appears as it wraps around.
+
+        Each image occupies 292px (284px wide at 160px tall, plus the 8px
+        gap). With only five source images a single pass is 1460px, which
+        would leave a visible gap on anything wider than a small laptop.
+        So Set 1 runs the five images twice over, giving 2920px, and Set 2
+        is an exact duplicate of that. Same five files either way, so the
+        browser caches them and the extra tags cost nothing to download.
+
+        If more stills get added later, drop the second pass and go back
+        to a straight one-pass Set 1 plus duplicate.
+      -->
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
-        <!-- Set 1 -->
-        <img class="ribbon-img" src="../../assets/images/mirrorsedge-keyart.png" alt="Mirror's Edge Catalyst key art" loading="lazy" role="listitem" />
-        <!-- Set 2 — duplicate for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/mirrorsedge-keyart.png" alt="Mirror's Edge Catalyst key art" loading="lazy" role="listitem" aria-hidden="true" />
+
+        <!-- Set 1 — pass 1 of 2 -->
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CityOfGlass.webp" alt="Faith looking out over the City of Glass" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_SentinelGuard.webp" alt="KrugerSec sentinel guards on a rain-soaked street" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CollapseLeap.webp" alt="Faith leaping clear of a collapsing building" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Combat.webp" alt="Faith in combat with KrugerSec officers" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Skyline.webp" alt="The City of Glass skyline" loading="lazy" role="listitem" />
+
+        <!-- Set 1 — pass 2 of 2 -->
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CityOfGlass.webp" alt="Faith looking out over the City of Glass" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_SentinelGuard.webp" alt="KrugerSec sentinel guards on a rain-soaked street" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CollapseLeap.webp" alt="Faith leaping clear of a collapsing building" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Combat.webp" alt="Faith in combat with KrugerSec officers" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Skyline.webp" alt="The City of Glass skyline" loading="lazy" role="listitem" aria-hidden="true" />
+
+        <!-- Set 2 — exact duplicate of Set 1 for the seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CityOfGlass.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_SentinelGuard.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CollapseLeap.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Combat.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Skyline.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CityOfGlass.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_SentinelGuard.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_CollapseLeap.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Combat.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Mirrors Edge Catalyst/MEC_Skyline.webp" alt="" loading="lazy" aria-hidden="true" />
+
       </div>
     </div>
   </section>
