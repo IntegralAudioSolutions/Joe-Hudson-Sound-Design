@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mirror's Edge Catalyst — Joe Hudson</title>
-  <meta name="description" content="Dialogue Editor — Cinematics on Mirror's Edge Catalyst — DICE / EA / Sweet Justice Sound Group." />
+  <meta name="description" content="Dialogue editing on Mirror's Edge Catalyst cinematics and location dialogue. Pro Tools editorial, Waves WNS noise suppression and dialogue chain prep for mix. DICE / EA / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -158,6 +158,187 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* ================================================================
+       SIGNAL CHAIN DIAGRAM
+       ----------------------------------------------------------------
+       A hand-built diagram showing the dialogue processing chain in
+       order. Pure HTML + CSS, no images, so it stays sharp at any
+       screen size and costs nothing to load.
+
+       Layout: a flex row of "stage" cards separated by arrow
+       connectors. On mobile the row flips to a vertical column and the
+       arrows rotate to point downwards (see the 600px media query).
+    ================================================================ */
+
+    .chain-diagram {
+      border: 1px solid var(--color-gold-border);
+      background: var(--color-bg-nav);
+      border-radius: 2px;
+      padding: var(--space-lg) var(--space-md) var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+
+    /* Small HUD-style caption sat above the chain */
+    .chain-caption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-md);
+      padding: 0 4px;
+    }
+
+    .chain-row {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    /*
+      Each processing stage.
+      flex: 1 1 120px lets the cards share the width evenly but wrap
+      onto a second line rather than squashing below 110px.
+    */
+    .chain-stage {
+      flex: 1 1 120px;
+      min-width: 110px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(212,172,80,0.22);
+      border-top: 2px solid var(--color-gold);
+      border-radius: 2px;
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    /* The bus stage is cyan so it reads as a different insert point */
+    .chain-stage--bus {
+      border-top-color: var(--color-cyan);
+      border-color: rgba(0,212,255,0.28);
+    }
+
+    /*
+      Offline stage: rendered to the clip rather than run as a live
+      insert. Dashed border + coral accent so it reads as a separate
+      tier from the real-time chain below it.
+    */
+    .chain-offline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-md);
+      border-bottom: 1px dashed rgba(255,255,255,0.08);
+    }
+
+    .chain-stage--offline {
+      flex: 0 1 190px;
+      border: 1px dashed rgba(224,122,95,0.4);
+      border-top: 2px solid var(--color-coral);
+    }
+
+    .chain-stage--offline .chain-name { color: var(--color-coral); }
+
+    .chain-offline-note {
+      flex: 1 1 200px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+    }
+
+    /* Downward connector between the offline tier and the insert chain */
+    .chain-tier-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    .chain-num {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.16em;
+    }
+
+    .chain-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+
+    .chain-stage--bus .chain-name { color: var(--color-cyan); }
+
+    .chain-fn {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.55;
+    }
+
+    /*
+      Arrow connector: a 1px horizontal line with a CSS triangle on the
+      right-hand end. align-self: center keeps it level with the middle
+      of the cards regardless of their height.
+    */
+    .chain-arrow {
+      align-self: center;
+      flex: 0 0 18px;
+      height: 1px;
+      background: var(--color-gold);
+      opacity: 0.45;
+      position: relative;
+    }
+
+    .chain-arrow::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -3px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 3.5px 0 3.5px 6px;
+      border-color: transparent transparent transparent var(--color-gold);
+    }
+
+    /* Footnote under the diagram explaining channel vs bus */
+    .chain-note {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.08em;
+      line-height: 1.7;
+      margin-top: var(--space-md);
+      padding: 0 4px;
+    }
+
+    /* Spacing between the prose blocks inside a detail section */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
+    /* Sub-heading inside a detail section */
+    .project-subhead {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: var(--space-lg) 0 8px;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -170,6 +351,27 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+
+      /*
+        Chain diagram on mobile: stack the stages vertically and turn
+        the connectors into short downward arrows.
+      */
+      .chain-row { flex-direction: column; }
+      .chain-stage { min-width: 0; }
+      .chain-arrow {
+        flex: 0 0 14px;
+        width: 1px;
+        height: 14px;
+        align-self: center;
+      }
+      .chain-arrow::after {
+        right: auto;
+        left: -3px;
+        top: auto;
+        bottom: -1px;
+        border-width: 6px 3.5px 0 3.5px;
+        border-color: var(--color-gold) transparent transparent transparent;
+      }
     }
   </style>
 </head>
@@ -223,12 +425,15 @@
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <iframe
+            src="https://www.youtube.com/embed/BNifjK2s0yU"
+            title="Mirror's Edge Catalyst — All Story Cinematic Cutscenes"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
         </div>
-        <p class="video-caption">// Mirror's Edge Catalyst &nbsp;&middot;&nbsp; Dialogue Editor · Cinematics</p>
+        <p class="video-caption">// Mirror's Edge Catalyst &nbsp;&middot;&nbsp; Full story cinematics &nbsp;&middot;&nbsp; Game capture courtesy of cakechieveables</p>
       </div>
 
       <!-- Body: text left, keyart right -->
@@ -257,16 +462,128 @@
             </div>
           </div>
 
-          <p class="project-desc">Dialogue Editor on Mirror's Edge Catalyst's cinematic sequences. The game's parkour-driven open-world narrative required precise editorial work across Faith's story cutscenes.</p>
+          <p class="project-desc">Dialogue editing across Catalyst's story cinematics and the location dialogue that plays out around the city. Roughly the same job in two very different shapes, and in both cases the deliverable was a Pro Tools session the mixer could open and start mixing.</p>
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+
+            <p class="project-detail-text">I cut dialogue on Catalyst on two fronts. The cinematics, which is Faith's story material and the scripted character beats, and the location dialogue that fires as you move through the city.</p>
+
+            <p class="project-detail-text">Cinematic work is the fussy end of it. Every line is locked to picture, so the edit has to sit exactly where the animation puts it, and any fix has to survive being watched as well as heard. Breaths, mouth noise, a chair creak two thirds of the way through the best take, a boom that drifts between lines. All of that gets dealt with before the mixer ever opens the session.</p>
+
+            <p class="project-detail-text">Location dialogue is a different problem entirely. Big line counts, delivered in batches, recorded across multiple sessions and not always in the same room. The job there is consistency. Every file has to land at a predictable level with a matched tone, so that when it goes into the game it behaves the same way wherever it triggers from and whatever it triggers next to.</p>
+
+            <p class="project-detail-text">Either way the target is the same. Hand over a session that's ready to mix, not one that needs repairing first.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+
+            <p class="project-detail-text">All of it was cut in Pro Tools. There are two tiers to it. Repair that gets rendered to the clip offline before anything else happens, and then the live insert chain that shapes what comes out the other side.</p>
+
+            <!-- ── SIGNAL CHAIN DIAGRAM ── -->
+            <div class="chain-diagram">
+              <p class="chain-caption">// Dialogue Processing Chain &nbsp;&middot;&nbsp; Signal Flow</p>
+
+              <!-- Tier 1: offline, rendered to the clip -->
+              <p class="chain-tier-label">// Offline &nbsp;&middot;&nbsp; Rendered to Clip</p>
+              <div class="chain-offline">
+                <div class="chain-stage chain-stage--offline">
+                  <span class="chain-num">00</span>
+                  <span class="chain-name">iZotope RX De-click</span>
+                  <span class="chain-fn">Offline Repair</span>
+                </div>
+                <p class="chain-offline-note">Not an insert. Processed onto the item file before it reaches the chain, so every stage below is working on already-repaired audio.</p>
+              </div>
+
+              <!-- Tier 2: real-time inserts -->
+              <p class="chain-tier-label">// Inserts &nbsp;&middot;&nbsp; Dialogue Channel &rarr; Bus</p>
+              <div class="chain-row">
+
+                <div class="chain-stage">
+                  <span class="chain-num">01</span>
+                  <span class="chain-name">Denoise</span>
+                  <span class="chain-fn">Broadband Pass</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">02</span>
+                  <span class="chain-name">Waves R Comp</span>
+                  <span class="chain-fn">Level Control</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">03</span>
+                  <span class="chain-name">Waves De-Esser</span>
+                  <span class="chain-fn">Sibilance</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">04</span>
+                  <span class="chain-name">FabFilter Pro-Q</span>
+                  <span class="chain-fn">Corrective EQ</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">05</span>
+                  <span class="chain-name">Waves WNS</span>
+                  <span class="chain-fn">Noise Suppressor</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage">
+                  <span class="chain-num">06</span>
+                  <span class="chain-name">McDSP ML4000</span>
+                  <span class="chain-fn">Peak Limiting</span>
+                </div>
+
+                <div class="chain-arrow" aria-hidden="true"></div>
+
+                <div class="chain-stage chain-stage--bus">
+                  <span class="chain-num">07</span>
+                  <span class="chain-name">Avid Pro Compressor</span>
+                  <span class="chain-fn">Dialogue Bus</span>
+                </div>
+
+              </div>
+
+              <p class="chain-note">Stage 00 is offline, rendered to the clip. Stages 01 to 06 are inserts on the dialogue channel. Stage 07 sits across the dialogue bus, treating the whole stem rather than individual lines.</p>
+            </div>
+
+            <p class="project-subhead">Why the order matters</p>
+
+            <p class="project-detail-text">The de-click happens offline, on the item file, before any of it. Clicks, ticks and crackle are faults baked into a specific take. They aren't a decision you want to keep revisiting, so you fix them once at source and render it in. Leaving a de-clicker as a live insert means every pass recomputes the same repair on the same file forever, and it clutters a chain that should only hold things you actually want to keep adjusting.</p>
+
+            <p class="project-detail-text">Then the denoise, and that goes before the compressor. A compressor pulls the loud and quiet parts of a signal closer together, then make-up gain lifts the whole lot back up. Room tone, hiss and air handling noise all live in the quiet parts. Compress first and you aren't just leaving that noise in, you're actively hauling it up in the gaps between words and then modulating it every time the actor speaks. That's where the breathing, pumping noise floor comes from, and nothing downstream really fixes it. Clean it while the floor is still steady and the compressor never knows it was there.</p>
+
+            <p class="project-detail-text">De-essing sits after the compressor rather than before it, and that catches people out. A compressor mostly reacts to the body of the voice, which means sibilance slips underneath it and then gets lifted by the make-up gain along with everything else. Tame the esses first and the compressor just hands them straight back to you. Let the level settle, then deal with what's left.</p>
+
+            <p class="project-detail-text">Pro-Q comes next, once the level and the top end are behaving. Carve a resonance too early and you're shaping something that's still moving around under you. By this point the voice is consistent enough that an EQ decision made on one line holds up across the batch.</p>
+
+            <p class="project-subhead">Two passes at the noise, not one</p>
+
+            <p class="project-detail-text">WNS goes late, right on the edge before the limiter, and it's doing a different job from the first denoise. The pass up front is deliberately gentle. Hit a raw take hard with suppression and you pull the life out of it, so the aim early on is to get the floor down far enough that the compressor behaves, and no further.</p>
+
+            <p class="project-detail-text">That leaves something behind, and the compressor then lifts it. So WNS gets a second, targeted go at the residue at a point where the signal is already level and predictable. That matters more than it sounds. A suppressor works off per-band thresholds, and thresholds only behave consistently when the material arriving at them is consistent. Put it first and you're constantly chasing it from line to line. Put it after the compressor and the de-esser and one setting holds across a whole delivery.</p>
+
+            <p class="project-detail-text">ML4000 then goes last on the channel, catching plosives and the odd overshoot so nothing reaches the bus with a rogue peak on it. The bus compressor does the gluing, and that's the only stage where I'm treating the dialogue as one thing rather than as a few thousand separate files.</p>
+
+            <p class="project-subhead">What WNS is actually doing</p>
+
+            <p class="project-detail-text">WNS is a broadband noise suppressor rather than a noise-print tool. It doesn't take a fingerprint of the room and subtract it, which is what RX or X-Noise do. It splits the signal into six frequency bands and watches the level inside each one continuously, pulling a band down when the signal in it drops towards the noise floor and opening it back up when there's speech present. Think six very fast, very well behaved expanders working per band rather than a spectral repair tool.</p>
+
+            <p class="project-detail-text">That distinction is exactly why it earns the late slot. A print-based denoiser wants a fresh fingerprint every time the room tone changes, and on a game with line counts in the thousands recorded over months across more than one studio, that's hours of your life you don't get back. WNS tracks the floor continuously instead, so it copes with whatever the earlier stages left behind without being re-taught on every batch.</p>
+
+            <p class="project-detail-text">The bell curve is the part worth explaining. Each band has its own threshold and range, and the display lets you shape how hard the suppression works across the spectrum instead of applying it flat. Flat suppression is what makes dialogue sound dead. You strip the air off the top and the body out of the bottom along with the noise, and the voice ends up thin and slightly underwater. Pulling a bell weights the suppression towards the region actually carrying the problem, usually the mid-upper area where hiss and air conditioning sit, and leaves the bands carrying the weight of the voice and the top end close to untouched. You take the noise out of the part of the spectrum where it's audible and leave alone the parts that make the voice sound like a person in a room.</p>
           </div>
 
           <div class="cta" style="padding:0">
