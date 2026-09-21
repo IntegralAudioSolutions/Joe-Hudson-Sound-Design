@@ -351,13 +351,51 @@
 
   <!-- Screenshot / character ribbon -->
   <section class="ribbon-section" aria-label="Project screenshots">
-    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Battlefield 1</p>
+    <p class="ribbon-label">// Game Stills &nbsp;&middot;&nbsp; Battlefield 1</p>
     <div class="ribbon-track-wrap">
+      <!--
+        SEAMLESS SCROLL LOOP
+        The track slides from translateX(0) to translateX(-50%), so it
+        moves left by exactly the width of Set 1 before snapping back.
+        Set 1 therefore has to be at least as wide as the visitor's
+        screen or a gap shows as it wraps.
+
+        Each image takes 292px (284px wide at 160px tall, plus the 8px
+        gap). Five stills is only 1460px, so Set 1 runs them twice for
+        2920px and Set 2 duplicates that. Same five files throughout,
+        so they cache and the extra tags cost nothing to download.
+
+        With nine or more stills, drop the second pass and go back to a
+        single Set 1 plus its duplicate.
+      -->
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
-        <!-- Set 1 -->
-        <img class="ribbon-img" src="../../assets/images/bf1-keyart.png" alt="Battlefield 1 key art" loading="lazy" role="listitem" />
-        <!-- Set 2 — duplicate for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/bf1-keyart.png" alt="Battlefield 1 key art" loading="lazy" role="listitem" aria-hidden="true" />
+
+        <!-- Set 1 — pass 1 of 2 -->
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_NoMansLand.webp" alt="Soldiers advancing through fog and ruins across no man's land" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Tank.webp" alt="A light tank dug in behind barbed wire in an alpine valley" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Melee.webp" alt="Close-quarters melee between German and British infantry" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_DesertAdvance.webp" alt="A British soldier advancing with a rifle across desert dunes" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Cinematic.webp" alt="Two soldiers in a story cinematic, subtitled &quot;You have the luck of the devil, Townsend&quot;" loading="lazy" role="listitem" />
+
+        <!-- Set 1 — pass 2 of 2 -->
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_NoMansLand.webp" alt="Soldiers advancing through fog and ruins across no man's land" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Tank.webp" alt="A light tank dug in behind barbed wire in an alpine valley" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Melee.webp" alt="Close-quarters melee between German and British infantry" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_DesertAdvance.webp" alt="A British soldier advancing with a rifle across desert dunes" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Cinematic.webp" alt="Two soldiers in a story cinematic, subtitled &quot;You have the luck of the devil, Townsend&quot;" loading="lazy" role="listitem" aria-hidden="true" />
+
+        <!-- Set 2 — exact duplicate of Set 1 for the seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_NoMansLand.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Tank.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Melee.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_DesertAdvance.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Cinematic.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_NoMansLand.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Tank.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Melee.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_DesertAdvance.webp" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Battlefield1/BF1_Cinematic.webp" alt="" loading="lazy" aria-hidden="true" />
+
       </div>
     </div>
   </section>
