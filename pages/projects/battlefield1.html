@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Battlefield 1 — Joe Hudson</title>
-  <meta name="description" content="Supervising Dialogue Editor on Battlefield 1 cinematics — DICE / EA / Sweet Justice Sound Group." />
+  <meta name="description" content="Supervising Dialogue Editor on Battlefield 1 cinematics, plus sound design for the Battlepack opening sequences. Pro Tools editorial, lavalier mocap dialogue repair, RX De-rustle. DICE / EA / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -158,6 +158,27 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /*
+      Extra full-width section below the main body grid.
+      Used for the Battlepack work, which is a separate credit from the
+      cinematics and gets its own heading, copy and video rather than
+      being squeezed into the narrow text column.
+    */
+    .project-extra {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    /* Keeps the extra section's prose to a readable line length */
+    .project-extra .project-detail-text { max-width: 780px; }
+
+    /* Spacing between consecutive paragraphs in a detail block */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -223,12 +244,19 @@
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <!--
+            TEMP EMBED. Swap the ID below for Joe's own PlayStation
+            render when it's uploaded. Nothing else needs changing.
+          -->
+          <iframe
+            src="https://www.youtube.com/embed/DnzeY5zlx4s"
+            title="Battlefield 1 — All Cutscenes"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
         </div>
-        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Supervising Dialogue Editor · Cinematics</p>
+        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Full campaign cinematics &nbsp;&middot;&nbsp; Game capture courtesy of Gamer's Little Playground</p>
       </div>
 
       <!-- Body: text left, keyart right -->
@@ -257,16 +285,26 @@
             </div>
           </div>
 
-          <p class="project-desc">Supervising Dialogue Editor on Battlefield 1's cinematic sequences. Set during World War I, the game's War Stories anthology demanded careful dialogue editorial across multiple languages and performance styles.</p>
+          <p class="project-desc">Supervising Dialogue Editor on Battlefield 1's cinematics, and sound design on the Battlepack opening sequences. Cut in Pro Tools and handed over as sessions ready to mix.</p>
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+
+            <p class="project-detail-text">Battlefield 1 tells its campaign as an anthology rather than one continuous story. Instead of a single cast and a single through line, you get a set of self-contained war stories, each with its own characters, its own setting and its own mix of languages and accents.</p>
+
+            <p class="project-detail-text">That changes the job. On a game with one protagonist you learn one voice and one recording setup and you settle into it. Here you're resetting every few scenes, and consistency has to hold within each story rather than across the whole campaign. A line from one war story sitting near a line from another doesn't need to match. A line that doesn't match the one before it in the same scene very much does.</p>
+
+            <p class="project-detail-text">Supervising rather than only editing means being the one who decides what finished looks like, and making sure everything arriving at the mix has been held to the same standard whichever session it came out of.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+
+            <p class="project-detail-text">Cut in Pro Tools, prepped and handed over ready for mix down.</p>
+
+            <p class="project-detail-text">The wrinkle on this one was where the dialogue came from. A lot of it was captured on lapel mics during mocap, which is a very different starting point from a booth. A lavalier is pinned to costume, it moves with the performer, and on a mocap stage the performer is doing a great deal of moving. So you inherit clothing rustle, the mic catching the suit, footsteps coming up through the body, and a room that was never built for recording in the first place.</p>
+
+            <p class="project-detail-text">That meant more repair up front than a studio session needs. De-click and De-rustle offline on the clips, then denoising, before anything else got near it. De-rustle is built for exactly this problem, lavalier clothing noise, and it handles it better than a general denoiser because it's hunting for movement artefacts rather than a steady noise floor. Get that out of the way and the rest of the chain is much the same as any dialogue job. Clean it, level it, make it consistent, hand it on.</p>
           </div>
 
           <div class="cta" style="padding:0">
@@ -281,6 +319,32 @@
         </div>
 
       </div>
+
+      <!-- ── BATTLEPACKS — separate credit, full width below the grid ── -->
+      <section class="project-extra" aria-label="Battlepack opening sequences">
+
+        <p class="project-section-label">// Battlepack Opening Sequences</p>
+
+        <p class="project-detail-text">Separate from the cinematic work, I did the sound design for the Battlepack opening sequences. These are the reward crates players open to reveal weapon skins and other cosmetics.</p>
+
+        <p class="project-detail-text">The sequence has a clear shape to it. The pack whooshes in and thumps down onto the ground, which is the beat that has to carry the weight. Then the padlock, which gets shot and chipped away at rather than simply popping open. Then the cut to the next screen, a small mechanical reload, and the strike through on the weapon image as the item registers as yours. The same sequence carries across the Battlepack tiers.</p>
+
+        <p class="project-detail-text">It's a different discipline from dialogue editorial, and the job there is timing and weight more than anything else. Every beat is locked to an animation that plays identically every time, so there's no room to be approximate about where something lands. The player is also going to trigger the whole thing hundreds of times across the life of the game, which sets the real constraint. It has to hit hard enough to feel like a reward on the first open and still be something you don't mind hearing on the two hundredth. The thump is the one that decides it. Sell the mass without letting the low end smear into something that wears you down.</p>
+
+        <div class="video-wrapper">
+          <!--
+            Placeholder until Joe captures the Battlepack opening footage
+            across all rarity tiers. Replace this whole placeholder div
+            with an iframe, same pattern as the cinematics embed above.
+          -->
+          <div class="video-placeholder">
+            <div class="video-play"></div>
+            <p class="video-label">Battlepack openings — footage to be added</p>
+          </div>
+        </div>
+        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Battlepack opening sequences &nbsp;&middot;&nbsp; All rarity tiers</p>
+
+      </section>
 
     </main>
   </div>
