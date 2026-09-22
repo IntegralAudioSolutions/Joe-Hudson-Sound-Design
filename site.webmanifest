@@ -1,0 +1,14 @@
+{
+  "name": "Joe Hudson \u2014 Senior Technical Sound Designer",
+  "short_name": "Joe Hudson",
+  "description": "UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+  "icons": [
+    { "src": "assets/images/favicon-32x32.png",    "sizes": "32x32",   "type": "image/png" },
+    { "src": "assets/images/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/images/icon-512.png",         "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#080a0f",
+  "theme_color": "#080a0f"
+}
