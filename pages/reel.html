@@ -19,6 +19,102 @@
   <link rel="manifest" href="../site.webmanifest" />
   <!-- Tints the browser chrome on mobile to match the page background -->
   <meta name="theme-color" content="#080a0f" />
+  <!-- Open Graph image + Twitter card (the og:title/description above already existed) -->
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-reel.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Reel — Joe Hudson · Sound Designer" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Reel — Joe Hudson · Sound Designer" />
+  <meta name="twitter:description"  content="Demo reel — UE5 world-building audio, Fortnite, AAA SFX design." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-reel.jpg" />
+
+  <!-- Structured data: tells Google who you are and what each credit is.
+       Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Senior Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Senior Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Senior Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/reel.html",
+      "url": "https://joehudson.co.uk/pages/reel.html",
+      "name": "Reel — Joe Hudson · Sound Designer",
+      "description": "Demo reel — UE5 world-building audio, Fortnite, AAA SFX design.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-reel.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Reel"
+          }
+        ]
+      },
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+  </script>
+
 
 
   <title>Reel — Joe Hudson · Senior Technical Sound Designer</title>
@@ -853,8 +949,7 @@
     <div class="footer-inner">
       <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
       <nav class="footer-links" aria-label="Social and contact links">
-        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="contact.html" class="footer-link">Contact</a>
       </nav>
     </div>

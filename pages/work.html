@@ -19,6 +19,307 @@
   <link rel="manifest" href="../site.webmanifest" />
   <!-- Tints the browser chrome on mobile to match the page background -->
   <meta name="theme-color" content="#080a0f" />
+  <!-- Open Graph image + Twitter card (the og:title/description above already existed) -->
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-work.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Work — Joe Hudson · Sound Designer" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Work — Joe Hudson · Sound Designer" />
+  <meta name="twitter:description"  content="12 years of AAA game audio. Fortnite, Epic Games, Sweet Justice Sound Group." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-work.jpg" />
+
+  <!-- Structured data: tells Google who you are and what each credit is.
+       Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Senior Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Senior Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Senior Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/work.html",
+      "url": "https://joehudson.co.uk/pages/work.html",
+      "name": "Work — Joe Hudson · Sound Designer",
+      "description": "12 years of AAA game audio. Fortnite, Epic Games, Sweet Justice Sound Group.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-work.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work"
+          }
+        ]
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "ItemList",
+      "name": "Selected game audio credits",
+      "numberOfItems": 33,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Ballistic (UEFN)",
+          "url": "https://joehudson.co.uk/pages/projects/ballistic.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Fortnite — Galactic Battle",
+          "url": "https://joehudson.co.uk/pages/projects/galactic-battle.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Fortnite — The Simpsons Season",
+          "url": "https://joehudson.co.uk/pages/projects/simpsons.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Fortnite C5S2 — Myths & Mortals",
+          "url": "https://joehudson.co.uk/pages/projects/myths-and-mortals.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Fortnite C5S3 — Wrecked",
+          "url": "https://joehudson.co.uk/pages/projects/wrecked.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Fortnite C6S1 — Oni Hunters",
+          "url": "https://joehudson.co.uk/pages/projects/hunters.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Fortnite — Chapter 5: Absolute Doom",
+          "url": "https://joehudson.co.uk/pages/projects/absolute-doom.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Fortnite C4S1 — Lawless",
+          "url": "https://joehudson.co.uk/pages/projects/lawless.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Fortnite C4S2 — Mega",
+          "url": "https://joehudson.co.uk/pages/projects/mega.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "Fortnite C4S3 — Wilds",
+          "url": "https://joehudson.co.uk/pages/projects/wilds.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "name": "Fortnite C5S1 — Underground",
+          "url": "https://joehudson.co.uk/pages/projects/underground.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "name": "Fortnite OG",
+          "url": "https://joehudson.co.uk/pages/projects/fortnite-og.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "name": "Fortnite C3S2 — Resistance",
+          "url": "https://joehudson.co.uk/pages/projects/resistance.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "name": "Fortnite C3S3 — Vibin'",
+          "url": "https://joehudson.co.uk/pages/projects/vibin.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "name": "Fortnite C3S4 — Paradise",
+          "url": "https://joehudson.co.uk/pages/projects/paradise.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "name": "Fortnite — Chapter 4 Launch",
+          "url": "https://joehudson.co.uk/pages/projects/chapter4-launch.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "name": "Fortnite C2S7 — Invasion",
+          "url": "https://joehudson.co.uk/pages/projects/invasion.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 18,
+          "name": "Fortnite C2S8 — Cubed",
+          "url": "https://joehudson.co.uk/pages/projects/cubed.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 19,
+          "name": "The Ascent",
+          "url": "https://joehudson.co.uk/pages/projects/ascent.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 20,
+          "name": "Fortnite C2S2",
+          "url": "https://joehudson.co.uk/pages/projects/c2s2.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 21,
+          "name": "Fortnite C2S4 — Fortnitemares 2020",
+          "url": "https://joehudson.co.uk/pages/projects/fortnitemares.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 22,
+          "name": "Half-Life: Alyx",
+          "url": "https://joehudson.co.uk/pages/projects/alyx.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 23,
+          "name": "Fortnite Battle Royale",
+          "url": "https://joehudson.co.uk/pages/projects/fortnite-br.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 24,
+          "name": "Mortal Kombat 11",
+          "url": "https://joehudson.co.uk/pages/projects/mortal-kombat-11.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 25,
+          "name": "Crisis: Planet of the Apes VR",
+          "url": "https://joehudson.co.uk/pages/projects/planet-of-the-apes.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 26,
+          "name": "Marvel Powers United VR",
+          "url": "https://joehudson.co.uk/pages/projects/marvel-powers-vr.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 27,
+          "name": "Smoke and Sacrifice",
+          "url": "https://joehudson.co.uk/pages/projects/smoke-and-sacrifice.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 28,
+          "name": "Cuphead",
+          "url": "https://joehudson.co.uk/pages/projects/cuphead.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 29,
+          "name": "Fortnite Save the World",
+          "url": "https://joehudson.co.uk/pages/projects/save-the-world.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 30,
+          "name": "Injustice 2",
+          "url": "https://joehudson.co.uk/pages/projects/injustice2.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 31,
+          "name": "Battlefield 1",
+          "url": "https://joehudson.co.uk/pages/projects/battlefield1.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 32,
+          "name": "Mirror's Edge Catalyst",
+          "url": "https://joehudson.co.uk/pages/projects/mirrorsedge.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 33,
+          "name": "Paragon",
+          "url": "https://joehudson.co.uk/pages/projects/paragon.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
 
 
   <title>Work — Joe Hudson · Senior Technical Sound Designer</title>
@@ -611,7 +912,9 @@
           </div>
 
           <div class="project-body">
-            <h2 class="project-title">Fortnite Battle Royale — Map Audio</h2>
+            <h2 class="project-title">
+              <a href="projects/fortnite-br.html" class="project-title-link">Fortnite Battle Royale — Map Audio &rarr;</a>
+            </h2>
             <p class="project-role">Senior Audio Designer</p>
             <p class="project-desc">
               Responsible for the full audio pipeline for Fortnite Battle Royale map environments —
@@ -714,34 +1017,939 @@
           Change project-entry--[colour] to: gold | cyan | purp | coral
           Change data-tags to any combination of: ue5 sfx implementation aaa
         -->
-        <article class="project-entry project-entry--purp"
-                 data-tags="sfx aaa"
-                 aria-label="Additional credit placeholder">
+
+
+        <!-- ── Ballistic (UEFN) ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Ballistic (UEFN)">
 
           <div class="project-header">
             <div class="project-client">
-              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-purp-light)" aria-hidden="true"></div>
-              Studio / Client Name
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Epic Games
             </div>
-            <span class="project-date">Year — Year</span>
+            <span class="project-date">Upcoming</span>
           </div>
 
           <div class="project-body">
-            <h2 class="project-title" style="color:var(--color-text-dim)">Project Title — To Be Added</h2>
-            <p class="project-role" style="color:#2a3a4a">Role · Platform</p>
-            <p class="project-desc" style="color:#2a3a4a">
-              Add your project description here. What did you do? What was the scope?
-              What made this project technically interesting?
+            <h2 class="project-title">
+              <a href="projects/ballistic.html" class="project-title-link">Ballistic (UEFN) &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              To be added.
             </p>
 
             <ul class="tags" aria-label="Skills and tools">
-              <li class="tag tag--purp">Placeholder</li>
+              <li class="tag tag--gold">AAA</li>
             </ul>
 
           </div>
         </article>
 
+        <!-- ── Fortnite — Galactic Battle ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite — Galactic Battle">
 
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2025</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/galactic-battle.html" class="project-title-link">Fortnite — Galactic Battle &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Ambient audio on Fortnite&#x27;s Galactic Battle season. A set of locations I owned outright, plus a wider pass acr
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite — The Simpsons Season ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite — The Simpsons Season">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2025</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/simpsons.html" class="project-title-link">Fortnite — The Simpsons Season &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Audio design for Fortnite&#x27;s Simpsons collaboration season, bringing Springfield&#x27;s iconic locations and charact
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C5S2 — Myths & Mortals ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C5S2 — Myths &amp; Mortals">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2024</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/myths-and-mortals.html" class="project-title-link">Fortnite C5S2 — Myths &amp; Mortals &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 5 Season 2, themed around Greek mythology. Ancient ruins, Olympian POIs,
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C5S3 — Wrecked ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C5S3 — Wrecked">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2024</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/wrecked.html" class="project-title-link">Fortnite C5S3 — Wrecked &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 5 Season 3 — Wrecked. A post-apocalyptic vehicle-combat themed season wi
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C4S1 — Lawless ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C4S1 — Lawless">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2023</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/lawless.html" class="project-title-link">Fortnite C4S1 — Lawless &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 4 Season 1 — Lawless.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C4S2 — Mega ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C4S2 — Mega">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2023</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/mega.html" class="project-title-link">Fortnite C4S2 — Mega &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 4 Season 2 — Mega. A cyberpunk aesthetic introduced neon-lit city POIs, 
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C4S3 — Wilds ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C4S3 — Wilds">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2023</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/wilds.html" class="project-title-link">Fortnite C4S3 — Wilds &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 4 Season 3 — Wilds. A tropical jungle biome dominated this season, requi
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C5S1 — Underground ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C5S1 — Underground">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2023 – 2024</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/underground.html" class="project-title-link">Fortnite C5S1 — Underground &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 5 Season 1 — Underground. A brand-new island introduced a subterranean b
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite OG ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation ue5"
+                 aria-label="Fortnite OG">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2023</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/fortnite-og.html" class="project-title-link">Fortnite OG &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Level Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Fortnite OG brought back the original Chapter 1 island for a limited-time event. Audio work focused on faithfu
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C3S2 — Resistance ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C3S2 — Resistance">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2022</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/resistance.html" class="project-title-link">Fortnite C3S2 — Resistance &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 3 Season 2 — Resistance.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C3S3 — Vibin' ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C3S3 — Vibin&#x27;">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2022</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/vibin.html" class="project-title-link">Fortnite C3S3 — Vibin&#x27; &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 3 Season 3 — Vibin&#x27;.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C3S4 — Paradise ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C3S4 — Paradise">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2022</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/paradise.html" class="project-title-link">Fortnite C3S4 — Paradise &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 3 Season 4 — Paradise.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite — Chapter 4 Launch ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite — Chapter 4 Launch">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2022</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/chapter4-launch.html" class="project-title-link">Fortnite — Chapter 4 Launch &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for the launch of Fortnite Chapter 4 — a new island with new biomes and audio systems.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C2S7 — Invasion ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C2S7 — Invasion">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2021</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/invasion.html" class="project-title-link">Fortnite C2S7 — Invasion &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 2 Season 7 — Invasion.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C2S8 — Cubed ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C2S8 — Cubed">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2021</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/cubed.html" class="project-title-link">Fortnite C2S8 — Cubed &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 2 Season 8 — Cubed.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── The Ascent ── -->
+        <article class="project-entry project-entry--coral"
+                 data-tags="implementation sfx"
+                 aria-label="The Ascent">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-coral)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Neon Giant
+            </div>
+            <span class="project-date">2021</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/ascent.html" class="project-title-link">The Ascent &rarr;</a>
+            </h2>
+            <p class="project-role">Technical Sound Designer · PC · Xbox</p>
+            <p class="project-desc">
+              Technical Sound Designer on The Ascent, Neon Giant&#x27;s cyberpunk twin-stick RPG. Dense, layered environments acr
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">Technical</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C2S2 ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C2S2">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2020</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/c2s2.html" class="project-title-link">Fortnite C2S2 &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 2 Season 2.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite C2S4 — Fortnitemares 2020 ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite C2S4 — Fortnitemares 2020">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Epic Games
+            </div>
+            <span class="project-date">2020</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/fortnitemares.html" class="project-title-link">Fortnite C2S4 — Fortnitemares 2020 &rarr;</a>
+            </h2>
+            <p class="project-role">Audio Designer · PC · Console · Mobile</p>
+            <p class="project-desc">
+              Map audio design for Fortnite Chapter 2 Season 4 — Fortnitemares 2020.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Half-Life: Alyx ── -->
+        <article class="project-entry project-entry--cyan"
+                 data-tags="aaa sfx"
+                 aria-label="Half-Life: Alyx">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-cyan)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Valve
+            </div>
+            <span class="project-date">2020</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/alyx.html" class="project-title-link">Half-Life: Alyx &rarr;</a>
+            </h2>
+            <p class="project-role">Supervising Foley Editor · PC VR</p>
+            <p class="project-desc">
+              Supervising Foley Editor on Valve&#x27;s landmark VR title. Half-Life: Alyx set a new benchmark for immersive audio
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Foley</li>
+              <li class="tag tag--coral">VR</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Mortal Kombat 11 ── -->
+        <article class="project-entry project-entry--purp"
+                 data-tags="aaa sfx"
+                 aria-label="Mortal Kombat 11">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-purp-light)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / NetherRealm Studios / WB Games
+            </div>
+            <span class="project-date">2019</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/mortal-kombat-11.html" class="project-title-link">Mortal Kombat 11 &rarr;</a>
+            </h2>
+            <p class="project-role">Dialogue Supervisor · PC · PS4 · Xbox One · Nintendo Switch</p>
+            <p class="project-desc">
+              Dialogue Supervisor on Mortal Kombat 11, NetherRealm&#x27;s flagship fighting title. An extensive roster of charact
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Dialogue</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Crisis: Planet of the Apes VR ── -->
+        <article class="project-entry project-entry--coral"
+                 data-tags="implementation sfx"
+                 aria-label="Crisis: Planet of the Apes VR">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-coral)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Imaginati Studios
+            </div>
+            <span class="project-date">2018</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/planet-of-the-apes.html" class="project-title-link">Crisis: Planet of the Apes VR &rarr;</a>
+            </h2>
+            <p class="project-role">Technical Sound Designer · PlayStation VR</p>
+            <p class="project-desc">
+              Technical Sound Designer on Crisis: Planet of the Apes VR. An immersive first-person VR experience set in the 
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">Technical</li>
+              <li class="tag tag--coral">VR</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Marvel Powers United VR ── -->
+        <article class="project-entry project-entry--coral"
+                 data-tags="implementation sfx"
+                 aria-label="Marvel Powers United VR">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-coral)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Sanzuru Games
+            </div>
+            <span class="project-date">2018</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/marvel-powers-vr.html" class="project-title-link">Marvel Powers United VR &rarr;</a>
+            </h2>
+            <p class="project-role">Technical Sound Designer · Oculus Rift</p>
+            <p class="project-desc">
+              Technical Sound Designer on Marvel Powers United VR, a co-op VR brawler featuring a roster of Marvel superhero
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">Technical</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Smoke and Sacrifice ── -->
+        <article class="project-entry project-entry--coral"
+                 data-tags="implementation sfx"
+                 aria-label="Smoke and Sacrifice">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-coral)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Solar Sail Games
+            </div>
+            <span class="project-date">2018</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/smoke-and-sacrifice.html" class="project-title-link">Smoke and Sacrifice &rarr;</a>
+            </h2>
+            <p class="project-role">SFX &amp; Implementation · Nintendo Switch · PC</p>
+            <p class="project-desc">
+              SFX design and implementation on Smoke and Sacrifice, an indie RPG for Nintendo Switch. A hand-painted art sty
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--gold">SFX Design</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Cuphead ── -->
+        <article class="project-entry project-entry--coral"
+                 data-tags="sfx"
+                 aria-label="Cuphead">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-coral)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / Studio MDHR
+            </div>
+            <span class="project-date">2017</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/cuphead.html" class="project-title-link">Cuphead &rarr;</a>
+            </h2>
+            <p class="project-role">Sound Designer · PC · Console</p>
+            <p class="project-desc">
+              Sound design for Cuphead&#x27;s DLC and ongoing updates. The game&#x27;s 1930s rubber-hose animation aesthetic demanded 
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--gold">SFX Design</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Fortnite Save the World ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx ue5"
+                 aria-label="Fortnite Save the World">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Epic Games
+            </div>
+            <span class="project-date">2017 – 2019</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/save-the-world.html" class="project-title-link">Fortnite Save the World &rarr;</a>
+            </h2>
+            <p class="project-role">Technical Sound Designer · PC · Console</p>
+            <p class="project-desc">
+              Technical Sound Designer on Fortnite Save the World, the co-operative PvE mode. Responsible for audio implemen
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--cyan">UE5</li>
+              <li class="tag tag--cyan">MetaSounds</li>
+              <li class="tag tag--gold">Fortnite</li>
+              <li class="tag tag--cyan">Technical</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Injustice 2 ── -->
+        <article class="project-entry project-entry--purp"
+                 data-tags="aaa sfx"
+                 aria-label="Injustice 2">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-purp-light)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / NetherRealm Studios / WB Games
+            </div>
+            <span class="project-date">2017</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/injustice2.html" class="project-title-link">Injustice 2 &rarr;</a>
+            </h2>
+            <p class="project-role">Supervising Foley Editor · PC · PS4 · Xbox One</p>
+            <p class="project-desc">
+              To be added.
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Foley</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Battlefield 1 ── -->
+        <article class="project-entry project-entry--cyan"
+                 data-tags="aaa sfx"
+                 aria-label="Battlefield 1">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-cyan)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / DICE / EA
+            </div>
+            <span class="project-date">2016</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/battlefield1.html" class="project-title-link">Battlefield 1 &rarr;</a>
+            </h2>
+            <p class="project-role">Supervising Dialogue Editor · Cinematics · PC · PS4 · Xbox One</p>
+            <p class="project-desc">
+              Supervising Dialogue Editor on Battlefield 1&#x27;s cinematics, and sound design on the Battlepack opening sequence
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Dialogue</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Mirror's Edge Catalyst ── -->
+        <article class="project-entry project-entry--cyan"
+                 data-tags="aaa sfx"
+                 aria-label="Mirror&#x27;s Edge Catalyst">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-cyan)" aria-hidden="true"></div>
+              Sweet Justice Sound Group / DICE / EA
+            </div>
+            <span class="project-date">2016</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/mirrorsedge.html" class="project-title-link">Mirror&#x27;s Edge Catalyst &rarr;</a>
+            </h2>
+            <p class="project-role">Dialogue Editor · Cinematics · PC · PS4 · Xbox One</p>
+            <p class="project-desc">
+              Dialogue editing across Catalyst&#x27;s story cinematics and the location dialogue that plays out around the city. 
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--purp">Dialogue</li>
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
+
+        <!-- ── Paragon ── -->
+        <article class="project-entry project-entry--gold"
+                 data-tags="aaa implementation sfx"
+                 aria-label="Paragon">
+
+          <div class="project-header">
+            <div class="project-client">
+              <div style="width:5px;height:5px;border-radius:50%;background:var(--color-gold)" aria-hidden="true"></div>
+              Epic Games
+            </div>
+            <span class="project-date">2016 – 2018</span>
+          </div>
+
+          <div class="project-body">
+            <h2 class="project-title">
+              <a href="projects/paragon.html" class="project-title-link">Paragon &rarr;</a>
+            </h2>
+            <p class="project-role">UI Sound Designer · PC · PS4</p>
+            <p class="project-desc">
+              UI Sound Designer on Paragon, Epic Games&#x27; MOBA. Responsible for the design and implementation of the game&#x27;s UI
+            </p>
+
+            <ul class="tags" aria-label="Skills and tools">
+              <li class="tag tag--gold">AAA</li>
+            </ul>
+
+          </div>
+        </article>
       </div>
       <!-- /project-list -->
 
@@ -808,8 +2016,7 @@
     <div class="footer-inner">
       <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
       <nav class="footer-links" aria-label="Social and contact links">
-        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="contact.html" class="footer-link">Contact</a>
       </nav>
     </div>
