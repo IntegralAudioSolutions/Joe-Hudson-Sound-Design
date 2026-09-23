@@ -165,7 +165,7 @@
 
 
   <title>Fortnite — Chapter 5: Absolute Doom — Joe Hudson</title>
-  <meta name="description" content="Map audio design for Fortnite Chapter 5 Season 4 — Absolute Doom. Doctor Doom's arrival shaped the entire environmental audio palette." />
+  <meta name="description" content="Environmental audio on Fortnite Chapter 5 Season 4, Absolute Doom. Bespoke attic ambiences, occluded wind, indoors submix routing across Castle Doom's tower doorways, and attenuation focus tuning on the crow flock. Epic Games / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -271,6 +271,19 @@
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
     }
     .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+
+    /* Spacing between consecutive paragraphs in a detail block */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
+    /* Sub-heading inside a detail section */
+    .project-subhead {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: var(--space-lg) 0 8px;
+    }
     .project-keyart {
       width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
       border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
@@ -426,16 +439,34 @@
             </div>
           </div>
 
-          <p class="project-desc">Map audio design for Fortnite Chapter 5 Season 4. This season brought Marvel's Doctor Doom to the Battle Royale island — a dark, dramatic aesthetic that informed every aspect of the environmental audio design.</p>
+          <p class="project-desc">Environmental audio for Fortnite Chapter 5 Season 4, the season that brought Doctor Doom to the island. Castle Doom is a stack of enclosed spaces sitting under a permanent storm, so most of the work was in the volumes and the thresholds between them.</p>
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+
+            <p class="project-detail-text">Environmental audio across Castle Doom and its surrounds. The volume work on this one went deeper than usual, because the castle is a stack of enclosed spaces sitting directly underneath a storm, and almost every problem on it came down to how one space gives way to the next.</p>
+
+            <p class="project-subhead">Attics and interiors</p>
+
+            <p class="project-detail-text">The attic spaces got bespoke ambiences rather than a shared interior bed. The point was to hear the wind occluded from inside, present enough that you know the storm is still out there, muffled enough that you know you are not in it. Randomised wood creaks sit on top, so the roof keeps moving without settling into a pattern you can predict.</p>
+
+            <p class="project-detail-text">The interiors had to carry Doom's character without overplaying it. Foreboding, not frightening, since the audience for this is not a horror audience. The answer was metal shifting tones tucked in and shaped around low choir drones and moans, which reads as dread rather than threat. Underneath that a 2D quad ambience gives the rooms a rumbling foundation while staying open and airy, keeping the top end that makes a space sound like a real volume rather than a closed box.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+
+            <p class="project-subhead">The main tower</p>
+
+            <p class="project-detail-text">The tower was the technical one. Four door entrances open onto a wooden walkway, so each doorway is a point where outside has to leak inside by the right amount. Four sound actors sit over the doors, routed through the indoors submix via their sound class, which lets the exterior bleed through while still being treated as interior audio rather than fighting the interior mix.</p>
+
+            <p class="project-detail-text">It sits close to the smoking Doom tower as well, with lightning and thunder rumbling nearby, so some of that exterior treatment had to be carried inside deliberately. Without it the threshold reads as a mix change rather than a doorway, and the whole illusion of the two spaces belonging to the same storm falls over.</p>
+
+            <p class="project-subhead">The crows</p>
+
+            <p class="project-detail-text">The flock above the castle came with a brief that pulls in two directions. The client wanted them clearly audible and properly spatialised across a large distance, without them becoming a distraction while you play.</p>
+
+            <p class="project-detail-text">That came down to attenuation focus, with most of the attention on the focus cone angle and on the attack and release of the focus itself. On heavily focused sounds a fast attack with a slow release usually wins. The flock arrives the moment you look up at it, then lets go gradually as you turn away, rather than snapping in and out of focus every time the camera moves and pulling your attention back each time.</p>
           </div>
 
           <div class="cta" style="padding:0">
