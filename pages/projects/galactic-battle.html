@@ -3,167 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- ==============================================================
-       FAVICON / APP ICONS
-       The browser picks the best match it understands from this list.
-       favicon.svg is the master (the JH monogram as vector outlines,
-       so it needs no webfont); the PNGs cover browsers without SVG
-       icon support; apple-touch-icon is used when the site is saved
-       to an iOS home screen. favicon.ico also sits at the site root
-       because browsers and crawlers request that path automatically.
-       ============================================================== -->
-  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
-  <link rel="manifest" href="../../site.webmanifest" />
-  <!-- Tints the browser chrome on mobile to match the page background -->
-  <meta name="theme-color" content="#080a0f" />
-  <link rel="canonical" href="https://joehudson.co.uk/pages/projects/galactic-battle.html" />
-
-  <!-- Open Graph / Twitter: controls the preview card on LinkedIn, Discord, Slack, X -->
-  <meta property="og:type"          content="article" />
-  <meta property="og:site_name"     content="Joe Hudson — Senior Technical Sound Designer" />
-  <meta property="og:title"         content="Fortnite — Galactic Battle — Audio Designer | Joe Hudson" />
-  <meta property="og:description"   content="Ambient audio design for Fortnite&#x27;s Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
-  <meta property="og:url"           content="https://joehudson.co.uk/pages/projects/galactic-battle.html" />
-  <meta property="og:locale"        content="en_GB" />
-  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg" />
-  <meta property="og:image:width"   content="1200" />
-  <meta property="og:image:height"  content="630" />
-  <meta property="og:image:alt"     content="Fortnite — Galactic Battle key art — Audio Designer, Joe Hudson" />
-  <meta name="twitter:card"         content="summary_large_image" />
-  <meta name="twitter:title"        content="Fortnite — Galactic Battle — Audio Designer | Joe Hudson" />
-  <meta name="twitter:description"  content="Ambient audio design for Fortnite&#x27;s Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
-  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg" />
-  <meta name="twitter:image:alt"    content="Fortnite — Galactic Battle key art — Audio Designer, Joe Hudson" />
-
-  <!-- Structured data: tells Google who you are and what each credit is.
-       Validate at https://search.google.com/test/rich-results -->
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://joehudson.co.uk/#website",
-      "url": "https://joehudson.co.uk/",
-      "name": "Joe Hudson — Senior Technical Sound Designer",
-      "publisher": {
-        "@id": "https://joehudson.co.uk/#joe"
-      },
-      "inLanguage": "en-GB"
-    },
-    {
-      "@type": "Person",
-      "@id": "https://joehudson.co.uk/#joe",
-      "name": "Joe Hudson",
-      "jobTitle": "Senior Technical Sound Designer",
-      "url": "https://joehudson.co.uk/",
-      "description": "Senior Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
-      "knowsAbout": [
-        "Game Audio",
-        "Sound Design",
-        "Unreal Engine 5",
-        "MetaSounds",
-        "Wwise",
-        "Environmental Audio",
-        "Audio Implementation",
-        "Foley",
-        "Dialogue Editing"
-      ],
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Integral Audio Solutions Ltd",
-        "url": "https://www.integralaudiosolutions.co.uk"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "GB"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/in/joehudsonsounddesign"
-      ],
-      "email": "IntegralAudioSolutions@outlook.com"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
-      "url": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
-      "name": "Fortnite — Galactic Battle — Audio Designer | Joe Hudson",
-      "description": "Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group.",
-      "isPartOf": {
-        "@id": "https://joehudson.co.uk/#website"
-      },
-      "inLanguage": "en-GB",
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg",
-        "width": 1200,
-        "height": 630
-      },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://joehudson.co.uk/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Work",
-            "item": "https://joehudson.co.uk/pages/work.html"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Fortnite — Galactic Battle"
-          }
-        ]
-      },
-      "about": {
-        "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
-      }
-    },
-    {
-      "@type": "VideoGame",
-      "name": "Fortnite — Galactic Battle",
-      "url": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
-      "image": "https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg",
-      "gamePlatform": [
-        "PC",
-        "Console",
-        "Mobile"
-      ],
-      "contributor": {
-        "@id": "https://joehudson.co.uk/#joe"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Epic Games"
-      },
-      "datePublished": "2025",
-      "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
-    },
-    {
-      "@type": "CreativeWork",
-      "name": "Audio Designer — Fortnite — Galactic Battle",
-      "creator": {
-        "@id": "https://joehudson.co.uk/#joe"
-      },
-      "about": {
-        "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
-      },
-      "description": "Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group."
-    }
-  ]
-}
-  </script>
-
-
   <title>Fortnite — Galactic Battle — Joe Hudson</title>
   <meta name="description" content="Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -410,6 +249,28 @@
        left and right down the page so it doesn't read as a list.
     ================================================================ */
 
+    /*
+      Full-width prose sections sitting outside the body grid.
+      Used for the lead-in above the locations and the longer approach
+      notes below them. The max-width keeps the line length readable,
+      since without it the text would run the full width of the page.
+    */
+    .detail-block {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+    }
+
+    .detail-block .project-detail-text,
+    .detail-block .layer-stack,
+    .detail-block .project-subhead { max-width: 820px; }
+
+    /* Space above the second label in the approach block */
+    .detail-block .project-section-label + .project-section-label,
+    .detail-block .project-detail-text + .project-section-label {
+      margin-top: var(--space-xl);
+    }
+
     .poi-block {
       width: 100%;
       border-top: 1px solid var(--color-gold-border);
@@ -586,13 +447,7 @@
 
         <div class="project-text">
 
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <a href="../work.html">Credits</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <span class="breadcrumb-current" aria-current="page">Fortnite — Galactic Battle</span>
-          </nav>
+          <a href="../work.html" class="back-link">&larr; Back to Credits</a>
 
           <div class="project-meta">
             <div class="meta-row">
@@ -616,71 +471,7 @@
           <p class="project-desc">Ambient audio on Fortnite's Galactic Battle season. A set of locations I owned outright, plus a wider pass across the island making the new areas sit properly against everything already there.</p>
 
           <div>
-            <p class="project-section-label">// Scope &amp; Responsibilities</p>
-
-            <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
-
-            <p class="project-detail-text">Three of those were mine end to end. On Outpost Enclave a colleague did the main thrust, setting up the volumes and interiors, and I worked alongside him fixing bugs and helping get it singing. That's how the good ones tend to go. One person owns it and knows every inch of it, another comes in with fresh ears and no attachment to any of the decisions, and the location ends up better than either of you would have managed on your own.</p>
-
-            <p class="project-detail-text">First Order Base and Resistance Base are the interesting pair, because they had to read as opposites the moment you landed in either one, without either of them leaning on the obvious.</p>
-
-            <p class="project-detail-text">Owning a location means deciding what it sounds like when nothing is happening. That's the part nobody consciously notices and everybody notices the absence of. What is the air doing. What machinery is running, and how far away. What is overhead. Is there water, wind, anything alive, and how does all of that change as you move through the place rather than past it.</p>
-
-            <p class="project-detail-text">The wider pass is a different problem. Fortnite's island isn't a set of separate levels, it's one continuous space that players cross at speed. Drop a new area into it and it has to belong. It can't announce itself with a hard edge where one ambience stops and the next starts, because somebody sprinting that boundary will hear the join, and once you've heard a join you can't unhear it.</p>
-
-            <p class="project-detail-text">That's the constraint that shapes everything else. You aren't mixing a location, you're mixing every possible route a player might take through it, including the ones that cut straight across a seam you'd rather they didn't.</p>
-          </div>
-
-          <div>
-            <p class="project-section-label">// Tools &amp; Pipeline</p>
-
-            <p class="project-detail-text">Built in Unreal from hand-placed emitters and audio volumes rather than anything generated. Slower, but it's the only way to get intent into a space.</p>
-
-            <!-- ── AMBIENCE LAYER STACK ── -->
-            <div class="layer-stack">
-              <p class="layer-caption">// Ambience &nbsp;&middot;&nbsp; Layer Stack</p>
-
-              <div class="layer-row">
-                <span class="layer-name">01 &nbsp;Ambient Bed</span>
-                <span class="layer-desc">Carries the overall character of an area. Broad, and featureless by design. If you can pick out an individual sound in the bed, it's doing too much.</span>
-              </div>
-
-              <div class="layer-row layer-row--emitters">
-                <span class="layer-name">02 &nbsp;Point Emitters</span>
-                <span class="layer-desc">Where the actual work happens. A generator behind a wall, wind through a structure, something creaking at the top of a tower. Each at a real position with its own attenuation curve.</span>
-              </div>
-
-              <div class="layer-row layer-row--volumes">
-                <span class="layer-name">03 &nbsp;Audio Volumes</span>
-                <span class="layer-desc">Interiors and transitions. Stepping inside should close the world down without a noticeable switch, so boundaries get pulled and crossfades stretched until the edge can't be caught.</span>
-              </div>
-            </div>
-
-            <p class="project-detail-text">The emitters are what separate a place from a texture. Because each one sits at a real position with its own falloff, moving through the space changes what you hear for the honest reason that you are nearer one thing and further from another. A looping stereo bed can't do that. It sounds the same standing still as it does running, and players read that instantly even if they couldn't tell you why.</p>
-
-            <p class="project-subhead">Most of it is walking</p>
-
-            <p class="project-detail-text">The real work is iteration in engine. Place something, play, walk it, move it, walk it again. You can't judge an ambient mix from a DAW, because the thing being mixed isn't a piece of audio, it's a player's path through a space, and there are as many paths as there are players.</p>
-
-            <p class="project-detail-text">So you walk the boundaries deliberately, looking for the joins. You approach each location from every direction it can be approached from, including the stupid ones, because on a map this size somebody will land on the roof and drop straight in through the middle of it.</p>
-
-            <p class="project-subhead">What we were allowed to build from</p>
-
-            <p class="project-detail-text">The rule on this season was that everything had to come from the original source content. No substituting a library recording because it was quicker, no building a hum from a synth because it got you there faster. If it ended up in the game it started life in the material we were given.</p>
-
-            <p class="project-detail-text">That's a tighter brief than it sounds. Original source content is decades old in places, recorded and mastered for cinema rather than for a game engine, and a lot of it does not survive being dropped into a world where it has to compete with everything else going on and still read through a phone speaker.</p>
-
-            <p class="project-detail-text">So cleaning and polishing was allowed and necessary. Denoising and limiting to get the recordings behaving, then spectral enhancement through Ozone 12 to brighten the top end. That last part matters more than it sounds. A recording can be perfectly good and still sit dull once it's inside the engine competing for the same space as everything else, and a bit of top end is what buys it translation across the range of systems people actually play on, from a full setup down to a handset.</p>
-
-            <p class="project-detail-text">Editing gave us more room. We could pitch and filter the source material to generate new tones, which is how you build out the technology of a space that doesn't have a canonical sound of its own. A door, a console, a piece of machinery nobody has heard before, all derived from something that already existed. Take an original tone, move it and shape it, and what comes out is a new sound that still carries the character of where it came from. That's the whole reason the method works, and it's why the results go on belonging in the universe rather than sitting next to it.</p>
-
-            <p class="project-subhead">Beds and transitions</p>
-
-            <p class="project-detail-text">From the polished material we built quad and stereo ambient beds covering every area of each location. Quad where the space needed to wrap around the player properly, stereo where it didn't need to and the budget was better spent elsewhere.</p>
-
-            <p class="project-detail-text">Then the interior and exterior transitions, which is where a new area either joins the island or doesn't. These places weren't dropped onto empty ground. They sit inside biome ambience established seasons earlier, which is already running and already familiar to anyone who plays regularly. So the beds had to be mixed against what was already there rather than over the top of it, and the boundaries had to be worked until stepping in or out of a structure reads as a change in the space rather than a change in the audio.</p>
-
-            <p class="project-subhead">Working with licensed source material</p>
+            <p class="project-section-label">// Working With Licensed Source Material</p>
 
             <p class="project-detail-text">This season ran on original source content supplied by the licensor, and that changes how you work before you've opened a single session.</p>
 
@@ -689,10 +480,6 @@
             <p class="project-detail-text">It's worth saying plainly because it's the part of a credit that never shows up in a reel. Bringing someone in on licensed IP means handing them material that belongs to somebody else, under an agreement you have signed and they haven't. Being straightforward to trust with it is part of the job, and it is a large part of why the same people get asked back.</p>
           </div>
 
-          <div class="cta" style="padding:0">
-            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-          </div>
 
         </div>
 
@@ -701,6 +488,17 @@
         </div>
 
       </div>
+
+      <!-- Lead-in to the POI breakdowns below -->
+      <section class="detail-block" aria-label="The locations">
+        <p class="project-section-label">// The Locations</p>
+
+            <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
+
+        <p class="project-detail-text">Three of those were mine end to end. On Outpost Enclave a colleague did the main thrust, setting up the volumes and interiors, and I worked alongside him fixing bugs and helping get it singing. That's how the good ones tend to go. One person owns it and knows every inch of it, another comes in with fresh ears and no attachment to any of the decisions, and the location ends up better than either of you would have managed on your own.</p>
+
+        <p class="project-detail-text">First Order Base and Resistance Base are the interesting pair, because they had to read as opposites the moment you landed in either one, without either of them leaning on the obvious.</p>
+      </section>
 
       <!-- ══ POI BREAKDOWNS ══ -->
 
@@ -764,62 +562,70 @@
         <p class="project-detail-text">The trick is to fix what's broken without quietly redesigning it around your own preferences. It was his location and it should sound like his location, only without the problems.</p>
       </section>
 
-    
-      <!-- ============================================================
-           RELATED CREDITS — generated from studio, franchise and platform.
-           Gives visitors (and search crawlers) a route between credits
-           instead of every project page being a dead end.
-           ============================================================ -->
-      <section class="related-section" aria-label="Related credits">
-        <div class="section-header">
-          <h2 class="section-tag">Related Credits</h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="related-grid">
-          <a class="related-card" href="simpsons.html">
-            <span class="related-card-art">
-              <img src="../../assets/images/c6s2-simpsons-season-keyart.jpg" alt="Fortnite — The Simpsons Season" loading="lazy" />
-            </span>
-            <span class="related-card-body">
-              <span class="related-card-meta">Epic Games · 2025</span>
-              <span class="related-card-title">Fortnite — The Simpsons Season</span>
-              <span class="related-card-role">Audio Designer</span>
-            </span>
-          </a>
-          <a class="related-card" href="myths-and-mortals.html">
-            <span class="related-card-art">
-              <img src="../../assets/images/c5s2-myths-and-mortals-keyart.jpg" alt="Fortnite C5S2 — Myths &amp; Mortals" loading="lazy" />
-            </span>
-            <span class="related-card-body">
-              <span class="related-card-meta">Epic Games · 2024</span>
-              <span class="related-card-title">Fortnite C5S2 — Myths &amp; Mortals</span>
-              <span class="related-card-role">Audio Designer</span>
-            </span>
-          </a>
-          <a class="related-card" href="wrecked.html">
-            <span class="related-card-art">
-              <img src="../../assets/images/c5s4-Wrecked-keyart.jpg" alt="Fortnite C5S3 — Wrecked" loading="lazy" />
-            </span>
-            <span class="related-card-body">
-              <span class="related-card-meta">Epic Games · 2024</span>
-              <span class="related-card-title">Fortnite C5S3 — Wrecked</span>
-              <span class="related-card-role">Audio Designer</span>
-            </span>
-          </a>
-        </div>
-      </section>
+      <!-- Longer-form approach notes, below the locations -->
+      <section class="detail-block" aria-label="Approach and pipeline">
+        <p class="project-section-label">// Approach</p>
 
-      <!-- Sequential navigation through the full credit list, newest to oldest -->
-      <nav class="projnav" aria-label="Credit navigation">
-        <a class="projnav-link projnav-prev" href="ballistic.html">
-          <span class="projnav-dir">&larr; Newer credit</span>
-          <span class="projnav-title">Ballistic (UEFN)</span>
-        </a>
-        <a class="projnav-link projnav-next" href="simpsons.html">
-          <span class="projnav-dir">Older credit &rarr;</span>
-          <span class="projnav-title">Fortnite — The Simpsons Season</span>
-        </a>
-      </nav>
+            <p class="project-detail-text">Owning a location means deciding what it sounds like when nothing is happening. That's the part nobody consciously notices and everybody notices the absence of. What is the air doing. What machinery is running, and how far away. What is overhead. Is there water, wind, anything alive, and how does all of that change as you move through the place rather than past it.</p>
+
+        <p class="project-detail-text">The wider pass is a different problem. Fortnite's island isn't a set of separate levels, it's one continuous space that players cross at speed. Drop a new area into it and it has to belong. It can't announce itself with a hard edge where one ambience stops and the next starts, because somebody sprinting that boundary will hear the join, and once you've heard a join you can't unhear it.</p>
+
+        <p class="project-detail-text">That's the constraint that shapes everything else. You aren't mixing a location, you're mixing every possible route a player might take through it, including the ones that cut straight across a seam you'd rather they didn't.</p>
+
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+
+        <p class="project-detail-text">Built in Unreal from hand-placed emitters and audio volumes rather than anything generated. Slower, but it's the only way to get intent into a space.</p>
+
+        <!-- ── AMBIENCE LAYER STACK ── -->
+        <div class="layer-stack">
+          <p class="layer-caption">// Ambience &nbsp;&middot;&nbsp; Layer Stack</p>
+
+          <div class="layer-row">
+            <span class="layer-name">01 &nbsp;Ambient Bed</span>
+            <span class="layer-desc">Carries the overall character of an area. Broad, and featureless by design. If you can pick out an individual sound in the bed, it's doing too much.</span>
+          </div>
+
+          <div class="layer-row layer-row--emitters">
+            <span class="layer-name">02 &nbsp;Point Emitters</span>
+            <span class="layer-desc">Where the actual work happens. A generator behind a wall, wind through a structure, something creaking at the top of a tower. Each at a real position with its own attenuation curve.</span>
+          </div>
+
+          <div class="layer-row layer-row--volumes">
+            <span class="layer-name">03 &nbsp;Audio Volumes</span>
+            <span class="layer-desc">Interiors and transitions. Stepping inside should close the world down without a noticeable switch, so boundaries get pulled and crossfades stretched until the edge can't be caught.</span>
+          </div>
+        </div>
+
+        <p class="project-detail-text">The emitters are what separate a place from a texture. Because each one sits at a real position with its own falloff, moving through the space changes what you hear for the honest reason that you are nearer one thing and further from another. A looping stereo bed can't do that. It sounds the same standing still as it does running, and players read that instantly even if they couldn't tell you why.</p>
+
+        <p class="project-subhead">Most of it is walking</p>
+
+        <p class="project-detail-text">The real work is iteration in engine. Place something, play, walk it, move it, walk it again. You can't judge an ambient mix from a DAW, because the thing being mixed isn't a piece of audio, it's a player's path through a space, and there are as many paths as there are players.</p>
+
+        <p class="project-detail-text">So you walk the boundaries deliberately, looking for the joins. You approach each location from every direction it can be approached from, including the stupid ones, because on a map this size somebody will land on the roof and drop straight in through the middle of it.</p>
+
+        <p class="project-subhead">What we were allowed to build from</p>
+
+        <p class="project-detail-text">The rule on this season was that everything had to come from the original source content. No substituting a library recording because it was quicker, no building a hum from a synth because it got you there faster. If it ended up in the game it started life in the material we were given.</p>
+
+        <p class="project-detail-text">That's a tighter brief than it sounds. Original source content is decades old in places, recorded and mastered for cinema rather than for a game engine, and a lot of it does not survive being dropped into a world where it has to compete with everything else going on and still read through a phone speaker.</p>
+
+        <p class="project-detail-text">So cleaning and polishing was allowed and necessary. Denoising and limiting to get the recordings behaving, then spectral enhancement through Ozone 12 to brighten the top end. That last part matters more than it sounds. A recording can be perfectly good and still sit dull once it's inside the engine competing for the same space as everything else, and a bit of top end is what buys it translation across the range of systems people actually play on, from a full setup down to a handset.</p>
+
+        <p class="project-detail-text">Editing gave us more room. We could pitch and filter the source material to generate new tones, which is how you build out the technology of a space that doesn't have a canonical sound of its own. A door, a console, a piece of machinery nobody has heard before, all derived from something that already existed. Take an original tone, move it and shape it, and what comes out is a new sound that still carries the character of where it came from. That's the whole reason the method works, and it's why the results go on belonging in the universe rather than sitting next to it.</p>
+
+        <p class="project-subhead">Beds and transitions</p>
+
+        <p class="project-detail-text">From the polished material we built quad and stereo ambient beds covering every area of each location. Quad where the space needed to wrap around the player properly, stereo where it didn't need to and the budget was better spent elsewhere.</p>
+
+        <p class="project-detail-text">Then the interior and exterior transitions, which is where a new area either joins the island or doesn't. These places weren't dropped onto empty ground. They sit inside biome ambience established seasons earlier, which is already running and already familiar to anyone who plays regularly. So the beds had to be mixed against what was already there rather than over the top of it, and the boundaries had to be worked until stepping in or out of a structure reads as a change in the space rather than a change in the audio.</p>
+
+          <div class="cta" style="padding:0">
+        <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+        <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+      </section>
 
     </main>
   </div>
@@ -881,7 +687,8 @@
     <div class="footer-inner">
       <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
       <nav class="footer-links" aria-label="Social and contact links">
-        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="#" class="footer-link" target="_blank" rel="noopener noreferrer">IMDb</a>
         <a href="../contact.html" class="footer-link">Contact</a>
       </nav>
     </div>
