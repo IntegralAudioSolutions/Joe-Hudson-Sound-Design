@@ -3,6 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS
+       The browser picks the best match it understands from this list.
+       favicon.svg is the master (the JH monogram as vector outlines,
+       so it needs no webfont); the PNGs cover browsers without SVG
+       icon support; apple-touch-icon is used when the site is saved
+       to an iOS home screen. favicon.ico also sits at the site root
+       because browsers and crawlers request that path automatically.
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <!-- Tints the browser chrome on mobile to match the page background -->
+  <meta name="theme-color" content="#080a0f" />
+  <link rel="canonical" href="https://joehudson.co.uk/pages/projects/galactic-battle.html" />
+
+  <!-- Open Graph / Twitter: controls the preview card on LinkedIn, Discord, Slack, X -->
+  <meta property="og:type"          content="article" />
+  <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
+  <meta property="og:title"         content="Fortnite — Galactic Battle — Audio Designer | Joe Hudson" />
+  <meta property="og:description"   content="Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
+  <meta property="og:url"           content="https://joehudson.co.uk/pages/projects/galactic-battle.html" />
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Fortnite Galactic Battle key art — Audio Designer, Joe Hudson" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Fortnite — Galactic Battle — Audio Designer | Joe Hudson" />
+  <meta name="twitter:description"  content="Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg" />
+  <meta name="twitter:image:alt"    content="Fortnite Galactic Battle key art — Audio Designer, Joe Hudson" />
+
+  <!-- Structured data: tells Google who you are and what each credit is.
+       Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
+      "url": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
+      "name": "Fortnite — Galactic Battle — Audio Designer | Joe Hudson",
+      "description": "Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "inLanguage": "en-GB",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work",
+            "item": "https://joehudson.co.uk/pages/work.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fortnite — Galactic Battle"
+          }
+        ]
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
+      }
+    },
+    {
+      "@type": "VideoGame",
+      "name": "Fortnite — Galactic Battle",
+      "url": "https://joehudson.co.uk/pages/projects/galactic-battle.html",
+      "image": "https://joehudson.co.uk/assets/images/og/og-galactic-battle.jpg",
+      "gamePlatform": [
+        "PC",
+        "Console",
+        "Mobile"
+      ],
+      "contributor": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Epic Games"
+      },
+      "datePublished": "2025",
+      "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Audio Designer — Fortnite: Galactic Battle",
+      "creator": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/galactic-battle.html#game"
+      },
+      "description": "Ambient audio design across named Star Wars POIs and a wider island pass, built from hand-placed emitters and audio volumes."
+    }
+  ]
+}
+  </script>
+
   <title>Fortnite — Galactic Battle — Joe Hudson</title>
   <meta name="description" content="Ambient audio design for Fortnite's Galactic Battle season. Hand-placed emitters, audio volumes and interior transitions across named POIs and a wider island pass. Epic Games / Sweet Justice Sound Group." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,7 +1,7 @@
 # Joe Hudson — Personal Portfolio
 ### joehudson.co.uk
 
-Personal portfolio website for Joe Hudson, Senior Technical Sound Designer.  
+Personal portfolio website for Joe Hudson, Technical Sound Designer.  
 Built with plain HTML, CSS, and vanilla JavaScript. No frameworks, no build tools.
 
 ---
