@@ -57,6 +57,7 @@
 
   --color-purp:        #7060c8;
   --color-purp-light:  #a090e0;
+  --color-purp-dark:   #3d346e;
   --color-purp-faint:  rgba(112, 96, 200, 0.08);
   --color-purp-border: rgba(112, 96, 200, 0.25);
 
@@ -941,7 +942,7 @@ h1, h2, h3 {
 .btn--purple:hover,
 .btn--purple:focus-visible {
   background: var(--color-purp);
-  border-color: var(--color-purp);
+  border-color: var(--color-purp-dark);
   color: #ffffff;
   outline: none;
 }
