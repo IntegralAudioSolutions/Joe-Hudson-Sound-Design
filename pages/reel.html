@@ -650,7 +650,7 @@
     </aside>
 
     <div class="page-header-content">
-      <p class="page-eyebrow">// Audio Samples &nbsp;·&nbsp; Demo Reel &nbsp;·&nbsp; Private Links</p>
+      <p class="page-eyebrow">// Demo Reel &nbsp;·&nbsp; World Building &nbsp;·&nbsp; SFX Design</p>
       <h1 class="page-title">Demo <strong>Reel</strong></h1>
       <p class="page-subtitle">World Building · SFX Design · UE5 Implementation</p>
     </div>
@@ -707,14 +707,17 @@
 
       <!-- ── NOTE PANEL ── -->
       <!--
-        This explains to visiting audio directors that reels are
-        hosted privately — professional and reassuring.
+        Explains to visiting audio directors why the reel isn't findable
+        on YouTube. Says "unlisted" rather than "private": private videos
+        cannot be embedded at all, so the wording has to be accurate or
+        it describes a setup that wouldn't work.
       -->
       <div class="reel-note" role="note">
         <p class="reel-note-label">// Access Note</p>
         <p class="reel-note-text">
-          Demo reels are hosted as private YouTube links — visible via this page
-          but not discoverable through YouTube search. If a reel isn't loading,
+          Reels are hosted as unlisted YouTube links — playable here, but not
+          listed on the channel or discoverable through search. If one isn't
+          loading,
           <a href="contact.html" style="color:var(--color-purp-light)">get in touch</a>
           and a direct link will be sent over promptly.
         </p>
@@ -731,8 +734,13 @@
 
         <!--
           HOW TO ADD YOUR YOUTUBE REEL:
-          
-          1. Go to your private YouTube video
+
+          IMPORTANT: the video must be UNLISTED, not Private. A Private
+          video cannot be embedded — visitors get "Video unavailable"
+          while it still plays fine for you when signed in, so the fault
+          is easy to miss.
+
+          1. Go to your unlisted YouTube video
           2. Click Share → Embed
           3. Copy the src URL — it looks like:
                https://www.youtube.com/embed/XXXXXXXXXXX
@@ -758,176 +766,33 @@
           <div class="reel-featured-info">
             <h2>Primary Demo Reel — World Building &amp; SFX Design</h2>
             <p>
-              <!--
-                Add a short description of your primary reel here.
-                What does it showcase? Which projects are featured?
-                What should an audio director pay particular attention to?
-              -->
-              Reel description to be added. Cover what the reel demonstrates —
-              world-building systems, SFX design approach, UE5 implementation work.
+              Fortnite map audio and world-building ambience, built in Unreal
+              Engine. Ambient beds, hand-placed point emitters, interior and
+              exterior transitions across seasonal locations, plus Storm King
+              weapon design from Save the World.
             </p>
           </div>
-          <span class="reel-featured-duration">// Duration: 0:00</span>
+          <!--
+            Duration removed rather than left reading 0:00. To put it back,
+            restore: <span class="reel-featured-duration">// Duration: M:SS</span>
+          -->
         </div>
 
       </div>
 
 
-      <!-- ── SECONDARY REELS GRID ── -->
-      <div class="reel-grid-label">
-        <span class="reel-grid-tag">Additional Reels</span>
-        <div class="reel-grid-line"></div>
-      </div>
-
-      <div class="reel-grid">
-
-        <!--
-          REEL CARD TEMPLATE:
-          Copy this block to add more reels.
-          Replace the placeholder div with an <iframe> once you have the URL.
-          Change reel-card--[colour] to: purp | cyan | gold | coral
-        -->
-
-        <!-- Reel card 1: UE5 / World Building -->
-        <article class="reel-card reel-card--purp" aria-label="UE5 World Building reel">
-          <div class="reel-card-thumb">
-            <!--
-              Replace this placeholder with:
-              <iframe
-                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                title="UE5 World Building Reel"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            -->
-            <div class="reel-card-placeholder" aria-label="Video placeholder">
-              <span>UE5 World Building</span>
-            </div>
-          </div>
-          <div class="reel-card-body">
-            <p class="reel-card-category">UE5 · World Building</p>
-            <h3 class="reel-card-title">World Building &amp; Ambience Systems</h3>
-            <p class="reel-card-meta">Attenuation, reverb zones, layered ambience — UE5</p>
-          </div>
-        </article>
-
-        <!-- Reel card 2: SFX Design -->
-        <article class="reel-card reel-card--cyan" aria-label="SFX Design reel">
-          <div class="reel-card-thumb">
-            <!--
-              Replace this placeholder with your SFX design reel iframe.
-            -->
-            <div class="reel-card-placeholder" aria-label="Video placeholder">
-              <span>SFX Design</span>
-            </div>
-          </div>
-          <div class="reel-card-body">
-            <p class="reel-card-category">SFX Design</p>
-            <h3 class="reel-card-title">Sound Effects Design</h3>
-            <p class="reel-card-meta">Original SFX — weapons, environments, UI</p>
-          </div>
-        </article>
-
-        <!-- Reel card 3: Implementation -->
-        <article class="reel-card reel-card--gold" aria-label="Implementation reel">
-          <div class="reel-card-thumb">
-            <!--
-              Replace this placeholder with your implementation reel iframe.
-            -->
-            <div class="reel-card-placeholder" aria-label="Video placeholder">
-              <span>Implementation</span>
-            </div>
-          </div>
-          <div class="reel-card-body">
-            <p class="reel-card-category">Implementation · Blueprint</p>
-            <h3 class="reel-card-title">Audio Implementation</h3>
-            <p class="reel-card-meta">MetaSounds, Blueprint scripting, Wwise / FMOD</p>
-          </div>
-        </article>
-
-        <!-- Reel card 4: Fortnite / Epic -->
-        <article class="reel-card reel-card--coral" aria-label="Fortnite map audio reel">
-          <div class="reel-card-thumb">
-            <!--
-              Replace this placeholder with your Fortnite / Epic reel iframe.
-              Check with Epic Games what footage is cleared for public use.
-            -->
-            <div class="reel-card-placeholder" aria-label="Video placeholder">
-              <span>Fortnite / Epic</span>
-            </div>
-          </div>
-          <div class="reel-card-body">
-            <p class="reel-card-category">Epic Games · Fortnite</p>
-            <h3 class="reel-card-title">Fortnite Map Audio</h3>
-            <p class="reel-card-meta">Battle Royale map audio — subject to Epic clearance</p>
-          </div>
-        </article>
-
-      </div>
-      <!-- /reel-grid -->
-
-
-      <!-- ── AUDIO SAMPLES ── -->
       <!--
-        Optional section for short standalone audio clips.
-        Useful for showcasing individual SFX without a video context.
-        
-        TO ADD AN AUDIO FILE:
-          1. Export your clip as MP3 (good browser support) or OGG
-          2. Place the file in assets/audio/
-          3. Replace the src="#" placeholder with the correct path:
-               src="../assets/audio/your-file-name.mp3"
+        ── ADDITIONAL REELS + AUDIO SAMPLES (REMOVED 2026-09-24) ──
+        Both sections were placeholder-only: four empty reel cards and
+        three dead audio players. Taken out so visitors don't land on
+        obviously unfinished content.
+
+        The exact markup is preserved in the project doc
+        "reel-page-removed-sections.md" and can be pasted straight back
+        in at this point. The CSS for .reel-grid, .reel-card and
+        .audio-* has deliberately been LEFT in this file's <style>
+        block, so restoring is a paste of the HTML only.
       -->
-      <div class="audio-section">
-
-        <div class="reel-grid-label" style="margin-bottom:var(--space-md)">
-          <span class="reel-grid-tag" style="color:var(--color-gold)">Audio Samples</span>
-          <div class="reel-grid-line" style="background:rgba(212,172,80,0.15)"></div>
-        </div>
-
-        <div class="audio-list">
-
-          <div class="audio-item">
-            <span class="audio-item-index">01</span>
-            <div class="audio-item-info">
-              <p class="audio-item-title">Sample Title — to be added</p>
-              <p class="audio-item-desc">Description · Category · Duration</p>
-            </div>
-            <!--
-              Replace src="#" with the real file path once audio is ready.
-              Example: src="../assets/audio/environmental-ambience-01.mp3"
-            -->
-            <audio controls src="#" aria-label="Audio sample 01 — placeholder">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="audio-item">
-            <span class="audio-item-index">02</span>
-            <div class="audio-item-info">
-              <p class="audio-item-title">Sample Title — to be added</p>
-              <p class="audio-item-desc">Description · Category · Duration</p>
-            </div>
-            <audio controls src="#" aria-label="Audio sample 02 — placeholder">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-          <div class="audio-item">
-            <span class="audio-item-index">03</span>
-            <div class="audio-item-info">
-              <p class="audio-item-title">Sample Title — to be added</p>
-              <p class="audio-item-desc">Description · Category · Duration</p>
-            </div>
-            <audio controls src="#" aria-label="Audio sample 03 — placeholder">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-
-        </div>
-
-      </div>
-      <!-- /audio-section -->
 
 
       <!-- CTA -->
