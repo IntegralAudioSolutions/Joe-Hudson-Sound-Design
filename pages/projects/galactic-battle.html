@@ -521,6 +521,84 @@
       border-color: rgba(232,112,64,0.35);
     }
 
+    /*
+      Per-POI walkthrough video — same floated box as .poi-figure
+      (smaller than the main video up top), alternating sides down
+      the page. Each POI gets one of these once Joe has a render;
+      until then it shows the placeholder below.
+    */
+    .poi-video {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+
+    /* Alternate side down the page, same as .poi-figure--left */
+    .poi-video--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+
+    /* 16:9 wrapper — same padding-bottom trick as the main video */
+    .poi-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+    }
+
+    .poi-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Placeholder shown until a POI's walkthrough render is ready */
+    .poi-video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .poi-video-play {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 17px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+
+    .poi-video-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .poi-video figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -539,9 +617,11 @@
       .layer-row { flex-direction: column; gap: 4px; }
       .layer-name { flex: 0 0 auto; }
 
-      /* POI images go full width above the copy rather than floated */
+      /* POI images and videos go full width above the copy rather than floated */
       .poi-figure,
-      .poi-figure--left {
+      .poi-figure--left,
+      .poi-video,
+      .poi-video--left {
         float: none;
         width: 100%;
         max-width: 100%;
@@ -685,9 +765,24 @@
       <section class="poi-block" aria-label="First Order Base">
         <p class="poi-name">First Order Base <span class="poi-tag">Owned</span></p>
 
-        <figure class="poi-figure">
-          <img src="../../assets/images/GalacticBattle/GB_POI_FirstOrder.webp" alt="A TIE fighter inside the First Order Base hangar" loading="lazy" />
-          <figcaption>// First Order Base &nbsp;&middot;&nbsp; Hangar interior</figcaption>
+        <!--
+          Swapped the still photo for Joe's own walkthrough video.
+          Original photo kept here in case he wants it back:
+          <figure class="poi-figure">
+            <img src="../../assets/images/GalacticBattle/GB_POI_FirstOrder.webp" alt="A TIE fighter inside the First Order Base hangar" loading="lazy" />
+            <figcaption>// First Order Base &nbsp;&middot;&nbsp; Hangar interior</figcaption>
+          </figure>
+        -->
+        <figure class="poi-video">
+          <div class="poi-video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/NvO7WNSPRJA"
+              title="First Order Base &nbsp;&middot;&nbsp; Walkthrough"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>// First Order Base &nbsp;&middot;&nbsp; Walkthrough</figcaption>
         </figure>
 
         <p class="project-detail-text">Snow, stone and hard metal. The base is cut into a mountainside, so the exterior carries weather and exposure while the interior is all flat surfaces and enclosed air, and the two need to be obviously different the moment you cross the threshold.</p>
@@ -700,9 +795,22 @@
       <section class="poi-block" aria-label="Resistance Base">
         <p class="poi-name">Resistance Base <span class="poi-tag">Owned</span></p>
 
-        <figure class="poi-figure poi-figure--left">
-          <img src="../../assets/images/GalacticBattle/GB_POI_Resistance.webp" alt="Interiors of the Resistance Base, including the hangar and holographic map room" loading="lazy" />
-          <figcaption>// Resistance Base &nbsp;&middot;&nbsp; Hangar and interior spaces</figcaption>
+        <!--
+          Placeholder for the walkthrough video — swap in once rendered.
+          Original photo kept here in case he wants it back instead:
+          <figure class="poi-figure poi-figure--left">
+            <img src="../../assets/images/GalacticBattle/GB_POI_Resistance.webp" alt="Interiors of the Resistance Base, including the hangar and holographic map room" loading="lazy" />
+            <figcaption>// Resistance Base &nbsp;&middot;&nbsp; Hangar and interior spaces</figcaption>
+          </figure>
+        -->
+        <figure class="poi-video poi-video--left">
+          <div class="poi-video-wrapper">
+            <div class="poi-video-placeholder">
+              <div class="poi-video-play"></div>
+              <p class="poi-video-label">Walkthrough &mdash; to be added</p>
+            </div>
+          </div>
+          <figcaption>// Resistance Base &nbsp;&middot;&nbsp; Walkthrough</figcaption>
         </figure>
 
         <p class="project-detail-text">The opposite problem, and the more interesting one. Where the First Order is machined and cold, the Resistance is dug into a green valley, improvised, and surrounded by a living biome that was already on the island long before this season arrived.</p>
@@ -715,9 +823,22 @@
       <section class="poi-block" aria-label="Vader Samurai's Solitude">
         <p class="poi-name">Vader Samurai's Solitude <span class="poi-tag">Owned</span></p>
 
-        <figure class="poi-figure">
-          <img src="../../assets/images/GalacticBattle/GB_POI_Samurai.webp" alt="A shuttle on a rocky outcrop surrounded by red maple trees" loading="lazy" />
-          <figcaption>// Vader Samurai's Solitude &nbsp;&middot;&nbsp; Exterior approach</figcaption>
+        <!--
+          Placeholder for the walkthrough video — swap in once rendered.
+          Original photo kept here in case he wants it back instead:
+          <figure class="poi-figure">
+            <img src="../../assets/images/GalacticBattle/GB_POI_Samurai.webp" alt="A shuttle on a rocky outcrop surrounded by red maple trees" loading="lazy" />
+            <figcaption>// Vader Samurai's Solitude &nbsp;&middot;&nbsp; Exterior approach</figcaption>
+          </figure>
+        -->
+        <figure class="poi-video">
+          <div class="poi-video-wrapper">
+            <div class="poi-video-placeholder">
+              <div class="poi-video-play"></div>
+              <p class="poi-video-label">Walkthrough &mdash; to be added</p>
+            </div>
+          </div>
+          <figcaption>// Vader Samurai's Solitude &nbsp;&middot;&nbsp; Walkthrough</figcaption>
         </figure>
 
         <p class="project-detail-text">The one with the most restraint in it. A shuttle set down on a rocky outcrop among red maples, more shrine than base, and the whole point of the place is that it's quiet.</p>
@@ -730,9 +851,22 @@
       <section class="poi-block" aria-label="Outpost Enclave">
         <p class="poi-name">Outpost Enclave <span class="poi-tag poi-tag--collab">Collaboration</span></p>
 
-        <figure class="poi-figure poi-figure--left">
-          <img src="../../assets/images/GalacticBattle/GB_POI_Outpost.webp" alt="The desert Outpost Enclave, with domed structures, droids and a docked vessel" loading="lazy" />
-          <figcaption>// Outpost Enclave &nbsp;&middot;&nbsp; Desert settlement</figcaption>
+        <!--
+          Placeholder for the walkthrough video — swap in once rendered.
+          Original photo kept here in case he wants it back instead:
+          <figure class="poi-figure poi-figure--left">
+            <img src="../../assets/images/GalacticBattle/GB_POI_Outpost.webp" alt="The desert Outpost Enclave, with domed structures, droids and a docked vessel" loading="lazy" />
+            <figcaption>// Outpost Enclave &nbsp;&middot;&nbsp; Desert settlement</figcaption>
+          </figure>
+        -->
+        <figure class="poi-video poi-video--left">
+          <div class="poi-video-wrapper">
+            <div class="poi-video-placeholder">
+              <div class="poi-video-play"></div>
+              <p class="poi-video-label">Walkthrough &mdash; to be added</p>
+            </div>
+          </div>
+          <figcaption>// Outpost Enclave &nbsp;&middot;&nbsp; Walkthrough</figcaption>
         </figure>
 
         <p class="project-detail-text">A desert settlement of domes and scrap, the most lived-in of the four. This one wasn't mine. A colleague set up the volumes and interiors and did the main thrust of the design, and I came in alongside him to fix bugs and help get it singing.</p>
