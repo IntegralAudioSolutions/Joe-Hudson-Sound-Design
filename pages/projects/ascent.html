@@ -249,14 +249,28 @@
     /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr;
       gap: var(--space-2xl);
       align-items: start;
     }
+
+    /*
+      Top row: breadcrumb + meta on the left, keyart on the right.
+      The separator line (previously on .project-meta) now sits under
+      this whole row, so it clears the keyart too.
+    */
+    .project-top-row {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .project-top-keyart { width: 100%; }
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
       display: flex; flex-direction: column; gap: 6px;
-      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .meta-row { display: flex; gap: 12px; align-items: baseline; }
     .meta-label {
@@ -321,6 +335,7 @@
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
+      .project-top-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
@@ -391,35 +406,44 @@
         <p class="video-caption">// The Ascent &nbsp;&middot;&nbsp; Technical Sound Designer</p>
       </div>
 
-      <!-- Body: text left, keyart right -->
+      <!-- Body copy, full width, matching the video's edges -->
       <div class="project-body-grid">
 
         <div class="project-text">
 
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <a href="../work.html">Credits</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <span class="breadcrumb-current" aria-current="page">The Ascent</span>
-          </nav>
+          <div class="project-top-row">
+            <div>
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <a href="../work.html">Credits</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">The Ascent</span>
+              </nav>
 
-          <div class="project-meta">
-            <div class="meta-row">
-              <span class="meta-label">Studio</span>
-              <span class="meta-value">Sweet Justice Sound Group / Neon Giant</span>
+              <div class="project-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Studio</span>
+                  <span class="meta-value">Sweet Justice Sound Group / Neon Giant</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">Technical Sound Designer</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Platform</span>
+                  <span class="meta-value">PC · Xbox</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value">2021</span>
+                </div>
+              </div>
             </div>
-            <div class="meta-row">
-              <span class="meta-label">Role</span>
-              <span class="meta-value">Technical Sound Designer</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Platform</span>
-              <span class="meta-value">PC · Xbox</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Year</span>
-              <span class="meta-value">2021</span>
+
+            <!-- Keyart sits here — between the video and the separator line -->
+            <div class="project-top-keyart">
+              <img class="project-keyart" src="../../assets/images/ascent-keyart.jpg" alt="The Ascent — Joe Hudson" loading="lazy" />
             </div>
           </div>
 
@@ -440,10 +464,6 @@
             <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
           </div>
 
-        </div>
-
-        <div>
-          <img class="project-keyart" src="../../assets/images/ascent-keyart.jpg" alt="The Ascent — Joe Hudson" loading="lazy" />
         </div>
 
       </div>
