@@ -249,11 +249,13 @@
     }
     /*
       Body layout.
-      The keyart used to sit in a 380px right-hand column, which pulled
-      the text column in and left every line ending well short of the
-      video box above it. Now a single column, so the copy runs to the
-      same right edge as the video, and the keyart sits below the text
-      at the same width — see .project-keyart-below.
+      The keyart used to sit in a 380px right-hand column running the
+      full height of the text, which pulled the copy in and left every
+      line ending well short of the video box above it. Now a single
+      column, so the copy runs to the same right edge as the video.
+      The keyart itself moved up into .project-top-row instead, sitting
+      beside the breadcrumb and meta block, between the video and the
+      separator line.
     */
     .project-body-grid {
       display: grid;
@@ -262,15 +264,24 @@
       align-items: start;
     }
 
-    /* Keyart moved beneath the copy, matching the video's width */
-    .project-keyart-below {
-      width: 100%;
-      margin-top: var(--space-xl);
+    /*
+      Top row: breadcrumb + meta on the left, keyart on the right.
+      The separator line (previously on .project-meta) now sits under
+      this whole row, so it clears the keyart too.
+    */
+    .project-top-row {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    .project-top-keyart { width: 100%; }
+
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
       display: flex; flex-direction: column; gap: 6px;
-      padding-bottom: var(--space-md); border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .meta-row { display: flex; gap: 12px; align-items: baseline; }
     .meta-label {
@@ -348,6 +359,7 @@
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
+      .project-top-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
@@ -420,35 +432,44 @@
         <p class="video-caption">// Fortnite — Chapter 5: Absolute Doom &nbsp;&middot;&nbsp; Audio Designer</p>
       </div>
 
-      <!-- Body: text left, keyart right -->
+      <!-- Body copy, full width, matching the video's edges -->
       <div class="project-body-grid">
 
         <div class="project-text">
 
-          <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <a href="../work.html">Credits</a>
-            <span class="breadcrumb-sep" aria-hidden="true">/</span>
-            <span class="breadcrumb-current" aria-current="page">Fortnite — Chapter 5: Absolute Doom</span>
-          </nav>
+          <div class="project-top-row">
+            <div>
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <a href="../work.html">Credits</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Fortnite — Chapter 5: Absolute Doom</span>
+              </nav>
 
-          <div class="project-meta">
-            <div class="meta-row">
-              <span class="meta-label">Studio</span>
-              <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+              <div class="project-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Studio</span>
+                  <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">Audio Designer</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Platform</span>
+                  <span class="meta-value">PC · Console · Mobile</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value">2024</span>
+                </div>
+              </div>
             </div>
-            <div class="meta-row">
-              <span class="meta-label">Role</span>
-              <span class="meta-value">Audio Designer</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Platform</span>
-              <span class="meta-value">PC · Console · Mobile</span>
-            </div>
-            <div class="meta-row">
-              <span class="meta-label">Year</span>
-              <span class="meta-value">2024</span>
+
+            <!-- Keyart sits here — between the video and the separator line -->
+            <div class="project-top-keyart">
+              <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom — Joe Hudson" loading="lazy" />
             </div>
           </div>
 
@@ -480,11 +501,6 @@
             <p class="project-detail-text">The flock above the castle came with a brief that pulls in two directions. The client wanted them clearly audible and properly spatialised across a large distance, without them becoming a distraction while you play.</p>
 
             <p class="project-detail-text">That came down to attenuation focus, with most of the attention on the focus cone angle and on the attack and release of the focus itself. On heavily focused sounds a fast attack with a slow release usually wins. The flock arrives the moment you look up at it, then lets go gradually as you turn away, rather than snapping in and out of focus every time the camera moves and pulling your attention back each time.</p>
-          </div>
-
-          <!-- Keyart now sits below the copy so the text runs full width -->
-          <div class="project-keyart-below">
-            <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom — Joe Hudson" loading="lazy" />
           </div>
 
           <div class="cta" style="padding:0">
