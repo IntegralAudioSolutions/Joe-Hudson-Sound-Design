@@ -247,12 +247,25 @@
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
       letter-spacing: 0.1em; margin-top: 8px;
     }
-    /* Body: text left, keyart right */
+    /*
+      Body layout.
+      The keyart used to sit in a 380px right-hand column, which pulled
+      the text column in and left every line ending well short of the
+      video box above it. Now a single column, so the copy runs to the
+      same right edge as the video, and the keyart sits below the text
+      at the same width — see .project-keyart-below.
+    */
     .project-body-grid {
       display: grid;
-      grid-template-columns: 1fr 380px;
+      grid-template-columns: 1fr;
       gap: var(--space-2xl);
       align-items: start;
+    }
+
+    /* Keyart moved beneath the copy, matching the video's width */
+    .project-keyart-below {
+      width: 100%;
+      margin-top: var(--space-xl);
     }
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
@@ -398,7 +411,7 @@
       <div class="project-video-top">
         <div class="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/_i4c_8kxIxQ"
+            src="https://www.youtube.com/embed/xJraIeGma4M"
             title="Fortnite — Chapter 5: Absolute Doom &nbsp;&middot;&nbsp; Audio Designer"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
@@ -469,15 +482,16 @@
             <p class="project-detail-text">That came down to attenuation focus, with most of the attention on the focus cone angle and on the attack and release of the focus itself. On heavily focused sounds a fast attack with a slow release usually wins. The flock arrives the moment you look up at it, then lets go gradually as you turn away, rather than snapping in and out of focus every time the camera moves and pulling your attention back each time.</p>
           </div>
 
+          <!-- Keyart now sits below the copy so the text runs full width -->
+          <div class="project-keyart-below">
+            <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom — Joe Hudson" loading="lazy" />
+          </div>
+
           <div class="cta" style="padding:0">
             <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
             <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
           </div>
 
-        </div>
-
-        <div>
-          <img class="project-keyart" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom — Joe Hudson" loading="lazy" />
         </div>
 
       </div>
