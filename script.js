@@ -556,6 +556,12 @@ if (readoutTab) {
   el.addEventListener('touchend', handleGhost, { passive: true });
 });
 
+[...document.querySelectorAll('.btn--purple')].forEach(el => {
+  function handlePurple() { resumeAudio(); playClick('purp'); pressButton(el); }
+  el.addEventListener('click',    handlePurple);
+  el.addEventListener('touchend', handlePurple, { passive: true });
+});
+
 // Footer elbow
 const footerElbow = document.querySelector('.footer-elbow');
 if (footerElbow) {

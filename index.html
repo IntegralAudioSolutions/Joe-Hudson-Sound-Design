@@ -220,9 +220,22 @@
 
     .lelbow:hover { filter: brightness(1.3); }
 
-    /* Hero text column */
+    /*
+      Hero content: text column on the left, studio photo in its own
+      fixed-width column on the right. This used to be a flex column
+      with the photo floated right, but a float does nothing to a
+      flex sibling — that's why the photo sat above everything with
+      dead space beside it instead of the text wrapping around it.
+    */
     .hero-content {
       padding: 36px 32px 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .hero-text-col {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -473,15 +486,13 @@
 
     /* ── HERO PHOTO ── */
     /*
-      Desktop: floated right so all hero text wraps around the left side.
-      Must be the first element in hero-content for the float to work.
-      Mobile: float removed, shows as a contained image at the top.
+      Sits in its own 320px grid column (see .hero-content), matching
+      the height of the text column beside it. On tablet and mobile
+      this collapses to a single column with the photo stacked above
+      the text — see the 900px and 600px media queries below.
     */
     .hero-photo-float {
-      float: right;
-      width: 38%;
-      max-width: 340px;
-      margin: 0 0 var(--space-md) var(--space-lg);
+      width: 100%;
       border-radius: 2px;
       border: 1px solid rgba(212,172,80,0.15);
       overflow: hidden;
@@ -591,6 +602,14 @@
 
     @media (max-width: 900px) {
       .image-grid { grid-template-columns: repeat(4, 1fr); }
+
+      /*
+        Hero: photo stacks above the text once the 320px column gets
+        tight. DOM order is text-then-photo (needed for the desktop
+        grid), so `order` puts the photo back on top visually here.
+      */
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-photo-float { order: -1; max-width: 320px; margin: 0 auto var(--space-lg); }
     }
 
     @media (max-width: 600px) {
@@ -650,14 +669,11 @@
         white-space: nowrap;  /* prevents button text breaking across lines */
       }
 
-      /* Studio photo — show at top on mobile, full width, no float */
+      /* Studio photo — full width at top on mobile */
       .hero-photo-float {
-        float: none;
         width: 100%;
         max-width: 100%;
         margin: 0 0 16px 0;   /* margin below photo, above text */
-        border-radius: 2px;
-        display: block;
       }
 
       /* ── REEL SECTION ── */
@@ -740,7 +756,28 @@
 
     <!-- Hero text -->
     <div class="hero-content">
-      <!-- Photo floated right — MUST be first element for text wrapping to work -->
+
+      <!-- Text column — everything except the photo -->
+      <div class="hero-text-col">
+        <!--
+          Eyebrow updated to include "Sounds & Implementation"
+        -->
+        <p class="hero-eyebrow">// SOUND DESIGN &nbsp;·&nbsp; IMPLEMENTATION &nbsp;·&nbsp; UNREAL ENGINE &nbsp;·&nbsp; JOEHUDSON.CO.UK</p>
+        <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
+        <p class="hero-role">Technical Sound Designer</p>
+        <hr class="hero-rule" />
+        <p class="hero-tagline">
+          12 years building the sonic worlds players live in.
+          UE5 specialist. Fortnite Battle Royale.
+          Now open to projects.
+        </p>
+        <div class="hero-cta">
+          <a href="pages/reel.html"    class="btn btn--cyan">View Reel →</a>
+          <a href="pages/contact.html" class="btn btn--purple">Get in Touch →</a>
+        </div>
+      </div>
+
+      <!-- Studio photo — its own column to the right of the text -->
       <div class="hero-photo-float">
         <img
           src="assets/images/joe-hudson-studio.jpg"
@@ -748,22 +785,7 @@
           loading="eager"
         />
       </div>
-      <!--
-        Eyebrow updated to include "Sounds & Implementation"
-      -->
-      <p class="hero-eyebrow">// SOUND DESIGN &nbsp;·&nbsp; IMPLEMENTATION &nbsp;·&nbsp; UNREAL ENGINE &nbsp;·&nbsp; JOEHUDSON.CO.UK</p>
-      <h1 class="hero-name">Joe <strong>Hudson</strong></h1>
-      <p class="hero-role">Technical Sound Designer</p>
-      <hr class="hero-rule" />
-      <p class="hero-tagline">
-        12 years building the sonic worlds players live in.
-        UE5 specialist. Fortnite Battle Royale.
-        Now open to projects.
-      </p>
-      <div class="hero-cta">
-        <a href="pages/reel.html"    class="btn btn--cyan">View Reel →</a>
-        <a href="pages/contact.html" class="btn btn--ghost">Get in Touch →</a>
-      </div>
+
     </div>
 
 

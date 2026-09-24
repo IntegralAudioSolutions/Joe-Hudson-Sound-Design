@@ -927,6 +927,25 @@ h1, h2, h3 {
   outline: none;
 }
 
+/*
+  Purple button — used for "Get in Touch". Resting state uses the
+  light purple that used to only show up on the ghost button's hover;
+  on hover this one fills solid purple with white text instead.
+*/
+.btn--purple {
+  background: var(--color-purp-faint);
+  color: var(--color-purp-light);
+  border-color: var(--color-purp-border);
+}
+
+.btn--purple:hover,
+.btn--purple:focus-visible {
+  background: var(--color-purp);
+  border-color: var(--color-purp);
+  color: #ffffff;
+  outline: none;
+}
+
 /* CTA row that holds the buttons */
 .cta {
   padding: 0 var(--space-xl) var(--space-lg);
@@ -1047,6 +1066,11 @@ h1, h2, h3 {
   100% { background: transparent; color: var(--color-text-dim); }
 }
 
+@keyframes btnPressPurple {
+  0%   { background: var(--color-purp); color: #fff; box-shadow: 0 0 16px rgba(112, 96, 200, 0.5); }
+  100% { background: var(--color-purp-faint); color: var(--color-purp-light); box-shadow: none; }
+}
+
 /* Card border glow on click */
 @keyframes cardFlash {
   0%   { box-shadow: 0 0 0 1px rgba(0, 200, 224, 0); }
@@ -1069,6 +1093,7 @@ h1, h2, h3 {
 /* Applied via JS */
 .btn--cyan.is-pressed   { animation: btnPressCyan  0.35s ease; }
 .btn--ghost.is-pressed  { animation: btnPressGhost 0.35s ease; }
+.btn--purple.is-pressed { animation: btnPressPurple 0.35s ease; }
 .card.is-flashing       { animation: cardFlash     0.5s ease; }
 .nav-link.is-flashing   { animation: navFlash      0.3s ease; }
 
