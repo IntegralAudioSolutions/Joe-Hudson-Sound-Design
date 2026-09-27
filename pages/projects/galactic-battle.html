@@ -433,6 +433,9 @@
       width: 100%;
       border-top: 1px solid var(--color-gold-border);
       padding-top: var(--space-xl);
+      /* Contains the floated trailer box in the overview section below,
+         same reason .poi-block needs it */
+      overflow: hidden;
     }
 
     .detail-block .project-detail-text,
@@ -601,16 +604,17 @@
     }
 
     /*
-      Reference box for the original trailer, sat on its own at the
-      very bottom of the page rather than floated against body text.
-      Sized down from the 520px POI boxes so it reads as a footnote
-      rather than a credit — the audio on it isn't Joe's work.
+      Reference box for the original trailer, floated right in the
+      overview section next to the locations/licensing text — same
+      pattern as .poi-video, just sized down a touch from the 520px
+      POI boxes so it reads as a footnote rather than a credit, since
+      the audio on it isn't Joe's work.
     */
     .trailer-video {
-      float: none;
-      width: 100%;
+      float: right;
+      width: 46%;
       max-width: 440px;
-      margin: var(--space-md) auto 0;
+      margin: 0 0 var(--space-md) var(--space-lg);
     }
 
     /* Responsive */
@@ -874,6 +878,20 @@
       <section class="detail-block" aria-label="Project overview">
         <p class="project-desc">Ambient audio on Fortnite's Galactic Battle season. A set of locations I owned outright, plus a wider pass across the island making the new areas sit properly against everything already there.</p>
 
+        <!-- Original announce trailer, included for reference only —
+             audio post on this wasn't part of Joe's credit -->
+        <figure class="poi-video trailer-video">
+          <div class="poi-video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/yR7-FBMCJn0"
+              title="Fortnite — Galactic Battle — Official Season Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Official season trailer &nbsp;&middot;&nbsp; Courtesy of IGN &nbsp;&middot;&nbsp; Audio post not by Joe Hudson</figcaption>
+        </figure>
+
         <p class="project-section-label">// The Locations</p>
 
         <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
@@ -954,25 +972,6 @@
         <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
           </div>
 
-      </section>
-
-      <!-- Original announce trailer, included for reference only —
-           audio post on this wasn't part of Joe's credit -->
-      <section class="detail-block" aria-label="Official trailer">
-        <p class="project-section-label">// For Reference</p>
-        <p class="project-detail-text">The original announce trailer for the season, included here for context. Audio post on the trailer itself wasn't part of the credit above.</p>
-
-        <figure class="poi-video trailer-video">
-          <div class="poi-video-wrapper">
-            <iframe
-              src="https://www.youtube.com/embed/yR7-FBMCJn0"
-              title="Fortnite — Galactic Battle — Official Season Trailer"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
-          <figcaption>// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Official season trailer &nbsp;&middot;&nbsp; Courtesy of IGN</figcaption>
-        </figure>
       </section>
 
     </main>
