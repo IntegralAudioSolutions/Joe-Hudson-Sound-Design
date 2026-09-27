@@ -426,8 +426,10 @@
     /*
       Full-width prose sections sitting outside the body grid.
       Used for the lead-in above the locations and the longer approach
-      notes below them. The max-width keeps the line length readable,
-      since without it the text would run the full width of the page.
+      notes below them. No max-width here on purpose — text runs the
+      full column width and only narrows where it's actually wrapping
+      round a floated image or video, exactly like the POI sections
+      above, rather than staying artificially narrow once it's clear.
     */
     .detail-block {
       width: 100%;
@@ -437,10 +439,6 @@
          same reason .poi-block needs it */
       overflow: hidden;
     }
-
-    .detail-block .project-detail-text,
-    .detail-block .layer-stack,
-    .detail-block .project-subhead { max-width: 820px; }
 
     /* Space above the second label in the approach block */
     .detail-block .project-section-label + .project-section-label,
