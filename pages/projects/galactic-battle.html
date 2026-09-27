@@ -441,7 +441,8 @@
 
     /* Space above the second label in the approach block */
     .detail-block .project-section-label + .project-section-label,
-    .detail-block .project-detail-text + .project-section-label {
+    .detail-block .project-detail-text + .project-section-label,
+    .detail-block .project-desc + .project-section-label {
       margin-top: var(--space-xl);
     }
 
@@ -599,6 +600,19 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
+    /*
+      Reference box for the original trailer, sat on its own at the
+      very bottom of the page rather than floated against body text.
+      Sized down from the 520px POI boxes so it reads as a footnote
+      rather than a credit — the audio on it isn't Joe's work.
+    */
+    .trailer-video {
+      float: none;
+      width: 100%;
+      max-width: 440px;
+      margin: var(--space-md) auto 0;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -681,20 +695,16 @@
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <!--
-            TEMP EMBED — official season trailer.
-            To be replaced with Joe's own in-engine walkthrough once it's
-            cut and uploaded. Only the video ID below needs changing.
-          -->
+          <!-- Joe's own in-engine walkthrough, stitching all four POIs -->
           <iframe
-            src="https://www.youtube.com/embed/yR7-FBMCJn0"
-            title="Fortnite — Galactic Battle cinematic trailer"
+            src="https://www.youtube.com/embed/acUETVlHAGA"
+            title="Fortnite — Galactic Battle — Full Location Walkthrough"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             loading="lazy"
             allowfullscreen>
           </iframe>
         </div>
-        <p class="video-caption">// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Official season trailer &nbsp;&middot;&nbsp; Courtesy of IGN</p>
+        <p class="video-caption">// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Full Location Walkthrough</p>
       </div>
 
       <!-- Body copy, full width, matching the video's edges -->
@@ -732,33 +742,9 @@
             </div>
           </div>
 
-          <p class="project-desc">Ambient audio on Fortnite's Galactic Battle season. A set of locations I owned outright, plus a wider pass across the island making the new areas sit properly against everything already there.</p>
-
-          <div>
-            <p class="project-section-label">// Working With Licensed Source Material</p>
-
-            <p class="project-detail-text">This season ran on original source content supplied by the licensor, and that changes how you work before you've opened a single session.</p>
-
-            <p class="project-detail-text">Material like that arrives with conditions attached. Where it is allowed to live, who can open it, what can leave the building, what can be shown and when. None of it is negotiable, and none of it is interesting to talk about, which is rather the point. The measure of having handled it properly is that there is nothing to report. Nothing leaked, nothing appeared early, nothing ended up somewhere it shouldn't have.</p>
-
-            <p class="project-detail-text">It's worth saying plainly because it's the part of a credit that never shows up in a reel. Bringing someone in on licensed IP means handing them material that belongs to somebody else, under an agreement you have signed and they haven't. Being straightforward to trust with it is part of the job, and it is a large part of why the same people get asked back.</p>
-          </div>
-
-
         </div>
 
       </div>
-
-      <!-- Lead-in to the POI breakdowns below -->
-      <section class="detail-block" aria-label="The locations">
-        <p class="project-section-label">// The Locations</p>
-
-            <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
-
-        <p class="project-detail-text">Three of those were mine end to end. On Outpost Enclave a colleague did the main thrust, setting up the volumes and interiors, and I worked alongside him fixing bugs and helping get it singing. That's how the good ones tend to go. One person owns it and knows every inch of it, another comes in with fresh ears and no attachment to any of the decisions, and the location ends up better than either of you would have managed on your own.</p>
-
-        <p class="project-detail-text">First Order Base and Resistance Base are the interesting pair, because they had to read as opposites the moment you landed in either one, without either of them leaning on the obvious.</p>
-      </section>
 
       <!-- ══ POI BREAKDOWNS ══ -->
 
@@ -882,6 +868,29 @@
         <p class="project-detail-text">The trick is to fix what's broken without quietly redesigning it around your own preferences. It was his location and it should sound like his location, only without the problems.</p>
       </section>
 
+      <!-- Overview + licensing note, moved down here so the POI
+           breakdowns lead the page rather than sitting behind a
+           wall of intro text -->
+      <section class="detail-block" aria-label="Project overview">
+        <p class="project-desc">Ambient audio on Fortnite's Galactic Battle season. A set of locations I owned outright, plus a wider pass across the island making the new areas sit properly against everything already there.</p>
+
+        <p class="project-section-label">// The Locations</p>
+
+        <p class="project-detail-text">Four locations carried the Star Wars identity that season. First Order Base, Resistance Base, Vader Samurai's Solitude and Outpost Enclave.</p>
+
+        <p class="project-detail-text">Three of those were mine end to end. On Outpost Enclave a colleague did the main thrust, setting up the volumes and interiors, and I worked alongside him fixing bugs and helping get it singing. That's how the good ones tend to go. One person owns it and knows every inch of it, another comes in with fresh ears and no attachment to any of the decisions, and the location ends up better than either of you would have managed on your own.</p>
+
+        <p class="project-detail-text">First Order Base and Resistance Base are the interesting pair, because they had to read as opposites the moment you landed in either one, without either of them leaning on the obvious.</p>
+
+        <p class="project-section-label">// Working With Licensed Source Material</p>
+
+        <p class="project-detail-text">This season ran on original source content supplied by the licensor, and that changes how you work before you've opened a single session.</p>
+
+        <p class="project-detail-text">Material like that arrives with conditions attached. Where it is allowed to live, who can open it, what can leave the building, what can be shown and when. None of it is negotiable, and none of it is interesting to talk about, which is rather the point. The measure of having handled it properly is that there is nothing to report. Nothing leaked, nothing appeared early, nothing ended up somewhere it shouldn't have.</p>
+
+        <p class="project-detail-text">It's worth saying plainly because it's the part of a credit that never shows up in a reel. Bringing someone in on licensed IP means handing them material that belongs to somebody else, under an agreement you have signed and they haven't. Being straightforward to trust with it is part of the job, and it is a large part of why the same people get asked back.</p>
+      </section>
+
       <!-- Longer-form approach notes, below the locations -->
       <section class="detail-block" aria-label="Approach and pipeline">
         <p class="project-section-label">// Approach</p>
@@ -945,6 +954,25 @@
         <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
           </div>
 
+      </section>
+
+      <!-- Original announce trailer, included for reference only —
+           audio post on this wasn't part of Joe's credit -->
+      <section class="detail-block" aria-label="Official trailer">
+        <p class="project-section-label">// For Reference</p>
+        <p class="project-detail-text">The original announce trailer for the season, included here for context. Audio post on the trailer itself wasn't part of the credit above.</p>
+
+        <figure class="poi-video trailer-video">
+          <div class="poi-video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/yR7-FBMCJn0"
+              title="Fortnite — Galactic Battle — Official Season Trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>// Fortnite — Galactic Battle &nbsp;&middot;&nbsp; Official season trailer &nbsp;&middot;&nbsp; Courtesy of IGN</figcaption>
+        </figure>
       </section>
 
     </main>
