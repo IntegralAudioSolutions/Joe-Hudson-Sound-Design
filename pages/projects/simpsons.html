@@ -247,6 +247,36 @@
       font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
       letter-spacing: 0.1em; margin-top: 8px;
     }
+
+    /*
+      Highlight reel — a grid of individual clips, separate from the
+      main video up top. Starts with one card as a placeholder; more
+      get added here as Joe supplies them, and the grid just wraps.
+    */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+    }
+    .highlight-card {
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .highlight-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+    }
+    .highlight-video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .highlight-card figcaption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-muted);
+      letter-spacing: 0.1em; line-height: 1.6; padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
     /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
@@ -396,13 +426,17 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- Full-width 16:9 video — matches Absolute Doom layout -->
+      <!-- Full-width 16:9 video — matches Absolute Doom layout.
+           PLACEHOLDER: standing in for the main video until a proper
+           cut is ready — only the video ID needs changing later. -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <iframe
+            src="https://www.youtube.com/embed/NBStYHoXQx8"
+            title="Fortnite — The Simpsons Season — Audio Designer"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
         <p class="video-caption">// Fortnite — The Simpsons Season &nbsp;&middot;&nbsp; Audio Designer</p>
       </div>
@@ -458,6 +492,25 @@
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
             <p class="project-detail-text">Tools and pipeline details to be added.</p>
+          </div>
+
+          <!-- Highlight reel — starts with one placeholder card;
+               more get added here as Joe supplies them -->
+          <div>
+            <p class="project-section-label">// Highlights</p>
+            <div class="highlights-grid">
+              <figure class="highlight-card">
+                <div class="highlight-video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/NBStYHoXQx8"
+                    title="Fortnite — The Simpsons Season — Highlight"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <figcaption>// Fortnite — The Simpsons Season &nbsp;&middot;&nbsp; Highlight &nbsp;&middot;&nbsp; Placeholder</figcaption>
+              </figure>
+            </div>
           </div>
 
           <div class="cta" style="padding:0">
