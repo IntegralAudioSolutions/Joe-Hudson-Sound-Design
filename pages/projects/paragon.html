@@ -539,6 +539,16 @@
       background: linear-gradient(135deg, rgba(212,172,80,0.07), rgba(0,200,224,0.07));
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    .hero-tile-portrait {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter 0.3s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-tile-portrait:hover { filter: saturate(1.0) brightness(1.0); }
     .hero-tile-initial {
       font-family: var(--font-mono);
       font-size: 22px;
@@ -881,53 +891,43 @@
         -->
         <div class="hero-grid">
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/sevarog.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/sevarog.jpg" alt="Sevarog" loading="lazy" />
             <p class="hero-tile-name">Sevarog</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/grux.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/grux.jpg" alt="Grux" loading="lazy" />
             <p class="hero-tile-name">Grux</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/grim-exe.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/grim-exe.jpg" alt="GRIM.exe" loading="lazy" />
             <p class="hero-tile-name">GRIM.exe</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/feng-mao.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">F</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/feng-mao.jpg" alt="Feng Mao" loading="lazy" />
             <p class="hero-tile-name">Feng Mao</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/murdock.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">M</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/murdock.jpg" alt="Murdock" loading="lazy" />
             <p class="hero-tile-name">Murdock</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/twinblast.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">T</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/twinblast.jpg" alt="TwinBlast" loading="lazy" />
             <p class="hero-tile-name">TwinBlast</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/gideon.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/gideon.jpg" alt="Gideon" loading="lazy" />
             <p class="hero-tile-name">Gideon</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/howitzer.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">H</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/howitzer.jpg" alt="Howitzer" loading="lazy" />
             <p class="hero-tile-name">Howitzer</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/steel.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/steel.jpg" alt="Steel" loading="lazy" />
             <p class="hero-tile-name">Steel</p>
           </div>
           <div class="hero-tile">
-            <!-- assets/images/Paragon/heroes/sparrow.jpg -->
-            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/sparrow.jpg" alt="Sparrow" loading="lazy" />
             <p class="hero-tile-name">Sparrow</p>
           </div>
         </div>
@@ -997,18 +997,12 @@
         <!-- Set 1 -->
         <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="Paragon key art" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="A hero leaping toward a swirling portal as a boulder is hurled past" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_SevarogDramatic.jpg" alt="Sevarog, hooded and wreathed in green light, gripping his war hammer" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_DualGuns.jpg" alt="A hero crossing dual pistols in close-up" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_ArmoredHelmet.jpg" alt="A heavily armoured hero in an orange and blue visored helmet" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_ClawArmHero.jpg" alt="A hero with a mechanical claw arm resting on her shoulder before a stone archway" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="The Paragon hero roster clashing on the Prime map" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="Overgrown ancient ruins across the Paragon map" loading="lazy" role="listitem" />
         <!-- Set 2 — exact duplicate for the seamless loop -->
         <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="" loading="lazy" aria-hidden="true" />
         <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_SevarogDramatic.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_DualGuns.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_ArmoredHelmet.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_ClawArmHero.jpg" alt="" loading="lazy" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="" loading="lazy" aria-hidden="true" />
         <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="" loading="lazy" aria-hidden="true" />
       </div>
     </div>
