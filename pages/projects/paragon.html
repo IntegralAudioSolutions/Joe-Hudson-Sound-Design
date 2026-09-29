@@ -332,6 +332,141 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+
+    /* ================================================================
+       FULL-WIDTH DETAIL SECTION
+       ----------------------------------------------------------------
+       Same pattern as the galactic-battle.html breakdown sections —
+       a full-width block below the main grid, separated by a rule.
+    ================================================================ */
+    .detail-block {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+      /* Contains the floated video below */
+      overflow: hidden;
+    }
+
+    /*
+      Dev-preview walkthrough video, floated exactly like the POI
+      videos on the galactic-battle.html page — same size, same
+      16:9 wrapper, same figcaption treatment.
+    */
+    .poi-video {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .poi-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+    }
+    .poi-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .poi-video figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /*
+      Disclaimer callout — sits at the top of the dev-preview section
+      so it's the first thing read. Coral border reuses the same
+      "needs attention" colour as the collab tag elsewhere on the site.
+    */
+    .dev-notice {
+      border: 1px solid var(--color-coral-border);
+      border-left: 3px solid var(--color-coral);
+      background: var(--color-bg-nav);
+      border-radius: 2px;
+      padding: 12px 14px;
+      margin-bottom: var(--space-lg);
+    }
+    .dev-notice-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-coral);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .dev-notice p {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .dev-notice p + p { margin-top: 8px; }
+
+    /* ================================================================
+       ISOLATED SFX PLAYERS
+       ----------------------------------------------------------------
+       Simple native <audio> players, grouped and labelled, styled to
+       sit inside the same bordered-card language as the rest of the
+       site rather than looking like a bare embed.
+    ================================================================ */
+    .sfx-block {
+      border: 1px solid var(--color-gold-border);
+      background: var(--color-bg-nav);
+      border-radius: 2px;
+      padding: var(--space-lg) var(--space-md) var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sfx-group-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-cyan);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: var(--space-md) 4px 4px;
+    }
+    .sfx-group-label:first-child { margin-top: 0; }
+    .sfx-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 2px;
+      padding: 8px 12px;
+    }
+    .sfx-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.03em;
+      flex: 0 0 200px;
+      line-height: 1.4;
+    }
+    .sfx-row audio {
+      flex: 1 1 auto;
+      width: 100%;
+      height: 32px;
+      color-scheme: dark;
+      accent-color: var(--color-cyan);
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -345,6 +480,9 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+      .poi-video { float: none; width: 100%; max-width: 100%; margin: 0 0 var(--space-md) 0; }
+      .sfx-row { flex-direction: column; align-items: stretch; gap: 6px; }
+      .sfx-name { flex: 0 0 auto; }
     }
   </style>
 </head>
@@ -468,7 +606,151 @@
 
       </div>
 
-    
+      <!-- ══ DEVELOPMENT AUDIO PREVIZ + ISOLATED SFX ══ -->
+      <section class="detail-block" aria-label="Development audio previz and isolated SFX">
+
+        <div class="dev-notice">
+          <span class="dev-notice-label">// Unreleased Development Material — Not Final Product</span>
+          <p>The video below is an internal audio previsualisation, not a representation of the finished game. It was built as a rough guide for the technical sound designer implementing the audio — showing roughly what should trigger where and when — rather than a polished mix intended for players to hear.</p>
+          <p>Paragon was discontinued by Epic Games in 2018, so this early-stage, work-in-progress footage is shared here only to illustrate process. It should not be taken as indicative of the shipped product.</p>
+        </div>
+
+        <figure class="poi-video">
+          <div class="poi-video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/dgBa6YTkMGw"
+              title="Paragon — UI Audio Previz (WIP, internal reference only)"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <figcaption>// Paragon &nbsp;&middot;&nbsp; Audio Previz (WIP) &nbsp;&middot;&nbsp; Internal reference only — not representative of final product</figcaption>
+        </figure>
+
+        <p class="project-section-label">// Handing Off To Implementation</p>
+
+        <p class="project-detail-text">Not every credit ends with the sound designer placing the final mix themselves. On work like this, part of the job was designing the palette of UI sounds and then handing them over to the technical sound designer building them into the engine — with instructions on intent and timing rather than a finished implementation to copy exactly.</p>
+
+        <p class="project-detail-text">A previz like the one above is that handoff document. It's a rough pass showing roughly where and when each sound should land, built so the person doing the implementation understands the intent behind the design rather than just inheriting a folder of files and guessing.</p>
+
+        <p class="project-detail-text">That handoff is often the part of the job that matters most. A sound can be designed perfectly and still land badly if the person implementing it doesn't understand why it was built that way. Communicating the intent clearly — what should trigger it, roughly when, how it should feel against everything else happening on screen — is frequently more critical to the end result than the sound design itself.</p>
+
+        <p class="project-section-label">// SFX — Isolated</p>
+
+        <p class="project-detail-text">A selection of the UI sound effects designed for Paragon, presented here in isolation exactly as they were delivered to the implementation team.</p>
+
+        <div class="sfx-block">
+          <p class="sfx-group-label">// Menus &amp; Navigation</p>
+          <div class="sfx-row">
+            <span class="sfx-name">Communication Menu — Open</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_CommunicationMenu_Open_Small_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Cursor Highlight</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_General_Cursor_Highlight_Mono.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Home Tab — Selected</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Home_Tab_Selected_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Play Tab — Selected</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Play_Tab_Selected_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Settings Menu — Open</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_SettingsMenu_Open_Small.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Matchmaking Menu — Slide In</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Matchmaking_Small_Menu_SlideIn_Right_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Loading Splash Screen</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Paragon_Loading_SplashScreen_St.wav"></audio>
+          </div>
+
+          <p class="sfx-group-label">// Hero Selection</p>
+          <div class="sfx-row">
+            <span class="sfx-name">Hero Abilities — Load Finished</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hero_Abilities_Load_Finished.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Hero Selected</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hero_Selected.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Hero Selection Menu — Slide In</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hero_SelectionMenu_SlideIn_Bottom_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Hero Selection Menu — Slide Out</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hero_SelectionMenu_SlideOut_Bottom_St.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Hero Selection — Page Turn</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hero_SelectionPage_Turned.wav"></audio>
+          </div>
+
+          <p class="sfx-group-label">// Match Type</p>
+          <div class="sfx-row">
+            <span class="sfx-name">Match Type — Hover 01</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hover_MatchType_Block_Embossed_Mono_01.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Match Type — Hover 02</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Hover_MatchType_Block_Embossed_Mono_02.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Match Type — Selected</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_Match_Type_Selected_St.wav"></audio>
+          </div>
+
+          <p class="sfx-group-label">// Team Comms</p>
+          <div class="sfx-row">
+            <span class="sfx-name">System Message 1</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_System_Messages_1_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">System Message 2</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_System_Messages_2_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Chat 1</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Chat_Messages_1_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Chat 2</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Chat_Messages_2_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Message 1</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Messages_1_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Message 2</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Messages_2_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Party Chat 1</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Party_Chat_Messages_1_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Teammate Party Chat 2</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Teammate_Party_Chat_Messages_2_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Whisper (1-2-1) 1</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Whispers_1-2-1_Messages_1_Stereo.wav"></audio>
+          </div>
+          <div class="sfx-row">
+            <span class="sfx-name">Whisper (1-2-1) 2</span>
+            <audio controls preload="none" src="../../assets/audio/ui_paragon/A_UI_TeamComms_Whispers_1-2-1_Messages_2_Stereo.wav"></audio>
+          </div>
+        </div>
+
+      </section>
+
       <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
