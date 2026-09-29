@@ -422,17 +422,26 @@
        sit inside the same bordered-card language as the rest of the
        site rather than looking like a bare embed.
     ================================================================ */
+    /*
+      Two columns rather than one long stretched-out list — a 0.5s UI
+      blip doesn't need a full-width scrub bar, and this keeps the
+      block a sane height. clear:both is set on the group label below
+      (the first thing after the floated previz video) so the whole
+      SFX block always sits full-width under the video rather than
+      wrapping into whatever room is left beside it.
+    */
     .sfx-block {
       border: 1px solid var(--color-gold-border);
       background: var(--color-bg-nav);
       border-radius: 2px;
       padding: var(--space-lg) var(--space-md) var(--space-md);
       margin: var(--space-md) 0 var(--space-lg);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px 12px;
     }
     .sfx-group-label {
+      grid-column: 1 / -1;
       font-family: var(--font-mono);
       font-size: 8px;
       color: var(--color-cyan);
@@ -441,28 +450,33 @@
       margin: var(--space-md) 4px 4px;
     }
     .sfx-group-label:first-child { margin-top: 0; }
+    /* Clears the floated previz video so the whole SFX section — this
+       label, the intro line, and the block below — sits full-width. */
+    .sfx-clear { clear: both; }
     .sfx-row {
       display: flex;
-      gap: 14px;
+      gap: 10px;
       align-items: center;
+      min-width: 0;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.06);
       border-left: 3px solid var(--color-gold);
       border-radius: 2px;
-      padding: 8px 12px;
+      padding: 7px 10px;
     }
     .sfx-name {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 9px;
       color: var(--color-text-dim);
-      letter-spacing: 0.03em;
-      flex: 0 0 200px;
-      line-height: 1.4;
+      letter-spacing: 0.02em;
+      flex: 0 0 126px;
+      line-height: 1.35;
     }
     .sfx-row audio {
       flex: 1 1 auto;
       width: 100%;
-      height: 32px;
+      min-width: 0;
+      height: 30px;
       color-scheme: dark;
       accent-color: var(--color-cyan);
     }
@@ -545,6 +559,7 @@
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
       .project-top-row { grid-template-columns: 1fr; }
+      .sfx-block { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
@@ -555,6 +570,7 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
       .poi-video { float: none; width: 100%; max-width: 100%; margin: 0 0 var(--space-md) 0; }
+      .sfx-block { grid-template-columns: 1fr; }
       .sfx-row { flex-direction: column; align-items: stretch; gap: 6px; }
       .sfx-name { flex: 0 0 auto; }
       .process-strip { grid-template-columns: 1fr; }
@@ -652,7 +668,7 @@
 
         <p class="project-detail-text">That handoff is often the part of the job that matters most. A sound can be designed perfectly and still land badly if the person implementing it doesn't understand why it was built that way. Communicating the intent clearly — what should trigger it, roughly when, how it should feel against everything else happening on screen — is frequently more critical to the end result than the sound design itself.</p>
 
-        <p class="project-section-label">// SFX — Isolated</p>
+        <p class="project-section-label sfx-clear">// SFX — Isolated</p>
 
         <p class="project-detail-text">A selection of the UI sound effects designed for Paragon, presented here in isolation exactly as they were delivered to the implementation team.</p>
 
