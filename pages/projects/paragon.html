@@ -467,6 +467,80 @@
       accent-color: var(--color-cyan);
     }
 
+    /* ================================================================
+       DIALOGUE EDITING — process strip + character grid
+       ================================================================ */
+    .process-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+    .process-shot {
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .process-shot img {
+      width: 100%; height: auto; display: block;
+      filter: saturate(0.9) brightness(0.95);
+      transition: filter var(--transition-med);
+    }
+    .process-shot img:hover { filter: saturate(1.0) brightness(1.0); }
+    .process-shot figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /*
+      Hero grid — one tile per character worked on. Ships as a
+      placeholder (initial letter on a faint gradient) until real
+      portrait art is dropped into assets/images/Paragon/heroes/,
+      same pattern as the placeholder video block up top.
+    */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: var(--space-md) 0 var(--space-lg);
+    }
+    .hero-tile {
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+      text-align: center;
+    }
+    .hero-tile-placeholder {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(212,172,80,0.07), rgba(0,200,224,0.07));
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hero-tile-initial {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--color-text-deep);
+      letter-spacing: 0.04em;
+    }
+    .hero-tile-name {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 7px 4px;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -483,6 +557,8 @@
       .poi-video { float: none; width: 100%; max-width: 100%; margin: 0 0 var(--space-md) 0; }
       .sfx-row { flex-direction: column; align-items: stretch; gap: 6px; }
       .sfx-name { flex: 0 0 auto; }
+      .process-strip { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -536,74 +612,15 @@
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
       <div class="project-video-top">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <iframe
+            src="https://www.youtube.com/embed/3OCJCZJWA68"
+            title="Paragon — Announce Trailer — Epic Games"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            loading="lazy"
+            allowfullscreen>
+          </iframe>
         </div>
-        <p class="video-caption">// Paragon &nbsp;&middot;&nbsp; UI Sound Designer</p>
-      </div>
-
-      <!-- Body copy, full width, matching the video's edges -->
-      <div class="project-body-grid">
-
-        <div class="project-text">
-
-          <div class="project-top-row">
-            <div>
-              <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="breadcrumb-sep" aria-hidden="true">/</span>
-                <a href="../work.html">Credits</a>
-                <span class="breadcrumb-sep" aria-hidden="true">/</span>
-                <span class="breadcrumb-current" aria-current="page">Paragon</span>
-              </nav>
-
-              <div class="project-meta">
-                <div class="meta-row">
-                  <span class="meta-label">Studio</span>
-                  <span class="meta-value">Epic Games</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Role</span>
-                  <span class="meta-value">UI Sound Designer</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Platform</span>
-                  <span class="meta-value">PC · PS4</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Year</span>
-                  <span class="meta-value">2016 – 2018</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Keyart sits here — between the video and the separator line -->
-            <div class="project-top-keyart">
-              <img class="project-keyart" src="../../assets/images/paragon-keyart.png" alt="Paragon — Joe Hudson" loading="lazy" />
-            </div>
-          </div>
-
-          <p class="project-desc">UI Sound Designer on Paragon, Epic Games' MOBA. Responsible for the design and implementation of the game's UI audio — menus, HUD feedback, and interactive sound design for all interface elements.</p>
-
-          <div>
-            <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
-          </div>
-
-          <div>
-            <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
-          </div>
-
-          <div class="cta" style="padding:0">
-            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
-            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
-          </div>
-
-        </div>
-
+        <p class="video-caption">// Paragon &nbsp;&middot;&nbsp; Official Announce Trailer &nbsp;&middot;&nbsp; Epic Games</p>
       </div>
 
       <!-- ══ DEVELOPMENT AUDIO PREVIZ + ISOLATED SFX ══ -->
@@ -749,6 +766,155 @@
           </div>
         </div>
 
+      </section>
+
+      <!-- Body copy, full width, matching the video's edges -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <div class="project-top-row">
+            <div>
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <a href="../work.html">Credits</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Paragon</span>
+              </nav>
+
+              <div class="project-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Studio</span>
+                  <span class="meta-value">Epic Games</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">UI Sound Designer</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Platform</span>
+                  <span class="meta-value">PC · PS4</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value">2016 – 2018</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Keyart sits here — between the video and the separator line -->
+            <div class="project-top-keyart">
+              <img class="project-keyart" src="../../assets/images/paragon-keyart.png" alt="Paragon — Joe Hudson" loading="lazy" />
+            </div>
+          </div>
+
+          <p class="project-desc">UI Sound Designer on Paragon, Epic Games' MOBA. Responsible for the design and implementation of the game's UI audio — menus, HUD feedback, and interactive sound design for all interface elements.</p>
+
+          <div>
+            <p class="project-section-label">// Scope &amp; Responsibilities</p>
+            <p class="project-detail-text">Detailed project notes to be added.</p>
+          </div>
+
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+          </div>
+
+          <div class="cta" style="padding:0">
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ══ DIALOGUE EDITING ══ -->
+      <section class="detail-block" aria-label="Dialogue editing">
+        <p class="project-section-label">// Dialogue Editing</p>
+
+        <p class="project-detail-text">One of my first gigs in the industry, and one I still take a quiet pride in. Paragon shipped a huge amount of hero dialogue, and my job was cutting, rendering and labelling the raw voiceover recordings ready for implementation — catchphrases, confirm selections, ability barks, interactions and team comms — across heroes including Sevarog, Grux, GRIM.exe, Feng Mao, Murdock, TwinBlast, Gideon, Howitzer, Steel and Sparrow. On my best day I got through over 1,000 lines, cut, rendered and labelled with zero mistakes, inside a single eight-hour session.</p>
+
+        <p class="project-detail-text">The workflow ran one audio track per session, with the VO artist recording somewhere between one and ten attempts at each line. I'd identify the best take, edit it down and rename the region directly in Reaper, then run a final check pass against the script before the file names went through a second, automated pass in Advanced Renamer to bring everything in line with the naming convention. Finished files were foldered off by type — catchphrases, confirm selections, interactions, taunts, team comms and so on — then zipped and sent back with the relevant Excel script for that character, line references and all.</p>
+
+        <p class="project-subhead">Process</p>
+
+        <div class="process-strip">
+          <figure class="process-shot">
+            <img src="../../assets/images/Paragon/paragon-dialogue-vo-script.png" alt="Per-character VO script showing Sevarog's bio, voice direction and the full line-by-line dialogue table" loading="lazy" />
+            <figcaption>// Per-character VO script &nbsp;&middot;&nbsp; bio, direction &amp; line-by-line dialogue table</figcaption>
+          </figure>
+          <figure class="process-shot">
+            <img src="../../assets/images/Paragon/paragon-dialogue-folder-structure.png" alt="Approved dialogue takes foldered off by line type — catchphrases, confirm selections, efforts, interactions, status, taunts, team comms" loading="lazy" />
+            <figcaption>// Approved takes foldered by line type ahead of the final rename pass</figcaption>
+          </figure>
+          <figure class="process-shot">
+            <img src="../../assets/images/Paragon/paragon-dialogue-renamer.png" alt="Batch renaming Sevarog dialogue files in Advanced Renamer against the naming convention" loading="lazy" />
+            <figcaption>// Batch renaming &amp; QC in Advanced Renamer, matched against the script</figcaption>
+          </figure>
+        </div>
+
+        <p class="project-subhead">Characters</p>
+
+        <!--
+          Placeholder tiles until real portrait art is dropped into
+          assets/images/Paragon/heroes/ (one file per hero, filenames
+          below). Swap a tile's placeholder div for an <img> once the
+          file exists — same pattern as the top-of-page video placeholder.
+        -->
+        <div class="hero-grid">
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/sevarog.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <p class="hero-tile-name">Sevarog</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/grux.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <p class="hero-tile-name">Grux</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/grim-exe.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <p class="hero-tile-name">GRIM.exe</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/feng-mao.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">F</span></div>
+            <p class="hero-tile-name">Feng Mao</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/murdock.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">M</span></div>
+            <p class="hero-tile-name">Murdock</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/twinblast.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">T</span></div>
+            <p class="hero-tile-name">TwinBlast</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/gideon.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">G</span></div>
+            <p class="hero-tile-name">Gideon</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/howitzer.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">H</span></div>
+            <p class="hero-tile-name">Howitzer</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/steel.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <p class="hero-tile-name">Steel</p>
+          </div>
+          <div class="hero-tile">
+            <!-- assets/images/Paragon/heroes/sparrow.jpg -->
+            <div class="hero-tile-placeholder"><span class="hero-tile-initial">S</span></div>
+            <p class="hero-tile-name">Sparrow</p>
+          </div>
+        </div>
       </section>
 
       <!-- ============================================================
