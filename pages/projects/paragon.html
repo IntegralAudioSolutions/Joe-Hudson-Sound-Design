@@ -254,20 +254,11 @@
       align-items: start;
     }
 
-    /*
-      Top row: breadcrumb + meta on the left, keyart on the right.
-      The separator line (previously on .project-meta) now sits under
-      this whole row, so it clears the keyart too.
-    */
+    /* Top row: breadcrumb + meta, full width now the keyart's gone. */
     .project-top-row {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: var(--space-2xl);
-      align-items: start;
       padding-bottom: var(--space-md);
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-    .project-top-keyart { width: 100%; }
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
       display: flex; flex-direction: column; gap: 6px;
@@ -278,17 +269,19 @@
       letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
     }
     .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    /* Secondary credit block — same pattern as the page-top meta, used to
+       attribute a distinct role (e.g. Dialogue Editor) within a section. */
+    .credit-footer {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
     .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
     .project-section-label {
       font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
     }
     .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
-    .project-keyart {
-      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
-      filter: saturate(0.8) brightness(0.9);
-    }
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
@@ -568,7 +561,6 @@
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
-      .project-top-row { grid-template-columns: 1fr; }
       .sfx-block { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
@@ -800,38 +792,31 @@
         <div class="project-text">
 
           <div class="project-top-row">
-            <div>
-              <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="../../index.html">Home</a>
-                <span class="breadcrumb-sep" aria-hidden="true">/</span>
-                <a href="../work.html">Credits</a>
-                <span class="breadcrumb-sep" aria-hidden="true">/</span>
-                <span class="breadcrumb-current" aria-current="page">Paragon</span>
-              </nav>
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a href="../../index.html">Home</a>
+              <span class="breadcrumb-sep" aria-hidden="true">/</span>
+              <a href="../work.html">Credits</a>
+              <span class="breadcrumb-sep" aria-hidden="true">/</span>
+              <span class="breadcrumb-current" aria-current="page">Paragon</span>
+            </nav>
 
-              <div class="project-meta">
-                <div class="meta-row">
-                  <span class="meta-label">Studio</span>
-                  <span class="meta-value">Epic Games</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Role</span>
-                  <span class="meta-value">UI Sound Designer</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Platform</span>
-                  <span class="meta-value">PC · PS4</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Year</span>
-                  <span class="meta-value">2016 – 2018</span>
-                </div>
+            <div class="project-meta">
+              <div class="meta-row">
+                <span class="meta-label">Studio</span>
+                <span class="meta-value">Epic Games</span>
               </div>
-            </div>
-
-            <!-- Keyart sits here — between the video and the separator line -->
-            <div class="project-top-keyart">
-              <img class="project-keyart" src="../../assets/images/paragon-keyart.png" alt="Paragon — Joe Hudson" loading="lazy" />
+              <div class="meta-row">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">UI Sound Designer</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Platform</span>
+                <span class="meta-value">PC · PS4</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">2016 – 2018</span>
+              </div>
             </div>
           </div>
 
@@ -929,6 +914,25 @@
           <div class="hero-tile">
             <img class="hero-tile-portrait" src="../../assets/images/Paragon/heroes/sparrow.jpg" alt="Sparrow" loading="lazy" />
             <p class="hero-tile-name">Sparrow</p>
+          </div>
+        </div>
+
+        <div class="credit-footer project-meta">
+          <div class="meta-row">
+            <span class="meta-label">Studio</span>
+            <span class="meta-value">Epic Games</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">Dialogue Editor</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Platform</span>
+            <span class="meta-value">PC · PS4</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Year</span>
+            <span class="meta-value">2016 – 2018</span>
           </div>
         </div>
       </section>
