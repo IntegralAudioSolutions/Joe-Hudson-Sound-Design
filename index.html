@@ -467,6 +467,19 @@
 
     .grid-cell:hover::before { opacity: 1; }
 
+    /*
+      MOBILE "ARMED" STATE — touch has no hover, so a single tap on a
+      tile mid-scroll would otherwise navigate straight away with no
+      warning. On touch devices a first tap only arms the tile (shown
+      with this state, reusing the desktop hover look) and a second
+      tap within the window actually follows the link. Mirrors the
+      :hover rules above one-for-one so it reads the same way.
+    */
+    .grid-cell.is-armed { border-color: rgba(255,255,255,0.5); }
+    .grid-cell.is-armed img { transform: scale(1.04); filter: saturate(1.0) brightness(1.0); }
+    .grid-cell.is-armed .grid-cell-overlay { opacity: 1; }
+    .grid-cell.is-armed::before { opacity: 1; }
+
     .grid-cell-label {
       font-family: var(--font-mono);
       font-size: 8px;
@@ -1166,8 +1179,39 @@
       tear-down issue as nav links. We use preventDefault + 120ms delay
       so the sound completes before navigation fires.
       Plain div cells have no href so they just play the sound.
+
+      DESKTOP (mouse/keyboard) is untouched below — a single click still
+      navigates straight away, exactly as before.
+
+      MOBILE (touch) is different on purpose. A raw touchend fires on
+      release regardless of whether the finger actually moved, so
+      scrolling the page with a thumb that happens to land on a tile
+      was firing this and navigating away mid-scroll. Touch taps now
+      need two things before they navigate:
+        1. Movement since touchstart under a small threshold (i.e. it
+           was actually a tap, not a scroll/drag) — anything past that
+           is ignored completely.
+        2. A second qualifying tap on the SAME tile within
+           DOUBLE_TAP_WINDOW of the first. The first tap only "arms"
+           the tile (.is-armed, same look as desktop :hover) so it's
+           obvious a repeat tap is needed; tapping a different tile
+           re-arms on that one instead.
     */
+    const DOUBLE_TAP_WINDOW = 2500; // ms allowed for the confirming second tap
+    const TAP_MOVE_TOLERANCE = 10;  // px of finger movement still counted as a tap
+    let armedCell = null;
+    let armedTimer = null;
+
+    function disarm(cell) {
+      cell.classList.remove('is-armed');
+      clearTimeout(armedTimer);
+      if (armedCell === cell) armedCell = null;
+    }
+
     document.querySelectorAll('.grid-cell').forEach(cell => {
+      let touchStartX = 0, touchStartY = 0;
+
+      /* Desktop / keyboard — unchanged single-click navigation */
       cell.addEventListener('click', (e) => {
         resumeAudio();
         if (typeof playClick === 'function') playClick('gold');
@@ -1177,15 +1221,49 @@
           setTimeout(() => { window.location.href = href; }, 120);
         }
       });
-      cell.addEventListener('touchend', (e) => {
-        resumeAudio();
-        if (typeof playClick === 'function') playClick('gold');
-        const href = cell.getAttribute('href');
-        if (href && !href.startsWith('#')) {
-          e.preventDefault();
-          setTimeout(() => { window.location.href = href; }, 120);
+
+      /* Mobile — record where the touch started so touchend can tell
+         a tap from a scroll that happened to begin on this tile */
+      cell.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
         }
       }, { passive: true });
+
+      cell.addEventListener('touchend', (e) => {
+        const touch = e.changedTouches && e.changedTouches[0];
+        if (touch) {
+          const dx = Math.abs(touch.clientX - touchStartX);
+          const dy = Math.abs(touch.clientY - touchStartY);
+          if (dx > TAP_MOVE_TOLERANCE || dy > TAP_MOVE_TOLERANCE) return; // scroll, not a tap — ignore entirely
+        }
+
+        // preventDefault on a genuine tap so the browser's own synthetic
+        // click (which would navigate immediately) never fires
+        e.preventDefault();
+
+        if (armedCell === cell) {
+          // Second tap on the same tile — go
+          disarm(cell);
+          resumeAudio();
+          if (typeof playClick === 'function') playClick('gold');
+          const href = cell.getAttribute('href');
+          if (href && !href.startsWith('#')) {
+            setTimeout(() => { window.location.href = href; }, 120);
+          }
+          return;
+        }
+
+        // First tap — arm this tile and wait for the confirming second tap
+        if (armedCell) disarm(armedCell);
+        armedCell = cell;
+        cell.classList.add('is-armed');
+        resumeAudio();
+        if (typeof playHover === 'function') playHover();
+        clearTimeout(armedTimer);
+        armedTimer = setTimeout(() => disarm(cell), DOUBLE_TAP_WINDOW);
+      }, { passive: false });
     });
 
     /* ── SIDE PILLS — hover + click-cyan ── */
