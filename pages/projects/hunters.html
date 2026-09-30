@@ -333,6 +333,193 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+
+    /*
+      POI (point of interest) blocks — same pattern used on the
+      Galactic Battle page for a map with several distinct named
+      locations. Each block gets a floated video or image alternating
+      sides down the page, followed by a few paragraphs of detail text.
+    */
+    .poi-block {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+      margin-top: var(--space-xl);
+      /* Floats are out of normal flow — without this the next block
+         would slide up alongside the previous block's image. */
+      overflow: hidden;
+    }
+    .poi-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .poi-figure {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .poi-figure--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+    .poi-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+    .poi-figure img:hover { filter: saturate(1.0) brightness(1.0); }
+    .poi-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .poi-video {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .poi-video--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+    .poi-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+    }
+    .poi-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .poi-video figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Biome chip list — quick visual readout of every biome volumised this season */
+    .biome-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 var(--space-lg);
+      padding: 0;
+    }
+    .biome-list li {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-cyan);
+      border: 1px solid rgba(0,200,224,0.3);
+      border-radius: 2px;
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+    /* Joe's favourite biome gets the gold accent instead of cyan */
+    .biome-list li.is-favourite {
+      color: var(--color-gold);
+      border-color: rgba(212,172,80,0.4);
+    }
+
+    /*
+      Map overview figure — the full island layout image, floated at
+      the top of the Scope block. Click-to-fullscreen via the
+      lightbox overlay defined below (see the inline script at the
+      bottom of the page).
+    */
+    .map-figure {
+      float: right;
+      width: 46%;
+      max-width: 480px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+      cursor: zoom-in;
+    }
+    .map-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+    .map-figure:hover img { filter: saturate(1.0) brightness(1.0); }
+    .map-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(4,6,10,0.94);
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl);
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.is-open { display: flex; }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      border: 1px solid rgba(212,172,80,0.3);
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: var(--space-lg);
+      right: var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-text-dim);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .lightbox-close:hover { color: var(--color-gold); border-color: rgba(212,172,80,0.4); }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -346,6 +533,18 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+
+      /* POI and map images go full width above the copy rather than floated */
+      .poi-figure,
+      .poi-figure--left,
+      .poi-video,
+      .poi-video--left,
+      .map-figure {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 var(--space-md) 0;
+      }
     }
   </style>
 </head>
@@ -460,7 +659,66 @@
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+
+            <figure class="map-figure lightbox-trigger" id="oninoshimaMap" tabindex="0" role="button" aria-label="Enlarge the full island layout map of Oninoshima">
+              <img src="../../assets/images/Oni Hunters/Oninoshima_29_-_Island_-_Fortnite.webp" alt="Full island layout map of Oninoshima, Fortnite Chapter 6 Season 1" loading="lazy" />
+              <figcaption>// Oninoshima &nbsp;&middot;&nbsp; Full island layout &nbsp;&middot;&nbsp; Click to enlarge</figcaption>
+            </figure>
+
+            <p class="project-detail-text">Full ambient audio delivery across the map, covering interiors and props as well as the outdoor world — every lake and ocean splined, every biome volumised seamlessly, and the volume placement inherited from previous seasons refactored throughout. Alongside that technical pass, a set of new ambient designs was built specifically to support the Japanese theme, from the lush grassland textures of Hopeful Heights through to the eerie, ghostly threads running through Nightshift Forest.</p>
+
+            <p class="project-section-label" style="margin-top: var(--space-lg);">// Biomes Volumised</p>
+            <ul class="biome-list">
+              <li class="is-favourite">Wetlands (Swamp)</li>
+              <li>Snow Mountains</li>
+              <li>Highlands</li>
+              <li>Grassland Plains</li>
+              <li>Farmland</li>
+              <li>Forests</li>
+              <li>Coastal</li>
+              <li>Rivers</li>
+            </ul>
+
+            <p class="project-detail-text">That volume work spanned every named POI on the map — Magic Mosses, Flooded Frogs, Pumped Power, Demon's Dojo, Masked Meadows, Wiffy Wharf, Hopeful Heights, Lost Lake and Seaport City among them. The four below get a closer look.</p>
+
+            <p class="project-detail-text">One of my favourite prop sounds of the whole season was the papery ruffle of the kites deployed at several of these POIs — a small textural detail, but one that added a lot of life to otherwise still moments.</p>
+
+            <p class="project-detail-text">The power towers at Pumped Power got their own prop dressing too, letting players traverse the landscape at speed. Metal-stretching and shifting-tension FX carried the sense of load and movement as players travelled along the lines, with metal wind added in as spot FX to sell the height and exposure.</p>
+
+            <section class="poi-block" aria-label="Seaport City">
+              <p class="poi-name">Seaport City</p>
+              <p class="project-detail-text">Seaport City set the biggest interior and reverb challenge on the map. Rather than treat it as one large ambience bed, every room in the city got its own hand-placed ambient volume, giving the audio a real sense of transition between urban and non-urbanised space — particularly noticeable in the feedback coming back off weapon fire.</p>
+              <p class="project-detail-text">The most acoustically contrasting spaces in any urban environment tend to be the toilets, so every one of them was hand-placed individually, each carrying its own unique reverb.</p>
+            </section>
+
+            <section class="poi-block" aria-label="Demon's Domain">
+              <p class="poi-name">Demon's Domain</p>
+              <figure class="poi-video">
+                <div class="poi-video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/u6T2rufip4I"
+                    title="Demon's Domain &nbsp;&middot;&nbsp; Storm ambient design"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <figcaption>// Demon's Domain &nbsp;&middot;&nbsp; Storm ambient design</figcaption>
+              </figure>
+              <p class="project-detail-text">Landing the right feel around a big, loud set-piece like the swirling lightning storm over Demon's Domain — also known as Demon's Dojo — was one of the toughest balancing acts of the season, shown in the video above. A single looping cue sat at the centre of the storm with a huge attenuation radius and equally strong air-absorption settings, giving the spiral arms of the storm some presence at range. Several layers of rumbling thunder were designed and processed around it, with the attenuation focused tightly enough that players would only hear the rumble at full strength if they were looking directly at it — contrast against the fixed-point main cue.</p>
+              <p class="project-detail-text">Because the storm was raging directly overhead, the interiors needed just as much attention. Mix modifiers were applied per-volume so the storm could bleed convincingly into the open, covered wooden interiors of the dojos, each of which carried its own bespoke wood reverb and absorption profile. On top of that sat quad loops of wind and wood-creak randomisation, adding variation to the low hum of a windy wooden interior and tying the whole space together.</p>
+              <p class="project-detail-text">Early on I'll admit I over-egged it slightly, designing and implementing more explosive lightning sounds than the scene really needed — fun while it lasted, but I think the balance landed in the right place by the end.</p>
+            </section>
+
+            <section class="poi-block" aria-label="Magic Mosses">
+              <p class="poi-name">Magic Mosses</p>
+              <p class="project-detail-text">Magic Mosses held one of the last-minute additions I'm proudest of on this season — a heavy stone door, hidden underground, that opens onto a secret area holding significant treasure if the player is carrying the right combination of Oni. Getting a door of that scale to feel genuinely heavy, and synced perfectly to the animation, took some care, and I added short rushes of air into the opening sequence to give the moment a bit more story.</p>
+            </section>
+
+            <section class="poi-block" aria-label="Floating Islands">
+              <p class="poi-name">Floating Islands</p>
+              <p class="project-detail-text">The Floating Islands brought a familiar challenge: loud, vortex-like wind sitting in close proximity to interior spaces. Feedback during development asked for more debris and more energy in the vortex wind holding the islands up, particularly in the spaces between them where players fought the demon boss battle — but the islands themselves needed to stay comparatively quiet, so the wind's energy didn't mask critical gameplay feedback.</p>
+              <p class="project-detail-text">To resolve that, the wind's attenuation was dialled in along a complex spline draped through the islands, paired with a per-island ambient volume carrying a toned-down version of the same sound. Sound classes then ducked the interior spaces, so players felt safe and hidden during dramatic moments — adding further to the contrast and suspense of the encounter.</p>
+            </section>
           </div>
 
           <div>
@@ -573,7 +831,51 @@
     </div>
   </footer>
 
+  <!-- Fullscreen lightbox for the Oninoshima map figure above -->
+  <div class="lightbox-overlay" id="lightboxOverlay">
+    <button type="button" class="lightbox-close">Close &times;</button>
+    <img src="" alt="" />
+  </div>
+
   <script src="../../script.js"></script>
+
+  <script>
+    // Simple click-to-fullscreen lightbox, scoped to this page.
+    // Vanilla JS only, no dependencies — matches the rest of the site.
+    (function () {
+      var trigger = document.querySelector('.lightbox-trigger');
+      var overlay = document.getElementById('lightboxOverlay');
+      if (!trigger || !overlay) return;
+
+      var overlayImg = overlay.querySelector('img');
+      var closeBtn = overlay.querySelector('.lightbox-close');
+      var sourceImg = trigger.querySelector('img');
+
+      function openLightbox() {
+        overlayImg.src = sourceImg.src;
+        overlayImg.alt = sourceImg.alt;
+        overlay.classList.add('is-open');
+      }
+      function closeLightbox() {
+        overlay.classList.remove('is-open');
+      }
+
+      trigger.addEventListener('click', openLightbox);
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox();
+        }
+      });
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeLightbox();
+      });
+      closeBtn.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
 
 </body>
 </html>
