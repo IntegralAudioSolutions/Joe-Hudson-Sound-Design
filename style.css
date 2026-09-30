@@ -30,6 +30,7 @@
      13. Utility classes
      14. Animations & keyframes
      15. Media queries (responsive / mobile)
+     16. Project page — hero video (single + multi-video handles)
 ================================================================ */
 
 
@@ -1369,4 +1370,123 @@ h1, h2, h3 {
   .related-grid .related-card:nth-child(3) { display: flex; }
   .projnav { grid-template-columns: 1fr; }
   .projnav-next { text-align: left; align-items: flex-start; }
+}
+
+
+/* ----------------------------------------------------------------
+   16. PROJECT PAGE — HERO VIDEO
+   The full-width 16:9 video that sits at the top of a project page
+   (and, later, the reel embed on the homepage). Used to live as a
+   copy-pasted <style> block on every individual project page —
+   moved here so it only has to be defined once. A project page's
+   own <style> block can still override any of this if a specific
+   page needs something different.
+
+   Two flavours share the same markup shell (.project-video-top >
+   .video-wrapper > iframe, plus a .video-caption underneath):
+     - Single video: just the iframe + caption, nothing else.
+     - Multi video (.hero-video-multi): adds a row of small "handle"
+       buttons plus prev/next arrows underneath the video, so a page
+       with several relevant trailers can flick between them without
+       taking up more space than a single video would. Only one
+       <iframe> is ever used — clicking a handle swaps its src rather
+       than stacking multiple embeds, so only one video ever loads.
+       See script.js for the swap behaviour.
+---------------------------------------------------------------- */
+
+.project-video-top { width: 100%; }
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Placeholder shown when no video ID is set yet */
+.video-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+}
+.video-play {
+  width: 0; height: 0; border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+}
+.video-label {
+  font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+  letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+}
+
+.video-caption {
+  font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+  letter-spacing: 0.1em; margin-top: 8px;
+}
+
+/* ── Multi-video handles ── */
+.hero-video-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.hero-video-handles {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.hero-video-handle {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.hero-video-handle:hover { color: var(--color-text); }
+.hero-video-handle.is-active {
+  color: var(--color-gold);
+  border-color: var(--color-gold-border);
+}
+
+.hero-video-arrow {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  background: var(--color-bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.hero-video-arrow:hover { color: var(--color-gold); border-color: var(--color-gold-border); }
+
+@media (max-width: 600px) {
+  .hero-video-handle { font-size: 8px; padding: 5px 9px; }
+  .hero-video-arrow { width: 26px; height: 26px; font-size: 14px; }
 }

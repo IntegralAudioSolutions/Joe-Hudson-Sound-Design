@@ -574,3 +574,61 @@ if (footerElbow) {
 [...document.querySelectorAll('.footer-link')].forEach(el => {
   el.addEventListener('click', () => playClick('cyan'));
 });
+
+// ----------------------------------------------------------------
+// MULTI-VIDEO HERO PLAYER
+// For a project page with more than one relevant trailer (a launch
+// trailer plus a couple of mini/character trailers, say). Only one
+// <iframe> is ever in the page — clicking a handle just swaps its
+// src, rather than embedding several YouTube players at once, which
+// would be slow and would autoplay/buffer players nobody's watching.
+//
+// Markup expected (see style.css section 16 for the CSS):
+//   <div class="project-video-top hero-video-multi">
+//     <div class="video-wrapper"><iframe class="hero-video-frame" ...></iframe></div>
+//     <div class="hero-video-nav">
+//       <button class="hero-video-arrow hero-video-arrow--prev">&lsaquo;</button>
+//       <div class="hero-video-handles">
+//         <button class="hero-video-handle is-active"
+//                 data-embed="VIDEO_ID"
+//                 data-title="Accessible iframe title"
+//                 data-caption="// Caption text shown below the player">Label</button>
+//         ...more handles...
+//       </div>
+//       <button class="hero-video-arrow hero-video-arrow--next">&rsaquo;</button>
+//     </div>
+//     <p class="video-caption hero-video-caption">// Caption text</p>
+//   </div>
+// The first handle in the markup is whatever plays on page load, so
+// put the launch/map trailer first.
+// ----------------------------------------------------------------
+[...document.querySelectorAll('.hero-video-multi')].forEach(player => {
+  const frame   = player.querySelector('.hero-video-frame');
+  const caption = player.querySelector('.hero-video-caption');
+  const handles = [...player.querySelectorAll('.hero-video-handle')];
+  const prevBtn = player.querySelector('.hero-video-arrow--prev');
+  const nextBtn = player.querySelector('.hero-video-arrow--next');
+  if (!frame || handles.length === 0) return;
+
+  let current = handles.findIndex(h => h.classList.contains('is-active'));
+  if (current < 0) current = 0;
+
+  function activate(index) {
+    // Wrap around at either end so the arrows can cycle endlessly
+    if (index < 0) index = handles.length - 1;
+    if (index >= handles.length) index = 0;
+    current = index;
+
+    const handle = handles[current];
+    frame.src = `https://www.youtube.com/embed/${handle.dataset.embed}`;
+    frame.title = handle.dataset.title || '';
+    if (caption) caption.textContent = handle.dataset.caption || '';
+    handles.forEach(h => h.classList.toggle('is-active', h === handle));
+  }
+
+  handles.forEach((handle, index) => {
+    handle.addEventListener('click', () => { playClick('cyan'); activate(index); });
+  });
+  if (prevBtn) prevBtn.addEventListener('click', () => { playClick('cyan'); activate(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { playClick('cyan'); activate(current + 1); });
+});

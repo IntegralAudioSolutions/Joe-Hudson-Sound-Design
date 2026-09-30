@@ -430,9 +430,10 @@
       into a section (e.g. the Magic Mosses secret door). Wraps the
       native <audio> element in a bordered panel matching the rest of
       the site's card treatment, with a label above and a rights
-      disclaimer below. Default volume is set to 60% via the inline
-      script at the bottom of the page (browsers don't offer a
-      default-volume attribute, so it has to be set in JS).
+      disclaimer below. Default volume is set via a data-default-volume
+      attribute on the <audio> element, read by the inline script at
+      the bottom of the page (browsers don't offer a default-volume
+      attribute of their own, so it has to be set in JS).
     */
     .audio-player {
       border: 1px solid rgba(212,172,80,0.18);
@@ -806,8 +807,8 @@
 
               <div class="audio-player">
                 <p class="audio-player-label">// Spot FX &nbsp;&middot;&nbsp; Huge Stone Door — Sliding Cave Open &nbsp;&middot;&nbsp; Magic Mosses secret door</p>
-                <audio class="audio-player-el" id="magicMossesDoorAudio" controls preload="none" src="../../assets/audio/onihunters/Spot_Door_Huge_Stone_Sliding_Cave_Open.wav"></audio>
-                <p class="audio-player-note">Heads up — this one's loud. Playback starts at 60% volume, but it's worth checking your own volume before you hit play.</p>
+                <audio class="audio-player-el" id="magicMossesDoorAudio" data-default-volume="0.4" controls preload="none" src="../../assets/audio/onihunters/Spot_Door_Huge_Stone_Sliding_Cave_Open.wav"></audio>
+                <p class="audio-player-note">Heads up — this one's loud. Playback starts at 40% volume, but it's worth checking your own volume before you hit play.</p>
                 <p class="audio-player-credit">&copy; Epic Games. All rights reserved.</p>
               </div>
             </section>
@@ -880,9 +881,9 @@
 
       <!-- Sequential navigation through the full credit list, newest to oldest -->
       <nav class="projnav" aria-label="Credit navigation">
-        <a class="projnav-link projnav-prev" href="wrecked.html">
+        <a class="projnav-link projnav-prev" href="lawless.html">
           <span class="projnav-dir">&larr; Newer credit</span>
-          <span class="projnav-title">Fortnite C5S3 — Wrecked</span>
+          <span class="projnav-title">Fortnite C6S2 — Lawless</span>
         </a>
         <a class="projnav-link projnav-next" href="absolute-doom.html">
           <span class="projnav-dir">Older credit &rarr;</span>
@@ -976,11 +977,13 @@
 
     // Set the default playback volume on any inline audio players —
     // browsers don't have a "default volume" attribute, so this has
-    // to be done in JS. Loud spot FX (like the Magic Mosses door)
-    // start at 60% rather than full blast.
+    // to be done in JS. Each player can set its own level via a
+    // data-default-volume="0.4" attribute; falls back to 0.6 if one
+    // isn't set.
     (function () {
       document.querySelectorAll('.audio-player-el').forEach(function (audio) {
-        audio.volume = 0.6;
+        var level = parseFloat(audio.dataset.defaultVolume);
+        audio.volume = isNaN(level) ? 0.6 : level;
       });
     })();
   </script>
