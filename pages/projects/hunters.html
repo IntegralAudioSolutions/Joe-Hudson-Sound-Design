@@ -425,6 +425,53 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
+    /*
+      Inline audio player — for spot FX/asset previews dropped directly
+      into a section (e.g. the Magic Mosses secret door). Wraps the
+      native <audio> element in a bordered panel matching the rest of
+      the site's card treatment, with a label above and a rights
+      disclaimer below. Default volume is set to 60% via the inline
+      script at the bottom of the page (browsers don't offer a
+      default-volume attribute, so it has to be set in JS).
+    */
+    .audio-player {
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      background: var(--color-bg-surface);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0 0;
+    }
+    .audio-player-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-cyan);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .audio-player-el {
+      width: 100%;
+      display: block;
+    }
+    .audio-player-note {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-coral);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+    .audio-player-credit {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
     /* Biome chip list — quick visual readout of every biome volumised this season */
     .biome-list {
       display: flex;
@@ -713,6 +760,13 @@
             <section class="poi-block" aria-label="Magic Mosses">
               <p class="poi-name">Magic Mosses</p>
               <p class="project-detail-text">Magic Mosses held one of the last-minute additions I'm proudest of on this season — a heavy stone door, hidden underground, that opens onto a secret area holding significant treasure if the player is carrying the right combination of Oni. Getting a door of that scale to feel genuinely heavy, and synced perfectly to the animation, took some care, and I added short rushes of air into the opening sequence to give the moment a bit more story.</p>
+
+              <div class="audio-player">
+                <p class="audio-player-label">// Spot FX &nbsp;&middot;&nbsp; Huge Stone Door — Sliding Cave Open &nbsp;&middot;&nbsp; Magic Mosses secret door</p>
+                <audio class="audio-player-el" id="magicMossesDoorAudio" controls preload="none" src="../../assets/audio/onihunters/Spot_Door_Huge_Stone_Sliding_Cave_Open.wav"></audio>
+                <p class="audio-player-note">Heads up — this one's loud. Playback starts at 60% volume, but it's worth checking your own volume before you hit play.</p>
+                <p class="audio-player-credit">&copy; Epic Games. All rights reserved.</p>
+              </div>
             </section>
 
             <section class="poi-block" aria-label="Floating Islands">
@@ -874,6 +928,16 @@
       closeBtn.addEventListener('click', closeLightbox);
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+
+    // Set the default playback volume on any inline audio players —
+    // browsers don't have a "default volume" attribute, so this has
+    // to be done in JS. Loud spot FX (like the Magic Mosses door)
+    // start at 60% rather than full blast.
+    (function () {
+      document.querySelectorAll('.audio-player-el').forEach(function (audio) {
+        audio.volume = 0.6;
       });
     })();
   </script>
