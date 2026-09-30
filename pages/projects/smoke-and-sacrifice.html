@@ -396,14 +396,35 @@
     <main class="project-content" id="main-content">
 
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
-      <div class="project-video-top">
+      <div class="project-video-top hero-video-multi">
         <div class="video-wrapper">
-          <div class="video-placeholder">
-            <div class="video-play"></div>
-            <p class="video-label">Video — to be added</p>
-          </div>
+          <iframe
+            class="hero-video-frame"
+            src="https://www.youtube.com/embed/62VIzU3oRh8"
+            title="Smoke and Sacrifice — Official Launch Trailer"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
         </div>
-        <p class="video-caption">// Smoke and Sacrifice &nbsp;&middot;&nbsp; SFX &amp; Implementation</p>
+        <div class="hero-video-nav">
+          <button class="hero-video-arrow hero-video-arrow--prev" aria-label="Previous video">&lsaquo;</button>
+          <div class="hero-video-handles">
+            <button class="hero-video-handle is-active"
+                    data-embed="62VIzU3oRh8"
+                    data-title="Smoke and Sacrifice — Official Launch Trailer"
+                    data-caption="// Smoke and Sacrifice &nbsp;&middot;&nbsp; Official Launch Trailer">Launch Trailer</button>
+            <button class="hero-video-handle"
+                    data-embed="pimIyjiwQSw"
+                    data-title="Smoke and Sacrifice — Official Trailer, Out Now on Nintendo Switch and Steam"
+                    data-caption="// Smoke and Sacrifice &nbsp;&middot;&nbsp; Out Now on Switch &amp; Steam">Out Now</button>
+            <button class="hero-video-handle"
+                    data-embed="M9QUcHvzxLU"
+                    data-title="Smoke and Sacrifice — Release Date Trailer, Nintendo Switch"
+                    data-caption="// Smoke and Sacrifice &nbsp;&middot;&nbsp; Release Date Trailer">Release Date</button>
+          </div>
+          <button class="hero-video-arrow hero-video-arrow--next" aria-label="Next video">&rsaquo;</button>
+        </div>
+        <p class="video-caption hero-video-caption">// Smoke and Sacrifice &nbsp;&middot;&nbsp; Official Launch Trailer</p>
       </div>
 
       <!-- Body copy, full width, matching the video's edges -->
