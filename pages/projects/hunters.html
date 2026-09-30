@@ -472,6 +472,38 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
+    /*
+      Left-aligned figure sat above the audio player — a stand-alone
+      card rather than a floated one, so it stacks directly on top of
+      the player below it instead of wrapping text alongside it.
+    */
+    .door-figure {
+      width: 55%;
+      max-width: 480px;
+      margin: var(--space-lg) 0 0;
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .door-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+    .door-figure img:hover { filter: saturate(1.0) brightness(1.0); }
+    .door-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
     /* Biome chip list — quick visual readout of every biome volumised this season */
     .biome-list {
       display: flex;
@@ -591,6 +623,12 @@
         width: 100%;
         max-width: 100%;
         margin: 0 0 var(--space-md) 0;
+      }
+
+      /* Door figure goes full width too on small screens */
+      .door-figure {
+        width: 100%;
+        max-width: 100%;
       }
     }
   </style>
@@ -760,6 +798,11 @@
             <section class="poi-block" aria-label="Magic Mosses">
               <p class="poi-name">Magic Mosses</p>
               <p class="project-detail-text">Magic Mosses held one of the last-minute additions I'm proudest of on this season — a heavy stone door, hidden underground, that opens onto a secret area holding significant treasure if the player is carrying the right combination of Oni. Getting a door of that scale to feel genuinely heavy, and synced perfectly to the animation, took some care, and I added short rushes of air into the opening sequence to give the moment a bit more story.</p>
+
+              <figure class="door-figure">
+                <img src="../../assets/images/hunters/magic-mosses-door.webp" alt="The secret cave behind the stone door at Magic Mosses, with the treasure chest visible beyond" loading="lazy" />
+                <figcaption>// Magic Mosses &nbsp;&middot;&nbsp; Beyond the stone door</figcaption>
+              </figure>
 
               <div class="audio-player">
                 <p class="audio-player-label">// Spot FX &nbsp;&middot;&nbsp; Huge Stone Door — Sliding Cave Open &nbsp;&middot;&nbsp; Magic Mosses secret door</p>
