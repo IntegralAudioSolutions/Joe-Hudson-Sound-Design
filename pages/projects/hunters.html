@@ -682,22 +682,36 @@
     <main class="project-content" id="main-content">
 
       <!-- Full-width 16:9 video — matches Absolute Doom layout -->
-      <div class="project-video-top">
+      <div class="project-video-top hero-video-multi">
         <div class="video-wrapper">
-          <!--
-            Joe's own in-engine capture of the Demon's Domain ambient
-            design, from his own channel, so no third-party courtesy
-            credit is needed on the caption.
-          -->
           <iframe
-            src="https://www.youtube.com/embed/l0ZdiOGR_n4"
-            title="Fortnite — Demon's Domain POI ambient design"
+            class="hero-video-frame"
+            src="https://www.youtube.com/embed/sCKBVM-92TU"
+            title="Fortnite Chapter 6 Season 1 &nbsp;&middot;&nbsp; Hunters — Official Cinematic Trailer"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            loading="lazy"
             allowfullscreen>
           </iframe>
         </div>
-        <p class="video-caption">// Demon's Domain &nbsp;&middot;&nbsp; POI ambient design &nbsp;&middot;&nbsp; In-engine capture</p>
+        <div class="hero-video-nav">
+          <button class="hero-video-arrow hero-video-arrow--prev" aria-label="Previous video">&lsaquo;</button>
+          <div class="hero-video-handles">
+            <button class="hero-video-handle is-active"
+                    data-embed="sCKBVM-92TU"
+                    data-title="Fortnite Chapter 6 Season 1 &nbsp;&middot;&nbsp; Hunters — Official Cinematic Trailer"
+                    data-caption="// Fortnite C6S1 — Oni Hunters &nbsp;&middot;&nbsp; Official Cinematic Trailer">Launch Trailer</button>
+            <!--
+              Joe's own in-engine capture of the Demon's Domain ambient
+              design, from his own channel, so no third-party courtesy
+              credit is needed on the caption.
+            -->
+            <button class="hero-video-handle"
+                    data-embed="l0ZdiOGR_n4"
+                    data-title="Fortnite — Demon's Domain POI ambient design"
+                    data-caption="// Demon's Domain &nbsp;&middot;&nbsp; POI ambient design &nbsp;&middot;&nbsp; In-engine capture">Demon's Domain</button>
+          </div>
+          <button class="hero-video-arrow hero-video-arrow--next" aria-label="Next video">&rsaquo;</button>
+        </div>
+        <p class="video-caption hero-video-caption">// Fortnite C6S1 — Oni Hunters &nbsp;&middot;&nbsp; Official Cinematic Trailer</p>
       </div>
 
       <!-- Body copy, full width, matching the video's edges -->
