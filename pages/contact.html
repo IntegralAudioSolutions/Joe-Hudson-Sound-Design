@@ -274,9 +274,9 @@
         - Netlify Forms — if you ever move to Netlify hosting
         - EmailJS — sends email directly from JavaScript
       
-      The form action is set to "#" as a placeholder.
+      The form now posts to Formspree (see the note above the form).
       Replace with your Formspree endpoint once set up:
-        action="https://formspree.io/f/YOUR_FORM_ID"
+        action="https://formspree.io/f/mkjgekbe"  (connected)
       
       Instructions are in the README.md.
     */
@@ -786,15 +786,16 @@
           FORM DELIVERY — FORMSPREE
           GitHub Pages can't send email itself, so the form posts to
           Formspree, which emails each message to you.
-          To connect: replace YOUR_FORM_ID below with the ID from your
-          Formspree dashboard (e.g. https://formspree.io/f/xabc1234).
+          Connected to Formspree form ID mkjgekbe (messages go to
+          IntegralAudioSolutions@outlook.com). To change forms, swap the
+          ID at the end of the action URL below — that is the only place.
           The script at the bottom of this page sends the message in
           the background and shows the success or error box here,
           so visitors never leave the page.
         -->
         <form
           id="contactForm"
-          action="https://formspree.io/f/YOUR_FORM_ID"
+          action="https://formspree.io/f/mkjgekbe"
           method="post"
           novalidate
           aria-label="Contact form"
@@ -1038,12 +1039,6 @@
         }
 
         if (typeof playClick === 'function') playClick('gold');
-
-        // Form not connected to Formspree yet — don't pretend it sent
-        if (form.action.includes('YOUR_FORM_ID')) {
-          showError();
-          return;
-        }
 
         submitBtn.disabled = true;
         submitBtn.classList.add('is-sending');
