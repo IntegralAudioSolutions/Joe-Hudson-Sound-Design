@@ -161,8 +161,50 @@
     .page-header-content {
       padding: var(--space-xl) var(--space-xl);
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xl);
+    }
+
+    .page-header-text {
+      display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    /* ── PROFILE PHOTO — "who you're talking to" ──────────────── */
+
+    .contact-photo {
+      flex-shrink: 0;
+      width: 240px;
+      margin: 0;
+    }
+
+    .contact-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border: 1px solid var(--color-gold-border);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 2px;
+    }
+
+    .contact-photo figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .contact-photo figcaption strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--color-gold);
+      font-weight: 500;
     }
 
     .page-eyebrow {
@@ -337,18 +379,33 @@
       color: var(--color-text);
     }
 
-    /* Submit button — full width, gold accent */
+    /*
+      The form column stretches to the height of the info panels on the
+      right, and the submit button grows to fill whatever space is left,
+      so its bottom edge lines up with the last info panel.
+    */
+    .contact-form-section { align-self: stretch; }
+
+    #contactForm {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Submit button — full width, gold accent, fills remaining height */
     .form-submit {
+      flex: 1;
+      min-height: 64px;
       width: 100%;
       padding: 12px;
       background: rgba(212, 172, 80, 0.1);
       border: 1px solid var(--color-gold-border);
       border-radius: 2px;
       font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--color-gold);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       cursor: pointer;
       transition: background var(--transition-med), border-color var(--transition-med);
@@ -401,15 +458,47 @@
 
     /* Info panel — a contained block for a contact method or note */
     .info-panel {
+      position: relative;     /* anchor for the full-card click area (see .info-link::after) */
       background: var(--color-bg-surface);
       border: 1px solid var(--color-border);
       border-radius: 2px;
       overflow: hidden;
-      cursor: pointer;
-      transition: border-color var(--transition-fast);
+      transition: border-color var(--transition-fast), background var(--transition-fast);
     }
 
-    .info-panel:hover { border-color: rgba(212, 172, 80, 0.2); }
+    /*
+      CLICKABLE CARDS
+      Panels that contain an .info-link become fully clickable: the
+      link's ::after pseudo-element is stretched over the whole card,
+      so clicking anywhere on the box follows the link. No JS needed,
+      and keyboard users still tab to the real link.
+      Panels without a link (e.g. Location) stay static.
+    */
+    .info-panel:has(.info-link) { cursor: pointer; }
+
+    .info-panel:has(.info-link):hover {
+      /* top/right/bottom only, so each card keeps its coloured left edge */
+      border-top-color: rgba(212, 172, 80, 0.35);
+      border-right-color: rgba(212, 172, 80, 0.35);
+      border-bottom-color: rgba(212, 172, 80, 0.35);
+      background: #0e121b;
+    }
+
+    .info-panel:has(.info-link):hover .info-link { color: var(--color-gold); }
+
+    .info-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    /* Keyboard focus outline drawn round the whole card */
+    .info-link:focus-visible { outline: none; }
+    .info-panel:has(.info-link:focus-visible) {
+      outline: 1px solid var(--color-cyan);
+      outline-offset: 2px;
+    }
 
     .info-panel--gold  { border-left: 3px solid var(--color-gold); }
     .info-panel--cyan  { border-left: 3px solid var(--color-cyan); }
@@ -516,6 +605,12 @@
       }
     }
 
+    @media (max-width: 760px) {
+      /* Photo drops below the heading on narrow screens */
+      .page-header-content { flex-direction: column; align-items: flex-start; }
+      .contact-photo { width: 100%; max-width: 320px; }
+    }
+
     @media (max-width: 600px) {
       .page-header { grid-template-columns: 1fr; }
       .page-header-sidebar { display: none; }
@@ -567,9 +662,23 @@
     </aside>
 
     <div class="page-header-content">
-      <p class="page-eyebrow">// Project Enquiries &nbsp;·&nbsp; Availability &nbsp;·&nbsp; Collaboration</p>
-      <h1 class="page-title">Get in <strong>Touch</strong></h1>
-      <p class="page-subtitle">Remote · UK-Based · Currently Taking Select Projects</p>
+      <div class="page-header-text">
+        <p class="page-eyebrow">// Project Enquiries &nbsp;·&nbsp; Availability &nbsp;·&nbsp; Collaboration</p>
+        <h1 class="page-title">Get in <strong>Touch</strong></h1>
+        <p class="page-subtitle">Remote · UK-Based · Currently Taking Select Projects</p>
+      </div>
+
+      <!-- Profile photo — so visitors know who they're contacting -->
+      <figure class="contact-photo">
+        <img
+          src="../assets/images/joe-hudson-contact.webp"
+          alt="Joe Hudson waving hello from his studio"
+          width="600"
+          height="450"
+          loading="eager"
+        />
+        <figcaption><strong>Joe Hudson</strong>You'll deal with me directly</figcaption>
+      </figure>
     </div>
 
   </section>
