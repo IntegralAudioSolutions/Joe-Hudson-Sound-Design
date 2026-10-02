@@ -248,35 +248,6 @@
       letter-spacing: 0.1em; margin-top: 8px;
     }
 
-    /*
-      Highlight reel — a grid of individual clips, separate from the
-      main video up top. Starts with one card as a placeholder; more
-      get added here as Joe supplies them, and the grid just wraps.
-    */
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: var(--space-lg);
-      margin-top: var(--space-md);
-    }
-    .highlight-card {
-      border: 1px solid rgba(212,172,80,0.18);
-      border-radius: 2px;
-      overflow: hidden;
-      background: var(--color-bg-surface);
-    }
-    .highlight-video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: var(--color-bg-surface);
-    }
-    .highlight-video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-    .highlight-card figcaption {
-      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-muted);
-      letter-spacing: 0.1em; line-height: 1.6; padding: 7px 9px;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
     /* Body: text left, keyart right */
     .project-body-grid {
       display: grid;
@@ -363,6 +334,145 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+
+    /* ================================================================
+       BREAKDOWN VIDEO BLOCKS
+       ----------------------------------------------------------------
+       The smaller "minor" videos. Same pattern as the Galactic Battle
+       and Oni Hunters pages: each block holds one floated video box
+       with the copy wrapping round it, and the boxes alternate right,
+       left, right, left down the page (the zig-zag).
+
+       To add another one later, copy a whole <section class="poi-block">
+       and flip whether its <figure> has the "poi-video--left" class.
+    ================================================================ */
+    .poi-block {
+      width: 100%;
+      border-top: 1px solid var(--color-gold-border);
+      padding-top: var(--space-xl);
+      margin-top: var(--space-xl);
+      /* Floats are out of normal flow — without this the next block
+         would slide up alongside the previous block's video. */
+      overflow: hidden;
+    }
+    /* The first block sits straight under the section label, so it
+       drops the divider line and the big gap the others have above them */
+    .project-section-label + .poi-block {
+      border-top: none;
+      padding-top: 0;
+      margin-top: var(--space-md);
+    }
+
+    .poi-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* Default: video box floats to the RIGHT, text wraps on the left */
+    .poi-video {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    /* Modifier: video box floats to the LEFT instead */
+    .poi-video--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+    /* 16:9 wrapper — same padding-bottom trick as the main video */
+    .poi-video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+    }
+    .poi-video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .poi-video figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Spacing between consecutive paragraphs in a detail block */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
+    /* ================================================================
+       PIPELINE STACK
+       ----------------------------------------------------------------
+       The four tools in the order the work passes through them. Same
+       row styling as the layer stack on the Galactic Battle page. The
+       coloured bar on the left is the only thing that differs per row.
+       Pure HTML and CSS, no images, so it stays sharp at any size.
+    ================================================================ */
+    .layer-stack {
+      border: 1px solid var(--color-gold-border);
+      background: var(--color-bg-nav);
+      border-radius: 2px;
+      padding: var(--space-lg) var(--space-md) var(--space-md);
+      margin: var(--space-md) 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .layer-caption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+    .layer-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .layer-row--cyan  { border-left-color: var(--color-cyan); }
+    .layer-row--coral { border-left-color: var(--color-coral); }
+    .layer-row--purp  { border-left-color: var(--color-purp-light); }
+    .layer-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-gold-bright);
+      letter-spacing: 0.04em;
+      flex: 0 0 150px;
+      line-height: 1.4;
+    }
+    .layer-row--cyan  .layer-name { color: var(--color-cyan); }
+    .layer-row--coral .layer-name { color: var(--color-coral); }
+    .layer-row--purp  .layer-name { color: var(--color-purp-light); }
+    .layer-desc {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      flex: 1 1 auto;
+    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -376,6 +486,19 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+
+      /* Breakdown videos go full width above the copy rather than floated */
+      .poi-video,
+      .poi-video--left {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 var(--space-md) 0;
+      }
+
+      /* Pipeline stack: tool name above its description rather than beside it */
+      .layer-row { flex-direction: column; gap: 4px; }
+      .layer-name { flex: 0 0 auto; }
     }
   </style>
 </head>
@@ -426,19 +549,20 @@
 
     <main class="project-content" id="main-content">
 
-      <!-- Full-width 16:9 video — matches Absolute Doom layout.
-           PLACEHOLDER: standing in for the main video until a proper
-           cut is ready — only the video ID needs changing later. -->
+      <!-- Full-width 16:9 hero video — matches Absolute Doom layout.
+           Joe's own Power Plant ambient walkthrough. The TV static
+           video that used to sit here now lives in the breakdown
+           blocks further down the page. -->
       <div class="project-video-top">
         <div class="video-wrapper">
           <iframe
-            src="https://www.youtube.com/embed/NBStYHoXQx8"
-            title="Fortnite — The Simpsons Season — Audio Designer"
+            src="https://www.youtube.com/embed/ipnbT3x2Bws"
+            title="Fortnite — The Simpsons Season — Power Plant Ambient Walkthrough"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
         </div>
-        <p class="video-caption">// Fortnite — The Simpsons Season &nbsp;&middot;&nbsp; Audio Designer</p>
+        <p class="video-caption">// Fortnite — The Simpsons Season &nbsp;&middot;&nbsp; Power Plant &nbsp;&middot;&nbsp; Ambient Walkthrough</p>
       </div>
 
       <!-- Body copy, full width, matching the video's edges -->
@@ -489,27 +613,111 @@
             <p class="project-detail-text">Detailed project notes to be added.</p>
           </div>
 
+          <!-- ══ BREAKDOWN VIDEOS ══
+               Four smaller videos in the zig-zag layout: right, left,
+               right, left. FIRST-PASS COPY — the one-line descriptions
+               are stand-ins written from the video titles, for Joe to
+               replace with his own notes on the second pass. -->
           <div>
-            <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
-          </div>
+            <p class="project-section-label">// Breakdowns</p>
 
-          <!-- Highlight reel — starts with one placeholder card;
-               more get added here as Joe supplies them -->
-          <div>
-            <p class="project-section-label">// Highlights</p>
-            <div class="highlights-grid">
-              <figure class="highlight-card">
-                <div class="highlight-video-wrapper">
+            <section class="poi-block" aria-label="Power Plant">
+              <p class="poi-name">Power Plant</p>
+              <figure class="poi-video">
+                <div class="poi-video-wrapper">
                   <iframe
-                    src="https://www.youtube.com/embed/NBStYHoXQx8"
-                    title="Fortnite — The Simpsons Season — Highlight"
+                    src="https://www.youtube.com/embed/ijLYPRt348Q"
+                    title="Fortnite — The Simpsons Season — Power Plant"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
                     allowfullscreen>
                   </iframe>
                 </div>
-                <figcaption>// Fortnite — The Simpsons Season &nbsp;&middot;&nbsp; Highlight &nbsp;&middot;&nbsp; Placeholder</figcaption>
+                <figcaption>// Power Plant &nbsp;&middot;&nbsp; In-engine capture</figcaption>
               </figure>
+              <p class="project-detail-text">A second look at the Power Plant, to sit alongside the full ambient walkthrough at the top of the page.</p>
+            </section>
+
+            <section class="poi-block" aria-label="Complex Ambient Volume Shapes">
+              <p class="poi-name">Complex Ambient Volume Shapes</p>
+              <figure class="poi-video poi-video--left">
+                <div class="poi-video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/SdW3wJrEbr4"
+                    title="Fortnite — The Simpsons Season — Complex Ambient Volume Shapes"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <figcaption>// Complex ambient volume shapes &nbsp;&middot;&nbsp; In-engine capture</figcaption>
+              </figure>
+              <p class="project-detail-text">Ambient volumes built with Unreal's geometry tools, shaped to follow the footprint of a space where a simple box volume wouldn't fit.</p>
+            </section>
+
+            <section class="poi-block" aria-label="Ocean Spline Deployment &amp; Optimisation">
+              <p class="poi-name">Ocean Spline Deployment &amp; Optimisation</p>
+              <figure class="poi-video">
+                <div class="poi-video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/JAEh2QODQ9I"
+                    title="Fortnite — The Simpsons Season — Ocean Spline Deployment &amp; Optimisation"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <figcaption>// Ocean spline &nbsp;&middot;&nbsp; Deployment and optimisation</figcaption>
+              </figure>
+              <p class="project-detail-text">The ocean ambience deployed along a spline, and the optimisation pass that followed.</p>
+            </section>
+
+            <section class="poi-block" aria-label="TV Static Implementation">
+              <p class="poi-name">TV Static Implementation</p>
+              <figure class="poi-video poi-video--left">
+                <div class="poi-video-wrapper">
+                  <iframe
+                    src="https://www.youtube.com/embed/NBStYHoXQx8"
+                    title="Fortnite — The Simpsons Season — TV Static Implementation"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen>
+                  </iframe>
+                </div>
+                <figcaption>// TV static &nbsp;&middot;&nbsp; Implementation</figcaption>
+              </figure>
+              <p class="project-detail-text">The TV static sound and how it was implemented in engine.</p>
+            </section>
+          </div>
+
+          <!-- FIRST-PASS COPY — tool list is Joe's, the one-line
+               descriptions are stand-ins for him to rewrite. -->
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">The same ambient audio map delivery process used on previous seasons.</p>
+
+            <div class="layer-stack">
+              <p class="layer-caption">// Ambient Map Delivery &nbsp;&middot;&nbsp; Pipeline</p>
+
+              <div class="layer-row">
+                <span class="layer-name">01 &nbsp;Reaper</span>
+                <span class="layer-desc">Sound design and editing of the ambient source material.</span>
+              </div>
+
+              <div class="layer-row layer-row--cyan">
+                <span class="layer-name">02 &nbsp;Unreal Engine</span>
+                <span class="layer-desc">Implementation in engine. Volumes, emitters and splines placed and mixed in the map.</span>
+              </div>
+
+              <div class="layer-row layer-row--coral">
+                <span class="layer-name">03 &nbsp;Geometry Tools</span>
+                <span class="layer-desc">Building the more complex ambient volume shapes.</span>
+              </div>
+
+              <div class="layer-row layer-row--purp">
+                <span class="layer-name">04 &nbsp;Blueprint</span>
+                <span class="layer-desc">Blueprint scripting where the setup needed it.</span>
+              </div>
             </div>
           </div>
 
