@@ -317,6 +317,12 @@
       animation: ribbonScroll 30s linear infinite;
     }
     .ribbon-track:hover { animation-play-state: paused; }
+    /* <picture> only chooses which file to load. display: contents removes
+       its box so each <img> is still laid out directly in the ribbon row.
+       The <source> inside it is hidden so it does not count as an empty
+       item in the row (which would double the gap between images). */
+    .ribbon-track picture { display: contents; }
+    .ribbon-track source  { display: none; }
     @keyframes ribbonScroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -913,22 +919,72 @@
     <p class="ribbon-label">// Location Screenshots &nbsp;&middot;&nbsp; Fortnite C6S1 — Oni Hunters</p>
     <div class="ribbon-track-wrap">
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!--
+          MOBILE RIBBON IMAGES
+          On screens up to 900px wide the browser loads a small 640px
+          WebP copy from assets/images/thumbs/ instead of the full-size
+          image. Wider screens ignore the <source> and load the original
+          in the <img>, exactly as before. Set 1 and Set 2 must still
+          match each other for the seamless scroll loop.
+        -->
         <!-- Set 1 -->
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp" alt="Demon's Domain — overview" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp" alt="Demon's Domain — promo shot" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp" alt="Demon Spire" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp" alt="The Citadel — main room" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp" alt="The Citadel — masks" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp" alt="The Citadel — top floor" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp" alt="Kintsugi Corruption" loading="lazy" role="listitem" />
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-domain-location.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp" alt="Demon's Domain — overview" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-domain-promo.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp" alt="Demon's Domain — promo shot" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-spire.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp" alt="Demon Spire" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-main-room.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp" alt="The Citadel — main room" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-masks.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp" alt="The Citadel — masks" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-top-floor.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp" alt="The Citadel — top floor" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/kintsugi-corruption.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp" alt="Kintsugi Corruption" loading="lazy" role="listitem" />
+        </picture>
         <!-- Set 2 — duplicate for seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp" alt="Demon's Domain — overview" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp" alt="Demon's Domain — promo shot" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp" alt="Demon Spire" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp" alt="The Citadel — main room" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp" alt="The Citadel — masks" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp" alt="The Citadel — top floor" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp" alt="Kintsugi Corruption" loading="lazy" role="listitem" aria-hidden="true" />
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-domain-location.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-location.webp" alt="Demon's Domain — overview" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-domain-promo.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-domain-promo.webp" alt="Demon's Domain — promo shot" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/demon-spire.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/demon-spire.webp" alt="Demon Spire" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-main-room.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-main-room.webp" alt="The Citadel — main room" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-masks.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-masks.webp" alt="The Citadel — masks" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/citadel-top-floor.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/citadel-top-floor.webp" alt="The Citadel — top floor" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/hunters/kintsugi-corruption.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/hunters/kintsugi-corruption.webp" alt="Kintsugi Corruption" loading="lazy" role="listitem" aria-hidden="true" />
+        </picture>
       </div>
     </div>
   </section>

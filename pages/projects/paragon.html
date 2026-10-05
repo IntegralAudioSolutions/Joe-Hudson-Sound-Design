@@ -309,6 +309,12 @@
       animation: ribbonScroll 30s linear infinite;
     }
     .ribbon-track:hover { animation-play-state: paused; }
+    /* <picture> only chooses which file to load. display: contents removes
+       its box so each <img> is still laid out directly in the ribbon row.
+       The <source> inside it is hidden so it does not count as an empty
+       item in the row (which would double the gap between images). */
+    .ribbon-track picture { display: contents; }
+    .ribbon-track source  { display: none; }
     @keyframes ribbonScroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -998,22 +1004,72 @@
     <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Paragon</p>
     <div class="ribbon-track-wrap">
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!--
+          MOBILE RIBBON IMAGES
+          On screens up to 900px wide the browser loads a small 640px
+          WebP copy from assets/images/thumbs/ instead of the full-size
+          image. Wider screens ignore the <source> and load the original
+          in the <img>, exactly as before. Set 1 and Set 2 must still
+          match each other for the seamless scroll loop.
+        -->
         <!-- Set 1 -->
-        <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="Paragon key art" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="A hero leaping toward a swirling portal as a boulder is hurled past" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="The Paragon hero roster clashing on the Prime map" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="Overgrown ancient ruins across the Paragon map" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithPlaza.jpg" alt="Ornate gold and marble plaza on the Monolith map" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithJungle.jpg" alt="Overgrown jungle pathway on the Monolith map" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithRuins.jpg" alt="Towering ancient ruins concept art for the Monolith map" loading="lazy" role="listitem" />
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/paragon-keyart.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="Paragon key art" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_RiftPortal.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="A hero leaping toward a swirling portal as a boulder is hurled past" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_HeroRoster.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="The Paragon hero roster clashing on the Prime map" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_RuinsLandscape.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="Overgrown ancient ruins across the Paragon map" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithPlaza.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithPlaza.jpg" alt="Ornate gold and marble plaza on the Monolith map" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithJungle.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithJungle.jpg" alt="Overgrown jungle pathway on the Monolith map" loading="lazy" role="listitem" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithRuins.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithRuins.jpg" alt="Towering ancient ruins concept art for the Monolith map" loading="lazy" role="listitem" />
+        </picture>
         <!-- Set 2 — exact duplicate for the seamless loop -->
-        <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithPlaza.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithJungle.jpg" alt="" loading="lazy" aria-hidden="true" />
-        <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithRuins.jpg" alt="" loading="lazy" aria-hidden="true" />
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/paragon-keyart.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/paragon-keyart.png" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_RiftPortal.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_RiftPortal.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_HeroRoster.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_HeroRoster.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_RuinsLandscape.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_RuinsLandscape.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithPlaza.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithPlaza.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithJungle.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithJungle.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
+        <picture>
+          <source media="(max-width: 900px)" srcset="../../assets/images/thumbs/Paragon/PA_MonolithRuins.webp" type="image/webp" />
+          <img class="ribbon-img" src="../../assets/images/Paragon/PA_MonolithRuins.jpg" alt="" loading="lazy" aria-hidden="true" />
+        </picture>
       </div>
     </div>
   </section>
