@@ -356,6 +356,44 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /*
+      Zig-zag figures — images floated right then left down the page
+      with the text wrapping round them. Same pattern as the Oni
+      Hunters page. .float-block contains the floats so the next
+      section never slides up beside an image.
+    */
+    .float-block { display: flow-root; }
+    .poi-figure {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .poi-figure--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+    .poi-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+    .poi-figure img:hover { filter: saturate(1.0) brightness(1.0); }
+    .poi-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -369,6 +407,14 @@
       .project-sidebar { display: none; }
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
+      /* Figures go full width above the copy on small screens */
+      .poi-figure,
+      .poi-figure--left {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 var(--space-md) 0;
+      }
     }
   </style>
 </head>
@@ -475,8 +521,13 @@
 
           <p class="project-desc">Environmental audio for Fortnite Chapter 5 Season 4, the season that brought Doctor Doom to the island. Castle Doom is a stack of enclosed spaces sitting under a permanent storm, so most of the work was in the volumes and the thresholds between them.</p>
 
-          <div>
+          <div class="float-block">
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
+
+            <figure class="poi-figure">
+              <img src="../../assets/images/Doom Castle/Absolute Doom Key Art.webp" alt="Concept key art of Castle Doom: a grey stone castle on a mountain under a storm, with Doctor Doom's glowing red face rising from the smoking tower and Iron Man flying in from the right" loading="lazy" />
+              <figcaption>// Castle Doom &nbsp;&middot;&nbsp; Chapter 5 key art</figcaption>
+            </figure>
 
             <p class="project-detail-text">Environmental audio across Castle Doom and its surrounds. The volume work on this one went deeper than usual, because the castle is a stack of enclosed spaces sitting directly underneath a storm, and almost every problem on it came down to how one space gives way to the next.</p>
 
@@ -487,10 +538,15 @@
             <p class="project-detail-text">The interiors had to carry Doom's character without overplaying it. Foreboding, not frightening, since the audience for this is not a horror audience. The answer was metal shifting tones tucked in and shaped around low choir drones and moans, which reads as dread rather than threat. Underneath that a 2D quad ambience gives the rooms a rumbling foundation while staying open and airy, keeping the top end that makes a space sound like a real volume rather than a closed box.</p>
           </div>
 
-          <div>
+          <div class="float-block">
             <p class="project-section-label">// Tools &amp; Pipeline</p>
 
             <p class="project-subhead">The main tower</p>
+
+            <figure class="poi-figure poi-figure--left">
+              <img src="../../assets/images/Doom Castle/Castle_Doom_29_-_Location_-_Fortnite.webp" alt="The great hall inside Castle Doom: green stained glass windows, a stone staircase flanked by wolf statues, and candlelit braziers" loading="lazy" />
+              <figcaption>// Castle Doom &nbsp;&middot;&nbsp; The great hall</figcaption>
+            </figure>
 
             <p class="project-detail-text">The tower was the technical one. Four door entrances open onto a wooden walkway, so each doorway is a point where outside has to leak inside by the right amount. Four sound actors sit over the doors, routed through the indoors submix via their sound class, which lets the exterior bleed through while still being treated as interior audio rather than fighting the interior mix.</p>
 
@@ -577,10 +633,20 @@
     <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite — Chapter 5: Absolute Doom</p>
     <div class="ribbon-track-wrap">
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
-        <!-- Set 1 -->
+        <!-- Set 1 (the three images repeated twice so the strip is wide enough to fill the screen) -->
         <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" />
-        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Absolute Doom Key Art.webp" alt="Castle Doom — concept key art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Castle_Doom_29_-_Location_-_Fortnite.webp" alt="Castle Doom — the great hall" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Absolute Doom Key Art.webp" alt="Castle Doom — concept key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Castle_Doom_29_-_Location_-_Fortnite.webp" alt="Castle Doom — the great hall" loading="lazy" role="listitem" aria-hidden="true" />
+        <!-- Set 2 — duplicate for seamless loop (the three images repeated twice so the strip is wide enough to fill the screen) -->
+        <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Absolute Doom Key Art.webp" alt="Castle Doom — concept key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Castle_Doom_29_-_Location_-_Fortnite.webp" alt="Castle Doom — the great hall" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Absolute Doom Key Art.webp" alt="Castle Doom — concept key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/Doom Castle/Castle_Doom_29_-_Location_-_Fortnite.webp" alt="Castle Doom — the great hall" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>
