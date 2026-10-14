@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS
+       The browser picks the best match it understands from this list.
+       favicon.svg is the master (the JH monogram as vector outlines,
+       so it needs no webfont); the PNGs cover browsers without SVG
+       icon support; apple-touch-icon is used when the site is saved
+       to an iOS home screen. favicon.ico also sits at the site root
+       because browsers and crawlers request that path automatically.
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <!-- Tints the browser chrome on mobile to match the page background -->
+  <meta name="theme-color" content="#080a0f" />
+  <link rel="canonical" href="https://joehudson.co.uk/pages/projects/super.html" />
+
+  <!-- Open Graph / Twitter: controls the preview card on LinkedIn, Discord, Slack, X -->
+  <meta property="og:type"          content="article" />
+  <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
+  <meta property="og:title"         content="Fortnite C6S3 — Super — Audio Designer | Joe Hudson" />
+  <meta property="og:description"   content="Map audio, prop and cosmetic sound design for Fortnite Chapter 6 Season 3 — Super. The Fortress of Solitude and Lakeside Lab: crystal chime ambience, iceberg shoreline and nested volumes." />
+  <meta property="og:url"           content="https://joehudson.co.uk/pages/projects/super.html" />
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-c6s3-super.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Fortnite C6S3 — Super key art — Audio Designer, Joe Hudson" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Fortnite C6S3 — Super — Audio Designer | Joe Hudson" />
+  <meta name="twitter:description"  content="Map audio, prop and cosmetic sound design for Fortnite Chapter 6 Season 3 — Super. The Fortress of Solitude and Lakeside Lab: crystal chime ambience, iceberg shoreline and nested volumes." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-c6s3-super.jpg" />
+  <meta name="twitter:image:alt"    content="Fortnite C6S3 — Super key art — Audio Designer, Joe Hudson" />
+
+  <!-- Structured data: tells Google who you are and what each credit is.
+       Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/projects/super.html",
+      "url": "https://joehudson.co.uk/pages/projects/super.html",
+      "name": "Fortnite C6S3 — Super — Audio Designer | Joe Hudson",
+      "description": "Map audio, prop and cosmetic sound design for Fortnite Chapter 6 Season 3 — Super. The Fortress of Solitude and Lakeside Lab: crystal chime ambience, iceberg shoreline and nested volumes.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "inLanguage": "en-GB",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-c6s3-super.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work",
+            "item": "https://joehudson.co.uk/pages/work.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fortnite C6S3 — Super"
+          }
+        ]
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/super.html#game"
+      }
+    },
+    {
+      "@type": "VideoGame",
+      "name": "Fortnite C6S3 — Super",
+      "url": "https://joehudson.co.uk/pages/projects/super.html",
+      "image": "https://joehudson.co.uk/assets/images/og/og-c6s3-super.jpg",
+      "gamePlatform": [
+        "PC",
+        "Console",
+        "Mobile"
+      ],
+      "contributor": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Epic Games"
+      },
+      "datePublished": "2025",
+      "@id": "https://joehudson.co.uk/pages/projects/super.html#game"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Audio Designer — Fortnite C6S3 — Super",
+      "creator": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/super.html#game"
+      },
+      "description": "Map audio, prop and cosmetic sound design for Fortnite Chapter 6 Season 3 — Super. The Fortress of Solitude and Lakeside Lab: crystal chime ambience, iceberg shoreline and nested volumes."
+    }
+  ]
+}
+  </script>
+
+
+  <title>Fortnite C6S3 — Super — Joe Hudson</title>
+  <meta name="description" content="Map audio, prop and cosmetic sound design on Fortnite Chapter 6 Season 3, Super. Crystal chime ambience and nested volumes at the Fortress of Solitude, an iceberg shoreline, and room-by-room reverb at Lakeside Lab. Epic Games / Sweet Justice Sound Group." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,172,80,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 12px 0 0; gap: 8px;
+    }
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-gold);
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-title {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 300; color: #eef2f8;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+    .page-subtitle {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+    .project-sidebar {
+      background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
+    }
+    /* Single-column flex: video full-width at top, body-grid below */
+    .project-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    /* Full-width 16:9 video */
+    .project-video-top { width: 100%; }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
+    .video-caption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.1em; margin-top: 8px;
+    }
+    /*
+      Body layout.
+      The keyart used to sit in a 380px right-hand column running the
+      full height of the text, which pulled the copy in and left every
+      line ending well short of the video box above it. Now a single
+      column, so the copy runs to the same right edge as the video.
+      The keyart itself moved up into .project-top-row instead, sitting
+      beside the breadcrumb and meta block, between the video and the
+      separator line.
+    */
+    .project-body-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /*
+      Top row: breadcrumb + meta on the left, keyart on the right.
+      The separator line (previously on .project-meta) now sits under
+      this whole row, so it clears the keyart too.
+    */
+    .project-top-row {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .project-top-keyart { width: 100%; }
+
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+
+    /* Spacing between consecutive paragraphs in a detail block */
+    .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
+
+    /* Sub-heading inside a detail section */
+    .project-subhead {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: var(--space-lg) 0 8px;
+    }
+    .project-keyart {
+      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
+      filter: saturate(0.8) brightness(0.9);
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    }
+    .back-link:hover { color: var(--color-gold); }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /*
+      Zig-zag figures — images floated right then left down the page
+      with the text wrapping round them. Same pattern as the Oni
+      Hunters page. .float-block contains the floats so the next
+      section never slides up beside an image.
+    */
+    .float-block { display: flow-root; }
+    .poi-figure {
+      float: right;
+      width: 46%;
+      max-width: 520px;
+      margin: 0 0 var(--space-md) var(--space-lg);
+      border: 1px solid rgba(212,172,80,0.18);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--color-bg-surface);
+    }
+    .poi-figure--left {
+      float: left;
+      margin: 0 var(--space-lg) var(--space-md) 0;
+    }
+    .poi-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: saturate(0.9) brightness(0.92);
+      transition: filter var(--transition-med);
+    }
+    .poi-figure img:hover { filter: saturate(1.0) brightness(1.0); }
+    .poi-figure figcaption {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+      padding: 7px 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    /* Each image + text pair is its own block, so the images always alternate
+       right / left even when a paragraph is short. */
+    .zz { margin-top: var(--space-md); }
+    .zz .project-subhead { margin-top: 0; }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .project-body-grid { grid-template-columns: 1fr; }
+      .project-top-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
+      /* Figures go full width above the copy on small screens */
+      .poi-figure,
+      .poi-figure--left {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 var(--space-md) 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav" role="banner">
+    <a href="../../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
+      <a href="../disciplines.html" class="nav-link">Disciplines</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header" aria-label="Project header">
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
+      <h1 class="page-title"><strong>Fortnite C6S3 — Super</strong></h1>
+      <p class="page-subtitle">Audio Designer</p>
+    </div>
+  </section>
+
+  <div class="project-layout">
+    <aside class="project-sidebar" aria-hidden="true">
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <span class="sidebar-label">Project</span>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+    </aside>
+
+    <main class="project-content" id="main-content">
+
+      <!-- Full-width 16:9 video — placeholder until a video is ready -->
+      <div class="project-video-top">
+        <div class="video-wrapper">
+          <div class="video-placeholder">
+            <div class="video-play"></div>
+            <p class="video-label">Video — to be added</p>
+          </div>
+        </div>
+        <p class="video-caption">// Fortnite C6S3 — Super &nbsp;&middot;&nbsp; Audio Designer</p>
+      </div>
+
+      <!-- Body copy, full width, matching the video's edges -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <div class="project-top-row">
+            <div>
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <a href="../work.html">Credits</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Fortnite C6S3 — Super</span>
+              </nav>
+
+              <div class="project-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Studio</span>
+                  <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">Audio Designer</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Platform</span>
+                  <span class="meta-value">PC · Console · Mobile</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value">2025</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Keyart sits here — between the video and the separator line -->
+            <div class="project-top-keyart">
+              <img class="project-keyart" src="../../assets/images/c6s3-super-keyart.jpg" alt="Fortnite Chapter 6 Season 3 — Super key art: Superman, Robin and other characters in front of the Fortnite logo" loading="lazy" />
+            </div>
+          </div>
+
+          <p class="project-desc">Map audio, prop sound design and cosmetic sound design for Fortnite Chapter 6 Season 3, the season that brought Superman to the island. This page covers two locations so far: the Fortress of Solitude and the nearby Lakeside Lab.</p>
+
+          <div class="float-block">
+            <p class="project-section-label">// Fortress of Solitude</p>
+
+          <div class="float-block zz">
+            <figure class="poi-figure">
+              <img src="../../assets/images/c6s3-super/fortress-of-solitude.webp" alt="The Fortress of Solitude, a tall crystal formation rising from an ice shelf in the middle of a calm lake, with buildings and snow around it" loading="lazy" />
+              <figcaption>// Fortress of Solitude &nbsp;&middot;&nbsp; Exterior</figcaption>
+            </figure>
+            <p class="project-subhead">Volumes</p>
+            <p class="project-detail-text">The Fortress of Solitude went through the usual volumisation process. The exterior and the crystal interior are separate nested volumes, each with its own ambience and reverb, so stepping from the open ice into the crystal hall is something you hear as well as see.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure poi-figure--left">
+              <img src="../../assets/images/c6s3-super/fortress-of-solitude-interior.webp" alt="Inside the Fortress of Solitude: large blue crystals framing a pool and a ring-shaped structure at the far end of the hall" loading="lazy" />
+              <figcaption>// Fortress of Solitude &nbsp;&middot;&nbsp; Interior</figcaption>
+            </figure>
+            <p class="project-subhead">Crystal chimes</p>
+            <p class="project-detail-text">Ethereal threads of crystal chimes run through the interior ambience. They were made from processed and smeared glass recordings, combined with metal chime shimmers.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure">
+              <img src="../../assets/images/c6s3-super/fortress-of-solitude-interior-editor.webp" alt="The Fortress of Solitude interior open in the Unreal editor, showing the audio actors placed around the crystal hall" loading="lazy" />
+              <figcaption>// Fortress of Solitude &nbsp;&middot;&nbsp; Interior in the editor</figcaption>
+            </figure>
+            <p class="project-subhead">Texture spots</p>
+            <p class="project-detail-text">The same chime material was also designed and randomised as one-shot texture spots placed around the interior. They give the ambience some life and movement in 3D space.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure poi-figure--left">
+              <img src="../../assets/images/c6s3-super/water-splining-shoreline.webp" alt="Top-down view in the Unreal editor of the new shoreline spline drawn around the icebergs" loading="lazy" />
+              <figcaption>// Shoreline spline in the editor</figcaption>
+            </figure>
+            <p class="project-subhead">Shoreline and icebergs</p>
+            <p class="project-detail-text">The new shoreline was splined to accommodate the icebergs, as shown in the editor view. Recordings of real icebergs creaking, along with water lapping and slapping against ice, were used to add realism to the scene.</p>
+          </div>
+          </div>
+
+          <div class="float-block">
+            <p class="project-section-label">// Lakeside Lab</p>
+
+          <div class="float-block zz">
+            <figure class="poi-figure">
+              <img src="../../assets/images/c6s3-super/lakeside-lab-landmark.webp" alt="The Lakeside Lab, a group of white prefab buildings and hangars on a snowy shore beside a radio mast" loading="lazy" />
+              <figcaption>// Lakeside Lab &nbsp;&middot;&nbsp; Overview</figcaption>
+            </figure>
+            <p class="project-subhead">Nested volumes</p>
+            <p class="project-detail-text">The Lakeside Lab gets the same treatment of complex nested volumisation, but here the structures are prefab and thin.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure poi-figure--left">
+              <img src="../../assets/images/c6s3-super/lakeside-lab-exterior.webp" alt="The outside of the Lakeside Lab, a long white building raised on a timber pier above snowy rock" loading="lazy" />
+              <figcaption>// Lakeside Lab &nbsp;&middot;&nbsp; Exterior</figcaption>
+            </figure>
+            <p class="project-subhead">Wind indoors</p>
+            <p class="project-detail-text">Because the structures are thin, some of the outside wind is brought into the interiors. It is occluded in the design and mixed in with the usual open metallic room tones and low hums and rumbles, delivered in both quad and stereo.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure">
+              <img src="../../assets/images/c6s3-super/lakeside-lab-bunk-beds.webp" alt="Looking down into a Lakeside Lab laboratory with a staircase, metal gantry and bunk beds" loading="lazy" />
+              <figcaption>// Lakeside Lab &nbsp;&middot;&nbsp; Laboratory and bunk beds</figcaption>
+            </figure>
+            <p class="project-subhead">A volume for every room size</p>
+            <p class="project-detail-text">Each room size gets its own volume. At the time of writing, these used reverb override components on the volumes themselves.</p>
+          </div>
+
+          <div class="float-block zz">
+            <figure class="poi-figure poi-figure--left">
+              <img src="../../assets/images/c6s3-super/lakeside-lab-bathroom.webp" alt="A white tiled bathroom inside the Lakeside Lab with an orange door and a basin" loading="lazy" />
+              <figcaption>// Lakeside Lab &nbsp;&middot;&nbsp; Tiled bathroom</figcaption>
+            </figure>
+            <p class="project-subhead">Reverb by hand</p>
+            <p class="project-detail-text">The reverbs were not tag dependent, and room size was not worked out by line traces. That meant a lot of manual work, but it was worthwhile for the contrast between spaces, especially going from tiled bathrooms to more absorbent open spaces like the mess halls.</p>
+          </div>
+          </div>
+
+          <div class="cta" style="padding:0">
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    
+      <!-- ============================================================
+           RELATED CREDITS — generated from studio, franchise and platform.
+           Gives visitors (and search crawlers) a route between credits
+           instead of every project page being a dead end.
+           ============================================================ -->
+      <section class="related-section" aria-label="Related credits">
+        <div class="section-header">
+          <h2 class="section-tag">Related Credits</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="related-grid">
+          <a class="related-card" href="lawless.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c4s1-lawless-keyart.jpg" alt="Fortnite C6S2 — Lawless" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2025</span>
+              <span class="related-card-title">Fortnite C6S2 — Lawless</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+          <a class="related-card" href="hunters.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c6s1-oni-hunters-keyart.jpg" alt="Fortnite C6S1 — Oni Hunters" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2024 – 2025</span>
+              <span class="related-card-title">Fortnite C6S1 — Oni Hunters</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+          <a class="related-card" href="absolute-doom.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c5s4-absolute-doom-keyart.jpg" alt="Fortnite — Chapter 5: Absolute Doom" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2024</span>
+              <span class="related-card-title">Fortnite — Chapter 5: Absolute Doom</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Sequential navigation through the full credit list, newest to oldest -->
+      <nav class="projnav" aria-label="Credit navigation">
+        <a class="projnav-link projnav-prev" href="wrecked.html">
+          <span class="projnav-dir">&larr; Newer credit</span>
+          <span class="projnav-title">Fortnite C5S3 — Wrecked</span>
+        </a>
+        <a class="projnav-link projnav-next" href="lawless.html">
+          <span class="projnav-dir">Older credit &rarr;</span>
+          <span class="projnav-title">Fortnite C6S2 — Lawless</span>
+        </a>
+      </nav>
+
+    </main>
+  </div>
+
+  <!-- Screenshot / character ribbon -->
+  <section class="ribbon-section" aria-label="Project screenshots">
+    <p class="ribbon-label">// Key Art &nbsp;&middot;&nbsp; Fortnite C6S3 — Super</p>
+    <div class="ribbon-track-wrap">
+      <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/c6s3-super-keyart.jpg" alt="Fortnite Chapter 6 Season 3 — Super key art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/fortress-of-solitude.webp" alt="Fortress of Solitude — exterior" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/fortress-of-solitude-interior.webp" alt="Fortress of Solitude — interior" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-landmark.webp" alt="Lakeside Lab — overview" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-exterior.webp" alt="Lakeside Lab — exterior" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-bunk-beds.webp" alt="Lakeside Lab — laboratory and bunk beds" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-bathroom.webp" alt="Lakeside Lab — tiled bathroom" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/c6s3-super-keyart.jpg" alt="Fortnite Chapter 6 Season 3 — Super key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/fortress-of-solitude.webp" alt="Fortress of Solitude — exterior" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/fortress-of-solitude-interior.webp" alt="Fortress of Solitude — interior" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-landmark.webp" alt="Lakeside Lab — overview" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-exterior.webp" alt="Lakeside Lab — exterior" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-bunk-beds.webp" alt="Lakeside Lab — laboratory and bunk beds" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c6s3-super/lakeside-lab-bathroom.webp" alt="Lakeside Lab — tiled bathroom" loading="lazy" role="listitem" aria-hidden="true" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="../contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
