@@ -1122,6 +1122,11 @@ h1, h2, h3 {
   }
 }
 
+/* Tablet nav — seven links now, so trim the side padding between 601px and 900px */
+@media (min-width: 601px) and (max-width: 900px) {
+  .nav-link { padding: 0 11px; }
+}
+
 /* Mobile — up to 600px wide */
 @media (max-width: 600px) {
 

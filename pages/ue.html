@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS (same set as every other page)
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <meta name="theme-color" content="#080a0f" />
+
+  <!-- Open Graph + Twitter card.
+       Uses the main site share image until a page-specific one is made
+       (og-ue.jpg / og-verse.jpg would sit in assets/images/og/). -->
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="UE Dev Log — Joe Hudson · Sound Designer" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="UE Dev Log — Joe Hudson · Sound Designer" />
+  <meta name="twitter:description"  content="Working notes from Unreal Engine 5: Blueprint ambient systems, MetaSounds, Niagara and audio." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/ue.html",
+      "url": "https://joehudson.co.uk/pages/ue.html",
+      "name": "UE Dev Log — Joe Hudson · Sound Designer",
+      "description": "Working notes from Unreal Engine 5: Blueprint ambient systems, MetaSounds, Niagara and audio.",
+      "isPartOf": { "@id": "https://joehudson.co.uk/#website" },
+      "about": { "@id": "https://joehudson.co.uk/#joe" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joehudson.co.uk/" },
+          { "@type": "ListItem", "position": 2, "name": "UE" }
+        ]
+      },
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+  </script>
+
+  <title>UE Dev Log — Joe Hudson · Technical Sound Designer</title>
+  <meta name="description" content="Working notes from Unreal Engine 5: Blueprint ambient systems, MetaSounds, Niagara and audio." />
+
+  <meta property="og:title"       content="UE Dev Log — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="Working notes from Unreal Engine 5: Blueprint ambient systems, MetaSounds, Niagara and audio." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/ue.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Joe Hudson — Technical Sound Designer" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/ue.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ================================================================
+       BLOG PAGE STYLES (shared by ue.html and verse.html)
+       Each page sets one accent colour with --blog-accent below, so
+       the two pages feel related but are easy to tell apart.
+    ================================================================ */
+
+    :root {
+      --blog-accent:       var(--color-cyan);
+      --blog-accent-faint: var(--color-cyan-faint);
+    }
+
+    /* ── PAGE HEADER (same pattern as disciplines.html) ── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT: sidebar column + content ── */
+
+    .blog-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .blog-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .blog-content { padding: var(--space-xl); }
+
+    /* The feed is capped in width so lines stay readable on big screens */
+    .blog-feed { max-width: 860px; }
+
+    .blog-intro {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ── ENTRY INDEX — jump links to each post ── */
+
+    .entry-index {
+      list-style: none;
+      margin: 0 0 var(--space-xl);
+      padding: 12px 16px;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+    }
+
+    .entry-index li + li { margin-top: 6px; }
+
+    .entry-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #c8d8e8;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .entry-link:hover { color: var(--blog-accent); }
+
+    .entry-link-date {
+      color: var(--color-text-deep);
+      margin-right: 10px;
+    }
+
+    /* ── POST CARD ── */
+
+    .post {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+      padding: var(--space-lg);
+      margin-bottom: 16px;
+      /* Stops a jump link hiding the post title under the fixed nav */
+      scroll-margin-top: 80px;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .post-date   { color: var(--blog-accent); }
+    .post-status { color: var(--color-text-dim); }
+
+    .post-tag {
+      padding: 2px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      color: var(--color-text-dim);
+    }
+
+    .post-title {
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 500;
+      color: #eef2f8;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .post-body p,
+    .post-body li {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
+    .post-body p  { margin-bottom: 12px; }
+    .post-body a  { color: var(--color-cyan); }
+
+    /* Small mono sub-headings inside a post */
+    .post-body h3 {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--blog-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 18px 0 8px;
+    }
+
+    .post-body ul { margin: 0 0 12px; padding-left: 20px; }
+    .post-body li { margin-bottom: 6px; }
+    .post-body li::marker { color: var(--blog-accent); }
+    .post-body strong { color: #c8d8e8; font-weight: 500; }
+
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #c8d8e8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Code block — scrolls sideways on small screens instead of breaking the layout */
+    .post-code {
+      margin: 14px 0;
+      padding: 14px 16px;
+      background: #080a0f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-code code {
+      display: block;
+      padding: 0;
+      background: none;
+      font-size: 11.5px;
+      line-height: 1.7;
+      white-space: pre;
+      color: #c8d8e8;
+    }
+
+    .post-code .c { color: var(--color-text-deep); }
+
+    .post-note {
+      font-size: 11px !important;
+      color: var(--color-text-dim) !important;
+      border-top: 1px solid var(--color-border);
+      padding-top: 10px;
+      margin-top: 14px;
+    }
+
+    /* ── VIDEO / CLIP BOX (16:9, same padding trick as the reel boxes) ── */
+
+    .post-media { margin: 16px 0 4px; }
+
+    .post-media-box {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0a0c12;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .post-media-box iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .post-media-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .post-media-play {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 0 14px 24px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+      margin-left: 4px;
+    }
+
+    .post-media-text {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .post-media figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { display: none; }
+      .blog-content { padding: var(--space-md); }
+
+      .post { padding: var(--space-md); }
+      .entry-link-date { display: block; margin: 0 0 2px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="reel.html"        class="nav-link">Reel</a>
+      <a href="disciplines.html" class="nav-link">Disciplines</a>
+      <a href="ue.html"          class="nav-link active">UE</a>
+      <a href="verse.html"       class="nav-link">Verse</a>
+      <a href="contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--purp"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Unreal Engine &nbsp;·&nbsp; Blueprint &nbsp;·&nbsp; Niagara &nbsp;·&nbsp; MetaSounds</p>
+      <h1 class="page-title">UE <strong>Dev Log</strong></h1>
+      <p class="page-subtitle">Notes from the editor · newest first</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER (duplicated once so the scroll loops seamlessly)
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● UNREAL ENGINE 5</span>
+      <span class="ticker-item ticker-item--cyan">// BLUEPRINT AMBIENT SYSTEMS</span>
+      <span class="ticker-item">● METASOUNDS</span>
+      <span class="ticker-item ticker-item--gold">// NIAGARA + AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● WORK IN PROGRESS</span>
+      <span class="ticker-item">// NEW ENTRIES ADDED REGULARLY</span>
+      <span class="ticker-item ticker-item--gold">● UNREAL ENGINE 5</span>
+      <span class="ticker-item ticker-item--cyan">// BLUEPRINT AMBIENT SYSTEMS</span>
+      <span class="ticker-item">● METASOUNDS</span>
+      <span class="ticker-item ticker-item--gold">// NIAGARA + AUDIO</span>
+      <span class="ticker-item ticker-item--cyan">● WORK IN PROGRESS</span>
+      <span class="ticker-item">// NEW ENTRIES ADDED REGULARLY</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="blog-layout">
+
+    <aside class="blog-sidebar" aria-label="Quick navigation">
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+      <a href="../index.html" class="lb lb--purp"  title="Home"></a>
+      <a href="../index.html" class="lb lb--gold"  title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--coral" title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+    </aside>
+
+    <main class="blog-content" id="main-content">
+      <div class="blog-feed">
+
+        <p class="blog-intro">Working notes from inside Unreal Engine 5: ambient systems, Blueprint audio logic, MetaSounds and Niagara. Newest entry first.</p>
+
+        <!-- Jump links to every entry. Add a line here when you add a post. -->
+        <ul class="entry-index" aria-label="Entries">
+        <li><a href="#ambient-system-01" class="entry-link"><span class="entry-link-date">2026-10-19</span> Ambient system in Blueprints — 01: the plan</a></li>
+        <li><a href="#niagara-and-audio" class="entry-link"><span class="entry-link-date">2026-10-19</span> Niagara and audio — where they meet</a></li>
+        <li><a href="#metasounds-from-blueprint" class="entry-link"><span class="entry-link-date">2026-10-19</span> Driving MetaSounds from Blueprint</a></li>
+        <li><a href="#about-this-log" class="entry-link"><span class="entry-link-date">2026-10-19</span> What this log is</a></li>
+        </ul>
+
+        <!--
+          ROLLING FEED — newest post at the top.
+          TO ADD A POST: copy a whole <article class="post"> … </article>
+          block, paste it directly above the current top post, then change
+          the id, date, title and text. Add a matching line to the entry
+          index above.
+        -->
+
+      <article class="post" id="ambient-system-01">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Build log · Planning</span>
+          <span class="post-tag">Blueprint</span><span class="post-tag">Ambience</span><span class="post-tag">MetaSounds</span>
+        </div>
+        <h2 class="post-title">Ambient system in Blueprints — 01: the plan</h2>
+        <div class="post-body">
+          <p>I'm building a reusable ambient system in Blueprints for large, open spaces. The aim is one setup that a level designer can drop into a map and tune without opening the graph. This first entry sets out the plan before any of it exists, so I can check later what survived contact with the editor.</p>
+          <h3>Structure</h3>
+          <ul>
+            <li><code>BP_AmbientZone</code> — a volume that knows which ambience belongs to its area and how quickly to blend in and out.</li>
+            <li><code>BP_AmbientManager</code> — a single actor that tracks which zones the listener is inside and blends their layers.</li>
+            <li><code>DA_AmbientZone</code> — a Data Asset per zone holding layers, blend times and parameter values, so tuning never touches the Blueprint.</li>
+            <li>One MetaSound source per zone type, with exposed parameters for time of day, weather and intensity.</li>
+          </ul>
+          <h3>Layers</h3>
+          <ul>
+            <li><strong>Bed</strong> — a continuous, low-detail loop that carries the space.</li>
+            <li><strong>Texture</strong> — slower, evolving layers such as wind movement or distant activity.</li>
+            <li><strong>Spots</strong> — one-shots placed randomly around the listener or at fixed emitters.</li>
+          </ul>
+          <h3>Rules</h3>
+          <ul>
+            <li>Events over Tick wherever possible. Zone entry and exit are events, and blends use timelines or interpolation rather than polling.</li>
+            <li>Everything tunable lives in data, not in the graph.</li>
+            <li>Debug output from day one: on-screen text for active zones and layer weights.</li>
+            <li>Overlapping zones blend. They never hard-cut.</li>
+          </ul>
+          <p>Next entry: the zone actor and the listener-tracking logic.</p>
+        <figure class="post-media">
+          <div class="post-media-box">
+            <!-- TO ADD A CLIP: replace this placeholder div with
+                 <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Ambient system build log 01"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowfullscreen></iframe> -->
+            <div class="post-media-placeholder"><span class="post-media-play"></span>
+              <span class="post-media-text">Clip to follow</span></div>
+          </div>
+          <figcaption>// Ambient system — early test footage</figcaption>
+        </figure>
+        </div>
+      </article>
+
+      <article class="post" id="niagara-and-audio">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Notes · Testing</span>
+          <span class="post-tag">Niagara</span><span class="post-tag">Audio</span><span class="post-tag">VFX</span>
+        </div>
+        <h2 class="post-title">Niagara and audio — where they meet</h2>
+        <div class="post-body">
+          <p>Niagara sits closer to audio than it first appears. Particles can carry sound with them, and audio analysis can drive visuals. These are notes on the points I'm testing, not a finished method.</p>
+          <h3>Sound from effects</h3>
+          <ul>
+            <li>A sound triggered per particle becomes a voice-count problem quickly. Decide early whether the sound belongs to the emitter as a whole or to individual particles.</li>
+            <li>For continuous effects such as fire, steam or rain on a surface, one emitter-level source usually sounds more controlled than many small ones.</li>
+            <li>Concurrency and attenuation settings on the sound do most of the protecting. Set them before the effect goes into a level.</li>
+            <li>Collision events give the most believable one-shot triggers, but they need a cap on how many can fire per second.</li>
+          </ul>
+          <h3>Visuals from sound</h3>
+          <p>Going the other way, audio analysis data can drive Niagara parameters. That suits pulsing lights, energy effects and visuals that react to music or ambience. I'll test it with a MetaSound output and write up what works in the current engine version.</p>
+          <h3>Why it matters for ambience</h3>
+          <p>Weather, insects, embers and drifting dust all live in the overlap. Getting the audio and the effect to agree on intensity from one shared parameter is the useful part, and it's what I'm testing next.</p>
+        <figure class="post-media">
+          <div class="post-media-box">
+            <!-- TO ADD A CLIP: replace this placeholder div with
+                 <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Niagara and audio test"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowfullscreen></iframe> -->
+            <div class="post-media-placeholder"><span class="post-media-play"></span>
+              <span class="post-media-text">Clip to follow</span></div>
+          </div>
+          <figcaption>// Niagara + audio — test clip</figcaption>
+        </figure>
+        </div>
+      </article>
+
+      <article class="post" id="metasounds-from-blueprint">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Technique</span>
+          <span class="post-tag">MetaSounds</span><span class="post-tag">Blueprint</span>
+        </div>
+        <h2 class="post-title">Driving MetaSounds from Blueprint</h2>
+        <div class="post-body">
+          <p>A MetaSound is only as flexible as the parameters it exposes. The pattern I use is to build the graph with a small set of clearly named inputs, then drive them from Blueprint through the Audio Component.</p>
+          <ul>
+            <li>Name inputs for what they mean (<code>Intensity</code>, <code>WindSpeed</code>, <code>TimeOfDay</code>), not for what they do inside the graph.</li>
+            <li>Keep ranges normalised from 0 to 1 and scale to real values inside the MetaSound, so the Blueprint logic stays simple.</li>
+            <li>Use the Audio Component's parameter setters (Set Float Parameter, Set Trigger Parameter and so on) from Blueprint.</li>
+            <li>Smooth values inside the graph with an interpolation node rather than in Blueprint, so changes stay click-free whatever the update rate.</li>
+            <li>Keep the parameter names in one place, such as a data asset or a function library, so a typo can't silently break a connection.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="post" id="about-this-log">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Intro</span>
+          <span class="post-tag">Unreal Engine 5</span>
+        </div>
+        <h2 class="post-title">What this log is</h2>
+        <div class="post-body">
+          <p>This is a working log of what I'm building and testing in Unreal Engine 5: ambient systems, Blueprint logic, MetaSounds and Niagara. Entries are short and practical. Some are plans, some are results, and I'll revise earlier entries when I find I was wrong.</p>
+          <p>Finished, shipped work lives under <a href="work.html">Work</a>. The Verse notes for UEFN are on their own page.</p>
+        </div>
+      </article>
+
+        <div class="cta" style="padding: var(--space-lg) 0 0;">
+          <a href="verse.html" class="btn btn--ghost">Verse notes →</a>
+          <a href="contact.html"   class="btn btn--cyan">Get in Touch →</a>
+        </div>
+
+      </div><!-- /blog-feed -->
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <script>
+    /* ── POSTS AND INDEX LINKS — same hover/click sounds as the rest of the site ── */
+
+    document.querySelectorAll('.post, .entry-link').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      el.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+  </script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
