@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS (same set as every other page)
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <meta name="theme-color" content="#080a0f" />
+
+  <!-- Open Graph + Twitter card.
+       Uses the main site share image until a page-specific one is made
+       (og-ue.jpg / og-verse.jpg would sit in assets/images/og/). -->
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="UEFN Ambience — Joe Hudson · Sound Designer" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="UEFN Ambience — Joe Hudson · Sound Designer" />
+  <meta name="twitter:description"  content="Ambience in UEFN: Ballistic and early battle royale maps, working to Epic's quality bar with a restricted toolset." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/uefn.html",
+      "url": "https://joehudson.co.uk/pages/uefn.html",
+      "name": "UEFN Ambience — Joe Hudson · Sound Designer",
+      "description": "Ambience in UEFN: Ballistic and early battle royale maps, working to Epic's quality bar with a restricted toolset.",
+      "isPartOf": { "@id": "https://joehudson.co.uk/#website" },
+      "about": { "@id": "https://joehudson.co.uk/#joe" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joehudson.co.uk/" },
+          { "@type": "ListItem", "position": 2, "name": "UEFN" }
+        ]
+      },
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+  </script>
+
+  <title>UEFN Ambience — Joe Hudson · Technical Sound Designer</title>
+  <meta name="description" content="Ambience in UEFN: Ballistic and early battle royale maps, working to Epic's quality bar with a restricted toolset." />
+
+  <meta property="og:title"       content="UEFN Ambience — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="Ambience in UEFN: Ballistic and early battle royale maps, working to Epic's quality bar with a restricted toolset." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/uefn.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Joe Hudson — Technical Sound Designer" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/uefn.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ================================================================
+       BLOG PAGE STYLES (shared by ue.html and verse.html)
+       Each page sets one accent colour with --blog-accent below, so
+       the two pages feel related but are easy to tell apart.
+    ================================================================ */
+
+    :root {
+      --blog-accent:       var(--color-coral);
+      --blog-accent-faint: var(--color-coral-faint);
+    }
+
+    /* ── PAGE HEADER (same pattern as disciplines.html) ── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT: sidebar column + content ── */
+
+    .blog-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .blog-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .blog-content { padding: var(--space-xl); }
+
+    /* The feed is capped in width so lines stay readable on big screens */
+    .blog-feed { max-width: 860px; }
+
+    .blog-intro {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ── ENTRY INDEX — jump links to each post ── */
+
+    .entry-index {
+      list-style: none;
+      margin: 0 0 var(--space-xl);
+      padding: 12px 16px;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+    }
+
+    .entry-index li + li { margin-top: 6px; }
+
+    .entry-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #c8d8e8;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .entry-link:hover { color: var(--blog-accent); }
+
+    .entry-link-date {
+      color: var(--color-text-deep);
+      margin-right: 10px;
+    }
+
+    /* ── POST CARD ── */
+
+    .post {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+      padding: var(--space-lg);
+      margin-bottom: 16px;
+      /* Stops a jump link hiding the post title under the fixed nav */
+      scroll-margin-top: 80px;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .post-date   { color: var(--blog-accent); }
+    .post-status { color: var(--color-text-dim); }
+
+    .post-tag {
+      padding: 2px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      color: var(--color-text-dim);
+    }
+
+    .post-title {
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 500;
+      color: #eef2f8;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .post-body p,
+    .post-body li {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
+    .post-body p  { margin-bottom: 12px; }
+    .post-body a  { color: var(--color-cyan); }
+
+    /* Small mono sub-headings inside a post */
+    .post-body h3 {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--blog-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 18px 0 8px;
+    }
+
+    .post-body ul { margin: 0 0 12px; padding-left: 20px; }
+    .post-body li { margin-bottom: 6px; }
+    .post-body li::marker { color: var(--blog-accent); }
+    .post-body strong { color: #c8d8e8; font-weight: 500; }
+
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #c8d8e8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Code block — scrolls sideways on small screens instead of breaking the layout */
+    .post-code {
+      margin: 14px 0;
+      padding: 14px 16px;
+      background: #080a0f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-code code {
+      display: block;
+      padding: 0;
+      background: none;
+      font-size: 11.5px;
+      line-height: 1.7;
+      white-space: pre;
+      color: #c8d8e8;
+    }
+
+    .post-code .c { color: var(--color-text-deep); }
+
+    .post-note {
+      font-size: 11px !important;
+      color: var(--color-text-dim) !important;
+      border-top: 1px solid var(--color-border);
+      padding-top: 10px;
+      margin-top: 14px;
+    }
+
+    /* ── VIDEO / CLIP BOX (16:9, same padding trick as the reel boxes) ── */
+
+    .post-media { margin: 16px 0 4px; }
+
+    .post-media-box {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0a0c12;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .post-media-box iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .post-media-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .post-media-play {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 0 14px 24px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+      margin-left: 4px;
+    }
+
+    .post-media-text {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* Still image inside a post (e.g. key art) */
+    .post-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+    }
+
+    /* Inline SVG diagram — drawn in code, so it stays sharp at any size */
+    .post-diagram {
+      margin: 16px 0;
+      padding: 12px;
+      background: #080a0f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+    }
+
+    .post-diagram svg { display: block; width: 100%; height: auto; }
+
+    .post-diagram figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    .post-media figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { display: none; }
+      .blog-content { padding: var(--space-md); }
+
+      .post { padding: var(--space-md); }
+      .entry-link-date { display: block; margin: 0 0 2px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="reel.html"        class="nav-link">Reel</a>
+      <a href="disciplines.html" class="nav-link">Disciplines</a>
+      <a href="ue.html"          class="nav-link">UE</a>
+      <a href="uefn.html"        class="nav-link active">UEFN</a>
+      <a href="verse.html"       class="nav-link">Verse</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--coral"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// UEFN &nbsp;·&nbsp; Ballistic &nbsp;·&nbsp; Battle Maps &nbsp;·&nbsp; Ambience</p>
+      <h1 class="page-title">UEFN <strong>Ambience</strong></h1>
+      <p class="page-subtitle">Landing Epic-quality ambience in UEFN · newest first</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER (duplicated once so the scroll loops seamlessly)
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● UEFN</span>
+      <span class="ticker-item ticker-item--cyan">// BALLISTIC AMBIENCE</span>
+      <span class="ticker-item">● EARLY BATTLE MAPS</span>
+      <span class="ticker-item ticker-item--gold">// LAYERED VOLUMES + CROSSFADES</span>
+      <span class="ticker-item ticker-item--cyan">● EPIC QUALITY BAR</span>
+      <span class="ticker-item">// WORK IN PROGRESS</span>
+      <span class="ticker-item ticker-item--gold">● UEFN</span>
+      <span class="ticker-item ticker-item--cyan">// BALLISTIC AMBIENCE</span>
+      <span class="ticker-item">● EARLY BATTLE MAPS</span>
+      <span class="ticker-item ticker-item--gold">// LAYERED VOLUMES + CROSSFADES</span>
+      <span class="ticker-item ticker-item--cyan">● EPIC QUALITY BAR</span>
+      <span class="ticker-item">// WORK IN PROGRESS</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="blog-layout">
+
+    <aside class="blog-sidebar" aria-label="Quick navigation">
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+      <a href="../index.html" class="lb lb--purp"  title="Home"></a>
+      <a href="../index.html" class="lb lb--gold"  title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--coral" title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+    </aside>
+
+    <main class="blog-content" id="main-content">
+      <div class="blog-feed">
+
+        <p class="blog-intro">Ambient audio work from inside UEFN, starting with Ballistic and some of the first battle maps Epic built in the tool. Newest entry first.</p>
+
+        <!-- Jump links to every entry. Add a line here when you add a post. -->
+        <ul class="entry-index" aria-label="Entries">
+        <li><a href="#early-uefn-battle-maps" class="entry-link"><span class="entry-link-date">2026-10-19</span> Early battle maps in UEFN: desert and town ambience</a></li>
+        <li><a href="#ambience-without-geometry" class="entry-link"><span class="entry-link-date">2026-10-19</span> Ambient volumes without geometry tools</a></li>
+        <li><a href="#ballistic-ambience" class="entry-link"><span class="entry-link-date">2026-10-19</span> Ballistic: landing ambience with a restricted toolset</a></li>
+        </ul>
+
+        <!--
+          ROLLING FEED — newest post at the top.
+          TO ADD A POST: copy a whole <article class="post"> … </article>
+          block, paste it directly above the current top post, then change
+          the id, date, title and text. Add a matching line to the entry
+          index above.
+        -->
+
+      <article class="post" id="early-uefn-battle-maps">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Early UEFN work</span>
+          <span class="post-tag">UEFN</span><span class="post-tag">Battle Royale</span><span class="post-tag">Ambience</span>
+        </div>
+        <h2 class="post-title">Early battle maps in UEFN: desert and town ambience</h2>
+        <div class="post-body">
+          <p>I was also involved in some of the first battle royale battle maps Epic built in UEFN. Most of my ambience work on them was desert and town spaces.</p>
+          <p>The constraints were the same as on Ballistic, so the method carried over: careful volume placement, layered volumes and sympathetic crossfades (see the entry on <a href="#ambience-without-geometry">working without geometry tools</a>). The result held the same ambience quality bar as Fortnite Battle Royale.</p>
+          <!-- TO ADD MAP NAMES AND IMAGES LATER:
+               add the map names to the paragraph above, then add images in a
+               <figure class="post-media"><img src="../assets/images/FOLDER/image.webp" alt="..." loading="lazy" /><figcaption>// Caption</figcaption></figure>
+               block directly under it. -->
+        </div>
+      </article>
+
+      <article class="post" id="ambience-without-geometry">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Technique</span>
+          <span class="post-tag">UEFN</span><span class="post-tag">Ambience</span><span class="post-tag">Volumes</span>
+        </div>
+        <h2 class="post-title">Ambient volumes without geometry tools</h2>
+        <div class="post-body">
+          <p>One of the tools we didn't have at the time was geometry, so we couldn't control the vertices of ambient volumes. The shapes were fixed, and everything had to be solved with where the volumes went and how they overlapped.</p>
+          <h3>The approach</h3>
+          <ul>
+            <li><strong>Careful placement.</strong> Each volume was positioned deliberately, because it couldn't be reshaped to fit the space afterwards.</li>
+            <li><strong>Layering.</strong> Volumes were stacked and overlapped, so a larger volume could carry the wider space while smaller ones added local detail.</li>
+            <li><strong>Sympathetic crossfades.</strong> Each fade between neighbouring volumes was chosen to suit the sounds on both sides of it, rather than one default fade for every border.</li>
+          </ul>
+          <figure class="post-diagram">
+            <svg viewBox="0 0 640 270" role="img" aria-label="Diagram. Three overlapping box-shaped ambient volumes seen from above, with a gain graph below showing each volume fading out as the next fades in across the overlap.">
+              <!-- TOP: the volumes, seen from above. Shapes are plain boxes, so the layout comes from placement. -->
+              <text x="40" y="18" style="font:9px 'JetBrains Mono',monospace;fill:var(--color-text-dim);letter-spacing:0.14em">TOP-DOWN · VOLUMES AS PLACED</text>
+              <rect x="40"  y="30" width="300" height="80"  style="fill:var(--color-cyan);fill-opacity:0.10;stroke:var(--color-cyan);stroke-width:1.2" />
+              <rect x="270" y="70" width="260" height="80"  style="fill:var(--color-gold);fill-opacity:0.10;stroke:var(--color-gold);stroke-width:1.2" />
+              <rect x="470" y="30" width="150" height="120" style="fill:var(--color-purp-light);fill-opacity:0.10;stroke:var(--color-purp-light);stroke-width:1.2" />
+              <text x="50"  y="50"  style="font:10px 'JetBrains Mono',monospace;fill:var(--color-cyan)">VOLUME A</text>
+              <text x="372" y="124" style="font:10px 'JetBrains Mono',monospace;fill:var(--color-gold)">VOLUME B</text>
+              <text x="540" y="50"  style="font:10px 'JetBrains Mono',monospace;fill:var(--color-purp-light)">VOLUME C</text>
+              <!-- overlap bands: where the crossfades happen -->
+              <rect x="270" y="70" width="70" height="40" style="fill:#ffffff;fill-opacity:0.10" />
+              <rect x="470" y="70" width="60" height="80" style="fill:#ffffff;fill-opacity:0.10" />
+
+              <!-- BOTTOM: how loud each volume is along the same left-to-right path -->
+              <text x="40" y="186" style="font:9px 'JetBrains Mono',monospace;fill:var(--color-text-dim);letter-spacing:0.14em">LEVEL ALONG THE PATH</text>
+              <line x1="40" y1="250" x2="620" y2="250" style="stroke:rgba(255,255,255,0.15);stroke-width:1" />
+              <path d="M40 200 H270 C300 200 310 250 340 250 H620" style="fill:none;stroke:var(--color-cyan);stroke-width:1.8" />
+              <path d="M40 250 H270 C300 250 310 200 340 200 H470 C500 200 500 250 530 250 H620" style="fill:none;stroke:var(--color-gold);stroke-width:1.8" />
+              <path d="M40 250 H470 C500 250 500 200 530 200 H620" style="fill:none;stroke:var(--color-purp-light);stroke-width:1.8" />
+              <text x="272" y="266" style="font:8px 'JetBrains Mono',monospace;fill:var(--color-text-dim)">CROSSFADE A→B</text>
+              <text x="456" y="266" style="font:8px 'JetBrains Mono',monospace;fill:var(--color-text-dim)">CROSSFADE B→C</text>
+            </svg>
+            <figcaption>// Illustration — box volumes layered along a route, with a crossfade across each overlap</figcaption>
+          </figure>
+          <p>With that approach, we landed the same ambience quality bar as Fortnite Battle Royale on the early maps.</p>
+        </div>
+      </article>
+
+      <article class="post" id="ballistic-ambience">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-10-19">19 OCT 2026</time>
+          <span class="post-status">Case notes</span>
+          <span class="post-tag">Ballistic</span><span class="post-tag">UEFN</span><span class="post-tag">Ambience</span>
+        </div>
+        <h2 class="post-title">Ballistic: landing ambience with a restricted toolset</h2>
+        <div class="post-body">
+          <p>Ballistic was one of the first Epic Games maps I was involved in. The job was to land the ambient audio in UEFN at Epic's quality bar, with a more restricted toolset than I was used to.</p>
+          <figure class="post-media">
+            <img src="../assets/images/ballistic-keyart.jpg" alt="Ballistic key art" loading="lazy" />
+            <figcaption>// Ballistic — key art</figcaption>
+          </figure>
+          <h3>Getting content into UEFN</h3>
+          <p>Our Fortnite ambient content was exposed to UEFN through plug-in directory inclusion. After a change, there was a delay of a couple of hours before the content was available in UEFN.</p>
+          <h3>What that did to the work</h3>
+          <p>That delay made instant decisions difficult. I couldn't change something and hear it straight away, so the work needed more planning than usual, with decisions made before the content went in rather than after hearing it in the editor.</p>
+          <p>The credit is on the <a href="projects/ballistic.html">Ballistic project page</a>.</p>
+        </div>
+      </article>
+
+        <div class="cta" style="padding: var(--space-lg) 0 0;">
+          <a href="verse.html" class="btn btn--ghost">Verse notes →</a>
+          <a href="contact.html"   class="btn btn--cyan">Get in Touch →</a>
+        </div>
+
+      </div><!-- /blog-feed -->
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <script>
+    /* ── POSTS AND INDEX LINKS — same hover/click sounds as the rest of the site ── */
+
+    document.querySelectorAll('.post, .entry-link').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      el.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+  </script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
