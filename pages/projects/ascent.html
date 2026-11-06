@@ -332,6 +332,37 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Sound design showcase — grouped audio examples, native <audio> controls */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      .sound-grid { grid-template-columns: 1fr; }
+    }
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -471,7 +502,135 @@
 
       </div>
 
-    
+      <!-- ============================================================
+           SOUND DESIGN EXAMPLES — first pass of raw audio from The
+           Ascent, grouped by system. Get them up, tidy later.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Sound Design Examples</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held at full session rate/bit depth (48kHz/16-bit or 96kHz/24-bit depending on source)</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Player — Level Up</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Level Up 01</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/level-up-01.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Environment — Sci-Fi Doors</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Mechanical Blast 01</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/door-mechanical-blast-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Mechanical Blast 02</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/door-mechanical-blast-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Mechanical Blast 03</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/door-mechanical-blast-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Weapons — Explosions</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Dirty Metal Shriek</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/explosion-dirty-metal-shriek.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Dirty Metal Shriek 01</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/explosion-dirty-metal-shriek-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Dirty Metal Shriek 02</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/explosion-dirty-metal-shriek-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Dirty Metal Shriek 03</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/explosion-dirty-metal-shriek-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Dirty Metal Shriek 04</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/explosion-dirty-metal-shriek-04.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Enemies — Hoverbot</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Metal Impact 001</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/hoverbot-metal-impact-001.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Pickup — Quad Damage</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Idle Loop</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-idle-loop.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Idle Loop (Stereo)</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-idle-loop-stereo.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Activated 01</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-activated-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Activated 02</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-activated-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Base Loop</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-base-loop.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Deactivated 01</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-deactivated-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Deactivated 02</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-deactivated-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">High Loop</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/quad-damage-high-loop.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// UI — Mission Complete</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Mission Objective Complete 02</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/ui-mission-complete-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Mission Objective Complete 03</span>
+              <audio controls preload="none" src="../../assets/audio/ascent/ui-mission-complete-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
