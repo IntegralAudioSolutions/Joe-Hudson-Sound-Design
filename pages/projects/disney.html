@@ -549,6 +549,7 @@
         '> access security grid',
         '> access main security grid'
       ];
+      var SPEED        = 2;      // overall playback speed: 1 = original pace, 2 = twice as fast, 0.5 = half speed
       var TYPE_SPEED   = 60;     // ms per typed character (a little random jitter is added)
       var FLOOD_START  = 420;    // ms between magic-word lines at the start of the flood...
       var FLOOD_END    = 55;     // ...speeding up to this many ms between lines
@@ -568,9 +569,10 @@
 
       /* ── SMALL HELPERS ───────────────────────────────────────── */
 
-      // sleep(500) pauses for half a second. Used with "await" below.
+      // sleep(500) pauses for half a second (at SPEED 1). Used with "await" below.
+      // Every pause in the scene goes through here, so dividing by SPEED speeds up the whole thing.
       function sleep(ms) {
-        return new Promise(function (resolve) { setTimeout(resolve, ms); });
+        return new Promise(function (resolve) { setTimeout(resolve, ms / SPEED); });
       }
 
       // One blinking cursor element, moved to whichever line is active.
@@ -730,7 +732,7 @@
           await sleep(delay);
           delay *= FLOOD_SPEEDUP;
         }
-        var until = Date.now() + FLOOD_HOLD;
+        var until = Date.now() + FLOOD_HOLD / SPEED;
         while (Date.now() < until) {
           newLine(MAGIC_LINE);
           await sleep(FLOOD_END);
