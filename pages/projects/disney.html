@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicons — same set as every other page on the site -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <!-- Win98 title-bar navy, so the phone's browser chrome blends in -->
+  <meta name="theme-color" content="#000080" />
+
+  <!--
+    noindex: this is a joke page, so it is kept out of Google and left out
+    of sitemap.xml. People only reach it by clicking the tile on the homepage.
+  -->
+  <meta name="robots" content="noindex" />
+
+  <title>Disney × Epic Games — Joe Hudson</title>
+  <meta name="description" content="Access denied. You didn't say the magic word." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Disney × Epic Games — Joe Hudson" />
+  <meta property="og:description" content="Access denied. You didn't say the magic word." />
+  <meta property="og:image"       content="https://joehudson.co.uk/assets/images/disney-epic-keyart.jpg" />
+
+  <style>
+    /* ================================================================
+       FONT
+       VT323 is a free (SIL Open Font Licence) pixel font that looks like
+       a DOS screen. It is hosted in assets/fonts/ rather than loaded from
+       Google, so the page has no outside dependency. If it fails to load
+       the browser falls back to Lucida Console / Courier New.
+    ================================================================ */
+    @font-face {
+      font-family: "VT323";
+      src: url("../../assets/fonts/vt323-latin-400-normal.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ================================================================
+       WINDOWS 98 COLOURS
+       Every colour used on the page is defined once here.
+    ================================================================ */
+    :root {
+      --w98-face:    #c0c0c0;   /* the classic grey of windows and buttons */
+      --w98-white:   #ffffff;   /* bevel highlight */
+      --w98-light:   #dfdfdf;   /* inner bevel highlight */
+      --w98-shadow:  #808080;   /* bevel shadow */
+      --w98-black:   #0a0a0a;   /* outer bevel shadow */
+      --w98-navy:    #000080;   /* title bar, left end */
+      --w98-sky:     #1084d0;   /* title bar, right end */
+      --w98-desktop: #008080;   /* the teal desktop (only seen as a fallback) */
+
+      --dos-font: "VT323", "Lucida Console", "Courier New", monospace;
+      --ui-font:  "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Verdana, Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--w98-desktop);
+      font-family: var(--ui-font);
+      font-size: 11px;
+      color: #000;
+      overflow: hidden;            /* the page never scrolls — the "window" is the page */
+      -webkit-font-smoothing: auto;
+    }
+
+    /* Visually hidden, but still read out by screen readers */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    /* ================================================================
+       BEVELS
+       Win98 fakes 3D with two-tone borders. These box-shadows draw them.
+         .raised = sticks out (buttons, window frame)
+         .sunken = pushed in (the DOS screen, the clock)
+    ================================================================ */
+    .raised {
+      box-shadow:
+        inset -1px -1px var(--w98-black),
+        inset  1px  1px var(--w98-white),
+        inset -2px -2px var(--w98-shadow),
+        inset  2px  2px var(--w98-light);
+    }
+    .sunken {
+      box-shadow:
+        inset -1px -1px var(--w98-white),
+        inset  1px  1px var(--w98-shadow),
+        inset -2px -2px var(--w98-light),
+        inset  2px  2px var(--w98-black);
+    }
+
+    /* Keyboard focus looks like Win98's dotted focus rectangle */
+    a:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+
+    /* ================================================================
+       LAYOUT
+       Full-height column: [window, grows to fill] then [taskbar].
+       100dvh follows the real visible height on phones, where the URL
+       bar slides in and out and 100vh would be too tall.
+    ================================================================ */
+    .desktop {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    /* The "maximised" MS-DOS Prompt window */
+    .window {
+      flex: 1;
+      min-height: 0;               /* lets the screen shrink inside a flex column */
+      display: flex;
+      flex-direction: column;
+      background: var(--w98-face);
+      padding: 2px;
+      gap: 2px;
+    }
+
+    /* ── Title bar ── */
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 20px;
+      padding: 2px 2px 2px 3px;
+      background: linear-gradient(90deg, var(--w98-navy), var(--w98-sky));
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .titlebar-icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .titlebar-text {
+      flex: 1;
+      min-width: 0;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: 0.01em;
+    }
+    .titlebar-buttons { display: flex; gap: 2px; margin-left: 2px; }
+
+    /* Minimise / maximise / close — the small grey square buttons */
+    .tbtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 14px;
+      background: var(--w98-face);
+      color: #000;
+      text-decoration: none;
+    }
+    .tbtn svg { display: block; }
+    .tbtn--close { margin-left: 2px; }
+    a.tbtn:active { box-shadow:
+        inset 1px 1px var(--w98-black), inset -1px -1px var(--w98-white),
+        inset 2px 2px var(--w98-shadow), inset -2px -2px var(--w98-light); }
+
+    /* ── Toolbar (purely decorative, like the real DOS window's one) ── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 4px;
+      flex-shrink: 0;
+    }
+    .tb-select {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 62px;
+      height: 21px;
+      padding: 0 1px 0 4px;
+      background: #fff;
+    }
+    .tb-select-arrow {
+      width: 16px; height: 17px;
+      background: var(--w98-face);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tb-select-arrow::after {
+      content: "";
+      border: 3px solid transparent;
+      border-top: 4px solid #000;
+      border-bottom: 0;
+    }
+    .tb-sep { width: 2px; height: 20px; margin: 0 2px;
+      border-left: 1px solid var(--w98-shadow); border-right: 1px solid var(--w98-white); }
+    .tb-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 23px; height: 22px;
+      background: var(--w98-face);
+    }
+
+    /* ================================================================
+       THE DOS SCREEN
+       .screen-frame is the sunken border; .screen is the black area;
+       .screen-text holds the lines of text that the script adds.
+    ================================================================ */
+    .screen-frame {
+      flex: 1;
+      min-height: 0;
+      padding: 2px;
+      background: var(--w98-face);
+    }
+    .screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;                 /* black and white, as asked */
+      font-family: var(--dos-font);
+      overflow: hidden;
+    }
+
+    /*
+      Text size scales with the screen width, so the page feels "filled"
+      on a big monitor but still fits a phone:
+        - never smaller than 20px
+        - 3.4% of the viewport width in between
+        - never larger than 64px
+    */
+    .screen-text {
+      position: absolute;
+      inset: 0;
+      padding: 6px 12px;
+      overflow: hidden;            /* older lines scroll off the top and are clipped */
+      font-size: clamp(20px, 3.4vw, 64px);
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+    }
+    .line {
+      min-height: 1.05em;          /* keeps blank lines the same height as text lines */
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    /* The flashing DOS underscore cursor */
+    .cursor {
+      display: inline-block;
+      width: 0.55em;
+      height: 0.13em;
+      margin-left: 0.05em;
+      background: #fff;
+      vertical-align: baseline;
+      animation: blink 1s steps(1, end) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /*
+      Dennis Nedry, on top of the text, wagging his finger.
+      Sized from whichever is smaller — the screen height or width —
+      so he never overflows a phone in portrait or a short laptop window.
+      The 128x144 GIF is small, so it is scaled up here; the browser's
+      default smoothing keeps it soft rather than blocky.
+    */
+    .nedry {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      height: min(52%, 76vw);
+      width: auto;
+      aspect-ratio: 128 / 144;
+      background: #fff;
+      border: 0;
+      display: block;
+    }
+    .nedry.is-hidden { display: none; }
+
+    /*
+      On a wide (landscape) screen the text only fills the left ~45%, so
+      Nedry moves to the right of centre. That keeps the typed commands
+      and the "...and..." readable. On a portrait phone the text spans
+      the whole width, so he stays in the middle and covers it, as in
+      the original scene.
+    */
+    @media (min-aspect-ratio: 1/1) {
+      .nedry { left: 64%; }
+    }
+
+    /* ================================================================
+       TASKBAR
+    ================================================================ */
+    .taskbar {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 28px;
+      padding: 2px 2px 2px 2px;
+      background: var(--w98-face);
+      border-top: 1px solid var(--w98-light);
+      box-shadow: inset 0 1px var(--w98-white);
+      flex-shrink: 0;
+    }
+    .start-btn, .task-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 22px;
+      padding: 0 6px;
+      background: var(--w98-face);
+      color: #000;
+      font: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .start-btn { font-weight: bold; padding-right: 8px; }
+    .task-btn { flex: 0 1 160px; min-width: 0; overflow: hidden; }
+    .task-btn span { overflow: hidden; text-overflow: ellipsis; }
+    /* The DOS window's button is "pressed in" because that window is active */
+    .task-btn--active {
+      font-weight: bold;
+      background:
+        repeating-conic-gradient(var(--w98-face) 0% 25%, #fff 0% 50%) 0 0 / 2px 2px;
+    }
+    .taskbar-gap { width: 2px; height: 20px;
+      border-left: 1px solid var(--w98-shadow); border-right: 1px solid var(--w98-white); }
+    .tray {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 10px;
+      gap: 8px;
+    }
+
+    /* ================================================================
+       PHONES AND TOUCH SCREENS
+       Bigger tap targets, and the decorative toolbar goes to save room.
+    ================================================================ */
+    @media (pointer: coarse) {
+      .titlebar { height: 28px; }
+      .tbtn { width: 26px; height: 22px; }
+      .tbtn svg { transform: scale(1.4); }
+      .titlebar-text { font-size: 12px; }
+      .taskbar { height: 34px; }
+      .start-btn, .task-btn { height: 28px; }
+    }
+    @media (max-width: 560px) {
+      /* Bigger text on phones so the lines fill the width, as in the original scene.
+         The longest line is 35 characters, so this size still fits without wrapping. */
+      .screen-text { font-size: clamp(20px, 6.2vw, 30px); }
+      .toolbar { display: none; }
+      .tray .tray-icon { display: none; }
+      .task-btn--site span { display: none; }  /* icon only, to leave room */
+      .task-btn--site { flex: 0 0 auto; }
+    }
+
+    /* ================================================================
+       REDUCED MOTION
+       For visitors who have asked their device to cut animation:
+       no blinking cursor (the script also skips the typing and shows
+       a still frame instead).
+    ================================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+    }
+  </style>
+
+  <!-- Without JavaScript the typing can't run, so show the end of the
+       scene as plain text instead (see the <noscript> block below). -->
+</head>
+
+<body>
+
+  <h1 class="sr-only">Access denied. You didn't say the magic word.</h1>
+
+  <div class="desktop">
+
+    <!-- ============================================================
+         THE WINDOW — a maximised MS-DOS Prompt, filling the page
+         ============================================================ -->
+    <main class="window raised" id="main-content">
+
+      <!-- Title bar -->
+      <div class="titlebar">
+        <svg class="titlebar-icon" viewBox="0 0 16 16" aria-hidden="true" shape-rendering="crispEdges">
+          <rect x="1" y="2" width="14" height="12" fill="#000" stroke="#c0c0c0"/>
+          <rect x="2" y="3" width="12" height="2" fill="#808080"/>
+          <path d="M4 8l2 2-2 2" stroke="#fff" fill="none"/>
+          <path d="M8 12h4" stroke="#fff"/>
+        </svg>
+        <span class="titlebar-text">MS-DOS Prompt</span>
+        <div class="titlebar-buttons">
+          <!-- Minimise and maximise are just for show -->
+          <span class="tbtn raised" aria-hidden="true">
+            <svg width="8" height="8" viewBox="0 0 8 8" shape-rendering="crispEdges"><rect x="0" y="6" width="6" height="2" fill="#000"/></svg>
+          </span>
+          <span class="tbtn raised" aria-hidden="true">
+            <svg width="9" height="9" viewBox="0 0 9 9" shape-rendering="crispEdges"><rect x="0.5" y="0.5" width="8" height="8" fill="none" stroke="#000"/><rect x="0" y="0" width="9" height="2" fill="#000"/></svg>
+          </span>
+          <!-- Close is real: it takes the visitor back to the homepage -->
+          <a class="tbtn tbtn--close raised" href="../../index.html" aria-label="Close this window and return to the portfolio" title="Close — back to the portfolio">
+            <svg width="8" height="7" viewBox="0 0 8 7" shape-rendering="crispEdges"><path d="M0.5 0.5l7 6M7.5 0.5l-7 6" stroke="#000" stroke-width="1.6" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Toolbar (decorative) -->
+      <div class="toolbar" aria-hidden="true">
+        <div class="tb-select sunken"><span>Auto</span><span class="tb-select-arrow"></span></div>
+        <span class="tb-sep"></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2.5" y="3.5" width="10" height="7" fill="none" stroke="#000" stroke-dasharray="2 1"/><path d="M9 9l4 5 1-3z" fill="#000"/></svg></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2.5" y="2.5" width="7" height="8" fill="#fff" stroke="#000"/><rect x="6.5" y="5.5" width="7" height="8" fill="#fff" stroke="#000"/></svg></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3.5" y="3.5" width="9" height="10" fill="#fff" stroke="#000"/><rect x="6.5" y="1.5" width="3" height="3" fill="#808080" stroke="#000"/></svg></span>
+        <span class="tb-sep"></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2.5" y="3.5" width="11" height="9" fill="none" stroke="#000"/><rect x="5" y="6" width="6" height="4" fill="#000"/></svg></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="3.5" y="2.5" width="9" height="11" fill="#fff" stroke="#000"/><path d="M5 5h6M5 7h6M5 9h4" stroke="#000" fill="none"/></svg></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges"><rect x="2.5" y="3.5" width="11" height="9" fill="#fff" stroke="#000"/><rect x="3" y="4" width="5" height="8" fill="#000080"/></svg></span>
+        <span class="tb-btn raised"><svg width="16" height="16" viewBox="0 0 16 16"><text x="3" y="13" font-family="Times New Roman, serif" font-size="14" font-weight="bold" fill="#000">A</text></svg></span>
+      </div>
+
+      <!-- ==========================================================
+           THE SCREEN
+           The script adds one <div class="line"> per line of text into
+           #screenText. #nedry sits on top of it.
+           ========================================================== -->
+      <div class="screen-frame sunken">
+        <div class="screen" role="img" aria-label="A DOS prompt repeating: access denied, you didn't say the magic word, while Dennis Nedry wags his finger.">
+
+          <div class="screen-text" id="screenText" aria-hidden="true">
+            <!-- No-JavaScript fallback: the scene as plain text -->
+            <noscript>
+              <div class="line">Ready...</div>
+              <div class="line">&gt; access main security grid</div>
+              <div class="line">access: PERMISSION DENIED....and...</div>
+              <div class="line">YOU DIDN'T SAY THE MAGIC WORD!</div>
+              <div class="line">YOU DIDN'T SAY THE MAGIC WORD!</div>
+              <div class="line">YOU DIDN'T SAY THE MAGIC WORD!</div>
+              <div class="line">YOU DIDN'T SAY THE MAGIC WORD!</div>
+              <div class="line">YOU DIDN'T SAY THE MAGIC WORD!</div>
+            </noscript>
+          </div>
+
+          <!--
+            Shown by default so the no-JavaScript fallback has him too;
+            the script hides him at the start of each loop and brings him
+            back when the flood of text begins.
+          -->
+          <img class="nedry" id="nedry"
+               src="../../assets/images/disney/nedry-wag.gif"
+               width="128" height="144"
+               alt="" aria-hidden="true" />
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ============================================================
+         TASKBAR
+         ============================================================ -->
+    <footer class="taskbar" aria-label="Taskbar">
+
+      <span class="start-btn raised" aria-hidden="true">
+        <svg width="16" height="14" viewBox="0 0 16 14" shape-rendering="crispEdges">
+          <rect x="1" y="1" width="6" height="5" fill="#e04020"/>
+          <rect x="8" y="1" width="6" height="5" fill="#20a040"/>
+          <rect x="1" y="7" width="6" height="5" fill="#2060d0"/>
+          <rect x="8" y="7" width="6" height="5" fill="#f0c020"/>
+        </svg>
+        Start
+      </span>
+
+      <span class="taskbar-gap" aria-hidden="true"></span>
+
+      <!-- The DOS window's task button, looking pressed in -->
+      <span class="task-btn task-btn--active sunken" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" style="flex-shrink:0">
+          <rect x="1" y="2" width="14" height="12" fill="#000" stroke="#808080"/>
+          <path d="M4 8l2 2-2 2" stroke="#fff" fill="none"/><path d="M8 12h4" stroke="#fff"/>
+        </svg>
+        <span>MS-DOS Prompt</span>
+      </span>
+
+      <!-- A second "open window" that is really a link back to the site -->
+      <a class="task-btn task-btn--site raised" href="../../index.html" title="Back to the portfolio">
+        <svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" style="flex-shrink:0" aria-hidden="true">
+          <rect x="1.5" y="2.5" width="13" height="11" fill="#fff" stroke="#000"/>
+          <rect x="2" y="3" width="12" height="2" fill="#000080"/>
+          <path d="M4 8h8M4 10h6" stroke="#808080"/>
+        </svg>
+        <span>joehudson.co.uk</span>
+      </a>
+
+      <div class="tray sunken" aria-hidden="true">
+        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges">
+          <path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path d="M11 5q2 3 0 6" stroke="#000" fill="none"/>
+        </svg>
+        <span id="clock">14:07</span>
+      </div>
+
+    </footer>
+
+  </div>
+
+  <script>
+    /* ================================================================
+       THE TERMINAL "VIDEO"
+       ----------------------------------------------------------------
+       This is not a video file. The script types the text out line by
+       line, which keeps the page tiny (a few KB, not tens of MB), pin
+       sharp at any screen size, and loops forever.
+
+       The scene, in order:
+         1. "Ready..." appears.
+         2. Three commands are typed; each is refused.
+         3. The last refusal trails off with "...and..."
+         4. Nedry pops up and the screen floods with the magic-word line,
+            faster and faster.
+         5. After a few seconds the screen clears and it all starts again.
+
+       To change the wording or the speed, edit the CONFIG section.
+    ================================================================ */
+    (function () {
+      'use strict';
+
+      /* ── CONFIG — safe to change ─────────────────────────────── */
+      var MAGIC_LINE   = "YOU DIDN'T SAY THE MAGIC WORD!";
+      var DENIED       = 'access: PERMISSION DENIED.';
+      var COMMANDS     = [                      // typed one after another
+        '> access security',
+        '> access security grid',
+        '> access main security grid'
+      ];
+      var TYPE_SPEED   = 60;     // ms per typed character (a little random jitter is added)
+      var FLOOD_START  = 420;    // ms between magic-word lines at the start of the flood...
+      var FLOOD_END    = 55;     // ...speeding up to this many ms between lines
+      var FLOOD_SPEEDUP = 0.84;  // each line is this much faster than the last (smaller = faster ramp)
+      var FLOOD_HOLD   = 7000;   // ms the flood keeps running at full speed
+      var END_PAUSE    = 1500;   // ms to sit on the full screen before restarting
+      var MAX_LINES    = 150;    // old lines are deleted past this, so the page never grows
+
+      /* ── ELEMENTS ────────────────────────────────────────────── */
+      var screenText = document.getElementById('screenText');
+      var nedry      = document.getElementById('nedry');
+      var clock      = document.getElementById('clock');
+
+      /* Respect "reduce motion" — see renderStill() near the bottom */
+      var reduceMotion = window.matchMedia &&
+                         window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ── SMALL HELPERS ───────────────────────────────────────── */
+
+      // sleep(500) pauses for half a second. Used with "await" below.
+      function sleep(ms) {
+        return new Promise(function (resolve) { setTimeout(resolve, ms); });
+      }
+
+      // One blinking cursor element, moved to whichever line is active.
+      var cursor = document.createElement('span');
+      cursor.className = 'cursor';
+
+      var currentText = null;   // the text node of the line being typed
+
+      // Keep the newest line in view and delete lines nobody can see any more.
+      function tidy() {
+        while (screenText.children.length > MAX_LINES) {
+          screenText.removeChild(screenText.firstChild);
+        }
+        screenText.scrollTop = screenText.scrollHeight;
+      }
+
+      // Add a new line (optionally already filled with text) and put the cursor on it.
+      function newLine(text) {
+        var div = document.createElement('div');
+        div.className = 'line';
+        currentText = document.createTextNode(text || '');
+        div.appendChild(currentText);
+        div.appendChild(cursor);
+        screenText.appendChild(div);
+        tidy();
+      }
+
+      // Type text onto the current line, one character at a time.
+      async function typeOut(text, speed) {
+        for (var i = 0; i < text.length; i++) {
+          currentText.data += text.charAt(i);
+          tidy();
+          // Random jitter (0.6x to 1.4x) so it feels like a person typing
+          await sleep(speed * (0.6 + Math.random() * 0.8));
+        }
+      }
+
+      function clearScreen() {
+        screenText.textContent = '';
+        currentText = null;
+      }
+
+      /* ── THE SCENE ───────────────────────────────────────────── */
+      async function playOnce() {
+        clearScreen();
+        nedry.classList.add('is-hidden');
+
+        newLine('Ready...');
+        await sleep(900);
+
+        // Three refused commands
+        for (var i = 0; i < COMMANDS.length; i++) {
+          newLine('');
+          await typeOut(COMMANDS[i], TYPE_SPEED);
+          await sleep(450);                       // "Enter" pressed, computer thinks
+          newLine('');
+          var last = (i === COMMANDS.length - 1);
+          await typeOut(DENIED, last ? 25 : 12);  // the reply appears almost instantly
+          if (last) {
+            await sleep(500);
+            await typeOut('...and...', 230);      // slow, ominous
+            await sleep(450);
+          } else {
+            await sleep(650);
+          }
+        }
+
+        // The flood — Nedry appears and the lines speed up
+        nedry.classList.remove('is-hidden');
+        var delay = FLOOD_START;
+        while (delay > FLOOD_END) {
+          newLine(MAGIC_LINE);
+          await sleep(delay);
+          delay *= FLOOD_SPEEDUP;
+        }
+        var until = Date.now() + FLOOD_HOLD;
+        while (Date.now() < until) {
+          newLine(MAGIC_LINE);
+          await sleep(FLOOD_END);
+        }
+
+        await sleep(END_PAUSE);
+      }
+
+      async function loopForever() {
+        while (true) { await playOnce(); }
+      }
+
+      /* ── REDUCED MOTION ──────────────────────────────────────── */
+      // One still frame of the finished scene: no typing, a frozen Nedry.
+      function renderStill() {
+        clearScreen();
+        newLine('Ready...');
+        COMMANDS.forEach(function (cmd) { newLine(cmd); newLine(DENIED); });
+        screenText.lastChild.firstChild.data = DENIED.slice(0, -1) + '....and...';
+        for (var i = 0; i < 60; i++) { newLine(MAGIC_LINE); }
+        nedry.src = '../../assets/images/disney/nedry-still.png';
+        nedry.classList.remove('is-hidden');
+      }
+
+      /* ── TASKBAR CLOCK ───────────────────────────────────────── */
+      function tickClock() {
+        var now = new Date();
+        clock.textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      }
+      tickClock();
+      setInterval(tickClock, 15000);
+
+      /* ── ESC = close the window (back to the portfolio) ──────── */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { window.location.href = '../../index.html'; }
+      });
+
+      /* ── GO ──────────────────────────────────────────────────── */
+      if (reduceMotion) { renderStill(); } else { loopForever(); }
+    })();
+  </script>
+
+  <!-- Visitor counter — same cookie-free GoatCounter tag as the rest of the site -->
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
