@@ -336,6 +336,16 @@
       gap: 8px;
     }
 
+    /* The speaker in the tray is a real button: it mutes / unmutes the two
+       sound effects. A red slash shows while sound is off or not yet allowed. */
+    .tray-sound {
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: 0; padding: 0 2px; cursor: pointer; color: inherit;
+    }
+    .tray-sound .slash { display: none; }
+    .tray-sound[data-state="off"] .slash { display: block; }
+    .tray-sound:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+
     /* ================================================================
        PHONES AND TOUCH SCREENS
        Bigger tap targets, and the decorative toolbar goes to save room.
@@ -353,7 +363,6 @@
          The longest line is 35 characters, so this size still fits without wrapping. */
       .screen-text { font-size: clamp(20px, 6.2vw, 30px); }
       .toolbar { display: none; }
-      .tray .tray-icon { display: none; }
       .task-btn--site span { display: none; }  /* icon only, to leave room */
       .task-btn--site { flex: 0 0 auto; }
     }
@@ -495,11 +504,16 @@
         <span>joehudson.co.uk</span>
       </a>
 
-      <div class="tray sunken" aria-hidden="true">
-        <svg class="tray-icon" width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges">
-          <path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path d="M11 5q2 3 0 6" stroke="#000" fill="none"/>
-        </svg>
-        <span id="clock">14:07</span>
+      <div class="tray sunken">
+        <!-- Sound on/off. Starts showing "off" because browsers keep a page silent
+             until the visitor taps or presses a key; the first tap switches it on. -->
+        <button class="tray-sound" id="soundBtn" type="button" data-state="off" aria-label="Sound: off. Press to turn on" title="Sound">
+          <svg width="16" height="16" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+            <path d="M2 6h3l4-3v10l-4-3H2z" fill="#000"/><path d="M11 5q2 3 0 6" stroke="#000" fill="none"/>
+            <path class="slash" d="M2 14L14 2" stroke="#d00000" stroke-width="2"/>
+          </svg>
+        </button>
+        <span id="clock" aria-hidden="true">14:07</span>
       </div>
 
     </footer>
@@ -599,6 +613,88 @@
         currentText = null;
       }
 
+      /* ── SOUND ───────────────────────────────────────────────────
+         Two short effects, made live with the Web Audio API (no audio
+         files): a low error buzz and a rising PC-speaker chirp.
+         - Each plays ONCE per visit, at one key moment.
+         - Browsers block sound until the visitor interacts, so the
+           audio context is only created on the first tap or key press.
+           Until then the effects are skipped (and not counted as played,
+           so they still fire the next time round the loop).
+         - The tray speaker button mutes everything.
+      */
+      var audioCtx = null;
+      var muted = false;
+      var played = { denied: false, sting: false };
+      var soundBtn = document.getElementById('soundBtn');
+
+      function soundIsLive() { return !!audioCtx && audioCtx.state === 'running' && !muted; }
+
+      function updateSoundButton() {
+        var live = soundIsLive();
+        soundBtn.setAttribute('data-state', live ? 'on' : 'off');
+        soundBtn.setAttribute('aria-label', live ? 'Sound: on. Press to mute' : 'Sound: off. Press to turn on');
+      }
+
+      // Called from a tap / key press (the only time a browser lets us start audio)
+      function unlockAudio() {
+        if (!audioCtx) {
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) { return; }
+          audioCtx = new AC();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume().then(updateSoundButton, function () {});
+        }
+        updateSoundButton();
+      }
+      document.addEventListener('pointerdown', function (e) {
+        if (soundBtn.contains(e.target)) { return; }   // the button handles itself below
+        unlockAudio();
+      }, { passive: true });
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') { unlockAudio(); }
+      });
+
+      soundBtn.addEventListener('click', function () {
+        if (!soundIsLive() && !muted) { unlockAudio(); return; }  // first press just turns it on
+        muted = !muted;
+        if (!muted) { unlockAudio(); }
+        updateSoundButton();
+      });
+
+      // One square-wave beep: frequency (Hz), start offset (s), length (s), volume (0-1)
+      function beep(freq, offset, length, volume) {
+        var t = audioCtx.currentTime + offset;
+        var osc = audioCtx.createOscillator();
+        var gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, t);
+        // Quick fade in and out so it doesn't click
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(volume, t + 0.01);
+        gain.gain.setValueAtTime(volume, t + length - 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + length);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + length + 0.02);
+      }
+
+      // Key moment 1 — the third refusal: a low two-tone error buzz
+      function playDenied() {
+        if (played.denied || !soundIsLive()) { return; }
+        played.denied = true;
+        beep(155, 0.00, 0.16, 0.06);
+        beep(110, 0.22, 0.30, 0.06);
+      }
+
+      // Key moment 2 — Nedry appears: a quick rising chirp
+      function playSting() {
+        if (played.sting || !soundIsLive()) { return; }
+        played.sting = true;
+        [523, 659, 784, 1047].forEach(function (f, i) { beep(f, i * 0.075, 0.07, 0.05); });
+      }
+
       /* ── THE SCENE ───────────────────────────────────────────── */
       async function playOnce() {
         clearScreen();
@@ -616,6 +712,7 @@
           var last = (i === COMMANDS.length - 1);
           await typeOut(DENIED, last ? 25 : 12);  // the reply appears almost instantly
           if (last) {
+            playDenied();                         // sound 1 of 2
             await sleep(500);
             await typeOut('...and...', 230);      // slow, ominous
             await sleep(450);
@@ -626,6 +723,7 @@
 
         // The flood — Nedry appears and the lines speed up
         nedry.classList.remove('is-hidden');
+        playSting();                              // sound 2 of 2
         var delay = FLOOD_START;
         while (delay > FLOOD_END) {
           newLine(MAGIC_LINE);
