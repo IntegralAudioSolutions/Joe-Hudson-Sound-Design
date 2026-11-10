@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS
+       The browser picks the best match it understands from this list.
+       favicon.svg is the master (the JH monogram as vector outlines,
+       so it needs no webfont); the PNGs cover browsers without SVG
+       icon support; apple-touch-icon is used when the site is saved
+       to an iOS home screen. favicon.ico also sits at the site root
+       because browsers and crawlers request that path automatically.
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <!-- Tints the browser chrome on mobile to match the page background -->
+  <meta name="theme-color" content="#080a0f" />
+  <link rel="canonical" href="https://joehudson.co.uk/pages/projects/zapotron.html" />
+
+  <!-- Open Graph / Twitter: controls the preview card on LinkedIn, Discord, Slack, X -->
+  <meta property="og:type"          content="article" />
+  <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
+  <meta property="og:title"         content="Fortnite — Zapotron — Audio Designer | Joe Hudson" />
+  <meta property="og:description"   content="Weapon audio for the Zapotron in Fortnite — charge-up, whine, barrel spin and shot sound design, 2021." />
+  <meta property="og:url"           content="https://joehudson.co.uk/pages/projects/zapotron.html" />
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-zapotron.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Fortnite — Zapotron weapon audio waveform graphic — Joe Hudson" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Fortnite — Zapotron — Audio Designer | Joe Hudson" />
+  <meta name="twitter:description"  content="Weapon audio for the Zapotron in Fortnite — charge-up, whine, barrel spin and shot sound design, 2021." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-zapotron.jpg" />
+  <meta name="twitter:image:alt"    content="Fortnite — Zapotron weapon audio waveform graphic — Joe Hudson" />
+
+  <!-- Structured data: tells Google who you are and what each credit is.
+       Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/projects/zapotron.html",
+      "url": "https://joehudson.co.uk/pages/projects/zapotron.html",
+      "name": "Fortnite — Zapotron — Audio Designer | Joe Hudson",
+      "description": "Weapon audio for the Zapotron in Fortnite — charge-up, whine, barrel spin and shot sound design, 2021.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "inLanguage": "en-GB",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-zapotron.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Work",
+            "item": "https://joehudson.co.uk/pages/work.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fortnite — Zapotron"
+          }
+        ]
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/zapotron.html#game"
+      }
+    },
+    {
+      "@type": "VideoGame",
+      "name": "Fortnite — Zapotron",
+      "url": "https://joehudson.co.uk/pages/projects/zapotron.html",
+      "image": "https://joehudson.co.uk/assets/images/og/og-zapotron.jpg",
+      "gamePlatform": [
+        "PC",
+        "Console",
+        "Mobile"
+      ],
+      "contributor": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Epic Games"
+      },
+      "datePublished": "2021",
+      "@id": "https://joehudson.co.uk/pages/projects/zapotron.html#game"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Audio Designer — Fortnite — Zapotron",
+      "creator": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "about": {
+        "@id": "https://joehudson.co.uk/pages/projects/zapotron.html#game"
+      },
+      "description": "Weapon audio for the Zapotron in Fortnite — charge-up, whine, barrel spin and shot sound design, 2021."
+    }
+  ]
+}
+  </script>
+
+
+  <title>Fortnite — Zapotron — Joe Hudson</title>
+  <meta name="description" content="Weapon audio for the Zapotron in Fortnite — charge-up, whine, barrel spin and shot sound design, 2021." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,172,80,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 12px 0 0; gap: 8px;
+    }
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-gold);
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-title {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 300; color: #eef2f8;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+    .page-subtitle {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+    .project-sidebar {
+      background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
+    }
+    /* Single-column flex: video full-width at top, body-grid below */
+    .project-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    /* Full-width 16:9 video */
+    .project-video-top { width: 100%; }
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    /* Placeholder shown when no video ID is set yet */
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+    }
+    .video-play {
+      width: 0; height: 0; border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.15);
+    }
+    .video-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.12em; text-transform: uppercase; text-align: center; line-height: 1.6;
+    }
+    .video-caption {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.1em; margin-top: 8px;
+    }
+    /* Body: text left, keyart right */
+    .project-body-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      align-items: start;
+    }
+
+    /*
+      Top row: breadcrumb + meta on the left, keyart on the right.
+      The separator line (previously on .project-meta) now sits under
+      this whole row, so it clears the keyart too.
+    */
+    .project-top-row {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-2xl);
+      align-items: start;
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .project-top-keyart { width: 100%; }
+    .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .project-meta {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .meta-row { display: flex; gap: 12px; align-items: baseline; }
+    .meta-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.16em; text-transform: uppercase; width: 80px; flex-shrink: 0;
+    }
+    .meta-value { font-family: var(--font-mono); font-size: 10px; color: var(--color-gold); letter-spacing: 0.06em; }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+    .project-keyart {
+      width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+      border-radius: 2px; border: 1px solid rgba(255,255,255,0.08);
+      filter: saturate(0.8) brightness(0.9);
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      transition: color var(--transition-fast); margin-bottom: var(--space-md);
+    }
+    .back-link:hover { color: var(--color-gold); }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .project-body-grid { grid-template-columns: 1fr; }
+      .project-top-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
+    }
+  
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      .sound-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+
+<body>
+
+  <header class="nav" role="banner">
+    <a href="../../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
+      <a href="../disciplines.html" class="nav-link">Disciplines</a>
+      <a href="../ue.html"    class="nav-link">UE</a>
+      <a href="../uefn.html"  class="nav-link">UEFN</a>
+      <a href="../verse.html" class="nav-link">Verse</a>
+      <a href="../work.html"        class="nav-link active">Work</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header" aria-label="Project header">
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Sweet Justice Sound Group / Epic Games</p>
+      <h1 class="page-title"><strong>Fortnite — Zapotron</strong></h1>
+      <p class="page-subtitle">Audio Designer</p>
+    </div>
+  </section>
+
+  <div class="project-layout">
+    <aside class="project-sidebar" aria-hidden="true">
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <span class="sidebar-label">Project</span>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+    </aside>
+
+    <main class="project-content" id="main-content">
+
+      <!-- Body copy, full width, matching the video's edges -->
+      <div class="project-body-grid">
+
+        <div class="project-text">
+
+          <div class="project-top-row">
+            <div>
+              <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="../../index.html">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <a href="../work.html">Credits</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span class="breadcrumb-current" aria-current="page">Fortnite — Zapotron</span>
+              </nav>
+
+              <div class="project-meta">
+                <div class="meta-row">
+                  <span class="meta-label">Studio</span>
+                  <span class="meta-value">Sweet Justice Sound Group / Epic Games</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Role</span>
+                  <span class="meta-value">Audio Designer</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Platform</span>
+                  <span class="meta-value">PC · Console · Mobile</span>
+                </div>
+                <div class="meta-row">
+                  <span class="meta-label">Year</span>
+                  <span class="meta-value">2021</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Keyart sits here — between the video and the separator line -->
+            <div class="project-top-keyart">
+              <img class="project-keyart" src="../../assets/images/c3s1-zapotron-keyart.jpg" alt="Fortnite — Zapotron — Joe Hudson" loading="lazy" />
+            </div>
+          </div>
+
+          <p class="project-desc">Weapon audio for the Zapotron — an electric, charge-up weapon. This page collects my 2021 update pass: trigger, charge-up, charge whine, barrel spin, charge hit and shot variations.</p>
+
+          <div>
+            <p class="project-section-label">// Scope &amp; Responsibilities</p>
+            <p class="project-detail-text">Updated the Zapotron weapon audio in 2021, covering the full charge-up sequence from trigger pull through to a fully charged shot. Selected assets are streamed below, grouped in the order they fire in-game.</p>
+          </div>
+
+          <div>
+            <p class="project-section-label">// Tools &amp; Pipeline</p>
+            <p class="project-detail-text">Reaper and Soundminer.</p>
+          </div>
+
+          <div class="cta" style="padding:0">
+            <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+            <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    
+      <!-- ============================================================
+           SOUND DESIGN EXAMPLES — Zapotron weapon audio, grouped in the
+           order the sounds fire: trigger, charge, whine, barrel spin,
+           charge hit, shot. MP3 previews live in assets/audio/zapotron/.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Sound Design Examples</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Trigger</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Whine</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Barrel Spin</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Hit</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Shot</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 04</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-04.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================
+           RELATED CREDITS — generated from studio, franchise and platform.
+           Gives visitors (and search crawlers) a route between credits
+           instead of every project page being a dead end.
+           ============================================================ -->
+      <section class="related-section" aria-label="Related credits">
+        <div class="section-header">
+          <h2 class="section-tag">Related Credits</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="related-grid">
+          <a class="related-card" href="resistance.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c3s2-resistance-keyart.jpg" alt="Fortnite C3S2 — Resistance" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2022</span>
+              <span class="related-card-title">Fortnite C3S2 — Resistance</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+          <a class="related-card" href="cubed.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c2s8-cubed-keyart.jpg" alt="Fortnite C2S8 — Cubed" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2021</span>
+              <span class="related-card-title">Fortnite C2S8 — Cubed</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+          <a class="related-card" href="fortnite-og.html">
+            <span class="related-card-art">
+              <img src="../../assets/images/c4s5-fortnite-og-keyart.jpg" alt="Fortnite OG" loading="lazy" />
+            </span>
+            <span class="related-card-body">
+              <span class="related-card-meta">Epic Games · 2023</span>
+              <span class="related-card-title">Fortnite OG</span>
+              <span class="related-card-role">Audio Designer</span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Sequential navigation through the full credit list, newest to oldest -->
+      <nav class="projnav" aria-label="Credit navigation">
+        <a class="projnav-link projnav-prev" href="resistance.html">
+          <span class="projnav-dir">&larr; Newer credit</span>
+          <span class="projnav-title">Fortnite C3S2 — Resistance</span>
+        </a>
+        <a class="projnav-link projnav-next" href="cubed.html">
+          <span class="projnav-dir">Older credit &rarr;</span>
+          <span class="projnav-title">Fortnite C2S8 — Cubed</span>
+        </a>
+      </nav>
+
+    </main>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="../contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+
+  <!-- Default playback volume for the Sound Design Examples players -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) {
+      a.volume = 0.6;
+    });
+  </script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
