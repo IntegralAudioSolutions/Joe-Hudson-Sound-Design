@@ -392,6 +392,13 @@
       letter-spacing: 0.08em; padding: 8px 12px;
     }
     @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
+    /* Environment gallery */
+    .env-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-md); }
+    .env-figure { display: block; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .env-figure--wide { grid-column: 1 / -1; }
+    .env-figure img { display: block; width: 100%; height: auto; transition: filter 0.3s ease; filter: saturate(0.9) brightness(0.92); }
+    .env-figure:hover img { filter: saturate(1) brightness(1); }
+    @media (max-width: 600px) { .env-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 
@@ -668,7 +675,28 @@
 
       </section>
 
-      <!-- ============================================================
+      
+
+      <section class="sound-showcase env-showcase" aria-label="Save the World environment images">
+        <div class="section-header">
+          <h2 class="section-tag">Save the World — Environments</h2>
+          <div class="section-line"></div>
+        </div>
+        <p class="sound-note">// Environment audio examples to be added</p>
+        <div class="env-grid">
+          <a class="env-figure env-figure--wide" href="../../assets/images/stw-environments/stw-environment-01.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-01.webp" alt="Stone temple courtyard lit by torches" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-02.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-02.webp" alt="Temple stairway with torch stands" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-03.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-03.webp" alt="Cave lagoon with waterfalls and a sandy shore" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-04.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-04.webp" alt="Jungle cave with floating islands and a lagoon, seen from above" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-05.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-05.webp" alt="Wooden mine corridor with audio actors placed along it" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-06.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-06.webp" alt="Cave river winding around a grassy island" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-07.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-07.webp" alt="Grassy cave with a waterfall and a clear pool" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-08.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-08.webp" alt="Cave pool and walkways in the Unreal editor" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/stw-environments/stw-environment-09.webp" target="_blank" rel="noopener"><img src="../../assets/images/stw-environments/stw-environment-09.webp" alt="Castle chamber with a lava pool and hanging cages" loading="lazy" /></a>
+        </div>
+      </section>
+
+    <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
            instead of every project page being a dead end.
