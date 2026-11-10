@@ -347,6 +347,27 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
     }
+
+    /* Blimp ambience */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep); letter-spacing: 0.08em; margin-bottom: var(--space-lg); }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title { font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-md); }
+    .sound-item { display: flex; flex-direction: column; gap: 6px; background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 10px 12px; }
+    .sound-item-label { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim); letter-spacing: 0.06em; }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    .blimp-split { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap: var(--space-xl); align-items: center; }
+    .blimp-split--flip { grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); }
+    .blimp-split .sound-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .blimp-figs { display: flex; flex-direction: column; gap: var(--space-md); }
+    .blimp-figure { margin: 0; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .blimp-figure img { display: block; width: 100%; height: auto; }
+    @media (max-width: 900px) {
+      .blimp-split, .blimp-split--flip { grid-template-columns: 1fr; }
+      .blimp-split--flip .blimp-figs { order: 2; }
+    }
+    @media (max-width: 600px) { .blimp-split .sound-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 
@@ -457,7 +478,8 @@
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Detailed project notes to be added.</p>
+            <p class="project-detail-text">The blimps were one of the most challenging volume creation tasks I have faced. The rooms and corridors inside are tight, and they overlap with loud engine and propeller sounds outside that sit very close to the player when they are indoors.</p>
+            <p class="project-detail-text" style="margin-top:12px">Everything had to sound right, so the looping Sound Cue actors and the volumes needed very specific Sound Class and attenuation settings to handle all the sound in the scene and keep it coherent. Here are the blimp ambiences.</p>
           </div>
 
           <div>
@@ -475,7 +497,123 @@
       </div>
 
     
-      <!-- ============================================================
+            <section class="sound-showcase" aria-label="Blimp ambience sound design">
+        <div class="section-header">
+          <h2 class="section-tag">Blimps — Ambience · Chapter 3 Season 2</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV loops</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Exterior</p>
+          <div class="blimp-split">
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Exposed Platform · Day</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-exterior-exposed-platform-day-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Exposed Platform · Night</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-exterior-exposed-platform-night-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Wings Loop</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-exterior-wings-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Wings Exterior</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-wings-exterior.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Rear Gantry Wind</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-wind-rear-gantry-stereo.mp3"></audio>
+              </div>
+            </div>
+            <div class="blimp-figs">
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-exterior-tilted.webp" alt="A blimp flying over the island" loading="lazy" /></figure>
+            </div>
+          </div>
+        </div>
+        <div class="sound-group">
+          <p class="sound-group-title">// Wind &amp; Jump Pad</p>
+          <div class="blimp-split blimp-split--flip">
+            <div class="blimp-figs">
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-underside.webp" alt="The underside of a blimp with its engines running" loading="lazy" /></figure>
+            </div>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Blimp Wind</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-wind-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Wind Blimp</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/wind-blimp-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Heavy Wind</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-heavy-wind-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Jump Pad</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/blimp-jump-pad-ambient-loop.mp3"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sound-group">
+          <p class="sound-group-title">// Interior</p>
+          <div class="blimp-split">
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Cockpit Console Room</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-cockpit-console-room-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Corridor</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-coridoor-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Main Metal Large Room · Day</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-main-metal-large-room-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Main Metal Large Room · Night</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-main-metal-large-room-night-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Metal Stairwell · Wind</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-metal-stairwell-wind-loop-stereo.mp3"></audio>
+              </div>
+            </div>
+            <div class="blimp-figs">
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-hangar.webp" alt="The main hangar inside a blimp" loading="lazy" /></figure>
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-cockpit.webp" alt="The blimp cockpit console room" loading="lazy" /></figure>
+            </div>
+          </div>
+        </div>
+        <div class="sound-group">
+          <p class="sound-group-title">// Loading Bay &amp; Cloth Flaps</p>
+          <div class="blimp-split blimp-split--flip">
+            <div class="blimp-figs">
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-loading-bay.webp" alt="The open loading bay with seats and straps" loading="lazy" /></figure>
+              <figure class="blimp-figure"><img src="../../assets/images/blimps/blimp-seats-straps.webp" alt="Seats with straps inside the blimp" loading="lazy" /></figure>
+            </div>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Loading Bay · Wind &amp; Cloth Flaps</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-loading-bay-wind-cloth-flaps-loop-stereo.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Metal Room · Wind &amp; Cloth Flaps</span>
+                <audio controls preload="none" src="../../assets/audio/blimps/ambience-blimp-interior-metal-room-wind-cloth-flaps-loop-stereo.mp3"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
            instead of every project page being a dead end.
@@ -541,8 +679,26 @@
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
         <!-- Set 1 -->
         <img class="ribbon-img" src="../../assets/images/c3s2-resistance-keyart.jpg" alt="Fortnite C3S2 — Resistance key art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-over-town.webp" alt="Fortnite C3S2 — Resistance a blimp over a town" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-exterior-tilted.webp" alt="Fortnite C3S2 — Resistance a blimp flying over the island" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-hangar.webp" alt="Fortnite C3S2 — Resistance the main hangar" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-command-cavern.webp" alt="Fortnite C3S2 — Resistance a blimp above Command Cavern" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-loading-bay.webp" alt="Fortnite C3S2 — Resistance the open loading bay" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-low-angle.webp" alt="Fortnite C3S2 — Resistance a blimp from below" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-cockpit.webp" alt="Fortnite C3S2 — Resistance the cockpit console room" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-underside.webp" alt="Fortnite C3S2 — Resistance the underside of a blimp" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-seats-straps.webp" alt="Fortnite C3S2 — Resistance seats with straps" loading="lazy" role="listitem" />
         <!-- Set 2 — duplicate for seamless loop -->
         <img class="ribbon-img" src="../../assets/images/c3s2-resistance-keyart.jpg" alt="Fortnite C3S2 — Resistance key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-over-town.webp" alt="Fortnite C3S2 — Resistance a blimp over a town" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-exterior-tilted.webp" alt="Fortnite C3S2 — Resistance a blimp flying over the island" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-hangar.webp" alt="Fortnite C3S2 — Resistance the main hangar" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-command-cavern.webp" alt="Fortnite C3S2 — Resistance a blimp above Command Cavern" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-loading-bay.webp" alt="Fortnite C3S2 — Resistance the open loading bay" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-low-angle.webp" alt="Fortnite C3S2 — Resistance a blimp from below" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-cockpit.webp" alt="Fortnite C3S2 — Resistance the cockpit console room" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-underside.webp" alt="Fortnite C3S2 — Resistance the underside of a blimp" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/blimps/blimp-seats-straps.webp" alt="Fortnite C3S2 — Resistance seats with straps" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>
@@ -561,5 +717,9 @@
   <script src="../../script.js"></script>
 
   <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <!-- Default playback volume for the sound players -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) { a.volume = 0.6; });
+  </script>
 </body>
 </html>
