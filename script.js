@@ -632,3 +632,18 @@ if (footerElbow) {
   if (prevBtn) prevBtn.addEventListener('click', () => { playClick('cyan'); activate(current - 1); });
   if (nextBtn) nextBtn.addEventListener('click', () => { playClick('cyan'); activate(current + 1); });
 });
+
+/* ================================================================
+   SOUND PLAYERS — only one plays at a time
+   The 'play' event doesn't bubble, so it is caught in the capture
+   phase on the document. Any other <audio controls> player that is
+   playing gets paused when a new one starts. Works for players that
+   are added to a page later too.
+   ================================================================ */
+document.addEventListener('play', function (e) {
+  var started = e.target;
+  if (!started || started.tagName !== 'AUDIO') return;
+  document.querySelectorAll('audio[controls]').forEach(function (a) {
+    if (a !== started && !a.paused) a.pause();
+  });
+}, true);
