@@ -347,6 +347,33 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
     }
+
+    /* Shadows — attack & movement audio */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep); letter-spacing: 0.08em; margin-bottom: var(--space-lg); }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title { font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-md); }
+    .sound-item { display: flex; flex-direction: column; gap: 6px; background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 10px 12px; }
+    .sound-item-label { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim); letter-spacing: 0.06em; }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    .shadow-showcase { position: relative; }
+    .shadow-icon { position: absolute; right: 0; top: -34px; width: 150px; height: auto; pointer-events: none; filter: drop-shadow(0 0 18px rgba(180,60,255,0.45)); opacity: 0.95; z-index: 0;
+      -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%);
+      mask-composite: intersect; }
+    .shadow-showcase > *:not(.shadow-icon) { position: relative; z-index: 1; }
+    .shadow-row { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,0.7fr); gap: var(--space-xl); align-items: center; margin-bottom: var(--space-xl); }
+    .shadow-row--flip { grid-template-columns: minmax(0,0.7fr) minmax(0,1.3fr); }
+    .shadow-row--flip .shadow-video { order: 2; }
+    .shadow-figure { margin: 0; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .shadow-figure img { display: block; width: 100%; height: auto; }
+    @media (max-width: 900px) {
+      .shadow-row, .shadow-row--flip { grid-template-columns: 1fr; }
+      .shadow-row--flip .shadow-video { order: 0; }
+      .shadow-icon { width: 90px; top: -20px; }
+    }
   </style>
 </head>
 
@@ -475,7 +502,136 @@
       </div>
 
     
-      <!-- ============================================================
+            <section class="sound-showcase shadow-showcase" aria-label="Shadow attack and movement sound design">
+        <img class="shadow-icon" src="../../assets/images/shadows/shadow-icon.webp" alt="" width="342" height="342" loading="lazy" aria-hidden="true" />
+        <div class="section-header">
+          <h2 class="section-tag">Shadows — Attack &amp; Movement Audio · Fortnitemares 2020</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <div class="shadow-row">
+          <div class="shadow-video">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/3T6Wg2tMvOA" title="Fortnitemares Claw Attacks" loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="video-caption">// Fortnitemares &nbsp;&middot;&nbsp; Claw Attacks</p>
+          </div>
+          <figure class="shadow-figure">
+            <img src="../../assets/images/shadows/shadow-claw-leap.webp" alt="Shadows leaping to attack in Fortnitemares" width="740" height="370" loading="lazy" />
+          </figure>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Claw Attacks — Primary</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Primary 01</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-primary-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Primary 02</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-primary-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Primary 03</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-primary-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Primary 04</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-primary-04.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Primary 05</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-primary-05.mp3"></audio>
+            </div>
+          </div>
+        </div>
+        <div class="sound-group">
+          <p class="sound-group-title">// Claw Attacks — Overhead</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Overhead 01</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-overhead-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Overhead 02</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-overhead-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Overhead 03</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-overhead-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Overhead 04</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-overhead-04.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Overhead 05</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-overhead-05.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="shadow-row shadow-row--flip">
+          <div class="shadow-video">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/-MZs-23LEY4" title="Fortnitemares Roll Movements" loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="video-caption">// Fortnitemares &nbsp;&middot;&nbsp; Roll Movements</p>
+          </div>
+          <figure class="shadow-figure">
+            <img src="../../assets/images/shadows/shadow-pair.webp" alt="Two Shadows from Fortnitemares" width="999" height="643" loading="lazy" />
+          </figure>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Roll Movements</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 01</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 02</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 03</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 04</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-04.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 05</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-05.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 06</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-06.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 07</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-07.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 08</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-08.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Roll Movement 09</span>
+              <audio controls preload="none" src="../../assets/audio/shadows/arsenic-ghost-attack-roll-movement-09.mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
            instead of every project page being a dead end.
@@ -561,5 +717,9 @@
   <script src="../../script.js"></script>
 
   <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <!-- Default playback volume for the sound players -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) { a.volume = 0.6; });
+  </script>
 </body>
 </html>
