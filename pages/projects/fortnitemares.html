@@ -357,13 +357,12 @@
     .sound-item { display: flex; flex-direction: column; gap: 6px; background: var(--color-bg-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; padding: 10px 12px; }
     .sound-item-label { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim); letter-spacing: 0.06em; }
     .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
-    .shadow-showcase { position: relative; }
-    .shadow-icon { position: absolute; right: 0; top: -60px; width: 260px; height: auto; pointer-events: none; filter: drop-shadow(0 0 18px rgba(180,60,255,0.45)); opacity: 0.95; z-index: 0;
-      -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%);
+    .project-top-shadow { display: flex; justify-content: center; align-self: center; }
+    .shadow-icon { display: block; width: 225px; max-width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 0 18px rgba(180,60,255,0.45));
+      -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%, #000 82%, transparent 100%);
       -webkit-mask-composite: source-in;
-      mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%);
+      mask-image: linear-gradient(to bottom, #000 62%, transparent 98%), linear-gradient(to right, transparent 0, #000 30%, #000 82%, transparent 100%);
       mask-composite: intersect; }
-    .shadow-showcase > *:not(.shadow-icon) { position: relative; z-index: 1; }
     .shadow-video { max-width: 820px; margin: 0 auto var(--space-xl); }
     .shadow-split { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,0.9fr); gap: var(--space-xl); align-items: center; }
     .shadow-split--flip { grid-template-columns: minmax(0,0.9fr) minmax(0,1.5fr); }
@@ -373,7 +372,7 @@
     @media (max-width: 900px) {
       .shadow-split, .shadow-split--flip { grid-template-columns: 1fr; }
       .shadow-split--flip .shadow-figure { order: 2; }
-      .shadow-icon { width: 130px; top: -20px; }
+      .shadow-icon { width: 180px; }
     }
     @media (max-width: 600px) { .shadow-split .sound-grid { grid-template-columns: 1fr; } }
   </style>
@@ -477,8 +476,8 @@
             </div>
 
             <!-- Keyart sits here — between the video and the separator line -->
-            <div class="project-top-keyart">
-              <img class="project-keyart" src="../../assets/images/c2s4-fortnitemares-2020-keyart.jpg" alt="Fortnite C2S4 — Fortnitemares 2020 — Joe Hudson" loading="lazy" />
+            <div class="project-top-keyart project-top-shadow">
+              <img class="shadow-icon" src="../../assets/images/shadows/shadow-icon.webp" alt="A Shadow from Fortnitemares 2020" width="342" height="342" loading="lazy" />
             </div>
           </div>
 
@@ -505,7 +504,6 @@
 
     
             <section class="sound-showcase shadow-showcase" aria-label="Shadow attack and movement sound design">
-        <img class="shadow-icon" src="../../assets/images/shadows/shadow-icon.webp" alt="" width="342" height="342" loading="lazy" aria-hidden="true" />
         <div class="section-header">
           <h2 class="section-tag">Shadows — Attack &amp; Movement Audio · Fortnitemares 2020</h2>
           <div class="section-line"></div>
