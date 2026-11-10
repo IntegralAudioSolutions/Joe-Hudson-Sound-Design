@@ -368,7 +368,15 @@
       .blimp-split--flip .blimp-figs { order: 2; }
     }
     @media (max-width: 600px) { .blimp-split .sound-grid { grid-template-columns: 1fr; } }
-  </style>
+      /* Level / volume gallery */
+    .env-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-md); }
+    .env-figure { display: block; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .env-figure--wide { grid-column: 1 / -1; }
+    .env-figure:not(.env-figure--wide) img { aspect-ratio: 16 / 10; object-fit: cover; }
+    .env-figure img { display: block; width: 100%; height: auto; transition: filter 0.3s ease; filter: saturate(0.9) brightness(0.92); }
+    .env-figure:hover img { filter: saturate(1) brightness(1); }
+    @media (max-width: 600px) { .env-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 
 <body>
@@ -610,6 +618,21 @@
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+    
+
+      <section class="sound-showcase env-showcase" aria-label="Blimp level and volume screenshots">
+        <div class="section-header">
+          <h2 class="section-tag">Blimps — Level &amp; Volumes</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="env-grid">
+          <a class="env-figure env-figure--wide" href="../../assets/images/blimps/blimp-level-hangar.webp" target="_blank" rel="noopener"><img src="../../assets/images/blimps/blimp-level-hangar.webp" alt="The main hangar inside the Artemis blimp level in Unreal" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/blimps/blimp-volume-gantry.webp" target="_blank" rel="noopener"><img src="../../assets/images/blimps/blimp-volume-gantry.webp" alt="An audio volume drawn over the rear gantry" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/blimps/blimp-volume-dock.webp" target="_blank" rel="noopener"><img src="../../assets/images/blimps/blimp-volume-dock.webp" alt="An audio volume drawn over the blimp dock" loading="lazy" /></a>
+          <a class="env-figure env-figure--wide" href="../../assets/images/blimps/blimp-graffiti-wip.webp" target="_blank" rel="noopener"><img src="../../assets/images/blimps/blimp-graffiti-wip.webp" alt="A graffiti-covered blimp above the mountain, work in progress" loading="lazy" /></a>
         </div>
       </section>
 
