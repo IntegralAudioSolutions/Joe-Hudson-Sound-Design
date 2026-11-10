@@ -347,7 +347,53 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
     }
-  </style>
+  
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      .sound-grid { grid-template-columns: 1fr; }
+    }
+    .zap-intro {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl);
+    }
+    .zap-text p { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-md); }
+    .zap-figure {
+      margin: 0; background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    .zap-figure img { display: block; width: 100%; height: auto; }
+    .zap-figure figcaption {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; padding: 8px 12px;
+    }
+    @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
+</style>
 </head>
 
 <body>
@@ -476,6 +522,151 @@
 
     
       <!-- ============================================================
+           ZAPOTRON WEAPON AUDIO (2021), grouped in the
+           order the sounds fire: trigger, charge, whine, barrel spin,
+           charge hit, shot. MP3 previews live in assets/audio/zapotron/.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Zapotron — Weapon Audio · 2021</h2>
+          <div class="section-line"></div>
+        </div>
+
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
+            <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
+            <p>Its weakness is that the charged shot takes a long time to build up to maximum damage. In the later levels players are often surrounded by Husks, which makes the weapon much less useful. Ideally it would be dual-use, with a faster single-shot mode to clear hordes of Husks without switching weapon. I suggested this at the time, but it wasn&rsquo;t prioritised.</p>
+            <p>Have a listen to the sounds I made for it below.</p>
+          </div>
+          <figure class="zap-figure">
+            <img src="../../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" width="1200" height="636" loading="lazy" />
+            <figcaption>// Zapotron &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          </figure>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Trigger</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Whine</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Barrel Spin</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Hit</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Shot</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 04</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-04.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
            instead of every project page being a dead end.
@@ -559,6 +750,13 @@
   </footer>
 
   <script src="../../script.js"></script>
+
+  <!-- Default playback volume for the Sound Design Examples players -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) {
+      a.volume = 0.6;
+    });
+  </script>
 
   <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
