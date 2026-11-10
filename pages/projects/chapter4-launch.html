@@ -347,7 +347,16 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
     }
-  </style>
+      /* Environment gallery */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note { font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep); letter-spacing: 0.08em; margin-bottom: var(--space-lg); }
+    .env-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-md); }
+    .env-figure { display: block; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+    .env-figure--wide { grid-column: 1 / -1; }
+    .env-figure img { display: block; width: 100%; height: auto; transition: filter 0.3s ease; filter: saturate(0.9) brightness(0.92); }
+    .env-figure:hover img { filter: saturate(1) brightness(1); }
+    @media (max-width: 600px) { .env-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 
 <body>
@@ -475,7 +484,22 @@
       </div>
 
     
-      <!-- ============================================================
+      
+
+      <section class="sound-showcase env-showcase" aria-label="Chapter 4 Launch environment images">
+        <div class="section-header">
+          <h2 class="section-tag">Chapter 4 Launch — Environments</h2>
+          <div class="section-line"></div>
+        </div>
+        <p class="sound-note">// Audio examples to be added</p>
+        <div class="env-grid">
+          <a class="env-figure env-figure--wide" href="../../assets/images/c4s1/c4s1-poi-overview.webp" target="_blank" rel="noopener"><img src="../../assets/images/c4s1/c4s1-poi-overview.webp" alt="Snow-covered POI with audio volumes drawn over the buildings" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/c4s1/c4s1-snow-base.webp" target="_blank" rel="noopener"><img src="../../assets/images/c4s1/c4s1-snow-base.webp" alt="A snowy base on the mountainside" loading="lazy" /></a>
+          <a class="env-figure" href="../../assets/images/c4s1/c4s1-lonely-labs.webp" target="_blank" rel="noopener"><img src="../../assets/images/c4s1/c4s1-lonely-labs.webp" alt="The Lonely Labs outpost on the ice" loading="lazy" /></a>
+        </div>
+      </section>
+
+    <!-- ============================================================
            RELATED CREDITS — generated from studio, franchise and platform.
            Gives visitors (and search crawlers) a route between credits
            instead of every project page being a dead end.
@@ -541,8 +565,18 @@
       <div class="ribbon-track" role="list" aria-label="Scrolling project screenshots">
         <!-- Set 1 -->
         <img class="ribbon-img" src="../../assets/images/c4s1-chapter4-launch-keyart.jpg" alt="Fortnite — Chapter 4 Launch key art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-keyart.webp" alt="Fortnite — Chapter 4 Launch season key art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-island.webp" alt="Fortnite — Chapter 4 Launch the island inside the bubble" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-bubble.webp" alt="Fortnite — Chapter 4 Launch the island bubble in space" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-concept.webp" alt="Fortnite — Chapter 4 Launch concept art" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-orb.webp" alt="Fortnite — Chapter 4 Launch the island orb among the asteroids" loading="lazy" role="listitem" />
         <!-- Set 2 — duplicate for seamless loop -->
         <img class="ribbon-img" src="../../assets/images/c4s1-chapter4-launch-keyart.jpg" alt="Fortnite — Chapter 4 Launch key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-keyart.webp" alt="Fortnite — Chapter 4 Launch season key art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-island.webp" alt="Fortnite — Chapter 4 Launch the island inside the bubble" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-bubble.webp" alt="Fortnite — Chapter 4 Launch the island bubble in space" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-concept.webp" alt="Fortnite — Chapter 4 Launch concept art" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/c4s1/c4s1-ribbon-orb.webp" alt="Fortnite — Chapter 4 Launch the island orb among the asteroids" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>
