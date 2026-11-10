@@ -620,7 +620,7 @@ if (footerElbow) {
     current = index;
 
     const handle = handles[current];
-    frame.src = `https://www.youtube.com/embed/${handle.dataset.embed}`;
+    frame.src = `https://www.youtube.com/embed/${handle.dataset.embed}?enablejsapi=1`;
     frame.title = handle.dataset.title || '';
     if (caption) caption.textContent = handle.dataset.caption || '';
     handles.forEach(h => h.classList.toggle('is-active', h === handle));
@@ -634,16 +634,54 @@ if (footerElbow) {
 });
 
 /* ================================================================
-   SOUND PLAYERS — only one plays at a time
-   The 'play' event doesn't bubble, so it is caught in the capture
-   phase on the document. Any other <audio controls> player that is
-   playing gets paused when a new one starts. Works for players that
-   are added to a page later too.
+   SOUND PLAYERS + VIDEOS — only one thing plays at a time
+   - Starting an audio player pauses (and rewinds) any other player,
+     and pauses any YouTube video on the page.
+   - Clicking into a YouTube video pauses (and rewinds) the players.
+   The audio 'play' event doesn't bubble, so it is caught in the
+   capture phase on the document. YouTube videos are controlled with
+   the iframe API (enablejsapi=1), which is added to each embed here.
    ================================================================ */
-document.addEventListener('play', function (e) {
-  var started = e.target;
-  if (!started || started.tagName !== 'AUDIO') return;
-  document.querySelectorAll('audio[controls]').forEach(function (a) {
-    if (a !== started && !a.paused) a.pause();
+(function () {
+  function ytFrames() {
+    return document.querySelectorAll('iframe[src*="youtube.com/embed"]');
+  }
+
+  function enableApi(frame) {
+    var src = frame.getAttribute('src') || '';
+    if (src.indexOf('enablejsapi=1') === -1) {
+      frame.setAttribute('src', src + (src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1');
+    }
+  }
+
+  function pauseVideos() {
+    ytFrames().forEach(function (f) {
+      try {
+        f.contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: 'pauseVideo', args: '' }), '*');
+      } catch (err) { /* frame not ready — nothing to pause */ }
+    });
+  }
+
+  function stopPlayers(except) {
+    document.querySelectorAll('audio[controls]').forEach(function (a) {
+      if (a !== except && !a.paused) { a.pause(); a.currentTime = 0; }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () { ytFrames().forEach(enableApi); });
+
+  document.addEventListener('play', function (e) {
+    if (!e.target || e.target.tagName !== 'AUDIO') return;
+    stopPlayers(e.target);
+    pauseVideos();
+  }, true);
+
+  // Clicking into a YouTube iframe moves focus to it — stop the players then.
+  window.addEventListener('blur', function () {
+    setTimeout(function () {
+      var el = document.activeElement;
+      if (el && el.tagName === 'IFRAME' && /youtube\.com\/embed/.test(el.src)) stopPlayers(null);
+    }, 0);
   });
-}, true);
+})();
