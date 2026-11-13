@@ -16,7 +16,7 @@
   <meta property="og:type"          content="website" />
   <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
   <meta property="og:title"         content="Weapons — Sound Design | Joe Hudson" />
-  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Assault Rifle. Listen to the sounds." />
+  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Blizzard Blitzer. Listen to the sounds." />
   <meta property="og:url"           content="https://joehudson.co.uk/pages/weapons.html" />
   <meta property="og:locale"        content="en_GB" />
   <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
@@ -25,7 +25,7 @@
   <meta property="og:image:alt"     content="Fortnite Save the World key art — Joe Hudson" />
   <meta name="twitter:card"         content="summary_large_image" />
   <meta name="twitter:title"        content="Weapons — Sound Design | Joe Hudson" />
-  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Assault Rifle. Listen to the sounds." />
+  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Blizzard Blitzer. Listen to the sounds." />
   <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
 
   <!-- Structured data. Validate at https://search.google.com/test/rich-results -->
@@ -80,7 +80,7 @@
       "@id": "https://joehudson.co.uk/pages/weapons.html",
       "url": "https://joehudson.co.uk/pages/weapons.html",
       "name": "Weapons — Sound Design | Joe Hudson",
-      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Assault Rifle. Listen to the sounds.",
+      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Blizzard Blitzer. Listen to the sounds.",
       "isPartOf": {
         "@id": "https://joehudson.co.uk/#website"
       },
@@ -113,7 +113,7 @@
   </script>
 
   <title>Weapons — Joe Hudson</title>
-  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Assault Rifle. Listen to the sounds." />
+  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Blizzard Blitzer. Listen to the sounds." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -351,9 +351,13 @@
     }
 
     /* Random reload demo */
+    /*
+      A flex container already avoids floats rather than sliding under
+      them, so this needs no clear: adding one only pushed the player
+      below the schematic and left a gap.
+    */
     .seq {
       display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;
-      clear: right;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 2px;
@@ -468,7 +472,7 @@
           <li><a href="#vindertech-pulsar"    class="entry-link"><span class="entry-link-type">Assault Rifle</span> Vindertech Pulsar</a></li>
 
           <li class="weapon-index-set">Other</li>
-          <li><a href="#snowball-assault"     class="entry-link"><span class="entry-link-type">Assault Rifle</span> Snowball Assault Rifle</a></li>
+          <li><a href="#snowball-assault"     class="entry-link"><span class="entry-link-type">Assault Rifle</span> Blizzard Blitzer</a></li>
         </ul>
       </nav>
 
@@ -1458,23 +1462,24 @@
 
       <div class="weapon-block" id="snowball-assault">
       <!-- ============================================================
-           SNOWBALL ASSAULT RIFLE — WEAPON AUDIO
+           BLIZZARD BLITZER — SNOWBALL ASSAULT RIFLE — WEAPON AUDIO
            MP3 previews live in assets/audio/snowball-assault/.
-           NO SCHEMATIC IMAGE YET — the Snowball Launcher art that was
-           here is a different weapon. Once the right one is in
-           assets/images/weapons/, add a .zap-figure here the way the
-           Art Deco sections have one and drop zap-intro--full.
            Joe's written account of the design work goes in .zap-text.
            ============================================================ -->
-      <section class="sound-showcase" aria-label="Snowball Assault Rifle sound design examples">
+      <section class="sound-showcase" aria-label="Blizzard Blitzer sound design examples">
         <div class="section-header">
-          <h3 class="section-tag">Snowball Assault Rifle — Weapon Audio</h3>
+          <h3 class="section-tag">Blizzard Blitzer — Snowball Assault Rifle · Weapon Audio</h3>
           <div class="section-line"></div>
         </div>
 
-        <div class="zap-intro zap-intro--full">
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/Blizzard_Blitzer_-_Schematic_-_Save_the_World.webp" alt="The Blizzard Blitzer, a snowball assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Blizzard Blitzer &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
+        <div class="zap-intro">
           <div class="zap-text">
-            <p>The Snowball Assault Rifle fires snowballs on full automatic in Fortnite Save the World.</p>
+            <p>The Blizzard Blitzer is a medium range assault rifle that shoots snowballs, from Fortnite Save the World.</p>
             <p>Sustained fire is a loop system rather than one shot per round. A start opens it, the loop carries the fire itself at nine and a half shots a second, and an end tail closes it on the last shot. A separate ice layer sits over the top. There are also single fire shots, an out of ammo switch, and a reload split into start, mid and end with two recordings in each slot.</p>
             <p>Press the burst button below to hear the loop system run, then the reload button for a random one of its eight sequences.</p>
           </div>
@@ -1621,6 +1626,7 @@
         <img class="ribbon-img" src="../assets/images/weapons/The_Brush_Off_-_Schematic_-_Save_the_World.webp" alt="The Brush Off, an Art Deco shotgun from Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/The_Big_Shot_-_Schematic_-_Save_the_World.webp" alt="The Big Shot, an Art Deco break-action shotgun from Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/Art_Deco_Weapon_Set.webp" alt="The full Art Deco weapon set from Fortnite Save the World" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../assets/images/weapons/Blizzard_Blitzer_-_Schematic_-_Save_the_World.webp" alt="The Blizzard Blitzer, a snowball assault rifle from Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/Black_Drum_-_Schematic_-_Save_the_World.webp" alt="Black Drum, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/Blackout_-_Schematic_-_Save_the_World.webp" alt="Blackout, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/Midnight_Stalker_-_Schematic_-_Save_the_World.webp" alt="Midnight Stalker, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" />
@@ -1632,6 +1638,7 @@
         <img class="ribbon-img" src="../assets/images/weapons/The_Brush_Off_-_Schematic_-_Save_the_World.webp" alt="The Brush Off, an Art Deco shotgun from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/The_Big_Shot_-_Schematic_-_Save_the_World.webp" alt="The Big Shot, an Art Deco break-action shotgun from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/Art_Deco_Weapon_Set.webp" alt="The full Art Deco weapon set from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../assets/images/weapons/Blizzard_Blitzer_-_Schematic_-_Save_the_World.webp" alt="The Blizzard Blitzer, a snowball assault rifle from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/Black_Drum_-_Schematic_-_Save_the_World.webp" alt="Black Drum, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/Blackout_-_Schematic_-_Save_the_World.webp" alt="Blackout, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/Midnight_Stalker_-_Schematic_-_Save_the_World.webp" alt="Midnight Stalker, from the Black Metal set in Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
@@ -1823,7 +1830,7 @@
     }, true);
 
     // ================================================================
-    // FIRING BURST — the Snowball Assault Rifle's loop system
+    // FIRING BURST — the Blizzard Blitzer's loop system
     // ----------------------------------------------------------------
     // The start sound and the loop begin at the same instant, with the
     // start layered over the top of the loop rather than played before
