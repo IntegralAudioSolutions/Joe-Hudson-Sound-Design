@@ -266,6 +266,54 @@
     .zap-figure--icon figcaption { align-self: stretch; }
     /* Page-level section spacing + jump links */
     .weapon-block { scroll-margin-top: 72px; }
+    /* ── CONTENTS — jump links to each weapon, matching the UE log's
+         entry index so the two pages read the same way ── */
+    .weapon-index { margin-bottom: var(--space-xl); }
+    .weapon-index-title {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .entry-index {
+      list-style: none;
+      margin: 0;
+      padding: 12px 16px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--color-gold);
+      border-radius: 2px;
+    }
+    .entry-index li + li { margin-top: 6px; }
+    /* Game name heading inside the list */
+    .weapon-index-game {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-gold);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding-bottom: 8px; margin-bottom: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    /* A second game would need this spacing above its heading */
+    .weapon-index-game + li { margin-top: 0; }
+    li + .weapon-index-game { margin-top: var(--space-md); }
+    .entry-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #c8d8e8;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+      display: inline-flex; gap: 10px; align-items: baseline;
+    }
+    .entry-link:hover { color: var(--color-gold-bright); }
+    /* Weapon class, dimmed, in a fixed column so the names line up */
+    .entry-link-type {
+      color: var(--color-text-deep);
+      min-width: 92px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 600px) {
+      .entry-link { display: block; }
+      .entry-link-type { display: block; min-width: 0; margin-bottom: 2px; }
+    }
+
     /* Random reload demo */
     .seq {
       display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;
@@ -357,6 +405,24 @@
       <p class="project-desc">Weapon sound design, grouped by game. Each one has the sounds themselves, so you can listen as well as read.</p>
 
       <!-- ============================================================
+           CONTENTS. Every weapon on the page, grouped by game, so a
+           visitor can go straight to the one they care about.
+           ADDING A WEAPON: add an <li> here with the same id you gave
+           its .weapon-block, and keep it in page order.
+           ============================================================ -->
+      <nav class="weapon-index" aria-labelledby="contents-title">
+        <p class="weapon-index-title" id="contents-title">// Contents</p>
+        <ul class="entry-index">
+          <li class="weapon-index-game">Fortnite Save the World</li>
+          <li><a href="#zapotron"        class="entry-link"><span class="entry-link-type">Rifle</span> Zapotron</a></li>
+          <li><a href="#floor-flusher"   class="entry-link"><span class="entry-link-type">Assault Rifle</span> The Floor Flusher</a></li>
+          <li><a href="#brush-off"       class="entry-link"><span class="entry-link-type">Shotgun</span> The Brush Off</a></li>
+          <li><a href="#big-shot"        class="entry-link"><span class="entry-link-type">Shotgun</span> The Big Shot</a></li>
+          <li><a href="#art-deco-pistol" class="entry-link"><span class="entry-link-type">Pistol</span> The Mouth Piece</a></li>
+        </ul>
+      </nav>
+
+      <!-- ============================================================
            GAME SUB HEADING. Add another .game-group block below this
            one for each new game, with its weapon sections inside it.
            ============================================================ -->
@@ -365,14 +431,6 @@
         <div class="game-header" id="save-the-world">
           <p class="game-eyebrow">// Epic Games</p>
           <h2 class="game-title">Fortnite Save the World</h2>
-        </div>
-
-        <div class="cta" style="padding:0">
-          <a href="#zapotron"         class="btn btn--ghost">Zapotron &darr;</a>
-          <a href="#floor-flusher"    class="btn btn--ghost">The Floor Flusher &darr;</a>
-          <a href="#brush-off"        class="btn btn--ghost">The Brush Off &darr;</a>
-          <a href="#big-shot"         class="btn btn--ghost">The Big Shot &darr;</a>
-          <a href="#art-deco-pistol"  class="btn btn--ghost">The Mouth Piece &darr;</a>
         </div>
 
       <!-- Copied word for word from pages/projects/save-the-world.html -->
