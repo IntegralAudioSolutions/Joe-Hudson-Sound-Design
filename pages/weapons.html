@@ -16,7 +16,7 @@
   <meta property="og:type"          content="website" />
   <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
   <meta property="og:title"         content="Weapons — Sound Design | Joe Hudson" />
-  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, and The Floor Flusher and The Mouth Piece from the Art Deco set. Listen to the sounds." />
   <meta property="og:url"           content="https://joehudson.co.uk/pages/weapons.html" />
   <meta property="og:locale"        content="en_GB" />
   <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
@@ -25,7 +25,7 @@
   <meta property="og:image:alt"     content="Fortnite Save the World key art — Joe Hudson" />
   <meta name="twitter:card"         content="summary_large_image" />
   <meta name="twitter:title"        content="Weapons — Sound Design | Joe Hudson" />
-  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, and The Floor Flusher and The Mouth Piece from the Art Deco set. Listen to the sounds." />
   <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
 
   <!-- Structured data. Validate at https://search.google.com/test/rich-results -->
@@ -80,7 +80,7 @@
       "@id": "https://joehudson.co.uk/pages/weapons.html",
       "url": "https://joehudson.co.uk/pages/weapons.html",
       "name": "Weapons — Sound Design | Joe Hudson",
-      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds.",
+      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, and The Floor Flusher and The Mouth Piece from the Art Deco set. Listen to the sounds.",
       "isPartOf": {
         "@id": "https://joehudson.co.uk/#website"
       },
@@ -113,7 +113,7 @@
   </script>
 
   <title>Weapons — Joe Hudson</title>
-  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, and The Floor Flusher and The Mouth Piece from the Art Deco set. Listen to the sounds." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -266,6 +266,20 @@
     .zap-figure--icon figcaption { align-self: stretch; }
     /* Page-level section spacing + jump links */
     .weapon-block { scroll-margin-top: 72px; }
+    /* Random reload demo */
+    .seq {
+      display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    .seq-readout {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-gold);
+      letter-spacing: 0.08em; margin: 0;
+    }
+    .seq button[disabled] { opacity: 0.5; cursor: default; }
     /* Game sub heading — one per game, with its weapons nested under it */
     .game-group { display: flex; flex-direction: column; gap: var(--space-lg); }
     .game-header {
@@ -355,6 +369,7 @@
 
         <div class="cta" style="padding:0">
           <a href="#zapotron"         class="btn btn--ghost">Zapotron &darr;</a>
+          <a href="#floor-flusher"    class="btn btn--ghost">The Floor Flusher &darr;</a>
           <a href="#art-deco-pistol"  class="btn btn--ghost">The Mouth Piece &darr;</a>
         </div>
 
@@ -506,6 +521,115 @@
       </section>
       </div>
 
+      <div class="weapon-block" id="floor-flusher">
+      <!-- ============================================================
+           THE FLOOR FLUSHER — ART DECO ASSAULT RIFLE WEAPON AUDIO
+           Loop-based automatic fire: start, loop and stop tail, with the
+           loop and tail at close, medium and distant perspectives, plus
+           out of ammo and destroyed. MP3 previews live in
+           assets/audio/art-deco-assault-rifle/.
+           Joe's written account of the design work goes in .zap-text
+           below, the way the Zapotron and Mouth Piece ones read.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Art Deco assault rifle sound design examples">
+        <div class="section-header">
+          <h3 class="section-tag">The Floor Flusher — Art Deco Assault Rifle · Weapon Audio</h3>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>The Floor Flusher is the assault rifle from the Art Deco set in Fortnite Save the World.</p>
+            <p>The firing is loop based rather than one shot per round: a start transient opens it, a loop sustains while the trigger is held, and a stop tail closes it. The loop and the tail were each built at close, medium and distant perspectives, and all four firing loops are exactly the same length.</p>
+            <p>Have a listen below.</p>
+          </div>
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../assets/images/weapons/The_Floor_Flusher_-_Schematic_-_Save_the_World.webp" alt="The Floor Flusher, an Art Deco assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// The Floor Flusher &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          </figure>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <!-- The transient that opens the firing loop -->
+        <div class="sound-group">
+          <p class="sound-group-title">// Start</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Start 01</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-start-01.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <!-- All four are the same length, so they line up with each other -->
+        <div class="sound-group">
+          <p class="sound-group-title">// Fire Loop &middot; by distance</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Loop &middot; Close</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-close-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Loop</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Loop &middot; Medium Distance</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-medium-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Loop &middot; Distant</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-distant-01.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Stop Tail &middot; by distance</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Stop &middot; Close</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-close-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Stop</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Stop &middot; Medium Distance</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-medium-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Stop &middot; Distant</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-distant-01.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Out of Ammo</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Out of Ammo 01</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-out-of-ammo-01.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Destroyed</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Destroyed</span>
+              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-destroyed.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
       <div class="weapon-block" id="art-deco-pistol">
       <!-- ============================================================
            THE MOUTH PIECE — ART DECO PISTOL WEAPON AUDIO
@@ -528,12 +652,22 @@
             <p>Have a listen below &mdash; the fire sounds, close and far, and the reload groups.</p>
           </div>
           <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <img src="../assets/images/weapons/The_Mouth_Piece_-_Schematic_-_Save_the_World.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" width="512" height="512" loading="lazy" />
             <figcaption>// The Mouth Piece &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
           </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <!-- ============================================================
+             RANDOM RELOAD — plays one start, one mid and one end, picked
+             at random, joined end to end. This is the 27-sequence system
+             described above, working. Script is at the foot of the page.
+             ============================================================ -->
+        <div class="seq" data-seq>
+          <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
+          <p class="seq-readout" data-seq-readout aria-live="polite">27 possible sequences &mdash; press play to hear one</p>
+        </div>
 
         <div class="sound-group">
           <p class="sound-group-title">// Fire &middot; Close</p>
@@ -665,11 +799,15 @@
         <!-- Set 1 -->
         <img class="ribbon-img" src="../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" loading="lazy" role="listitem" />
         <img class="ribbon-img" src="../assets/images/weapons/zapotron-icon.webp" alt="Zapotron weapon icon" loading="lazy" role="listitem" />
-        <img class="ribbon-img" src="../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../assets/images/weapons/The_Mouth_Piece_-_Schematic_-_Save_the_World.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../assets/images/weapons/The_Floor_Flusher_-_Schematic_-_Save_the_World.webp" alt="The Floor Flusher, an Art Deco assault rifle from Fortnite Save the World" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../assets/images/weapons/Art_Deco_Weapon_Set.webp" alt="The full Art Deco weapon set from Fortnite Save the World" loading="lazy" role="listitem" />
         <!-- Set 2 — duplicate for seamless loop -->
         <img class="ribbon-img" src="../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
         <img class="ribbon-img" src="../assets/images/weapons/zapotron-icon.webp" alt="Zapotron weapon icon" loading="lazy" role="listitem" aria-hidden="true" />
-        <img class="ribbon-img" src="../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../assets/images/weapons/The_Mouth_Piece_-_Schematic_-_Save_the_World.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../assets/images/weapons/The_Floor_Flusher_-_Schematic_-_Save_the_World.webp" alt="The Floor Flusher, an Art Deco assault rifle from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../assets/images/weapons/Art_Deco_Weapon_Set.webp" alt="The full Art Deco weapon set from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
       </div>
     </div>
   </section>
@@ -686,6 +824,153 @@
   </footer>
 
   <script src="../script.js"></script>
+
+
+  <!--
+    RANDOM RELOAD SEQUENCER
+    ------------------------------------------------------------------
+    The reload is three slots — start, mid, end — with three recordings
+    in each. Any combination can play, which is 3 x 3 x 3 = 27 possible
+    reloads. This picks one at random and plays it.
+
+    Why the Web Audio API and not three audio tags: audio elements
+    played one after another leave an audible gap at each join, because
+    the browser only starts the next file once the previous one has
+    finished. Web Audio lets each section be scheduled to the sample,
+    so the three parts butt together.
+
+    trim() exists for two reasons. The start recordings carry 70 to
+    110ms of silence at the end, where they were cut; the mid
+    recordings carry none at all, so they were plainly meant to abut.
+    Trimming that silence keeps every join as tight as the mid ones.
+    Some browsers also leave MP3 encoder delay at the head of a file,
+    which trim() skips for the same reason.
+
+    One caveat worth knowing: in the game the three sections fire on
+    animation notifies, so the spacing between them follows the reload
+    animation. Butting them end to end here is an approximation of
+    that, and the point being demonstrated is the random combination.
+  -->
+  <script>
+  (function () {
+    var box = document.querySelector('[data-seq]');
+    if (!box) return;
+
+    var button  = box.querySelector('[data-seq-play]');
+    var readout = box.querySelector('[data-seq-readout]');
+    var FOLDER  = '../assets/audio/art-deco-pistol/';
+
+    // The three slots, in the order they play
+    var SLOTS = [
+      { name: 'Start', files: ['revolver-artdeco-reload-start-01', 'revolver-artdeco-reload-start-02', 'revolver-artdeco-reload-start-03'] },
+      { name: 'Mid',   files: ['revolver-artdeco-reload-mid-01',   'revolver-artdeco-reload-mid-02',   'revolver-artdeco-reload-mid-03'] },
+      { name: 'End',   files: ['revolver-artdeco-reload-end-01',   'revolver-artdeco-reload-end-02',   'revolver-artdeco-reload-end-03'] }
+    ];
+
+    var ctx = null;          // created on the first click (browsers require a gesture)
+    var buffers = {};        // decoded audio, cached so it only downloads once
+    var playing = [];        // sources currently scheduled, so they can be stopped
+    var lastPick = '';       // avoids playing the identical sequence twice in a row
+
+    // Find where the audio really starts and ends, ignoring MP3 padding.
+    function trim(buffer) {
+      var data = buffer.getChannelData(0);
+      var threshold = 0.0015;                    // about -56 dBFS
+      var first = 0, last = data.length - 1;
+      while (first < data.length && Math.abs(data[first]) < threshold) first++;
+      while (last > first && Math.abs(data[last]) < threshold) last--;
+      var guard = Math.round(buffer.sampleRate * 0.002);   // 2ms before the transient
+      var tail  = Math.round(buffer.sampleRate * 0.010);   // 10ms of natural tail
+      first = Math.max(0, first - guard);
+      last  = Math.min(data.length - 1, last + tail);
+      return { offset: first / buffer.sampleRate, duration: (last - first) / buffer.sampleRate };
+    }
+
+    function load(name) {
+      if (buffers[name]) return Promise.resolve(buffers[name]);
+      return fetch(FOLDER + name + '.mp3')
+        .then(function (r) { return r.arrayBuffer(); })
+        .then(function (bytes) {
+          return new Promise(function (resolve, reject) {
+            ctx.decodeAudioData(bytes, resolve, reject);   // callback form for older Safari
+          });
+        })
+        .then(function (buffer) { buffers[name] = buffer; return buffer; });
+    }
+
+    function stop() {
+      playing.forEach(function (s) { try { s.stop(); } catch (e) {} });
+      playing = [];
+    }
+
+    function pick() {
+      // Pick one file per slot, and reroll if the whole sequence repeats
+      for (var attempt = 0; attempt < 8; attempt++) {
+        var chosen = SLOTS.map(function (slot) {
+          return Math.floor(Math.random() * slot.files.length);
+        });
+        if (chosen.join('') !== lastPick) { lastPick = chosen.join(''); return chosen; }
+      }
+      return SLOTS.map(function () { return 0; });
+    }
+
+    function play() {
+      if (!ctx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) { readout.textContent = 'This browser cannot play the sequence.'; return; }
+        ctx = new AC();
+      }
+      if (ctx.state === 'suspended') ctx.resume();
+
+      // Only one thing plays at a time, same as the players on this page
+      document.querySelectorAll('audio[controls]').forEach(function (a) {
+        if (!a.paused) { a.pause(); a.currentTime = 0; }
+      });
+      stop();
+
+      var chosen = pick();
+      var names  = chosen.map(function (index, slot) { return SLOTS[slot].files[index]; });
+
+      button.disabled = true;
+      readout.textContent = 'Loading\u2026';
+
+      Promise.all(names.map(load)).then(function (loaded) {
+        var gain = ctx.createGain();
+        gain.gain.value = 0.6;                   // matches the players' default volume
+        gain.connect(ctx.destination);
+
+        var when = ctx.currentTime + 0.05;       // small lead-in so scheduling is reliable
+        loaded.forEach(function (buffer) {
+          var cut = trim(buffer);
+          var source = ctx.createBufferSource();
+          source.buffer = buffer;
+          source.connect(gain);
+          source.start(when, cut.offset, cut.duration);
+          playing.push(source);
+          when += cut.duration;                  // next section begins exactly as this one ends
+        });
+
+        readout.textContent = chosen.map(function (index, slot) {
+          return SLOTS[slot].name + ' 0' + (index + 1);
+        }).join(' \u00b7 ');
+
+        var total = (when - ctx.currentTime) * 1000;
+        setTimeout(function () { button.disabled = false; }, total);
+      }).catch(function (err) {
+        readout.textContent = 'Could not load the reload sounds.';
+        button.disabled = false;
+        console.warn('Random reload:', err);
+      });
+    }
+
+    button.addEventListener('click', play);
+
+    // If a visitor starts one of the players, stop the sequence
+    document.addEventListener('play', function (e) {
+      if (e.target && e.target.tagName === 'AUDIO') stop();
+    }, true);
+  })();
+  </script>
 
   <!-- Default playback volume for the Sound Design Examples players -->
   <script>
