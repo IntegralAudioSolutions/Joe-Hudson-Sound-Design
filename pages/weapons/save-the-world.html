@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Favicon / app icons (same set as every other page) -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <meta name="theme-color" content="#080a0f" />
+  <link rel="canonical" href="https://joehudson.co.uk/pages/weapons/save-the-world.html" />
+
+  <!-- Open Graph / Twitter: controls the preview card on LinkedIn, Discord, Slack, X -->
+  <meta property="og:type"          content="website" />
+  <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
+  <meta property="og:title"         content="Fortnite Save the World — Weapon Audio | Joe Hudson" />
+  <meta property="og:description"   content="Weapon sound design from Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <meta property="og:url"           content="https://joehudson.co.uk/pages/weapons/save-the-world.html" />
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Fortnite Save the World key art — Joe Hudson" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Fortnite Save the World — Weapon Audio | Joe Hudson" />
+  <meta name="twitter:description"  content="Weapon sound design from Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
+
+  <!-- Structured data. Validate at https://search.google.com/test/rich-results -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://joehudson.co.uk/#website",
+      "url": "https://joehudson.co.uk/",
+      "name": "Joe Hudson — Technical Sound Designer",
+      "publisher": {
+        "@id": "https://joehudson.co.uk/#joe"
+      },
+      "inLanguage": "en-GB"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://joehudson.co.uk/#joe",
+      "name": "Joe Hudson",
+      "jobTitle": "Technical Sound Designer",
+      "url": "https://joehudson.co.uk/",
+      "description": "Technical Sound Designer specialising in UE5 world-building audio, MetaSounds and AAA game audio implementation.",
+      "knowsAbout": [
+        "Game Audio",
+        "Sound Design",
+        "Unreal Engine 5",
+        "MetaSounds",
+        "Wwise",
+        "Environmental Audio",
+        "Audio Implementation",
+        "Foley",
+        "Dialogue Editing"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Integral Audio Solutions Ltd",
+        "url": "https://www.integralaudiosolutions.co.uk"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/joehudsonsounddesign"
+      ],
+      "email": "IntegralAudioSolutions@outlook.com"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/weapons/save-the-world.html",
+      "url": "https://joehudson.co.uk/pages/weapons/save-the-world.html",
+      "name": "Fortnite Save the World — Weapon Audio | Joe Hudson",
+      "description": "Weapon sound design from Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds.",
+      "isPartOf": {
+        "@id": "https://joehudson.co.uk/#website"
+      },
+      "inLanguage": "en-GB",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://joehudson.co.uk/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Weapons",
+            "item": "https://joehudson.co.uk/pages/weapons.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fortnite Save the World"
+          }
+        ]
+      }
+    }
+  ]
+}
+  </script>
+
+  <title>Fortnite Save the World Weapons — Joe Hudson</title>
+  <meta name="description" content="Weapon sound design from Fortnite Save the World: the Zapotron and The Mouth Piece, an Art Deco pistol. Listen to the sounds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212,172,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,172,80,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center;
+      padding: 12px 0 0; gap: 8px;
+    }
+    .page-header-content {
+      padding: var(--space-xl) var(--space-xl);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .page-eyebrow {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-gold);
+      letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-title {
+      font-size: clamp(22px, 3vw, 36px); font-weight: 300; color: #eef2f8;
+      line-height: 1.1; margin-bottom: 10px;
+    }
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+    .page-subtitle {
+      font-family: var(--font-mono); font-size: 10px; color: var(--color-text-dim);
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .project-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; }
+    .project-sidebar {
+      background: var(--color-bg-nav); border-right: 2px solid var(--color-gold);
+      display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px;
+    }
+    /* Single-column flex: video full-width at top, body-grid below */
+    .project-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    .project-desc { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; }
+    .project-section-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-cyan);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .project-detail-text { font-size: 13px; color: var(--color-text-dim); line-height: 1.75; }
+    /* Image ribbon */
+    .ribbon-section {
+      border-top: 1px solid var(--color-gold-border);
+      overflow: hidden;
+      padding: var(--space-md) 0;
+      background: var(--color-bg-nav);
+    }
+    .ribbon-label {
+      font-family: var(--font-mono); font-size: 8px; color: var(--color-text-deep);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 0 var(--space-xl) var(--space-sm);
+    }
+    .ribbon-track-wrap { overflow: hidden; }
+    .ribbon-track {
+      display: flex;
+      gap: 8px;
+      width: max-content;
+      animation: ribbonScroll 30s linear infinite;
+    }
+    .ribbon-track:hover { animation-play-state: paused; }
+    @keyframes ribbonScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .ribbon-img {
+      height: 160px;
+      width: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      filter: saturate(0.8) brightness(0.85);
+      transition: filter 0.3s ease;
+      flex-shrink: 0;
+    }
+    .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { display: none; }
+      .project-content { padding: var(--space-md); }
+      .ribbon-img { height: 110px; }
+    }
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      .sound-grid { grid-template-columns: 1fr; }
+    }
+    .zap-intro {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl);
+    }
+    .zap-text p { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-md); }
+    .zap-figure {
+      margin: 0; background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    .zap-figure img { display: block; width: 100%; height: auto; }
+    .zap-figure figcaption {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; padding: 8px 12px;
+    }
+    @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
+    /* Icon-style weapon image (square, transparent) sits centred on its card */
+    .zap-figure--icon { display: flex; flex-direction: column; align-items: center; }
+    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-lg); }
+    .zap-figure--icon figcaption { align-self: stretch; }
+    /* Page-level section spacing + jump links */
+    .weapon-block { scroll-margin-top: 72px; }
+  </style>
+</head>
+
+<body>
+
+  <header class="nav" role="banner">
+    <a href="../../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../../index.html"    class="nav-link">About</a>
+      <a href="../reel.html"        class="nav-link">Reel</a>
+      <a href="../disciplines.html" class="nav-link">Disciplines</a>
+      <a href="../ue.html"    class="nav-link">UE</a>
+      <a href="../uefn.html"  class="nav-link">UEFN</a>
+      <a href="../verse.html" class="nav-link">Verse</a>
+      <a href="../weapons.html" class="nav-link active">Weapons</a>
+      <a href="../work.html"        class="nav-link">Work</a>
+      <a href="../contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="page-header" aria-label="Page header">
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--cyan"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+    <div class="page-header-content">
+      <p class="page-eyebrow">// Weapon Audio &nbsp;&middot;&nbsp; Epic Games</p>
+      <h1 class="page-title"><strong>Fortnite Save the World</strong></h1>
+      <p class="page-subtitle">Weapons</p>
+    </div>
+  </section>
+
+  <div class="project-layout">
+    <aside class="project-sidebar" aria-hidden="true">
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--cyan" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--purp" aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <span class="sidebar-label">Weapons</span>
+      <a href="../../index.html" class="lb lb--dim"  aria-label="Back to home"></a>
+      <a href="../../index.html" class="lb lb--gold" aria-label="Back to home"></a>
+    </aside>
+
+    <main class="project-content" id="main-content">
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <a href="../weapons.html">Weapons</a>
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current" aria-current="page">Fortnite Save the World</span>
+      </nav>
+
+      <p class="project-desc">Weapon audio from Fortnite Save the World: the Zapotron, and The Mouth Piece, a pistol from the Art Deco set.</p>
+
+      <div class="cta" style="padding:0">
+        <a href="#zapotron"         class="btn btn--ghost">Zapotron &darr;</a>
+        <a href="#art-deco-pistol"  class="btn btn--ghost">The Mouth Piece &darr;</a>
+      </div>
+
+      <!-- Copied word for word from pages/projects/save-the-world.html -->
+      <div class="weapon-block" id="zapotron">
+      <!-- ============================================================
+           ZAPOTRON WEAPON AUDIO (2021), grouped in the
+           order the sounds fire: trigger, charge, whine, barrel spin,
+           charge hit, shot. MP3 previews live in assets/audio/zapotron/.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Zapotron — Weapon Audio · 2021</h2>
+          <div class="section-line"></div>
+        </div>
+
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
+            <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
+            <p>Its weakness is that the charged shot takes a long time to build up to maximum damage. In the later levels players are often surrounded by Husks, which makes the weapon much less useful. Ideally it would be dual-use, with a faster single-shot mode to clear hordes of Husks without switching weapon. I suggested this at the time, but it wasn&rsquo;t prioritised.</p>
+            <p>Have a listen to the sounds I made for it below.</p>
+          </div>
+          <figure class="zap-figure">
+            <img src="../../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" width="1200" height="636" loading="lazy" />
+            <figcaption>// Zapotron &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          </figure>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Trigger</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Trigger 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Whine</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Whine 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Barrel Spin</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Barrel Spin 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Charge Hit</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Charge Hit 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Shot</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 01</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 02</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 03</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Shot 04</span>
+              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-04.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
+      <div class="weapon-block" id="art-deco-pistol">
+      <!-- ============================================================
+           THE MOUTH PIECE — ART DECO PISTOL WEAPON AUDIO
+           Fire sounds, close perspective. MP3 previews live in
+           assets/audio/art-deco-pistol/ (originals held as 16-bit WAV).
+           Written account of the design work can go in .zap-text below.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Art Deco pistol sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">The Mouth Piece — Art Deco Pistol · Weapon Audio</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>The Mouth Piece is a pistol from the Art Deco set in Fortnite Save the World.</p>
+            <p>Have a listen to the close-perspective fire sounds I made for it below.</p>
+          </div>
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// The Mouth Piece &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          </figure>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Fire &middot; Close</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 01</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 02</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 03</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 04</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-04.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 05</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-05.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire Close 06</span>
+              <audio controls preload="none" src="../../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-06.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
+      <div class="cta" style="padding:0">
+        <a href="../contact.html"                   class="btn btn--cyan">Get in Touch &rarr;</a>
+        <a href="../projects/save-the-world.html"   class="btn btn--ghost">Save the World Credit &rarr;</a>
+        <a href="../weapons.html"                   class="btn btn--ghost">All Weapons &rarr;</a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Weapon art ribbon (Set 2 is an exact duplicate for the seamless loop) -->
+  <section class="ribbon-section" aria-label="Weapon images">
+    <p class="ribbon-label">// Weapon Art &nbsp;&middot;&nbsp; Fortnite Save the World</p>
+    <div class="ribbon-track-wrap">
+      <div class="ribbon-track" role="list" aria-label="Scrolling weapon images">
+        <!-- Set 1 -->
+        <img class="ribbon-img" src="../../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/weapons/zapotron-icon.webp" alt="Zapotron weapon icon" loading="lazy" role="listitem" />
+        <img class="ribbon-img" src="../../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" />
+        <!-- Set 2 — duplicate for seamless loop -->
+        <img class="ribbon-img" src="../../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/weapons/zapotron-icon.webp" alt="Zapotron weapon icon" loading="lazy" role="listitem" aria-hidden="true" />
+        <img class="ribbon-img" src="../../assets/images/weapons/art-deco-pistol-icon.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" loading="lazy" role="listitem" aria-hidden="true" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;&middot;&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="../contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="../../script.js"></script>
+
+  <!-- Default playback volume for the Sound Design Examples players -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) {
+      a.volume = 0.6;
+    });
+  </script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
