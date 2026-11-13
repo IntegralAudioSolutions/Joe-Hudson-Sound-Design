@@ -16,7 +16,7 @@
   <meta property="og:type"          content="website" />
   <meta property="og:site_name"     content="Joe Hudson — Technical Sound Designer" />
   <meta property="og:title"         content="Weapons — Sound Design | Joe Hudson" />
-  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set and the Vindertech Pulsar. Listen to the sounds." />
+  <meta property="og:description"   content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Launcher. Listen to the sounds." />
   <meta property="og:url"           content="https://joehudson.co.uk/pages/weapons.html" />
   <meta property="og:locale"        content="en_GB" />
   <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
@@ -25,7 +25,7 @@
   <meta property="og:image:alt"     content="Fortnite Save the World key art — Joe Hudson" />
   <meta name="twitter:card"         content="summary_large_image" />
   <meta name="twitter:title"        content="Weapons — Sound Design | Joe Hudson" />
-  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set and the Vindertech Pulsar. Listen to the sounds." />
+  <meta name="twitter:description"  content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Launcher. Listen to the sounds." />
   <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-save-the-world.jpg" />
 
   <!-- Structured data. Validate at https://search.google.com/test/rich-results -->
@@ -80,7 +80,7 @@
       "@id": "https://joehudson.co.uk/pages/weapons.html",
       "url": "https://joehudson.co.uk/pages/weapons.html",
       "name": "Weapons — Sound Design | Joe Hudson",
-      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set and the Vindertech Pulsar. Listen to the sounds.",
+      "description": "Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Launcher. Listen to the sounds.",
       "isPartOf": {
         "@id": "https://joehudson.co.uk/#website"
       },
@@ -113,7 +113,7 @@
   </script>
 
   <title>Weapons — Joe Hudson</title>
-  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set and the Vindertech Pulsar. Listen to the sounds." />
+  <meta name="description" content="Weapon sound design by Joe Hudson, by game. Fortnite Save the World: the Zapotron, four weapons from the Art Deco set, three from the Black Metal set, the Vindertech Pulsar and the Snowball Launcher. Listen to the sounds." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -339,6 +339,12 @@
       letter-spacing: 0.08em; margin: 0;
     }
     .seq button[disabled] { opacity: 0.5; cursor: default; }
+    .seq-toggle {
+      font-family: var(--font-mono); font-size: 10px; color: #c8d8e8;
+      letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 6px;
+      cursor: pointer; user-select: none;
+    }
+    .seq-toggle input { accent-color: var(--color-cyan); cursor: pointer; }
     /* Game sub heading — one per game, with its weapons nested under it */
     .game-group { display: flex; flex-direction: column; gap: var(--space-lg); }
     .game-header {
@@ -440,6 +446,9 @@
 
           <li class="weapon-index-set">Vindertech</li>
           <li><a href="#vindertech-pulsar"    class="entry-link"><span class="entry-link-type">Assault Rifle</span> Vindertech Pulsar</a></li>
+
+          <li class="weapon-index-set">Other</li>
+          <li><a href="#snowball-launcher"    class="entry-link"><span class="entry-link-type">Snowball</span> Snowball Launcher</a></li>
         </ul>
       </nav>
 
@@ -915,7 +924,7 @@
              at random, joined end to end. This is the 27-sequence system
              described above, working. Script is at the foot of the page.
              ============================================================ -->
-        <div class="seq" data-seq>
+        <div class="seq" data-seq="mouth-piece-reload">
           <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
           <p class="seq-readout" data-seq-readout aria-live="polite">27 possible sequences &mdash; press play to hear one</p>
         </div>
@@ -1418,6 +1427,149 @@
       </section>
       </div>
 
+      <div class="weapon-block" id="snowball-launcher">
+      <!-- ============================================================
+           SNOWBALL LAUNCHER — WEAPON AUDIO
+           MP3 previews live in assets/audio/snowball-assault/.
+           Joe's written account of the design work goes in .zap-text.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Snowball Launcher sound design examples">
+        <div class="section-header">
+          <h3 class="section-tag">Snowball Launcher — Weapon Audio</h3>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>The Snowball Launcher fires snowballs on full automatic in Fortnite Save the World.</p>
+            <p>Sustained fire is a loop system rather than one shot per round. A start opens it, the loop carries the fire itself at nine and a half shots a second, and an end tail closes it on the last shot. A separate ice layer sits over the top. There are also single fire shots, an out of ammo switch, and a reload split into start, mid and end with two recordings in each slot.</p>
+            <p>Press the burst button below to hear the loop system run, then the reload button for a random one of its eight sequences.</p>
+          </div>
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../assets/images/weapons/Snowball_Launcher_-_Weapon_-_Fortnite.webp" alt="The Snowball Launcher from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// Snowball Launcher &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          </figure>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+
+        <!-- ============================================================
+             FIRING BURST — start, the loop twice, then the end landing
+             on the last hit of the second loop. Script at the foot of
+             the page; the timings live in BURST there.
+             ============================================================ -->
+        <div class="seq" data-burst>
+          <button type="button" class="btn btn--cyan" data-burst-play>&#9654;&nbsp; Play a firing burst</button>
+          <label class="seq-toggle"><input type="checkbox" data-burst-ice /> Ice layer</label>
+          <p class="seq-readout" data-burst-readout aria-live="polite">Start &middot; loop &times;2 &middot; end on the last hit</p>
+        </div>
+
+        <!-- The loop players keep running until paused; use the burst button above to hear them in order -->
+        <div class="sound-group">
+          <p class="sound-group-title">// Firing Loop</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Loop Start</span>
+              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-start-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Loop</span>
+              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Loop End</span>
+              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-end-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Ice Loop</span>
+              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-ice-loop.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Fire &middot; One Shot</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Fire 01</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire 02</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Fire 03</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-03.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two recordings in each of the three reload slots: 8 sequences -->
+        <div class="seq" data-seq="snowball-reload">
+          <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
+          <p class="seq-readout" data-seq-readout>8 possible sequences &mdash; press play to hear one</p>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Reload &middot; Start</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Reload Start 01</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-start-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Reload Start 02</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-start-02.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Reload &middot; Mid</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Reload Mid 01</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-mid-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Reload Mid 02</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-mid-02.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Reload &middot; End</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Reload End 01</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-end-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Reload End 02</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-reload-end-02.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Out of Ammo</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">Out of Ammo 01</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-out-of-ammo-01.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">Out of Ammo 02</span>
+              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-out-of-ammo-02.mp3"></audio>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
       </section><!-- /game-group -->
 
       <div class="cta" style="padding:0">
@@ -1476,53 +1628,84 @@
   <!--
     RANDOM RELOAD SEQUENCER
     ------------------------------------------------------------------
-    The reload is three slots — start, mid, end — with three recordings
-    in each. Any combination can play, which is 3 x 3 x 3 = 27 possible
-    reloads. This picks one at random and plays it.
+    A reload built from three slots — start, mid and end — with several
+    recordings in each. Any combination can play, so three slots of
+    three give 27 reloads and three slots of two give 8. This picks one
+    at random and plays it.
 
     Why the Web Audio API and not three audio tags: audio elements
     played one after another leave an audible gap at each join, because
     the browser only starts the next file once the previous one has
     finished. Web Audio lets each section be scheduled to the sample,
-    so the three parts butt together.
+    so the parts butt together.
 
-    trim() exists for two reasons. The start recordings carry 70 to
-    110ms of silence at the end, where they were cut; the mid
-    recordings carry none at all, so they were plainly meant to abut.
-    Trimming that silence keeps every join as tight as the mid ones.
-    Some browsers also leave MP3 encoder delay at the head of a file,
-    which trim() skips for the same reason.
+    trim() exists for two reasons. The Mouth Piece start recordings
+    carry 70 to 110ms of silence at the end, where they were cut; its
+    mid recordings carry none at all, so they were plainly meant to
+    abut. Trimming that silence keeps every join as tight as the mid
+    ones. Some browsers also leave MP3 encoder delay at the head of a
+    file, which trim() skips for the same reason.
 
-    One caveat worth knowing: in the game the three sections fire on
+    One caveat worth knowing: in the game the sections fire on
     animation notifies, so the spacing between them follows the reload
     animation. Butting them end to end here is an approximation of
     that, and the point being demonstrated is the random combination.
+
+    ADDING ONE TO ANOTHER WEAPON: add an entry to SEQUENCERS below and
+    give the weapon a <div class="seq" data-seq="your-key"> with a
+    [data-seq-play] button and a [data-seq-readout] paragraph.
   -->
   <script>
   (function () {
-    var box = document.querySelector('[data-seq]');
-    if (!box) return;
+    var SEQUENCERS = {
+      'mouth-piece-reload': {
+        folder: '../assets/audio/art-deco-pistol/',
+        slots: [
+          { name: 'Start', files: ['revolver-artdeco-reload-start-01', 'revolver-artdeco-reload-start-02', 'revolver-artdeco-reload-start-03'] },
+          { name: 'Mid',   files: ['revolver-artdeco-reload-mid-01',   'revolver-artdeco-reload-mid-02',   'revolver-artdeco-reload-mid-03'] },
+          { name: 'End',   files: ['revolver-artdeco-reload-end-01',   'revolver-artdeco-reload-end-02',   'revolver-artdeco-reload-end-03'] }
+        ]
+      },
+      'snowball-reload': {
+        folder: '../assets/audio/snowball-assault/',
+        slots: [
+          { name: 'Start', files: ['snowball-reload-start-01', 'snowball-reload-start-02'] },
+          { name: 'Mid',   files: ['snowball-reload-mid-01',   'snowball-reload-mid-02'] },
+          { name: 'End',   files: ['snowball-reload-end-01',   'snowball-reload-end-02'] }
+        ]
+      }
+    };
 
-    var button  = box.querySelector('[data-seq-play]');
-    var readout = box.querySelector('[data-seq-readout]');
-    var FOLDER  = '../assets/audio/art-deco-pistol/';
+    var ctx = null;      // one context shared by every player on the page
+    var buffers = {};    // decoded audio, cached so each file downloads once
 
-    // The three slots, in the order they play
-    var SLOTS = [
-      { name: 'Start', files: ['revolver-artdeco-reload-start-01', 'revolver-artdeco-reload-start-02', 'revolver-artdeco-reload-start-03'] },
-      { name: 'Mid',   files: ['revolver-artdeco-reload-mid-01',   'revolver-artdeco-reload-mid-02',   'revolver-artdeco-reload-mid-03'] },
-      { name: 'End',   files: ['revolver-artdeco-reload-end-01',   'revolver-artdeco-reload-end-02',   'revolver-artdeco-reload-end-03'] }
-    ];
+    function audio() {
+      if (!ctx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        ctx = new AC();
+      }
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
 
-    var ctx = null;          // created on the first click (browsers require a gesture)
-    var buffers = {};        // decoded audio, cached so it only downloads once
-    var playing = [];        // sources currently scheduled, so they can be stopped
-    var lastPick = '';       // avoids playing the identical sequence twice in a row
+    function load(folder, name) {
+      var key = folder + name;
+      if (buffers[key]) return Promise.resolve(buffers[key]);
+      return fetch(folder + name + '.mp3')
+        .then(function (r) { return r.arrayBuffer(); })
+        .then(function (bytes) {
+          return new Promise(function (resolve, reject) {
+            ctx.decodeAudioData(bytes, resolve, reject);   // callback form for older Safari
+          });
+        })
+        .then(function (buffer) { buffers[key] = buffer; return buffer; });
+    }
 
-    // Find where the audio really starts and ends, ignoring MP3 padding.
+    // Where the audio really starts and ends, ignoring padding and handle
     function trim(buffer) {
       var data = buffer.getChannelData(0);
-      var threshold = 0.0015;                    // about -56 dBFS
+      var threshold = 0.0015;                   // about -56 dBFS
       var first = 0, last = data.length - 1;
       while (first < data.length && Math.abs(data[first]) < threshold) first++;
       while (last > first && Math.abs(data[last]) < threshold) last--;
@@ -1533,89 +1716,170 @@
       return { offset: first / buffer.sampleRate, duration: (last - first) / buffer.sampleRate };
     }
 
-    function load(name) {
-      if (buffers[name]) return Promise.resolve(buffers[name]);
-      return fetch(FOLDER + name + '.mp3')
-        .then(function (r) { return r.arrayBuffer(); })
-        .then(function (bytes) {
-          return new Promise(function (resolve, reject) {
-            ctx.decodeAudioData(bytes, resolve, reject);   // callback form for older Safari
-          });
-        })
-        .then(function (buffer) { buffers[name] = buffer; return buffer; });
-    }
-
-    function stop() {
+    // Anything currently scheduled, across every player on the page
+    var playing = [];
+    function stopAll() {
       playing.forEach(function (s) { try { s.stop(); } catch (e) {} });
       playing = [];
     }
+    window.__weaponStopAll = stopAll;
 
-    function pick() {
-      // Pick one file per slot, and reroll if the whole sequence repeats
-      for (var attempt = 0; attempt < 8; attempt++) {
-        var chosen = SLOTS.map(function (slot) {
-          return Math.floor(Math.random() * slot.files.length);
-        });
-        if (chosen.join('') !== lastPick) { lastPick = chosen.join(''); return chosen; }
-      }
-      return SLOTS.map(function () { return 0; });
-    }
-
-    function play() {
-      if (!ctx) {
-        var AC = window.AudioContext || window.webkitAudioContext;
-        if (!AC) { readout.textContent = 'This browser cannot play the sequence.'; return; }
-        ctx = new AC();
-      }
-      if (ctx.state === 'suspended') ctx.resume();
-
-      // Only one thing plays at a time, same as the players on this page
+    function pauseThePlayers() {
       document.querySelectorAll('audio[controls]').forEach(function (a) {
         if (!a.paused) { a.pause(); a.currentTime = 0; }
       });
-      stop();
-
-      var chosen = pick();
-      var names  = chosen.map(function (index, slot) { return SLOTS[slot].files[index]; });
-
-      button.disabled = true;
-      readout.textContent = 'Loading\u2026';
-
-      Promise.all(names.map(load)).then(function (loaded) {
-        var gain = ctx.createGain();
-        gain.gain.value = 0.6;                   // matches the players' default volume
-        gain.connect(ctx.destination);
-
-        var when = ctx.currentTime + 0.05;       // small lead-in so scheduling is reliable
-        loaded.forEach(function (buffer) {
-          var cut = trim(buffer);
-          var source = ctx.createBufferSource();
-          source.buffer = buffer;
-          source.connect(gain);
-          source.start(when, cut.offset, cut.duration);
-          playing.push(source);
-          when += cut.duration;                  // next section begins exactly as this one ends
-        });
-
-        readout.textContent = chosen.map(function (index, slot) {
-          return SLOTS[slot].name + ' 0' + (index + 1);
-        }).join(' \u00b7 ');
-
-        var total = (when - ctx.currentTime) * 1000;
-        setTimeout(function () { button.disabled = false; }, total);
-      }).catch(function (err) {
-        readout.textContent = 'Could not load the reload sounds.';
-        button.disabled = false;
-        console.warn('Random reload:', err);
-      });
     }
 
-    button.addEventListener('click', play);
+    document.querySelectorAll('[data-seq]').forEach(function (box) {
+      var config = SEQUENCERS[box.getAttribute('data-seq')];
+      if (!config) return;
 
-    // If a visitor starts one of the players, stop the sequence
+      var button  = box.querySelector('[data-seq-play]');
+      var readout = box.querySelector('[data-seq-readout]');
+      var lastPick = '';
+
+      function pick() {
+        // One file per slot, rerolled if the whole sequence repeats
+        for (var attempt = 0; attempt < 8; attempt++) {
+          var chosen = config.slots.map(function (slot) {
+            return Math.floor(Math.random() * slot.files.length);
+          });
+          if (chosen.join('') !== lastPick) { lastPick = chosen.join(''); return chosen; }
+        }
+        return config.slots.map(function () { return 0; });
+      }
+
+      button.addEventListener('click', function () {
+        if (!audio()) { readout.textContent = 'This browser cannot play the sequence.'; return; }
+        pauseThePlayers();
+        stopAll();
+
+        var chosen = pick();
+        var names  = chosen.map(function (index, slot) { return config.slots[slot].files[index]; });
+
+        button.disabled = true;
+        readout.textContent = 'Loading…';
+
+        Promise.all(names.map(function (n) { return load(config.folder, n); })).then(function (loaded) {
+          var gain = ctx.createGain();
+          gain.gain.value = 0.6;                 // matches the players' default volume
+          gain.connect(ctx.destination);
+
+          var when = ctx.currentTime + 0.05;     // small lead-in so scheduling is reliable
+          loaded.forEach(function (buffer) {
+            var cut = trim(buffer);
+            var source = ctx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(gain);
+            source.start(when, cut.offset, cut.duration);
+            playing.push(source);
+            when += cut.duration;                // the next section begins as this one ends
+          });
+
+          readout.textContent = chosen.map(function (index, slot) {
+            return config.slots[slot].name + ' 0' + (index + 1);
+          }).join(' · ');
+
+          setTimeout(function () { button.disabled = false; }, (when - ctx.currentTime) * 1000);
+        }).catch(function (err) {
+          readout.textContent = 'Could not load the reload sounds.';
+          button.disabled = false;
+          console.warn('Random reload:', err);
+        });
+      });
+    });
+
+    // Starting one of the page's own players stops anything scheduled
     document.addEventListener('play', function (e) {
-      if (e.target && e.target.tagName === 'AUDIO') stop();
+      if (e.target && e.target.tagName === 'AUDIO') stopAll();
     }, true);
+
+    // ================================================================
+    // FIRING BURST — the Snowball Launcher's loop system
+    // ----------------------------------------------------------------
+    // Start opens it, the loop runs twice, and the end lands on the
+    // last hit of the second loop rather than after it. To do that the
+    // second pass is cut one shot short, so the end's first transient
+    // falls exactly where that shot would have been.
+    //
+    // The timings below were measured from the original WAVs, not read
+    // from the MP3s, so the burst plays identically in every browser:
+    //   start   0.240s
+    //   loop    3.309s, 31 hits, so one shot every 0.1067s
+    //   end     plays from start + loop + (loop - one shot)
+    // Change these if the real fire rate differs.
+    // ================================================================
+    var BURST = {
+      folder: '../assets/audio/snowball-assault/',
+      start: 'snowball-loop-start-01',
+      loop:  'snowball-loop-01',
+      end:   'snowball-loop-end-01',
+      ice:   'snowball-ice-loop',
+      startDuration: 0.240,
+      loopDuration:  3.309,
+      shotInterval:  0.1067,
+      passes: 2
+    };
+
+    document.querySelectorAll('[data-burst]').forEach(function (box) {
+      var button  = box.querySelector('[data-burst-play]');
+      var readout = box.querySelector('[data-burst-readout]');
+      var iceBox  = box.querySelector('[data-burst-ice]');
+
+      button.addEventListener('click', function () {
+        if (!audio()) { readout.textContent = 'This browser cannot play the burst.'; return; }
+        pauseThePlayers();
+        stopAll();
+
+        button.disabled = true;
+        readout.textContent = 'Loading…';
+
+        var names = [BURST.start, BURST.loop, BURST.end];
+        if (iceBox && iceBox.checked) names.push(BURST.ice);
+
+        Promise.all(names.map(function (n) { return load(BURST.folder, n); })).then(function () {
+          var gain = ctx.createGain();
+          gain.gain.value = 0.6;
+          gain.connect(ctx.destination);
+
+          function play(name, when, offset, duration, loop) {
+            var source = ctx.createBufferSource();
+            source.buffer = buffers[BURST.folder + name];
+            source.connect(gain);
+            if (loop) { source.loop = true; source.start(when); }
+            else if (duration) source.start(when, offset || 0, duration);
+            else source.start(when, offset || 0);
+            playing.push(source);
+            return source;
+          }
+
+          var t0 = ctx.currentTime + 0.05;
+          // where the end lands: after the first pass, one shot short of the second
+          var lastHit = BURST.loopDuration - BURST.shotInterval;
+          var endAt = t0 + BURST.startDuration + BURST.loopDuration + lastHit;
+
+          play(BURST.start, t0, 0, BURST.startDuration);
+          play(BURST.loop, t0 + BURST.startDuration, 0, BURST.loopDuration);
+          play(BURST.loop, t0 + BURST.startDuration + BURST.loopDuration, 0, lastHit);
+          var endSource = play(BURST.end, endAt);
+
+          var total = endAt - t0 + buffers[BURST.folder + BURST.end].duration;
+
+          if (iceBox && iceBox.checked) {
+            var ice = play(BURST.ice, t0, 0, null, true);
+            ice.stop(t0 + total);
+          }
+
+          readout.textContent = 'Start · loop ×' + BURST.passes +
+            ' · end' + (iceBox && iceBox.checked ? ' · ice layer' : '');
+          setTimeout(function () { button.disabled = false; }, total * 1000);
+        }).catch(function (err) {
+          readout.textContent = 'Could not load the burst sounds.';
+          button.disabled = false;
+          console.warn('Firing burst:', err);
+        });
+      });
+    });
   })();
   </script>
 
