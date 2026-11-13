@@ -220,22 +220,38 @@
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
       letter-spacing: 0.08em; margin-bottom: var(--space-lg);
     }
-    .sound-group { margin-bottom: var(--space-xl); }
+    /*
+      display: flow-root makes each group its own block formatting
+      context, which is what keeps it beside the floated schematic
+      instead of sliding underneath it. A plain grid container would
+      overlap the float; a formatting context shrinks to fit the space
+      left beside it.
+    */
+    .sound-group { margin-bottom: var(--space-lg); display: flow-root; }
+    /*
+      The group heading doubles as the separator between groups: the
+      label, then a hairline running out to the right edge.
+    */
     .sound-group-title {
       font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
-      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sound-group-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,0.07);
     }
     .sound-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: var(--space-md);
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 8px;
     }
     .sound-item {
-      display: flex; flex-direction: column; gap: 6px;
+      display: flex; flex-direction: column; gap: 4px;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 2px;
-      padding: 10px 12px;
+      padding: 8px 10px;
     }
     .sound-item-label {
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
@@ -245,27 +261,36 @@
     @media (max-width: 600px) {
       .sound-grid { grid-template-columns: 1fr; }
     }
-    .zap-intro {
-      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl);
-    }
-    /* Used while a weapon has no schematic image yet */
-    .zap-intro--full { grid-template-columns: 1fr; }
+    .zap-intro { margin-bottom: var(--space-lg); }
+    /* No schematic on this weapon yet, so stop the copy running full width */
     .zap-intro--full .zap-text { max-width: 70ch; }
     .zap-text p { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-md); }
+    /*
+      The schematic floats right so the copy and the sound groups both
+      wrap around it, rather than sitting in a column of their own with
+      empty space underneath.
+    */
     .zap-figure {
-      margin: 0; background: var(--color-bg-surface);
+      float: right;
+      width: 300px;
+      margin: 0 0 var(--space-lg) var(--space-xl);
+      background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
     }
+    /* Keeps the float inside its own weapon section */
+    .sound-showcase::after { content: ''; display: block; clear: both; }
     .zap-figure img { display: block; width: 100%; height: auto; }
     .zap-figure figcaption {
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
       letter-spacing: 0.08em; padding: 8px 12px;
     }
-    @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
+    /* Too narrow to float beside: the schematic goes back above the copy */
+    @media (max-width: 900px) {
+      .zap-figure { float: none; width: 100%; max-width: 320px; margin: 0 auto var(--space-lg); }
+    }
     /* Icon-style weapon image (square, transparent) sits centred on its card */
     .zap-figure--icon { display: flex; flex-direction: column; align-items: center; }
-    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-lg); }
+    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-md); }
     .zap-figure--icon figcaption { align-self: stretch; }
     /* Page-level section spacing + jump links */
     .weapon-block { scroll-margin-top: 72px; }
@@ -328,6 +353,7 @@
     /* Random reload demo */
     .seq {
       display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap;
+      clear: right;
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 2px;
@@ -471,6 +497,11 @@
         </div>
 
 
+        <figure class="zap-figure">
+          <img src="../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" width="1200" height="636" loading="lazy" />
+          <figcaption>// Zapotron &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
@@ -478,10 +509,6 @@
             <p>Its weakness is that the charged shot takes a long time to build up to maximum damage. In the later levels players are often surrounded by Husks, which makes the weapon much less useful. Ideally it would be dual-use, with a faster single-shot mode to clear hordes of Husks without switching weapon. I suggested this at the time, but it wasn&rsquo;t prioritised.</p>
             <p>Have a listen to the sounds I made for it below.</p>
           </div>
-          <figure class="zap-figure">
-            <img src="../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" width="1200" height="636" loading="lazy" />
-            <figcaption>// Zapotron &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -621,16 +648,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/The_Floor_Flusher_-_Schematic_-_Save_the_World.webp" alt="The Floor Flusher, an Art Deco assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// The Floor Flusher &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>The Floor Flusher is the assault rifle from the Art Deco set in Fortnite Save the World.</p>
             <p>The firing is loop based rather than one shot per round: a start transient opens it, a loop sustains while the trigger is held, and a stop tail closes it. The loop and the tail were each built at close, medium and distant perspectives, and all four firing loops are exactly the same length.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/The_Floor_Flusher_-_Schematic_-_Save_the_World.webp" alt="The Floor Flusher, an Art Deco assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// The Floor Flusher &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -728,16 +756,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/The_Brush_Off_-_Schematic_-_Save_the_World.webp" alt="The Brush Off, an Art Deco shotgun from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// The Brush Off &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>The Brush Off is one of the two shotguns in the Art Deco set in Fortnite Save the World.</p>
             <p>The firing was built at three distances &mdash; close, medium and distant &mdash; with variations at each. The reload is split into its mechanical parts rather than recorded as one pass: the charge moving in and out, the shell inserted, and the spent shell leaving, with a separate metal version of that.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/The_Brush_Off_-_Schematic_-_Save_the_World.webp" alt="The Brush Off, an Art Deco shotgun from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// The Brush Off &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -829,16 +858,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/The_Big_Shot_-_Schematic_-_Save_the_World.webp" alt="The Big Shot, an Art Deco break-action shotgun from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// The Big Shot &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>The Big Shot is the other Art Deco shotgun, a break-action weapon that hits several enemies at once in a short, wide cone, with a tiny magazine and a long reload.</p>
             <p>The firing was built at close and medium distances, with variations at each.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/The_Big_Shot_-_Schematic_-_Save_the_World.webp" alt="The Big Shot, an Art Deco break-action shotgun from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// The Big Shot &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -898,6 +928,11 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/The_Mouth_Piece_-_Schematic_-_Save_the_World.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// The Mouth Piece &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>The Mouth Piece is a pistol from the Art Deco set in Fortnite Save the World. It fires slowly but hits hard, and carries very little ammo.</p>
@@ -905,10 +940,6 @@
             <p>The reloads are split into three sections &mdash; start, mid and end &mdash; with three sounds in each group, allowed to randomise between themselves. Nine files, 27 unique reload sequences. That was one of the ways I made this weapon feel distinct, and it only needed the sound cue and the animation sequence triggers set up accordingly.</p>
             <p>Have a listen below &mdash; the fire sounds, close and far, and the reload groups.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/The_Mouth_Piece_-_Schematic_-_Save_the_World.webp" alt="The Mouth Piece, an Art Deco pistol from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// The Mouth Piece &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -1047,16 +1078,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/Black_Drum_-_Schematic_-_Save_the_World.webp" alt="Black Drum, a assault rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Black Drum &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>Black Drum is an assault rifle from the Black Metal set in Fortnite Save the World.</p>
             <p>The firing is one shot per round rather than a sustained loop, with four variations close and three distant. The reload is split into start, mid and end, the same three-part approach as The Mouth Piece.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/Black_Drum_-_Schematic_-_Save_the_World.webp" alt="Black Drum, a assault rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Black Drum &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -1138,16 +1170,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/Blackout_-_Schematic_-_Save_the_World.webp" alt="Blackout, a shotgun from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Blackout &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>Blackout is a shotgun from the Black Metal set in Fortnite Save the World.</p>
             <p>The firing was built at three distances &mdash; close, medium and distant &mdash; with three variations at each. Alongside the reload there are degrade and destroy sounds, for the weapon wearing down and breaking.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/Blackout_-_Schematic_-_Save_the_World.webp" alt="Blackout, a shotgun from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Blackout &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -1254,16 +1287,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/Midnight_Stalker_-_Schematic_-_Save_the_World.webp" alt="Midnight Stalker, a sniper rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Midnight Stalker &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>Midnight Stalker is a sniper rifle from the Black Metal set in Fortnite Save the World.</p>
             <p>The firing was built at three distances &mdash; close, medium and distant &mdash; with two variations at each, and the reload is split into start, in and end. This one also has handling sounds for the weapon being picked up and dropped.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/Midnight_Stalker_-_Schematic_-_Save_the_World.webp" alt="Midnight Stalker, a sniper rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Midnight Stalker &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -1368,16 +1402,17 @@
           <div class="section-line"></div>
         </div>
 
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../assets/images/weapons/Vindertech_Pulsar_-_Schematic_-_Save_the_World.webp" alt="The Vindertech Pulsar, an energy assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Vindertech Pulsar &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+        </figure>
+
         <div class="zap-intro">
           <div class="zap-text">
             <p>The Vindertech Pulsar is an energy assault rifle in Fortnite Save the World.</p>
             <p>Every sound here is a loop rather than one shot per round. The fire loop runs while the trigger is held, muzzle sparks layer over the top with a separate version for when the player is close to the weapon, and a low ammo loop sits underneath as the magazine runs down.</p>
             <p>Have a listen below. These players loop, so each one keeps running until you pause it.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../assets/images/weapons/Vindertech_Pulsar_-_Schematic_-_Save_the_World.webp" alt="The Vindertech Pulsar, an energy assault rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Vindertech Pulsar &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
