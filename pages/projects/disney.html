@@ -290,6 +290,15 @@
       .nedry { left: 64%; }
     }
 
+    /*
+      He is on screen from the first frame now, so on a tall phone he sits
+      in the lower half. The first few typed lines stay clear above him,
+      and the flood fills in around and behind him.
+    */
+    @media (max-aspect-ratio: 1/1) {
+      .nedry { top: 66%; }
+    }
+
     /* ================================================================
        TASKBAR
     ================================================================ */
@@ -454,9 +463,8 @@
           </div>
 
           <!--
-            Shown by default so the no-JavaScript fallback has him too;
-            the script hides him at the start of each loop and brings him
-            back when the flood of text begins.
+            Always on screen, from the first frame and through every loop.
+            (The no-JavaScript fallback shows him too.)
           -->
           <img class="nedry" id="nedry"
                src="../../assets/images/disney/nedry-wag.gif"
@@ -532,8 +540,8 @@
          1. "Ready..." appears.
          2. Three commands are typed; each is refused.
          3. The last refusal trails off with "...and..."
-         4. Nedry pops up and the screen floods with the magic-word line,
-            faster and faster.
+         4. The screen floods with the magic-word line, faster and faster.
+            (Nedry is on screen the whole time, from the very start.)
          5. After a few seconds the screen clears and it all starts again.
 
        To change the wording or the speed, edit the CONFIG section.
@@ -690,7 +698,7 @@
         beep(110, 0.22, 0.30, 0.06);
       }
 
-      // Key moment 2 — Nedry appears: a quick rising chirp
+      // Key moment 2 — the flood of text begins: a quick rising chirp
       function playSting() {
         if (played.sting || !soundIsLive()) { return; }
         played.sting = true;
@@ -700,7 +708,6 @@
       /* ── THE SCENE ───────────────────────────────────────────── */
       async function playOnce() {
         clearScreen();
-        nedry.classList.add('is-hidden');
 
         newLine('Ready...');
         await sleep(900);
@@ -723,8 +730,7 @@
           }
         }
 
-        // The flood — Nedry appears and the lines speed up
-        nedry.classList.remove('is-hidden');
+        // The flood — the lines speed up
         playSting();                              // sound 2 of 2
         var delay = FLOOD_START;
         while (delay > FLOOD_END) {
