@@ -412,6 +412,13 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
+    /* Modifier: a still image that is not floated. It clears the video above
+       and sits under the text, left aligned, so a tall image does not
+       squeeze the copy into a narrow column. */
+    .poi-video--still { float: none; clear: both; width: 100%; max-width: 520px; margin: var(--space-md) 0 0 0; }
+    /* Still image inside a breakdown box: fills the box width and opens full size */
+    .poi-video img { display: block; width: 100%; height: auto; }
+    .poi-video a { display: block; }
     /* Spacing between consecutive paragraphs in a detail block */
     .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
 
@@ -674,6 +681,14 @@
                 <figcaption>// Ocean spline &nbsp;&middot;&nbsp; Deployment and optimisation</figcaption>
               </figure>
               <p class="project-detail-text">The ocean ambience deployed along a spline, and the optimisation pass that followed.</p>
+              <p class="project-detail-text">The image below shows how huge concave, hollow volumes can be built around the ocean seamlessly, by laying down volume geometry points with the pen tool in top down view. We did this to override the biome volumes and stop insects playing out at sea. It also gave us the chance to add more seagulls out there and bring in a darker, rolling ocean soundscape.</p>
+              <!-- Still image: not floated, sits full width under the video and text -->
+              <figure class="poi-video poi-video--still">
+                <a href="../../assets/images/Simpsons/ocean-spline-volumes-top-down.webp" target="_blank" rel="noopener">
+                  <img src="../../assets/images/Simpsons/ocean-spline-volumes-top-down.webp" alt="Top-down view of the island in the Unreal editor, with yellow volume geometry points and lines laid around the coast and out across the ocean" width="1239" height="1173" loading="lazy" />
+                </a>
+                <figcaption>// Top-down view &nbsp;&middot;&nbsp; Volume geometry points laid with the pen tool</figcaption>
+              </figure>
             </section>
 
             <section class="poi-block" aria-label="TV Static Implementation">
