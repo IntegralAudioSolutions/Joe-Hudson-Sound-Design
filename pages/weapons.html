@@ -220,14 +220,7 @@
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
       letter-spacing: 0.08em; margin-bottom: var(--space-lg);
     }
-    /*
-      display: flow-root makes each group its own block formatting
-      context, which is what keeps it beside the floated schematic
-      instead of sliding underneath it. A plain grid container would
-      overlap the float; a formatting context shrinks to fit the space
-      left beside it.
-    */
-    .sound-group { margin-bottom: var(--space-lg); display: flow-root; }
+    .sound-group { margin-bottom: var(--space-lg); }
     /*
       The group heading doubles as the separator between groups: the
       label, then a hairline running out to the right edge.
@@ -242,23 +235,31 @@
       background: rgba(255,255,255,0.07);
     }
     /*
-      Two small groups side by side, with a hairline between them.
-      column-rule draws that line for free; break-inside keeps a group
-      from being split across the two columns. The inner grid drops its
-      minimum width so two players still fit across a narrower column.
+      SOUND LAYOUT. All of a weapon's sounds sit in one .sound-cols
+      grid: two equal columns with no visible divider. Groups fill it
+      row by row, left then right, so list them in the order they
+      should be read. A group that needs the full width (the five part
+      Brush Off reload) takes the extra class sound-group--wide, and a
+      .seq demo button always spans both columns. clear: both starts
+      the grid below the floated schematic.
     */
-    .sound-columns {
-      column-count: 2;
-      column-gap: var(--space-xl);
-      column-rule: 1px solid rgba(255,255,255,0.07);
-      margin-bottom: var(--space-lg);
+    .sound-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md) var(--space-xl);
+      align-items: start;
+      clear: both;
     }
-    .sound-columns .sound-group { break-inside: avoid; margin-bottom: var(--space-md); }
-    .sound-columns .sound-group:last-child { margin-bottom: 0; }
-    .sound-columns .sound-grid { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
-    /* Too narrow for two columns: back to one, and the rule goes with it */
+    .sound-cols .sound-group { margin-bottom: 0; }
+    .sound-cols .sound-group--wide,
+    .sound-cols .seq { grid-column: 1 / -1; }
+    .sound-cols .seq { margin-bottom: 0; }
+    /* Half width columns: the players can be a little narrower */
+    .sound-cols .sound-grid { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
+    .sound-cols .sound-group--wide .sound-grid { grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); }
+    /* Too narrow for two columns: one column */
     @media (max-width: 760px) {
-      .sound-columns { column-count: 1; column-rule: none; }
+      .sound-cols { grid-template-columns: 1fr; }
     }
 
     .sound-grid {
@@ -279,25 +280,26 @@
     }
     .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
     @media (max-width: 600px) {
-      /* The second selector is needed because .sound-columns .sound-grid
+      /* The extra selectors are needed because .sound-cols .sound-grid
          is more specific than .sound-grid, so it would otherwise keep
          two cramped players per row on a phone. */
       .sound-grid,
-      .sound-columns .sound-grid { grid-template-columns: 1fr; }
+      .sound-cols .sound-grid,
+      .sound-cols .sound-group--wide .sound-grid { grid-template-columns: 1fr; }
     }
     .zap-intro { margin-bottom: var(--space-lg); }
     /* No schematic on this weapon yet, so stop the copy running full width */
     .zap-intro--full .zap-text { max-width: 70ch; }
     .zap-text p { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-md); }
     /*
-      The schematic floats right so the copy and the sound groups both
-      wrap around it, rather than sitting in a column of their own with
-      empty space underneath.
+      The schematic floats right so the intro copy wraps around it,
+      rather than sitting in a column of its own with empty space
+      underneath. The sound grid below clears it.
     */
     .zap-figure {
       float: right;
       width: 300px;
-      margin: 0 0 var(--space-lg) var(--space-xl);
+      margin: 0 0 var(--space-md) var(--space-xl);
       background: var(--color-bg-surface);
       border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
     }
@@ -313,8 +315,8 @@
       .zap-figure { float: none; width: 100%; max-width: 320px; margin: 0 auto var(--space-lg); }
     }
     /* Icon-style weapon image (square, transparent) sits centred on its card */
-    .zap-figure--icon { display: flex; flex-direction: column; align-items: center; }
-    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-md); }
+    .zap-figure--icon { display: flex; flex-direction: column; align-items: center; width: 170px; }
+    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-xs); }
     .zap-figure--icon figcaption { align-self: stretch; }
     /* Page-level section spacing + jump links */
     .weapon-block { scroll-margin-top: 72px; }
@@ -468,6 +470,7 @@
       </nav>
 
       <p class="project-desc">Weapon sound design, grouped by game. Each one has the sounds themselves, so you can listen as well as read.</p>
+      <p class="sound-note" style="margin-bottom:0">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
 
       <!-- ============================================================
            CONTENTS. Every weapon on the page, grouped by game, so a
@@ -534,125 +537,76 @@
           <div class="zap-text">
             <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
             <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
-            <p>Its weakness is that the charged shot takes a long time to build up to maximum damage. In the later levels players are often surrounded by Husks, which makes the weapon much less useful. Ideally it would be dual-use, with a faster single-shot mode to clear hordes of Husks without switching weapon. I suggested this at the time, but it wasn&rsquo;t prioritised.</p>
             <p>Have a listen to the sounds I made for it below.</p>
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-group">
-          <p class="sound-group-title">// Trigger</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-trigger-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-trigger-03.mp3"></audio>
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Trigger</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Trigger 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge Whine</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-whine-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-whine-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge Whine</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge Whine 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Barrel Spin</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-barrel-spin-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-barrel-spin-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Barrel Spin</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Barrel Spin 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge Hit</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-hit-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-hit-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge Hit</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge Hit 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Shot</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 01</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 02</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 03</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 04</span>
-              <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-04.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Shot</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Shot 01</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Shot 02</span>
+                <audio controls preload="none" src="../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -689,65 +643,43 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <!-- The transient that opens the firing loop -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Start</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Start 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-start-01.mp3"></audio>
+        <div class="sound-cols">
+          <!-- The transient that opens the firing loop -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Start</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Start 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-start-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- All four are the same length, so they line up with each other -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire Loop &middot; by distance</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Loop &middot; Close</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-close-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Loop</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Loop &middot; Medium Distance</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-medium-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Loop &middot; Distant</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-distant-01.mp3"></audio>
+          <!-- All four are the same length, so they line up with each other -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire Loop &middot; by distance</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Loop &middot; Close</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-close-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Loop &middot; Distant</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-loop-distant-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Stop Tail &middot; by distance</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Stop &middot; Close</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-close-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Stop</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Stop &middot; Medium Distance</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-medium-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Stop &middot; Distant</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-distant-01.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Stop Tail</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Stop &middot; Close</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-assault-rifle/artdeco-ar-stop-close-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-columns">
           <div class="sound-group">
             <p class="sound-group-title">// Out of Ammo</p>
             <div class="sound-grid">
@@ -799,33 +731,13 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-columns">
+        <div class="sound-cols">
           <div class="sound-group">
             <p class="sound-group-title">// Fire &middot; Close</p>
             <div class="sound-grid">
               <div class="sound-item">
                 <span class="sound-item-label">Fire Close 02</span>
                 <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-close-02.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Close 04</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-close-04.mp3"></audio>
-              </div>
-            </div>
-          </div>
-
-          <div class="sound-group">
-            <p class="sound-group-title">// Fire &middot; Medium Distance</p>
-            <div class="sound-grid">
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Medium 02</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-medium-02.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Medium 04</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-medium-04.mp3"></audio>
               </div>
             </div>
           </div>
@@ -837,37 +749,33 @@
                 <span class="sound-item-label">Fire Distant 02</span>
                 <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-distant-02.mp3"></audio>
               </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Distant 04</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-fire-distant-04.mp3"></audio>
-              </div>
             </div>
           </div>
-        </div>
 
-        <!-- The reload broken into its mechanical parts, each triggered separately -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge In 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-charge-in-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Out 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-charge-out-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Insert 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-insert-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shell Out 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-shell-out-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shell Out Metal 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-shell-out-metal-01.mp3"></audio>
+          <!-- The reload broken into its mechanical parts, each triggered separately -->
+          <div class="sound-group sound-group--wide">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge In 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-charge-in-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Charge Out 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-charge-out-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Insert 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-insert-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Shell Out 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-shell-out-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Shell Out Metal 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-brush-off/brush-off-reload-shell-out-metal-01.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -903,19 +811,13 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-columns">
+        <div class="sound-cols">
           <div class="sound-group">
             <p class="sound-group-title">// Fire &middot; Close</p>
             <div class="sound-grid">
               <div class="sound-item">
                 <span class="sound-item-label">Fire Close 01</span>
                 <audio controls preload="none" src="../assets/audio/art-deco-big-shot/big-shot-fire-close-01.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Close 05</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-big-shot/big-shot-fire-close-05.mp3"></audio>
               </div>
             </div>
           </div>
@@ -926,10 +828,6 @@
               <div class="sound-item">
                 <span class="sound-item-label">Fire Medium 01</span>
                 <audio controls preload="none" src="../assets/audio/art-deco-big-shot/big-shot-fire-medium-01.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Medium 03</span>
-                <audio controls preload="none" src="../assets/audio/art-deco-big-shot/big-shot-fire-medium-03.mp3"></audio>
               </div>
             </div>
           </div>
@@ -976,123 +874,99 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+        <div class="sound-cols">
+          <!-- ============================================================
+               RANDOM RELOAD — plays one start, one mid and one end, picked
+               at random, joined end to end. This is the 27-sequence system
+               described above, working. Script is at the foot of the page.
+               ============================================================ -->
+          <div class="seq" data-seq="mouth-piece-reload">
+            <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
+            <p class="seq-readout" data-seq-readout aria-live="polite">27 possible sequences &mdash; press play to hear one</p>
+          </div>
 
-        <!-- ============================================================
-             RANDOM RELOAD — plays one start, one mid and one end, picked
-             at random, joined end to end. This is the 27-sequence system
-             described above, working. Script is at the foot of the page.
-             ============================================================ -->
-        <div class="seq" data-seq="mouth-piece-reload">
-          <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
-          <p class="seq-readout" data-seq-readout aria-live="polite">27 possible sequences &mdash; press play to hear one</p>
-        </div>
-
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Close</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 02</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 03</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 04</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-04.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 05</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-05.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 06</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-06.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Close</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-close-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Far</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Far 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-far-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Far 02</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-far-02.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Far</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Far 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-fire-far-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- The three reload groups below are the randomising set: any start, any mid and any end can play together, which is where the 27 sequences come from. -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload &middot; Start</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start 02</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start 03</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-03.mp3"></audio>
+          <!-- The three reload groups below are the randomising set: any start, any mid and any end can play together, which is where the 27 sequences come from. -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload &middot; Start</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 02</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-02.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 03</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-start-03.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload &middot; Mid</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Mid 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Mid 02</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Mid 03</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload &middot; Mid</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Mid 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Mid 02</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-02.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Mid 03</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-mid-03.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload &middot; End</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End 02</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End 03</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload &middot; End</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End 02</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-02.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End 03</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-end-03.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload &middot; Shell Casings</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Shell Casings 01</span>
-              <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-shell-casings-01.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload &middot; Shell Casings</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Shell Casings 01</span>
+                <audio controls preload="none" src="../assets/audio/art-deco-pistol/revolver-artdeco-reload-shell-casings-01.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -1125,63 +999,43 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Close</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 03</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 04</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-04.mp3"></audio>
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Close</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Distant</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-distant-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-distant-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 03</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-distant-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Distant</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Distant 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-distant-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Start, mid and end again, the same three-part split as The Mouth Piece -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-start-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Insert Mid 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-insert-mid-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-end.mp3"></audio>
+          <!-- Start, mid and end again, the same three-part split as The Mouth Piece -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Insert Mid 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-insert-mid-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-end.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -1217,91 +1071,57 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Close</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Close 03</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-03.mp3"></audio>
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Close</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Medium Distance</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Medium 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-mid-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Medium 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-mid-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Medium 03</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-mid-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; Distant</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Distant 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-distant-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; Distant</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-distant-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-distant-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire Distant 03</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-fire-distant-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-start.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload In</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-in.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-end.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-start.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload In</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-in.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-reload-end.mp3"></audio>
-            </div>
-          </div>
-        </div>
-
-        <!-- Weapon durability wearing down, and the weapon breaking -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Degrade &amp; Destroy</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Degrade</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-degrade.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Destroy</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-destroy.mp3"></audio>
+          <!-- Weapon durability wearing down, and the weapon breaking -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Degrade &amp; Destroy</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Degrade</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-degrade.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Destroy</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-shotgun/blackmetal-sg-destroy.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -1334,33 +1154,13 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-columns">
+        <div class="sound-cols">
           <div class="sound-group">
             <p class="sound-group-title">// Fire &middot; Close</p>
             <div class="sound-grid">
               <div class="sound-item">
                 <span class="sound-item-label">Fire Close 01</span>
                 <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-close-01.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Close 02</span>
-                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-close-02.mp3"></audio>
-              </div>
-            </div>
-          </div>
-
-          <div class="sound-group">
-            <p class="sound-group-title">// Fire &middot; Medium Distance</p>
-            <div class="sound-grid">
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Medium 01</span>
-                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-mid-01.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Fire Medium 02</span>
-                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-mid-02.mp3"></audio>
               </div>
             </div>
           </div>
@@ -1372,51 +1172,39 @@
                 <span class="sound-item-label">Fire Distant 01</span>
                 <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-distant-01.mp3"></audio>
               </div>
+            </div>
+          </div>
+
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
               <div class="sound-item">
-                <span class="sound-item-label">Fire Distant 02</span>
-                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-fire-distant-02.mp3"></audio>
+                <span class="sound-item-label">Reload Start 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload In 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-in-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-end-01.mp3"></audio>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Reload</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Reload Start 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-start-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload In 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-in-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Reload End 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-reload-end-01.mp3"></audio>
-            </div>
-          </div>
-        </div>
-
-        <!-- Handling sounds — the weapon being picked up off the ground and put down -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Pick Up &amp; Drop</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Pick Up 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-pickup-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Pick Up 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-pickup-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Drop 01</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-drop-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Drop 02</span>
-              <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-drop-02.mp3"></audio>
+          <!-- Handling sounds — the weapon being picked up off the ground and put down -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Pick Up &amp; Drop</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Pick Up 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-pickup-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Drop 01</span>
+                <audio controls preload="none" src="../assets/audio/black-metal-sniper/blackmetal-sn-drop-01.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
@@ -1451,9 +1239,7 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
-
-        <div class="sound-columns">
+        <div class="sound-cols">
           <!-- Runs for as long as the trigger is held -->
           <div class="sound-group">
             <p class="sound-group-title">// Fire Loop</p>
@@ -1472,10 +1258,6 @@
               <div class="sound-item">
                 <span class="sound-item-label">Muzzle Sparks Loop</span>
                 <audio controls loop preload="none" src="../assets/audio/vindertech-pulsar/pulsar-muzzle-sparks-loop.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Muzzle Sparks &middot; Proximity</span>
-                <audio controls loop preload="none" src="../assets/audio/vindertech-pulsar/pulsar-muzzle-sparks-prox-loop.mp3"></audio>
               </div>
             </div>
           </div>
@@ -1519,66 +1301,56 @@
           </div>
         </div>
 
-        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
+        <div class="sound-cols">
+          <!-- ============================================================
+               FIRING BURST — start, the loop twice, then the end landing
+               on the last hit of the second loop. Script at the foot of
+               the page; the timings live in BURST there.
+               ============================================================ -->
+          <div class="seq" data-burst>
+            <button type="button" class="btn btn--cyan" data-burst-play>&#9654;&nbsp; Play a firing burst</button>
+            <p class="seq-readout" data-burst-readout aria-live="polite">Start and ice over the loop &times;2, end on the last hit</p>
+          </div>
 
-        <!-- ============================================================
-             FIRING BURST — start, the loop twice, then the end landing
-             on the last hit of the second loop. Script at the foot of
-             the page; the timings live in BURST there.
-             ============================================================ -->
-        <div class="seq" data-burst>
-          <button type="button" class="btn btn--cyan" data-burst-play>&#9654;&nbsp; Play a firing burst</button>
-          <p class="seq-readout" data-burst-readout aria-live="polite">Start and ice over the loop &times;2, end on the last hit</p>
-        </div>
-
-        <!-- The loop players keep running until paused; use the burst button above to hear them in order -->
-        <div class="sound-group">
-          <p class="sound-group-title">// Firing Loop</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Loop Start</span>
-              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-start-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Loop</span>
-              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Loop End</span>
-              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-end-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Ice Loop</span>
-              <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-ice-loop.mp3"></audio>
+          <!-- The loop players keep running until paused; use the burst button above to hear them in order -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Firing Loop</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Loop Start</span>
+                <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Loop</span>
+                <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Loop End</span>
+                <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-loop-end-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Ice Loop</span>
+                <audio controls loop preload="none" src="../assets/audio/snowball-assault/snowball-ice-loop.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Fire &middot; One Shot</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Fire 01</span>
-              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire 02</span>
-              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fire 03</span>
-              <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire &middot; One Shot</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire 01</span>
+                <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-fire-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Two recordings in each of the three reload slots: 8 sequences -->
-        <div class="seq" data-seq="snowball-reload">
-          <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
-          <p class="seq-readout" data-seq-readout>8 possible sequences &mdash; press play to hear one</p>
-        </div>
+          <!-- Two recordings in each of the three reload slots: 8 sequences -->
+          <div class="seq" data-seq="snowball-reload">
+            <button type="button" class="btn btn--cyan" data-seq-play>&#9654;&nbsp; Play a random reload</button>
+            <p class="seq-readout" data-seq-readout>8 possible sequences &mdash; press play to hear one</p>
+          </div>
 
-        <div class="sound-columns">
           <div class="sound-group">
             <p class="sound-group-title">// Reload &middot; Start</p>
             <div class="sound-grid">
@@ -1627,10 +1399,6 @@
               <div class="sound-item">
                 <span class="sound-item-label">Out of Ammo 01</span>
                 <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-out-of-ammo-01.mp3"></audio>
-              </div>
-              <div class="sound-item">
-                <span class="sound-item-label">Out of Ammo 02</span>
-                <audio controls preload="none" src="../assets/audio/snowball-assault/snowball-out-of-ammo-02.mp3"></audio>
               </div>
             </div>
           </div>

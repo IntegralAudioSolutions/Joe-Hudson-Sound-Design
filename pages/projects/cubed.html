@@ -378,6 +378,15 @@
     @media (max-width: 600px) {
       .sound-grid { grid-template-columns: 1fr; }
     }
+    /* Zapotron sounds in two quiet columns, filled row by row (same idea as pages/weapons.html) */
+    .sound-cols {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-md) var(--space-xl); align-items: start;
+    }
+    .sound-cols .sound-group { margin-bottom: 0; }
+    .sound-cols .sound-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--space-sm); }
+    @media (max-width: 760px) { .sound-cols { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .sound-cols .sound-grid { grid-template-columns: 1fr; } }
     .zap-intro {
       display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
       gap: var(--space-xl); align-items: start; margin-bottom: var(--space-xl);
@@ -538,7 +547,6 @@
           <div class="zap-text">
             <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
             <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
-            <p>Its weakness is that the charged shot takes a long time to build up to maximum damage. In the later levels players are often surrounded by Husks, which makes the weapon much less useful. Ideally it would be dual-use, with a faster single-shot mode to clear hordes of Husks without switching weapon. I suggested this at the time, but it wasn&rsquo;t prioritised.</p>
             <p>Have a listen to the sounds I made for it below.</p>
           </div>
           <figure class="zap-figure">
@@ -549,118 +557,72 @@
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Trigger</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Trigger 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-03.mp3"></audio>
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Trigger</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Trigger 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-trigger-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge Whine</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Whine 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge Whine</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge Whine 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-whine-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Barrel Spin</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Barrel Spin 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Barrel Spin</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Barrel Spin 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-barrel-spin-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Fully Charged — Barrel Spin Loop</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-fully-charged-barrel-spin-loop.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Charge Hit</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Charge Hit 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-03.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Charge Hit</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Charge Hit 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-charge-hit-01.mp3"></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="sound-group">
-          <p class="sound-group-title">// Shot</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 01</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 02</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 03</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <span class="sound-item-label">Shot 04</span>
-              <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-04.mp3"></audio>
+          <div class="sound-group">
+            <p class="sound-group-title">// Shot</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Shot 01</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Shot 02</span>
+                <audio controls preload="none" src="../../assets/audio/zapotron/rifle-amr-electric-shot-02.mp3"></audio>
+              </div>
             </div>
           </div>
         </div>
