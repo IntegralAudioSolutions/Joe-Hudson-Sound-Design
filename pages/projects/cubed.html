@@ -402,6 +402,10 @@
       letter-spacing: 0.08em; padding: 8px 12px;
     }
     @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
+    /* Small square weapon icon beside the intro text */
+    .zap-figure--icon { max-width: 200px; justify-self: end; }
+    .zap-figure--icon img { padding: var(--space-xs); }
+    @media (max-width: 900px) { .zap-figure--icon { justify-self: center; width: 100%; max-width: 240px; margin: 0 auto; } }
 </style>
 </head>
 
@@ -549,9 +553,9 @@
             <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
             <p>Have a listen to the sounds I made for it below.</p>
           </div>
-          <figure class="zap-figure">
-            <img src="../../assets/images/weapons/zapotron-promo.webp" alt="The Zapotron weapon from Fortnite Save the World" width="1200" height="636" loading="lazy" />
-            <figcaption>// Zapotron &nbsp;&middot;&nbsp; Fortnite Save the World</figcaption>
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../../assets/images/weapons/Zapotron_-_Weapon_-_Fortnite.webp" alt="The Zapotron, a rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// Zapotron</figcaption>
           </figure>
         </div>
 
