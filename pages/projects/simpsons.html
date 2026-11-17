@@ -412,10 +412,10 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    /* Modifier: a still image that is not floated. It clears the video above
-       and sits under the text, left aligned, so a tall image does not
-       squeeze the copy into a narrow column. */
-    .poi-video--still { float: none; clear: both; width: 100%; max-width: 520px; margin: var(--space-md) 0 0 0; }
+    /* Modifier: a small still image. It floats left under the copy, beside the
+       video, so it fills the gap rather than dropping below the video. On
+       phones the rule further down makes it full width. */
+    .poi-video--still { float: left; clear: none; width: 100%; max-width: 260px; margin: var(--space-md) var(--space-lg) var(--space-md) 0; }
     /* Still image inside a breakdown box: fills the box width and opens full size */
     .poi-video img { display: block; width: 100%; height: auto; }
     .poi-video a { display: block; }
