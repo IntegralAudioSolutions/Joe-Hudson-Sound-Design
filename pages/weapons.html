@@ -2196,7 +2196,7 @@
 
         Promise.all(names.map(function (n) { return load(config.folder, n); })).then(function (loaded) {
           var gain = ctx.createGain();
-          gain.gain.value = 0.6;                 // matches the players' default volume
+          gain.gain.value = 0.5;                 // matches the players' default volume
           gain.connect(ctx.destination);
 
           var when = ctx.currentTime + 0.05;     // small lead-in so scheduling is reliable
@@ -2276,7 +2276,7 @@
 
         Promise.all(names.map(function (n) { return load(BURST.folder, n); })).then(function () {
           var gain = ctx.createGain();
-          gain.gain.value = 0.6;
+          gain.gain.value = 0.5;
           gain.connect(ctx.destination);
 
           function play(name, when, offset, duration, loop) {
@@ -2322,7 +2322,7 @@
   <!-- Default playback volume for the Sound Design Examples players -->
   <script>
     document.querySelectorAll('.sound-item audio').forEach(function (a) {
-      a.volume = 0.6;
+      a.volume = 0.5;
     });
   </script>
 
