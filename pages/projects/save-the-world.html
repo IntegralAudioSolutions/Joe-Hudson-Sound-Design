@@ -402,9 +402,14 @@
     }
     @media (max-width: 900px) { .zap-intro { grid-template-columns: 1fr; } .zap-figure { order: -1; } }
     /* Small square weapon icon beside the intro text (e.g. Shark Attack!) */
-    .zap-figure--icon { max-width: 200px; justify-self: end; }
+    /* Icon on the left with the copy beside it, matching the weapons page */
+    .zap-intro--icon { grid-template-columns: 160px minmax(0, 1fr); gap: var(--space-xl); }
+    .zap-figure--icon { max-width: 160px; justify-self: start; }
     .zap-figure--icon img { padding: var(--space-xs); }
-    @media (max-width: 900px) { .zap-figure--icon { justify-self: center; width: 100%; max-width: 240px; margin: 0 auto; } }
+    @media (max-width: 900px) {
+      .zap-intro--icon { grid-template-columns: 1fr; }
+      .zap-figure--icon { justify-self: center; width: 100%; max-width: 240px; margin: 0 auto; }
+    }
     /* Environment gallery */
     .env-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-md); }
     .env-figure { display: block; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
@@ -555,16 +560,16 @@
         </div>
 
 
-        <div class="zap-intro">
+        <div class="zap-intro zap-intro--icon">
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../../assets/images/weapons/Zapotron_-_Weapon_-_Fortnite.webp" alt="The Zapotron, a rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// Zapotron</figcaption>
+          </figure>
           <div class="zap-text">
             <p>In 2021 I was asked to update the sounds for the Zapotron. I was delighted to take on the redesign of such an iconic weapon, working within the existing implementation: the one-shots, loops and release sounds that build up to a charged shot.</p>
             <p>The Zapotron is an important weapon in Save the World, where it helps players take on end-game enemies such as Smashers.</p>
             <p>Have a listen to the sounds I made for it below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../../assets/images/weapons/Zapotron_-_Weapon_-_Fortnite.webp" alt="The Zapotron, a rifle from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Zapotron</figcaption>
-          </figure>
         </div>
 
         <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; originals held as 16-bit WAV</p>
@@ -653,16 +658,16 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="zap-intro">
+        <div class="zap-intro zap-intro--icon">
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../../assets/images/weapons/Shark_Attack_-_Schematic_-_Save_the_World.webp" alt="Shark Attack!, a launcher from Fortnite Save the World" width="512" height="512" loading="lazy" />
+            <figcaption>// Shark Attack!</figcaption>
+          </figure>
           <div class="zap-text">
             <p>Shark Attack! is a launcher in Fortnite Save the World with a comedy style.</p>
             <p>This one was a challenge, because the squeak had to cut through the explosion to help sell the comedy of the weapon. The sound set covers the shot, the explosion, the bounce on land and on water, and a reload in start and mid stages with the squeak.</p>
             <p>Have a listen below.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../../assets/images/weapons/Shark_Attack_-_Schematic_-_Save_the_World.webp" alt="Shark Attack!, a launcher from Fortnite Save the World" width="512" height="512" loading="lazy" />
-            <figcaption>// Shark Attack!</figcaption>
-          </figure>
         </div>
 
         <div class="sound-cols">
@@ -735,16 +740,16 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="zap-intro">
+        <div class="zap-intro zap-intro--icon">
+          <figure class="zap-figure zap-figure--icon">
+          <img src="../../assets/images/weapons/Vacuum_Tube_Bow_-_Schematic_-_Save_the_World.webp" alt="The Vacuum Tube Bow, a bow from Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Vacuum Tube Bow</figcaption>
+        </figure>
           <div class="zap-text">
             <p>The Vacuum Tube Bow is a bow in Fortnite Save the World that deals area of effect damage. Its passive makes chain lightning strike up to six monsters when it hits one.</p>
             <p>The sound set covers the draw and a tension loop, shots at low and full tension, the projectile’s explosion and impact, the chain lightning, and the reload, equip, degrade and destroy sounds.</p>
             <p>Have a listen below. The tension loop repeats until you pause it.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-          <img src="../../assets/images/weapons/Vacuum_Tube_Bow_-_Schematic_-_Save_the_World.webp" alt="The Vacuum Tube Bow, a bow from Fortnite Save the World" width="512" height="512" loading="lazy" />
-          <figcaption>// Vacuum Tube Bow</figcaption>
-        </figure>
         </div>
 
         <div class="sound-cols">
@@ -841,16 +846,16 @@
           <div class="section-line"></div>
         </div>
 
-        <div class="zap-intro">
+        <div class="zap-intro zap-intro--icon">
+          <figure class="zap-figure zap-figure--icon">
+            <img src="../../assets/images/weapons/Toy_Teddy_-_Save_the_World.webp" alt="T.E.D.D.Y., a robot teddy bear with a cannon on each arm, from Fortnite Save the World" width="1174" height="972" loading="lazy" />
+            <figcaption>// T.E.D.D.Y.</figcaption>
+          </figure>
           <div class="zap-text">
             <p>T.E.D.D.Y. is a perk you can pop to defend yourself from swarms of husks, for when you absolutely positively have to kill every husk in the room. Accept no substitute.</p>
             <p>The sound set covers the malfunctioning fire as a start, a loop and a tail, plus a malfunction loop and an area zap with its impact.</p>
             <p>Have a listen below. The fire loop and the malfunction loop repeat until you pause them.</p>
           </div>
-          <figure class="zap-figure zap-figure--icon">
-            <img src="../../assets/images/weapons/Toy_Teddy_-_Save_the_World.webp" alt="T.E.D.D.Y., a robot teddy bear with a cannon on each arm, from Fortnite Save the World" width="1174" height="972" loading="lazy" />
-            <figcaption>// T.E.D.D.Y.</figcaption>
-          </figure>
         </div>
 
         <div class="sound-cols">
