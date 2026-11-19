@@ -449,6 +449,8 @@
 
     /* Equal visual space above and below the Get in Touch / All Credits buttons (bottom trimmed to allow for the line-height above) */
     .detail-block .cta { padding: var(--space-xl) 0 calc(var(--space-xl) - 12px); }
+    /* The ribbon sits further away above 600px, so trim the bottom padding to keep both gaps equal */
+    @media (min-width: 601px) { .detail-block .cta { padding-bottom: calc(var(--space-xl) - 28px); } }
 
     .poi-block {
       width: 100%;
