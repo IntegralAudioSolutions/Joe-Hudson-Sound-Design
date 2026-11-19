@@ -907,58 +907,10 @@
       </section>
 
       <!-- Longer-form approach notes, below the locations -->
-      <section class="detail-block" aria-label="Approach and pipeline">
+      <section class="detail-block" aria-label="Approach">
         <p class="project-section-label">// Approach</p>
 
             <p class="project-detail-text">Owning a location means deciding what it sounds like when nothing is happening. New areas also have to join Fortnite's continuous island without a hard edge where one ambience stops and the next starts.</p>
-
-            <p class="project-section-label">// Tools &amp; Pipeline</p>
-
-        <p class="project-detail-text">Built in Unreal from hand-placed emitters and audio volumes, nothing generated.</p>
-
-        <!-- ── AMBIENCE LAYER STACK ── -->
-        <div class="layer-stack">
-          <p class="layer-caption">// Ambience &nbsp;&middot;&nbsp; Layer Stack</p>
-
-          <div class="layer-row">
-            <span class="layer-name">01 &nbsp;Ambient Bed</span>
-            <span class="layer-desc">Carries the overall character of an area. Broad, and featureless by design. If you can pick out an individual sound in the bed, it's doing too much.</span>
-          </div>
-
-          <div class="layer-row layer-row--emitters">
-            <span class="layer-name">02 &nbsp;Point Emitters</span>
-            <span class="layer-desc">Where the actual work happens. A generator behind a wall, wind through a structure, something creaking at the top of a tower. Each at a real position with its own attenuation curve.</span>
-          </div>
-
-          <div class="layer-row layer-row--volumes">
-            <span class="layer-name">03 &nbsp;Audio Volumes</span>
-            <span class="layer-desc">Interiors and transitions. Stepping inside should close the world down without a noticeable switch, so boundaries get pulled and crossfades stretched until the edge can't be caught.</span>
-          </div>
-        </div>
-
-        <p class="project-detail-text">Emitters are what separate a place from a texture. Each one sits at a real position with its own falloff, so what you hear changes because you're nearer one thing and further from another. A looping stereo bed sounds the same standing still as running, and players notice.</p>
-
-        <p class="project-subhead">Most of it is walking</p>
-
-        <p class="project-detail-text">The real work is iteration in engine: place, play, walk it, move it, walk it again. You can't judge an ambient mix from a DAW, because you're mixing a player's path through a space, not a piece of audio.</p>
-
-        <p class="project-detail-text">So I walk the boundaries deliberately, looking for joins, and approach each location from every direction it can be approached from, including the daft ones. On a map this size somebody will land on the roof and drop straight in through the middle.</p>
-
-        <p class="project-subhead">What we were allowed to build from</p>
-
-        <p class="project-detail-text">The rule on this season was that everything had to come from the original source content. No swapping in a library recording because it was quicker, no building a hum from a synth. If it ended up in the game, it started life in the material we were given.</p>
-
-        <p class="project-detail-text">That's a tighter brief than it sounds. The source is decades old in places and was mastered for cinema, not a game engine, so a lot of it struggles to compete with everything else and still read through a phone speaker.</p>
-
-        <p class="project-detail-text">So cleaning and polishing was allowed, and necessary. I used denoising and limiting to get the recordings behaving, then spectral enhancement in Ozone 12 to brighten the top end. A recording can be perfectly good and still sit dull in the engine, and a bit of top end helps it translate from a full setup down to a handset.</p>
-
-        <p class="project-detail-text">Editing gave us more room. We could pitch and filter the source material to generate new tones, which is how you build out the technology of a space that has no canonical sound of its own. Everything is derived from something that already existed, so it still carries the character of where it came from and belongs in the universe.</p>
-
-        <p class="project-subhead">Beds and transitions</p>
-
-        <p class="project-detail-text">From the polished material we built quad and stereo ambient beds covering every area of each location: quad where the space needed to wrap around the player, stereo where it didn't and the budget was better spent elsewhere.</p>
-
-        <p class="project-detail-text">Then the transitions between interior and exterior, where a new area either joins the island or doesn't. These places sit inside biome ambience established seasons earlier, so the beds had to be mixed against what was already there, not over the top of it. The aim was for stepping in or out of a structure to feel like a change in the space, not the audio.</p>
 
           <div class="cta" style="padding:0">
         <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
