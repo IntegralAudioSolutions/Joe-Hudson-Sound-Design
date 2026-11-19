@@ -447,6 +447,9 @@
       margin-top: var(--space-xl);
     }
 
+    /* Equal visual space above and below the Get in Touch / All Credits buttons (bottom trimmed to allow for the line-height above) */
+    .detail-block .cta { padding: var(--space-xl) 0 calc(var(--space-xl) - 12px); }
+
     .poi-block {
       width: 100%;
       border-top: 1px solid var(--color-gold-border);
@@ -907,7 +910,7 @@
 
             <p class="project-detail-text">Owning a location means deciding what it sounds like when nothing is happening. New areas also have to join Fortnite's continuous island without a hard edge where one ambience stops and the next starts.</p>
 
-          <div class="cta" style="padding:0">
+          <div class="cta">
         <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
         <a href="../work.html"    class="btn btn--ghost">All Credits &rarr;</a>
           </div>
