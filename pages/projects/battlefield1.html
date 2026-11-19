@@ -350,6 +350,7 @@
 
     /* Keeps the extra section's prose to a readable line length */
     .project-extra .project-detail-text { max-width: 780px; }
+    .project-extra .project-keyart { max-width: 780px; }
 
     /* Spacing between consecutive paragraphs in a detail block */
     .project-detail-text + .project-detail-text { margin-top: var(--space-md); }
@@ -474,9 +475,23 @@
               </div>
             </div>
 
-            <!-- Keyart sits here — between the video and the separator line -->
+            <!-- Battlepack opening video sits here — between the main video and the separator line -->
             <div class="project-top-keyart">
-              <img class="project-keyart" src="../../assets/images/bf1-keyart.png" alt="Battlefield 1 — Joe Hudson" loading="lazy" />
+              <div class="video-wrapper">
+                <!--
+                  Premium Battlepack openings. Chosen because the capture has
+                  no commentary over it, so the sound design is actually
+                  audible rather than buried under a voiceover.
+                -->
+                <iframe
+                  src="https://www.youtube.com/embed/kF9qtJVz9KM"
+                  title="Battlefield 1 — Premium Battlepack openings"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  loading="lazy"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <p class="video-caption">// Premium Battlepack openings &nbsp;&middot;&nbsp; Game capture courtesy of MaXxGaming</p>
             </div>
           </div>
 
@@ -522,21 +537,8 @@
 
         <p class="project-detail-text">It's a different discipline from dialogue editorial, and the job there is timing and weight more than anything else. Every beat is locked to an animation that plays identically every time, so there's no room to be approximate about where something lands. The player is also going to trigger the whole thing hundreds of times across the life of the game, which sets the real constraint. It has to hit hard enough to feel like a reward on the first open and still be something you don't mind hearing on the two hundredth. The thump is the one that decides it. Sell the mass without letting the low end smear into something that wears you down.</p>
 
-        <div class="video-wrapper">
-          <!--
-            Premium Battlepack openings. Chosen because the capture has
-            no commentary over it, so the sound design is actually
-            audible rather than buried under a voiceover.
-          -->
-          <iframe
-            src="https://www.youtube.com/embed/kF9qtJVz9KM"
-            title="Battlefield 1 — Premium Battlepack openings"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            loading="lazy"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Premium Battlepack openings &nbsp;&middot;&nbsp; Game capture courtesy of MaXxGaming</p>
+        <img class="project-keyart" src="../../assets/images/bf1-keyart.png" alt="Battlefield 1 key art" loading="lazy" />
+        <p class="video-caption">// Battlefield 1 &nbsp;&middot;&nbsp; Key art</p>
 
       </section>
 
