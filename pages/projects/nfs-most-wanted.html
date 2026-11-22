@@ -381,24 +381,30 @@
     .sound-item:has(.sound-item-icon) .sound-item-label { align-self: end; }
     .sound-item:has(.sound-item-icon) audio { align-self: start; min-width: 0; }
 
-    /* Track feature: large map with the two corner views underneath */
-    .track-feature { padding: var(--space-lg) 0 var(--space-xl); }
-    .track-feature figure { margin: 0; }
-    .track-feature img {
+    /* Zig-zag layout: track images alternate left and right of the players */
+    .zig-row {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-lg);
+      align-items: center;
+      margin-bottom: var(--space-lg);
+    }
+    .zig-row--flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .zig-row--flip .zig-fig { order: 2; }
+    .zig-fig { margin: 0; }
+    .zig-fig img {
       display: block; width: 100%; height: auto;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 2px;
     }
-    .track-feature figcaption {
+    .zig-fig figcaption {
       font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
       letter-spacing: 0.08em; margin-top: 8px;
     }
-    .track-corners {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--space-md); margin-top: var(--space-md);
-    }
-    @media (max-width: 600px) {
-      .track-corners { grid-template-columns: 1fr; }
+    .zig-players { display: flex; flex-direction: column; gap: var(--space-md); }
+    @media (max-width: 800px) {
+      .zig-row, .zig-row--flip { grid-template-columns: 1fr; }
+      .zig-row--flip .zig-fig { order: 0; }
     }
     /* Responsive */
     @media (max-width: 900px) {
@@ -537,31 +543,6 @@
     
       <!-- Sequential navigation through the full credit list, newest to oldest -->
       <!-- ============================================================
-           THE TRACK — top-down map of the Top Gear test track, then the
-           two corner views.
-           ============================================================ -->
-      <section class="track-feature" aria-label="The Top Gear test track">
-        <div class="section-header">
-          <h2 class="section-tag">The Track</h2>
-          <div class="section-line"></div>
-        </div>
-        <figure>
-          <img src="../../assets/images/nfs-most-wanted/top-gear-track-map.jpg" alt="Top-down map of the Top Gear test track and rally track" width="1600" height="900" loading="lazy" decoding="async" />
-          <figcaption>// Top Gear test track and rally track, from above</figcaption>
-        </figure>
-        <div class="track-corners">
-          <figure>
-            <img src="../../assets/images/nfs-most-wanted/track-corner.jpg" alt="A corner of the Top Gear test track" width="1126" height="633" loading="lazy" decoding="async" />
-            <figcaption>// A corner on the test track</figcaption>
-          </figure>
-          <figure>
-            <img src="../../assets/images/nfs-most-wanted/track-corner-layout.jpg" alt="The same corner with its racing line drawn on" width="890" height="421" loading="lazy" decoding="async" />
-            <figcaption>// The corner and its racing line</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ============================================================
            SOUND DESIGN EXAMPLES — exterior Lexus LFA recordings from the
            Top Gear track day. Exterior passes only: the in-car recordings
            are not for public release.
@@ -576,58 +557,80 @@
 
         <div class="sound-group">
           <p class="sound-group-title">// Lexus LFA — Exterior Passes &amp; Manoeuvres</p>
-          <div class="sound-grid">
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/harbour.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Start Idle Revs By Fast Away 02</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-start-idle-revs-by-fast-away-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/track.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Accel By Medium 06</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-medium-06.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/front.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Accel By Fast 03</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/tunnel.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Accel By Fast Horn</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-horn.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/profile.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Accel By Aggressive Fast 03</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-aggressive-fast-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/track.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Passby Fast High RPM</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-passby-fast-high-rpm.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 02</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-02.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 03</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-03.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/profile.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Cornering Maneuvers Slow</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-cornering-maneuvers-slow.mp3"></audio>
-            </div>
-            <div class="sound-item">
-              <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
-              <span class="sound-item-label">LEXUS LFA — Hard In Decel Skid Burnout Away Fast</span>
-              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-hard-in-decel-skid-burnout-away-fast.mp3"></audio>
-            </div>
+        <div class="zig-row">
+          <figure class="zig-fig">
+            <img src="../../assets/images/nfs-most-wanted/top-gear-track-map.jpg" alt="Top-down map of the Top Gear test track and rally track" width="1600" height="900" loading="lazy" decoding="async" />
+            <figcaption>// Top Gear test track and rally track, from above</figcaption>
+          </figure>
+          <div class="zig-players">
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/harbour.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Start Idle Revs By Fast Away 02</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-start-idle-revs-by-fast-away-02.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/track.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Accel By Medium 06</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-medium-06.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/front.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Accel By Fast 03</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-03.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/tunnel.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Accel By Fast Horn</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-horn.mp3"></audio>
+                </div>
           </div>
+        </div>
+        <div class="zig-row zig-row--flip">
+          <figure class="zig-fig">
+            <img src="../../assets/images/nfs-most-wanted/track-corner.jpg" alt="A corner of the Top Gear test track" width="1126" height="633" loading="lazy" decoding="async" />
+            <figcaption>// A corner on the test track</figcaption>
+          </figure>
+          <div class="zig-players">
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/profile.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Accel By Aggressive Fast 03</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-aggressive-fast-03.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/track.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Passby Fast High RPM</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-passby-fast-high-rpm.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/profile.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Cornering Maneuvers Slow</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-cornering-maneuvers-slow.mp3"></audio>
+                </div>
+          </div>
+        </div>
+        <div class="zig-row">
+          <figure class="zig-fig">
+            <img src="../../assets/images/nfs-most-wanted/track-corner-layout.jpg" alt="The same corner with its racing line drawn on" width="890" height="421" loading="lazy" decoding="async" />
+            <figcaption>// The corner and its racing line</figcaption>
+          </figure>
+          <div class="zig-players">
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 02</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-02.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 03</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-03.mp3"></audio>
+                </div>
+                <div class="sound-item">
+                  <img class="sound-item-icon" src="../../assets/images/nfs-most-wanted/icons/drift.webp" alt="" width="56" height="56" loading="lazy" decoding="async" />
+                  <span class="sound-item-label">LEXUS LFA — Hard In Decel Skid Burnout Away Fast</span>
+                  <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-hard-in-decel-skid-burnout-away-fast.mp3"></audio>
+                </div>
+          </div>
+        </div>
         </div>
       </section>
 
