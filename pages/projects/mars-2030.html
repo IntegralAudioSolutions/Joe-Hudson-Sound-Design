@@ -331,6 +331,8 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    .video-reference { padding: var(--space-lg) 0 var(--space-xl); }
+    .video-reference .video-caption { margin-top: 8px; }
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -451,13 +453,14 @@
 
           <div>
             <p class="project-section-label">// Scope &amp; Responsibilities</p>
-            <p class="project-detail-text">Edited the recordings used for the MMSEV — the Multi-Mission Space Exploration Vehicle players drive across the Martian surface, modelled on an actual NASA rover design. Implementation into the build was handled by another member of the team; the delivered cuts went straight in first time, with no further iteration needed.</p>
+            <p class="project-detail-text">Edited the recordings used for the MMSEV — the Multi-Mission Space Exploration Vehicle players drive across the Martian surface, modelled on an actual NASA rover design.</p>
+            <p class="project-detail-text">I was given the raw MMSEV recordings from NASA&rsquo;s testing site. From those I made layered composites of the engine audio, designing layers where they were needed, smoothed them out with pitch processing and looped them, ready for implementation.</p>
             <p class="project-detail-text">Mars 2030 drew high-profile attention early on: Apple co-founder Steve Wozniak demoed the experience live on stage at NVIDIA's GTC 2016, running on NVIDIA VRWorks.</p>
           </div>
 
           <div>
             <p class="project-section-label">// Tools &amp; Pipeline</p>
-            <p class="project-detail-text">Tools and pipeline details to be added.</p>
+            <p class="project-detail-text">The finished loops were handed to another technical sound designer, who implemented them in Wwise and triggered them from Blueprint. The delivered cuts went in first time, with no further iteration needed.</p>
           </div>
 
           <div class="cta" style="padding:0">
@@ -470,6 +473,20 @@
       </div>
 
       <!-- Sequential navigation through the full credit list, newest to oldest -->
+      <!-- ============================================================
+           VIDEO REFERENCE — second video, further down the page.
+           ============================================================ -->
+      <section class="video-reference" aria-label="Video reference">
+        <div class="section-header">
+          <h2 class="section-tag">Video Reference</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/_h8Tqaxel7s" title="Mars 2030 — Video reference" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="video-caption">// Mars 2030 &nbsp;&middot;&nbsp; Video reference</p>
+      </section>
+
       <nav class="projnav" aria-label="Credit navigation">
         <a class="projnav-link projnav-prev" href="paragon.html">
           <span class="projnav-dir">&larr; Newer credit</span>
