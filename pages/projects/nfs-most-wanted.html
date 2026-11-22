@@ -332,6 +332,37 @@
       flex-shrink: 0;
     }
     .ribbon-img:hover { filter: saturate(1.0) brightness(1.0); }
+    /* Sound design showcase — grouped audio examples, native <audio> controls */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-xl); }
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-md);
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 6px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 10px 12px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      .sound-grid { grid-template-columns: 1fr; }
+    }
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -470,6 +501,66 @@
 
     
       <!-- Sequential navigation through the full credit list, newest to oldest -->
+      <!-- ============================================================
+           SOUND DESIGN EXAMPLES — exterior Lexus LFA recordings from the
+           Top Gear track day. Exterior passes only: the in-car recordings
+           are not for public release.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Lexus LFA recordings">
+        <div class="section-header">
+          <h2 class="section-tag">Sound Design Examples</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <p class="sound-note">// Streamed here as compressed MP3 previews &nbsp;&middot;&nbsp; exterior recordings only</p>
+
+        <div class="sound-group">
+          <p class="sound-group-title">// Lexus LFA — Exterior Passes &amp; Manoeuvres</p>
+          <div class="sound-grid">
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Start Idle Revs By Fast Away 02</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-start-idle-revs-by-fast-away-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Accel By Medium 06</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-medium-06.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Accel By Fast 03</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Accel By Fast Horn</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-fast-horn.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Accel By Aggressive Fast 03</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-accel-by-aggressive-fast-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Passby Fast High RPM</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-passby-fast-high-rpm.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 02</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-02.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Fast Downshift In Drift Around Corner 03</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-fast-downshift-in-drift-around-corner-03.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Cornering Maneuvers Slow</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-cornering-maneuvers-slow.mp3"></audio>
+            </div>
+            <div class="sound-item">
+              <span class="sound-item-label">LEXUS LFA — Hard In Decel Skid Burnout Away Fast</span>
+              <audio controls preload="none" src="../../assets/audio/nfs-most-wanted/lexus-lfa-hard-in-decel-skid-burnout-away-fast.mp3"></audio>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <nav class="projnav" aria-label="Credit navigation">
         <a class="projnav-link projnav-prev" href="mars-2030.html">
           <span class="projnav-dir">&larr; Newer credit</span>
@@ -510,6 +601,13 @@
   </footer>
 
   <script src="../../script.js"></script>
+
+  <!-- Default playback volume for the Sound Design Examples players (50%) -->
+  <script>
+    document.querySelectorAll('.sound-item audio').forEach(function (a) {
+      a.volume = 0.5;
+    });
+  </script>
 
   <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
