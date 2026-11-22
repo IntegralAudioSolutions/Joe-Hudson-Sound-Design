@@ -269,4 +269,28 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://joehudson.co.uk/pages/projects/primal.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://joehudson.co.uk/pages/projects/splash.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://joehudson.co.uk/pages/projects/top-secret.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://joehudson.co.uk/pages/projects/nfs-most-wanted.html</loc>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
