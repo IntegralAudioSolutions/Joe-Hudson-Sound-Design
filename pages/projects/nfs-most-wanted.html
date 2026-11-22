@@ -268,6 +268,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .project-top-keyart { width: 100%; }
+    .project-top-row { grid-template-columns: 1fr; }
     .project-text { display: flex; flex-direction: column; gap: var(--space-lg); }
     .project-meta {
       display: flex; flex-direction: column; gap: 6px;
@@ -406,6 +407,17 @@
       .zig-row, .zig-row--flip { grid-template-columns: 1fr; }
       .zig-row--flip .zig-fig { order: 0; }
     }
+    /* Credit details sit top right of the page header, title group on the left */
+    .page-header-content--split {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: var(--space-xl);
+      align-items: start;
+    }
+    .page-header-content--split .project-meta { padding-top: 2px; }
+    @media (max-width: 800px) {
+      .page-header-content--split { grid-template-columns: 1fr; row-gap: var(--space-md); }
+    }
     /* Responsive */
     @media (max-width: 900px) {
       .project-body-grid { grid-template-columns: 1fr; }
@@ -453,10 +465,30 @@
       <div class="lbar"></div>
       <div class="lelbow"></div>
     </aside>
-    <div class="page-header-content">
-      <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Criterion Games / Electronic Arts</p>
-      <h1 class="page-title"><strong>Need for Speed: Most Wanted</strong></h1>
-      <p class="page-subtitle">Freelance Sound Recordist</p>
+    <div class="page-header-content page-header-content--split">
+      <div class="page-header-titles">
+        <p class="page-eyebrow">// Project Detail &nbsp;&middot;&nbsp; Criterion Games / Electronic Arts</p>
+        <h1 class="page-title"><strong>Need for Speed: Most Wanted</strong></h1>
+        <p class="page-subtitle">Freelance Sound Recordist</p>
+      </div>
+          <div class="project-meta">
+            <div class="meta-row">
+              <span class="meta-label">Studio</span>
+              <span class="meta-value">Criterion Games / Electronic Arts</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Role</span>
+              <span class="meta-value">Freelance Sound Recordist</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Platform</span>
+              <span class="meta-value">PC · Console</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Year</span>
+              <span class="meta-value">2012</span>
+            </div>
+          </div>
     </div>
   </section>
 
@@ -496,30 +528,8 @@
                 <span class="breadcrumb-current" aria-current="page">Need for Speed: Most Wanted</span>
               </nav>
 
-              <div class="project-meta">
-                <div class="meta-row">
-                  <span class="meta-label">Studio</span>
-                  <span class="meta-value">Criterion Games / Electronic Arts</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Role</span>
-                  <span class="meta-value">Freelance Sound Recordist</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Platform</span>
-                  <span class="meta-value">PC · Console</span>
-                </div>
-                <div class="meta-row">
-                  <span class="meta-label">Year</span>
-                  <span class="meta-value">2012</span>
-                </div>
-              </div>
             </div>
 
-            <!-- Keyart sits here — between the video and the separator line -->
-            <div class="project-top-keyart">
-              <img class="project-keyart" src="../../assets/images/nfs-most-wanted-keyart.jpg" alt="Need for Speed: Most Wanted — Joe Hudson" loading="lazy" style="object-position: top;" />
-            </div>
           </div>
 
           <p class="project-desc">Freelance sound recordist on Need for Speed: Most Wanted, Criterion's open-world racer. One day on the Top Gear test track recording the Lexus LFA, plus standard road cars for traffic passes and idles.</p>
