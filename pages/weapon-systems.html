@@ -370,18 +370,6 @@
       background: #0a0c12;
     }
 
-    /*
-      Tall narrow panel crops (Members list etc.) — held at a readable
-      width and centred. Not floated: it sits between two wide figures,
-      so there is no body text alongside it to wrap.
-    */
-    .post-figure--narrow {
-      width: 300px;
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     .post-figure figcaption {
       margin-top: 8px;
       font-family: var(--font-mono);
@@ -535,18 +523,26 @@
 
           <p><strong>MS_WD_Fire_Master</strong> is the opposite approach: one master graph that owns every layer, wrapped as a MetaSound Source preset so each weapon is just a different set of inputs. No duplicated logic, no four-way drift.</p>
 
-        <figure class="post-figure">
-          <img src="../assets/images/weapon-systems/weapon-test-level.webp"
-               alt="First-person view of a suppressed rifle in a greybox Unreal Engine test level, open sky above and flat tiled ground"
-               loading="lazy" width="1600" height="896" />
-          <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation</figcaption>
-        </figure>
+        <!--
+          Autoplaying loop of the weapon firing in the greybox test level.
 
-        <figure class="post-figure post-figure--narrow">
-          <img src="../assets/images/weapon-systems/ms-wd-fire-master-inputs.webp"
-               alt="The Members panel of MS_WD_Fire_Master listing every promoted input, grouped by close, mid, far and area environment, with stereo outputs and the UE.Attenuation and UE.Source.OneShot interfaces"
-               loading="lazy" width="388" height="1105" />
-          <figcaption>// Every input promoted on the master graph. Two interfaces do the plumbing — UE.Attenuation supplies Distance, UE.Source.OneShot supplies On Finished</figcaption>
+          Three bits of the URL are doing specific jobs:
+            mute=1      Browsers block autoplay with sound. Remove this and
+                        the video will not start on its own at all.
+            loop=1      On its own this does nothing for a single video —
+                        YouTube also needs playlist= set to the same video
+                        id, which is why the id appears twice. Not a typo.
+            controls=1  Leaves the viewer able to unmute, pause or scrub.
+        -->
+        <figure class="post-media">
+          <div class="post-media-box">
+            <iframe src="https://www.youtube.com/embed/SCQXQxTL2_A?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=SCQXQxTL2_A&amp;controls=1&amp;rel=0&amp;playsinline=1&amp;modestbranding=1"
+                    title="MS_WD_Fire_Master firing in the greybox test level"
+                    loading="lazy"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+          <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation. Unmute to hear it</figcaption>
         </figure>
 
         <figure class="post-figure">
