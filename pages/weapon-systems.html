@@ -524,25 +524,30 @@
           <p><strong>MS_WD_Fire_Master</strong> is the opposite approach: one master graph that owns every layer, wrapped as a MetaSound Source preset so each weapon is just a different set of inputs. No duplicated logic, no four-way drift.</p>
 
         <!--
-          Autoplaying loop of the weapon firing in the greybox test level.
+          The weapon firing in the greybox test level.
 
-          Three bits of the URL are doing specific jobs:
-            mute=1      Browsers block autoplay with sound. Remove this and
-                        the video will not start on its own at all.
-            loop=1      On its own this does nothing for a single video —
-                        YouTube also needs playlist= set to the same video
-                        id, which is why the id appears twice. Not a typo.
-            controls=1  Leaves the viewer able to unmute, pause or scrub.
+          Deliberately NOT autoplaying. Browsers only permit autoplay when a
+          video is muted, and a silent weapon clip defeats the point, so this
+          waits for a click and then plays with sound.
+
+          What the URL parameters do:
+            loop=1      Repeats until the viewer stops it. On its own this
+                        does nothing for a single video — YouTube also needs
+                        playlist= set to the same video id, which is why the
+                        id appears twice below. Not a typo.
+            controls=1  Play, pause, scrub and volume stay available.
+            rel=0       Keeps suggested videos at the end to this channel
+                        rather than sending viewers off to someone else's.
         -->
         <figure class="post-media">
           <div class="post-media-box">
-            <iframe src="https://www.youtube.com/embed/SCQXQxTL2_A?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=SCQXQxTL2_A&amp;controls=1&amp;rel=0&amp;playsinline=1&amp;modestbranding=1"
+            <iframe src="https://www.youtube.com/embed/SCQXQxTL2_A?loop=1&amp;playlist=SCQXQxTL2_A&amp;controls=1&amp;rel=0&amp;playsinline=1&amp;modestbranding=1"
                     title="MS_WD_Fire_Master firing in the greybox test level"
                     loading="lazy"
-                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allow="encrypted-media; picture-in-picture; fullscreen"
                     allowfullscreen></iframe>
           </div>
-          <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation. Unmute to hear it</figcaption>
+          <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation. Press play for sound</figcaption>
         </figure>
 
         <figure class="post-figure">
