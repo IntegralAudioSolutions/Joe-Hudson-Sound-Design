@@ -370,6 +370,18 @@
       background: #0a0c12;
     }
 
+    /*
+      Tall narrow panel crops (Members list etc.) — held at a readable
+      width and centred. Not floated: it sits between two wide figures,
+      so there is no body text alongside it to wrap.
+    */
+    .post-figure--narrow {
+      width: 300px;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .post-figure figcaption {
       margin-top: 8px;
       font-family: var(--font-mono);
@@ -389,6 +401,7 @@
     /* ── RESPONSIVE ── */
 
     @media (max-width: 600px) {
+
       .page-header { grid-template-columns: 1fr; }
       .page-header-sidebar { display: none; }
       .page-header-content { padding: var(--space-lg); }
@@ -529,11 +542,18 @@
           <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation</figcaption>
         </figure>
 
+        <figure class="post-figure post-figure--narrow">
+          <img src="../assets/images/weapon-systems/ms-wd-fire-master-inputs.webp"
+               alt="The Members panel of MS_WD_Fire_Master listing every promoted input, grouped by close, mid, far and area environment, with stereo outputs and the UE.Attenuation and UE.Source.OneShot interfaces"
+               loading="lazy" width="388" height="1105" />
+          <figcaption>// Every input promoted on the master graph. Two interfaces do the plumbing — UE.Attenuation supplies Distance, UE.Source.OneShot supplies On Finished</figcaption>
+        </figure>
+
         <figure class="post-figure">
-          <img src="../assets/images/weapon-systems/ms-wd-fire-master-preset.webp"
-               alt="MetaSound Source preset graph showing the MS_WD_Fire_Master node with its exposed inputs for close, mid and far layers, environment settings and last-round handling"
-               loading="lazy" width="1770" height="1177" />
-          <figcaption>// MS_WD_Fire_Master — preset graph, inputs promoted for per-weapon tuning</figcaption>
+          <img src="../assets/images/weapon-systems/ms-wd-fire-master-graph.webp"
+               alt="Inside the MS_WD_Fire_Master MetaSound graph, with commented blocks for close, mid and far core elements, final bullet handling, area type float controls, attenuation ranges, tail filtering with reverb IRs, and the mono and stereo mixers"
+               loading="lazy" width="1476" height="1301" />
+          <figcaption>// Inside MS_WD_Fire_Master — core layers and final-bullet check on the left, attenuation ranges in the middle, area-type controls and tail reverb below, mixers on the right</figcaption>
         </figure>
 
           <h3>Distance does the mixing</h3>
@@ -547,14 +567,24 @@
 
           <h3>The space is an input, not a second asset</h3>
           <p><code>AreaType</code> selects the environment behaviour, and the <code>AreaEnv*</code> inputs carry the settings for it — pre-delay, gain, a low-pass corner, reverb decay and wet amount, plus <code>EnvNear</code>, <code>EnvFar</code>, <code>EnvFarGain</code> and the <code>EnvTail</code> waves. Indoors, a canyon and open ground are the same graph with a different index.</p>
+          <p>The tails run through their own filtering and reverb IRs before they reach the mix, and they are the only stereo part of the graph. Core layers stay mono so attenuation and panning can place the shot properly; the tails spread wide because that is what makes the space read. Mono mixer first, then a stereo mixer and master gain on the way out.</p>
           <p>That keeps the reflection character attached to the weapon system rather than scattered across level-side reverb volumes, and it means a designer can audition a weapon in every space without leaving the asset.</p>
 
           <h3>Last round</h3>
-          <p><code>IsLastRound</code> and <code>FinalBulletWaves</code> handle the final shot in a magazine. It is a small thing that does a lot of work — it tells the player they are about to be reloading without a single line of UI, and it stops a long burst ending on an identical sample to the twenty before it.</p>
+          <p><code>IsLastRound</code> and <code>FinalBulletWaves</code> handle the final shot in a magazine. The check sits in front of the core layers and swaps them out rather than stacking on top, so the last round is its own sound rather than the usual one with something added.</p>
+          <p>It is a small thing that does a lot of work — it tells the player they are about to be reloading without a single line of UI, and it stops a long burst ending on an identical sample to the twenty before it.</p>
 
           <h3>Why a preset</h3>
           <p>Everything above lives in the master graph once. Each weapon is a MetaSound Source preset with its own waves and its own distance numbers, so a fix to the crossfade logic lands on every weapon at the same time. <code>MasterGain</code> and <code>MaxLifetimeSeconds</code> sit on top as safety rails, and <code>On Finished</code> reports back so the voice can be cleaned up properly rather than left to time out.</p>
-          <p>Render cost reads 0.00 at rest in the screenshot, which is the point of a preset — it costs nothing until it is triggered.</p>
+
+        <figure class="post-figure">
+          <img src="../assets/images/weapon-systems/ms-wd-fire-master-preset.webp"
+               alt="Unreal Engine MetaSound editor showing the MS_WD_Fire_AR preset built on the MS_WD_Fire_Master node, with the full input list in the Members panel and MidCore set to a WaveAsset array"
+               loading="lazy" width="2551" height="1386" />
+          <figcaption>// MS_WD_Fire_AR — one weapon preset built on MS_WD_Fire_Master. Tabs along the top are separate weapons on the same master graph</figcaption>
+        </figure>
+
+          <p>The tabs in the screenshot above are the proof of it: <code>MS_WD_Fire_Master</code> alongside <code>MS_WD_Fire_AR</code> and <code>MS_WD_Fire_SG</code>, three weapons and one piece of logic. Render cost reads 0.00 at rest, which is the point of a preset — it costs nothing until it is triggered.</p>
 
           <h3>What is next</h3>
           <ul>
