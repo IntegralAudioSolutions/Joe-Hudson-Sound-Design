@@ -621,6 +621,81 @@
       letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.7;
     }
 
+    /* ── REEL CAROUSEL ── */
+    /*
+      The video sits between two arrow buttons in a flex row:
+
+        [ ‹ ]   [        video        ]   [ › ]
+
+      .index-reel-stage is the flex child that holds the video, and the
+      video keeps its own full-width box inside it. That extra wrapper is
+      not decoration: .index-reel-wrapper gets its 16:9 shape from
+      padding-bottom: 56.25%, and percentage padding is measured against
+      the PARENT's width. Drop the video straight into the flex row and it
+      would be measured against the whole row including both arrows, and
+      the box would come out too tall.
+    */
+    .index-reel-carousel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .index-reel-stage {
+      flex: 1;
+      min-width: 0;   /* allows the video to shrink inside the flex row */
+    }
+
+    /* Label and position readout share one row above the video */
+    .index-reel-labelrow {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .reel-counter {
+      margin-left: auto;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.18em;
+      white-space: nowrap;
+    }
+
+    .reel-nav {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: var(--color-bg-nav);
+      border: 1px solid var(--color-gold);
+      border-radius: 2px;
+      color: var(--color-gold);
+      font-family: var(--font-mono);
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .reel-nav:hover {
+      background: var(--color-gold);
+      color: var(--color-bg);
+    }
+
+    /*
+      :focus-visible shows the ring for people tabbing through with a
+      keyboard, but not for mouse clicks — so it helps without putting a
+      box around the button every time it is clicked.
+    */
+    .reel-nav:focus-visible {
+      outline: 2px solid var(--color-cyan);
+      outline-offset: 2px;
+    }
+
     /* ── RESPONSIVE ── */
 
 
@@ -715,6 +790,20 @@
         letter-spacing: 0.08em;
         word-spacing: 0.05em;
       }
+
+      /*
+        Carousel on mobile — narrower arrows so the video keeps as much
+        width as possible. Still a comfortable tap target: 26px wide by
+        56px tall is above the ~44px minimum in one direction, and the
+        full height is easy to hit with a thumb.
+      */
+      .index-reel-carousel { gap: 6px; }
+      .reel-nav {
+        width: 26px;
+        height: 56px;
+        font-size: 16px;
+      }
+      .reel-counter { font-size: 7px; letter-spacing: 0.1em; }
 
       /* ── CREDITS GRID ── */
       .grid-section { grid-template-columns: 1fr; }
@@ -875,15 +964,40 @@
     -->
     <div class="index-reel-sidebar" aria-hidden="true"></div>
     <div class="index-reel-content">
-      <span class="index-reel-label">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</span>
-      <div class="index-reel-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/dOTpZ7MDDEM"
-          title="Joe Hudson — Primary Demo Reel"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+
+      <div class="index-reel-labelrow">
+        <span class="index-reel-label" id="reelLabel">// Primary Demo Reel &nbsp;·&nbsp; World Building &amp; SFX Design</span>
+        <span class="reel-counter" id="reelCounter">1 / 2</span>
       </div>
+
+      <!--
+        TO ADD ANOTHER VIDEO: do not touch this markup. The list of videos
+        lives in the script at the bottom of this file — search for
+        "REEL CAROUSEL" and add an entry to reelVideos.
+
+        The first video is written out in full here rather than built by
+        the script, so that it still appears if JavaScript fails to load.
+        The arrows are the only part that needs the script.
+      -->
+      <div class="index-reel-carousel">
+
+        <button class="reel-nav" id="reelPrev" type="button" aria-label="Previous video">&lsaquo;</button>
+
+        <div class="index-reel-stage">
+          <div class="index-reel-wrapper" id="reelStage">
+            <iframe
+              src="https://www.youtube.com/embed/dOTpZ7MDDEM"
+              title="Joe Hudson — Primary Demo Reel"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+        <button class="reel-nav" id="reelNext" type="button" aria-label="Next video">&rsaquo;</button>
+
+      </div>
+
     </div>
   </div>
 
@@ -1547,6 +1661,120 @@
     if (hvp) {
       hvp.addEventListener('mouseenter', () => { resumeAudio(); if (typeof playHover === 'function') playHover(); });
       hvp.addEventListener('click', () => { resumeAudio(); if (typeof playClick === 'function') playClick('cyan'); });
+    }
+
+    /* ── REEL CAROUSEL ──────────────────────────────────────────────
+       The arrows either side of the main video step through this list.
+
+       TO ADD A VIDEO: copy one of the blocks below and change the four
+       values. Order here is the order the arrows move through.
+
+         id     The YouTube id — the part after "v=" or "youtu.be/".
+                From https://youtu.be/SCQXQxTL2_A the id is SCQXQxTL2_A
+         title  Describes the player to screen readers. Not shown.
+         label  The small mono caption above the video.
+         loop   true repeats until the viewer stops it, false plays once.
+
+       Nothing autoplays. Browsers only allow autoplay on muted video,
+       and a silent reel is pointless here, so every clip waits for a
+       click and then plays with sound.
+    ───────────────────────────────────────────────────────────────── */
+    const reelVideos = [
+      {
+        id:    'dOTpZ7MDDEM',
+        title: 'Joe Hudson — Primary Demo Reel',
+        label: '// Primary Demo Reel  ·  World Building & SFX Design',
+        loop:  false
+      },
+      {
+        id:    'SCQXQxTL2_A',
+        title: 'MS_WD_Fire_Master firing in the greybox test level',
+        label: '// Weapon Systems  ·  MS_WD_Fire_Master In The Test Level',
+        loop:  true
+      }
+    ];
+
+    const reelStage   = document.getElementById('reelStage');
+    const reelLabel   = document.getElementById('reelLabel');
+    const reelCounter = document.getElementById('reelCounter');
+    const reelPrev    = document.getElementById('reelPrev');
+    const reelNext    = document.getElementById('reelNext');
+    let   reelIndex   = 0;
+
+    if (reelStage && reelPrev && reelNext) {
+
+      const showReel = function (next) {
+        /*
+          The modulo here wraps the index round at both ends, so going
+          back from the first video lands on the last one and the arrows
+          never dead-end on a dud click.
+        */
+        reelIndex = (next + reelVideos.length) % reelVideos.length;
+        const v = reelVideos[reelIndex];
+
+        /*
+          enablejsapi=1 matters. script.js runs a "only one thing plays
+          at a time" system — starting an audio player pauses any video
+          on the page — and it talks to the YouTube player through the
+          iframe API, which only answers when this is set. script.js adds
+          it to every embed once, on page load, so any iframe built
+          afterwards has to bring its own or it quietly stops responding.
+        */
+        let src = 'https://www.youtube.com/embed/' + v.id +
+                  '?enablejsapi=1&controls=1&rel=0&playsinline=1&modestbranding=1';
+
+        /*
+          loop=1 does nothing on its own for a single video — YouTube
+          also wants playlist= set to the same id. Looks like a mistake,
+          is not.
+        */
+        if (v.loop) src += '&loop=1&playlist=' + v.id;
+
+        /*
+          Build a fresh iframe rather than changing the existing one's
+          src. Two reasons: changing src can push entries onto the
+          browser's back history, so the back button would walk through
+          the videos instead of leaving the page; and replacing the
+          element reliably stops whatever was playing before.
+        */
+        const frame = document.createElement('iframe');
+        frame.src   = src;
+        frame.title = v.title;
+        frame.setAttribute('allow', 'encrypted-media; picture-in-picture; fullscreen');
+        frame.setAttribute('allowfullscreen', '');
+
+        reelStage.innerHTML = '';
+        reelStage.appendChild(frame);
+
+        if (reelLabel)   reelLabel.textContent   = v.label;
+        if (reelCounter) reelCounter.textContent = (reelIndex + 1) + ' / ' + reelVideos.length;
+      };
+
+      const navReel = function (step) {
+        /*
+          The UI sounds live in script.js. They are guarded here so that
+          if that file ever fails to load, the arrows still change the
+          video — a decorative click sound must never be able to break
+          the navigation it is attached to.
+        */
+        if (typeof resumeAudio === 'function') resumeAudio();
+        if (typeof playClick === 'function') playClick('gold');
+        showReel(reelIndex + step);
+      };
+
+      reelPrev.addEventListener('click', () => navReel(-1));
+      reelNext.addEventListener('click', () => navReel(1));
+
+      /* Match the hover sound used by the rest of the LCARS controls */
+      [reelPrev, reelNext].forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          if (typeof resumeAudio === 'function') resumeAudio();
+          if (typeof playHover === 'function') playHover();
+        });
+      });
+
+      /* Keep the counter honest if the list is ever edited */
+      if (reelCounter) reelCounter.textContent = '1 / ' + reelVideos.length;
     }
   </script>
 
