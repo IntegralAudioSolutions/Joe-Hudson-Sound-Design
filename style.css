@@ -1128,6 +1128,42 @@ h1, h2, h3 {
 }
 
 /* Mobile — up to 600px wide */
+/* ================================================================
+   NAV COLLAPSE BREAKPOINT
+   The nav is a single non-wrapping flex row. With ten links it needs
+   roughly 780px before it runs past the right edge, so the hamburger
+   takes over below 820px rather than waiting for the 600px mobile
+   block. Only the nav collapses here — every other mobile rule still
+   starts at 600px.
+================================================================ */
+@media (max-width: 820px) {
+
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 48px;              /* directly below the nav bar */
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-bg-nav);
+    border-bottom: 2px solid var(--color-gold);
+    z-index: 99;
+    height: auto;
+  }
+
+  /* When JS adds this class, the menu opens */
+  .nav-links.is-open { display: flex; }
+
+  .nav-link {
+    padding: var(--space-md) var(--space-lg);
+    border-left: none;
+    border-bottom: 1px solid var(--color-border-gold);
+    font-size: 12px;
+  }
+}
+
 @media (max-width: 600px) {
 
   /*

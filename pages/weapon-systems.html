@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ==============================================================
+       FAVICON / APP ICONS (same set as every other page)
+       ============================================================== -->
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <meta name="theme-color" content="#080a0f" />
+
+  <!-- Open Graph + Twitter card.
+       Uses the main site share image until a page-specific one is made
+       (og-ue.jpg / og-verse.jpg would sit in assets/images/og/). -->
+  <meta property="og:locale"        content="en_GB" />
+  <meta property="og:image"         content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+  <meta property="og:image:width"   content="1200" />
+  <meta property="og:image:height"  content="630" />
+  <meta property="og:image:alt"     content="Weapon Systems — Joe Hudson · Sound Designer" />
+  <meta name="twitter:card"         content="summary_large_image" />
+  <meta name="twitter:title"        content="Weapon Systems — Joe Hudson · Sound Designer" />
+  <meta name="twitter:description"  content="MetaSound weapon systems: distance-layered gunfire, environment tails and last-round behaviour, built as reusable presets in Unreal Engine 5." />
+  <meta name="twitter:image"        content="https://joehudson.co.uk/assets/images/og/og-index.jpg" />
+
+  <!-- Structured data for search engines -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://joehudson.co.uk/pages/weapon-systems.html",
+      "url": "https://joehudson.co.uk/pages/weapon-systems.html",
+      "name": "Weapon Systems — Joe Hudson · Sound Designer",
+      "description": "MetaSound weapon systems: distance-layered gunfire, environment tails and last-round behaviour, built as reusable presets in Unreal Engine 5.",
+      "isPartOf": { "@id": "https://joehudson.co.uk/#website" },
+      "about": { "@id": "https://joehudson.co.uk/#joe" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://joehudson.co.uk/" },
+          { "@type": "ListItem", "position": 2, "name": "Weapon Systems" }
+        ]
+      },
+      "inLanguage": "en-GB"
+    }
+  ]
+}
+  </script>
+
+  <title>Weapon Systems — Joe Hudson · Technical Sound Designer</title>
+  <meta name="description" content="MetaSound weapon systems: distance-layered gunfire, environment tails and last-round behaviour, built as reusable presets in Unreal Engine 5." />
+
+  <meta property="og:title"       content="Weapon Systems — Joe Hudson · Sound Designer" />
+  <meta property="og:description" content="MetaSound weapon systems: distance-layered gunfire, environment tails and last-round behaviour, built as reusable presets in Unreal Engine 5." />
+  <meta property="og:url"         content="https://joehudson.co.uk/pages/weapon-systems.html" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="Joe Hudson — Technical Sound Designer" />
+
+  <link rel="canonical" href="https://joehudson.co.uk/pages/weapon-systems.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ================================================================
+       BLOG PAGE STYLES (shared by ue.html, verse.html, weapon-systems.html)
+       Each page sets one accent colour with --blog-accent below, so
+       the two pages feel related but are easy to tell apart.
+    ================================================================ */
+
+    :root {
+      --blog-accent:       var(--color-gold-bright);
+      --blog-accent-faint: var(--color-gold-faint);
+    }
+
+    /* ── PAGE HEADER (same pattern as disciplines.html) ── */
+
+    .page-header {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      border-bottom: 1px solid var(--color-gold-border);
+      background-image:
+        linear-gradient(rgba(212, 172, 80, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 172, 80, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .page-header-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 0;
+      gap: 8px;
+    }
+
+    .page-header-content {
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-cyan);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      color: #eef2f8;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .page-title strong { font-weight: 600; color: var(--color-gold-bright); }
+
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-text-dim);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN LAYOUT: sidebar column + content ── */
+
+    .blog-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+
+    .blog-sidebar {
+      background: var(--color-bg-nav);
+      border-right: 2px solid var(--color-gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 0;
+      gap: 8px;
+    }
+
+    .blog-content { padding: var(--space-xl); }
+
+    /* The feed is capped in width so lines stay readable on big screens */
+    .blog-feed { max-width: 860px; }
+
+    .blog-intro {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 640px;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ── ENTRY INDEX — jump links to each post ── */
+
+    .entry-index {
+      list-style: none;
+      margin: 0 0 var(--space-xl);
+      padding: 12px 16px;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+    }
+
+    .entry-index li + li { margin-top: 6px; }
+
+    .entry-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #c8d8e8;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    .entry-link:hover { color: var(--blog-accent); }
+
+    .entry-link-date {
+      color: var(--color-text-deep);
+      margin-right: 10px;
+    }
+
+    /* ── POST CARD ── */
+
+    .post {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--blog-accent);
+      border-radius: 2px;
+      padding: var(--space-lg);
+      margin-bottom: 16px;
+      /* Stops a jump link hiding the post title under the fixed nav */
+      scroll-margin-top: 80px;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .post-date   { color: var(--blog-accent); }
+    .post-status { color: var(--color-text-dim); }
+
+    .post-tag {
+      padding: 2px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      color: var(--color-text-dim);
+    }
+
+    .post-title {
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 500;
+      color: #eef2f8;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+
+    .post-body p,
+    .post-body li {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
+    .post-body p  { margin-bottom: 12px; }
+    .post-body a  { color: var(--color-cyan); }
+
+    /* Small mono sub-headings inside a post */
+    .post-body h3 {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--blog-accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 18px 0 8px;
+    }
+
+    .post-body ul { margin: 0 0 12px; padding-left: 20px; }
+    .post-body li { margin-bottom: 6px; }
+    .post-body li::marker { color: var(--blog-accent); }
+    .post-body strong { color: #c8d8e8; font-weight: 500; }
+
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #c8d8e8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 5px;
+      border-radius: 2px;
+    }
+
+    /* Code block — scrolls sideways on small screens instead of breaking the layout */
+    .post-code {
+      margin: 14px 0;
+      padding: 14px 16px;
+      background: #080a0f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-code code {
+      display: block;
+      padding: 0;
+      background: none;
+      font-size: 11.5px;
+      line-height: 1.7;
+      white-space: pre;
+      color: #c8d8e8;
+    }
+
+    .post-code .c { color: var(--color-text-deep); }
+
+    .post-note {
+      font-size: 11px !important;
+      color: var(--color-text-dim) !important;
+      border-top: 1px solid var(--color-border);
+      padding-top: 10px;
+      margin-top: 14px;
+    }
+
+    /* ── VIDEO / CLIP BOX (16:9, same padding trick as the reel boxes) ── */
+
+    .post-media { margin: 16px 0 4px; }
+
+    .post-media-box {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0a0c12;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .post-media-box iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .post-media-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .post-media-play {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 14px 0 14px 24px;
+      border-color: transparent transparent transparent rgba(255, 255, 255, 0.15);
+      margin-left: 4px;
+    }
+
+    .post-media-text {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* ── STILL IMAGE FIGURE (graph screenshots, Wwise/MetaSound captures) ── */
+
+    .post-figure { margin: 16px 0 4px; }
+
+    .post-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      background: #0a0c12;
+    }
+
+    .post-figure figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    .post-media figcaption {
+      margin-top: 8px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--color-text-deep);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── RESPONSIVE ── */
+
+    @media (max-width: 600px) {
+      .page-header { grid-template-columns: 1fr; }
+      .page-header-sidebar { display: none; }
+      .page-header-content { padding: var(--space-lg); }
+
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { display: none; }
+      .blog-content { padding: var(--space-md); }
+
+      .post { padding: var(--space-md); }
+      .entry-link-date { display: block; margin: 0 0 2px; }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="../index.html" class="nav-logo-block" aria-label="Joe Hudson — home">
+      <span class="nav-logo">JOE HUDSON</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+      <a href="../index.html"    class="nav-link">About</a>
+      <a href="reel.html"        class="nav-link">Reel</a>
+      <a href="disciplines.html" class="nav-link">Disciplines</a>
+      <a href="ue.html"          class="nav-link">UE</a>
+      <a href="uefn.html"  class="nav-link">UEFN</a>
+      <a href="verse.html"       class="nav-link">Verse</a>
+      <a href="weapons.html" class="nav-link">Weapon Designs</a>
+      <a href="weapon-systems.html" class="nav-link active">Weapon Systems</a>
+      <a href="work.html"        class="nav-link">Work</a>
+      <a href="contact.html"     class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <section class="page-header" aria-label="Page header">
+
+    <aside class="page-header-sidebar" aria-hidden="true">
+      <div class="lp lp--gold"></div>
+      <div class="lp lp--coral"></div>
+      <div class="lp lp--dim"></div>
+      <div class="lbar"></div>
+      <div class="lelbow"></div>
+    </aside>
+
+    <div class="page-header-content">
+      <p class="page-eyebrow">// MetaSounds &nbsp;·&nbsp; UE5 &nbsp;·&nbsp; Weapon Audio &nbsp;·&nbsp; Systems Design</p>
+      <h1 class="page-title">Weapon <strong>Systems</strong></h1>
+      <p class="page-subtitle">Building weapon audio systems in MetaSounds · newest first</p>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       TICKER (duplicated once so the scroll loops seamlessly)
+       ============================================================ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item ticker-item--gold">● METASOUNDS</span>
+      <span class="ticker-item ticker-item--cyan">// DISTANCE LAYERING</span>
+      <span class="ticker-item">● CLOSE · MID · FAR</span>
+      <span class="ticker-item ticker-item--gold">// ENVIRONMENT TAILS</span>
+      <span class="ticker-item ticker-item--cyan">● LAST ROUND BEHAVIOUR</span>
+      <span class="ticker-item">// NEW ENTRIES ADDED REGULARLY</span>
+      <span class="ticker-item ticker-item--gold">● METASOUNDS</span>
+      <span class="ticker-item ticker-item--cyan">// DISTANCE LAYERING</span>
+      <span class="ticker-item">● CLOSE · MID · FAR</span>
+      <span class="ticker-item ticker-item--gold">// ENVIRONMENT TAILS</span>
+      <span class="ticker-item ticker-item--cyan">● LAST ROUND BEHAVIOUR</span>
+      <span class="ticker-item">// NEW ENTRIES ADDED REGULARLY</span>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       MAIN LAYOUT
+       ============================================================ -->
+  <div class="blog-layout">
+
+    <aside class="blog-sidebar" aria-label="Quick navigation">
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+      <a href="../index.html" class="lb lb--purp"  title="Home"></a>
+      <a href="../index.html" class="lb lb--gold"  title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--coral" title="Home"></a>
+      <a href="../index.html" class="lb lb--dim"   title="Home"></a>
+      <a href="../index.html" class="lb lb--cyan"  title="Home"></a>
+    </aside>
+
+    <main class="blog-content" id="main-content">
+      <div class="blog-feed">
+
+        <p class="blog-intro">A running log of the weapon audio systems I build in MetaSounds. Each entry covers one system: what it has to do in game, how the graph is laid out, and what I would change next time. Newest entry first.</p>
+
+        <!-- Jump links to every entry. Add a line here when you add a post. -->
+        <ul class="entry-index" aria-label="Entries">
+        <li><a href="#fire-master" class="entry-link"><span class="entry-link-date">2026-11-24</span> MS_WD_Fire_Master — one graph for the whole weapon</a></li>
+        </ul>
+
+        <!--
+          ROLLING FEED — newest post at the top.
+          TO ADD A POST: copy a whole <article class="post"> … </article>
+          block, paste it directly above the current top post, then change
+          the id, date, title and text. Add a matching line to the entry
+          index above.
+        -->
+
+      <article class="post" id="fire-master">
+        <div class="post-meta">
+          <time class="post-date" datetime="2026-11-24">24 NOV 2026</time>
+          <span class="post-status">In progress</span>
+          <span class="post-tag">MetaSounds</span><span class="post-tag">UE5</span><span class="post-tag">Weapon Audio</span>
+        </div>
+        <h2 class="post-title">MS_WD_Fire_Master — one graph for the whole weapon</h2>
+        <div class="post-body">
+
+          <p>Weapon fire is rarely one sound. It is a close layer with real punch, a mid layer that carries across a street, a far crack that arrives late, and a tail that belongs to whatever space the player is standing in. Build those as separate cues and you end up maintaining four things that have to agree with each other.</p>
+
+          <p><strong>MS_WD_Fire_Master</strong> is the opposite approach: one master graph that owns every layer, wrapped as a MetaSound Source preset so each weapon is just a different set of inputs. No duplicated logic, no four-way drift.</p>
+
+        <figure class="post-figure">
+          <img src="../assets/images/weapon-systems/weapon-test-level.webp"
+               alt="First-person view of a suppressed rifle in a greybox Unreal Engine test level, open sky above and flat tiled ground"
+               loading="lazy" width="1600" height="896" />
+          <figcaption>// Greybox test level — flat ground and hard walls, so the distance layers and area types can be heard in isolation</figcaption>
+        </figure>
+
+        <figure class="post-figure">
+          <img src="../assets/images/weapon-systems/ms-wd-fire-master-preset.webp"
+               alt="MetaSound Source preset graph showing the MS_WD_Fire_Master node with its exposed inputs for close, mid and far layers, environment settings and last-round handling"
+               loading="lazy" width="1770" height="1177" />
+          <figcaption>// MS_WD_Fire_Master — preset graph, inputs promoted for per-weapon tuning</figcaption>
+        </figure>
+
+          <h3>Distance does the mixing</h3>
+          <p>The <code>Distance</code> input is fed straight from UE's attenuation system, so the graph always knows how far the listener is from the shot. Every layer then has its own crossfade window rather than a single global blend:</p>
+          <ul>
+            <li><strong>Close</strong> — <code>CloseCore</code>, <code>ClosePunch</code> and <code>CloseMech</code>, faded out between <code>CloseFadeStart</code> and <code>CloseFadeEnd</code>. Mechanical detail is the first thing to go; nobody hears the bolt from forty metres.</li>
+            <li><strong>Mid</strong> — <code>MidCore</code> with a rise <em>and</em> a fall (<code>MidRiseStart</code>/<code>MidRiseEnd</code>, <code>MidFallStart</code>/<code>MidFallEnd</code>), so it owns the middle distances and gets out of the way at both ends.</li>
+            <li><strong>Far</strong> — <code>FarCore</code> rising in across <code>FarRiseStart</code> to <code>FarRiseEnd</code>.</li>
+          </ul>
+          <p>Giving each layer independent in and out points is the part that matters. A single crossfade value forces the layers to hand over at the same distance, which is exactly when you hear the seam.</p>
+
+          <h3>The space is an input, not a second asset</h3>
+          <p><code>AreaType</code> selects the environment behaviour, and the <code>AreaEnv*</code> inputs carry the settings for it — pre-delay, gain, a low-pass corner, reverb decay and wet amount, plus <code>EnvNear</code>, <code>EnvFar</code>, <code>EnvFarGain</code> and the <code>EnvTail</code> waves. Indoors, a canyon and open ground are the same graph with a different index.</p>
+          <p>That keeps the reflection character attached to the weapon system rather than scattered across level-side reverb volumes, and it means a designer can audition a weapon in every space without leaving the asset.</p>
+
+          <h3>Last round</h3>
+          <p><code>IsLastRound</code> and <code>FinalBulletWaves</code> handle the final shot in a magazine. It is a small thing that does a lot of work — it tells the player they are about to be reloading without a single line of UI, and it stops a long burst ending on an identical sample to the twenty before it.</p>
+
+          <h3>Why a preset</h3>
+          <p>Everything above lives in the master graph once. Each weapon is a MetaSound Source preset with its own waves and its own distance numbers, so a fix to the crossfade logic lands on every weapon at the same time. <code>MasterGain</code> and <code>MaxLifetimeSeconds</code> sit on top as safety rails, and <code>On Finished</code> reports back so the voice can be cleaned up properly rather than left to time out.</p>
+          <p>Render cost reads 0.00 at rest in the screenshot, which is the point of a preset — it costs nothing until it is triggered.</p>
+
+          <h3>What is next</h3>
+          <ul>
+            <li>Weighting the wave arrays so the less characterful takes come up more often than the standouts.</li>
+            <li>A tail variant that survives the player moving during the shot, rather than being chosen once at trigger time.</li>
+            <li>Indoor occlusion feeding the same <code>AreaEnv</code> path instead of running as a separate chain.</li>
+          </ul>
+
+          <p class="post-note"><strong>Note:</strong> work in progress — parameter names and ranges are still moving as the system is tested against more weapons.</p>
+        </div>
+      </article>
+
+        <div class="cta" style="padding: var(--space-lg) 0 0;">
+          <a href="weapons.html" class="btn btn--ghost">Weapon designs →</a>
+          <a href="ue.html" class="btn btn--ghost">UE dev log →</a>
+          <a href="contact.html" class="btn btn--cyan">Get in Touch →</a>
+        </div>
+
+      </div><!-- /blog-feed -->
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-elbow" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <p class="footer-text">Integral Audio Solutions Ltd &nbsp;·&nbsp; Registered in England &amp; Wales</p>
+      <nav class="footer-links" aria-label="Social and contact links">
+        <a href="https://www.linkedin.com/in/joehudsonsounddesign" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <script src="../script.js"></script>
+
+  <script>
+    /* ── POSTS AND INDEX LINKS — same hover/click sounds as the rest of the site ── */
+
+    document.querySelectorAll('.post, .entry-link').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (typeof playHover === 'function') playHover();
+      });
+      el.addEventListener('click', () => {
+        if (typeof playClick === 'function') playClick('gold');
+      });
+    });
+  </script>
+
+  <script data-goatcounter="https://joehudson.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
