@@ -347,6 +347,113 @@
       .project-content { padding: var(--space-md); }
       .ribbon-img { height: 110px; }
     }
+
+    /* ── Weapon audio, copied from pages/weapons.html ── */
+    .sound-showcase { padding: var(--space-lg) 0 0; }
+    .sound-note {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; margin-bottom: var(--space-lg);
+    }
+    .sound-group { margin-bottom: var(--space-lg); }
+    /*
+      The group heading doubles as the separator between groups: the
+      label, then a hairline running out to the right edge.
+    */
+    .sound-group-title {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-cyan);
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sound-group-title::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    /*
+      SOUND LAYOUT. All of a weapon's sounds sit in one .sound-cols
+      grid: two equal columns with no visible divider. Groups fill it
+      row by row, left then right, so list them in the order they
+      should be read. A group that needs the full width (the five part
+      Brush Off reload) takes the extra class sound-group--wide, and a
+      .seq demo button always spans both columns. clear: both starts
+      the grid below the floated schematic.
+    */
+    .sound-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md) var(--space-xl);
+      align-items: start;
+      clear: both;
+    }
+    .sound-cols .sound-group { margin-bottom: 0; }
+    .sound-cols .sound-group--wide,
+    .sound-cols .seq { grid-column: 1 / -1; }
+    .sound-cols .seq { margin-bottom: 0; }
+    /* Half width columns: the players can be a little narrower */
+    .sound-cols .sound-grid { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
+    .sound-cols .sound-group--wide .sound-grid { grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); }
+    /* Too narrow for two columns: one column */
+    @media (max-width: 760px) {
+      .sound-cols { grid-template-columns: 1fr; }
+    }
+
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 8px;
+    }
+    .sound-item {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 8px 10px;
+    }
+    .sound-item-label {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-dim);
+      letter-spacing: 0.06em;
+    }
+    .sound-item audio { width: 100%; accent-color: var(--color-cyan); }
+    @media (max-width: 600px) {
+      /* The extra selectors are needed because .sound-cols .sound-grid
+         is more specific than .sound-grid, so it would otherwise keep
+         two cramped players per row on a phone. */
+      .sound-grid,
+      .sound-cols .sound-grid,
+      .sound-cols .sound-group--wide .sound-grid { grid-template-columns: 1fr; }
+    }
+    .zap-intro { margin-bottom: var(--space-lg); }
+    /* No schematic on this weapon yet, so stop the copy running full width */
+    .zap-intro--full .zap-text { max-width: 70ch; }
+    .zap-text p { font-size: 14px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: var(--space-md); }
+    /*
+      The schematic floats left so the intro copy wraps around it,
+      rather than sitting in a column of its own with empty space
+      underneath. The sound grid below clears it.
+    */
+    .zap-figure {
+      float: left;
+      width: 300px;
+      margin: 0 var(--space-xl) var(--space-md) 0;
+      background: var(--color-bg-surface);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden;
+    }
+    /* Keeps the float inside its own weapon section */
+    .sound-showcase::after { content: ''; display: block; clear: both; }
+    .zap-figure img { display: block; width: 100%; height: auto; }
+    .zap-figure figcaption {
+      font-family: var(--font-mono); font-size: 9px; color: var(--color-text-deep);
+      letter-spacing: 0.08em; padding: 8px 12px;
+    }
+    /* Too narrow to float beside: the schematic goes back above the copy */
+    @media (max-width: 900px) {
+      .zap-figure { float: none; width: 100%; max-width: 320px; margin: 0 auto var(--space-lg); }
+    }
+    /* Icon-style weapon image (square, transparent) sits centred on its card */
+    .zap-figure--icon { display: flex; flex-direction: column; align-items: center; width: 160px; }
+    .zap-figure--icon img { width: 100%; max-width: 360px; padding: var(--space-xs); }
+    .zap-figure--icon figcaption { align-self: stretch; }
+    /* Page-level section spacing + jump links */
+    .weapon-block { scroll-margin-top: 72px; }
   </style>
 </head>
 
@@ -465,6 +572,242 @@
       </div>
 
     
+      <!-- ============================================================
+           BLACK METAL WEAPON AUDIO
+           The same three weapons that appear on pages/weapons.html,
+           repeated here the way the Zapotron appears on both
+           weapons.html and the Save the World credit page.
+           MP3s are shared: assets/audio/black-metal-*/ — there is only
+           one copy of each file, both pages point at it.
+           A line of copy saying what these weapons have to do with this
+           season would sit well just below, before the first heading.
+           ============================================================ -->
+      <div class="weapon-block" id="black-metal-ar-primal">
+      <!-- ============================================================
+           BLACK METAL ASSAULT RIFLE — WEAPON AUDIO
+           MP3 previews live in assets/audio/black-metal-assault-rifle/.
+           Joe's written account of the design work goes in .zap-text.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Black Metal assault rifle sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Black Drum — Black Metal Assault Rifle · Weapon Audio</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../../assets/images/weapons/Black_Drum_-_Schematic_-_Save_the_World.webp" alt="Black Drum, a assault rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Black Drum</figcaption>
+        </figure>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>Black Drum is an assault rifle from the Black Metal set in Fortnite Save the World.</p>
+            <p>The firing is one shot per round rather than a sustained loop, with four variations close and three distant. The reload is split into start, mid and end, the same three-part approach as The Mouth Piece.</p>
+            <p>Have a listen below.</p>
+          </div>
+        </div>
+
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 02</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-assault-rifle/blackmetal-ar-fire-close-02.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+          <!-- Start, mid and end again, the same three-part split as The Mouth Piece -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Insert Mid 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-insert-mid-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-assault-rifle/blackmetal-ar-reload-end.mp3"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
+      <div class="weapon-block" id="black-metal-shotgun-primal">
+      <!-- ============================================================
+           BLACK METAL SHOTGUN — WEAPON AUDIO
+           MP3 previews live in assets/audio/black-metal-shotgun/.
+           The three reload files are named STW_BlackMetal_Reload_*
+           with no weapon in the name, so they may be shared across
+           the set rather than belonging to the shotgun alone.
+           Joe's written account of the design work goes in .zap-text.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Black Metal shotgun sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Blackout — Black Metal Shotgun · Weapon Audio</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../../assets/images/weapons/Blackout_-_Schematic_-_Save_the_World.webp" alt="Blackout, a shotgun from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Blackout</figcaption>
+        </figure>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>Blackout is a shotgun from the Black Metal set in Fortnite Save the World.</p>
+            <p>The firing was built at three distances &mdash; close, medium and distant &mdash; with three variations at each. Alongside the reload there are degrade and destroy sounds, for the weapon wearing down and breaking.</p>
+            <p>Have a listen below.</p>
+          </div>
+        </div>
+
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 02</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-fire-close-02.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-reload-start.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload In</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-reload-in.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-reload-end.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weapon durability wearing down, and the weapon breaking -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Degrade &amp; Destroy</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Degrade</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-degrade.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Destroy</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-shotgun/blackmetal-sg-destroy.mp3"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
+      <div class="weapon-block" id="black-metal-sniper-primal">
+      <!-- ============================================================
+           BLACK METAL SNIPER — WEAPON AUDIO
+           MP3 previews live in assets/audio/black-metal-sniper/.
+           Joe's written account of the design work goes in .zap-text.
+           ============================================================ -->
+      <section class="sound-showcase" aria-label="Black Metal sniper sound design examples">
+        <div class="section-header">
+          <h2 class="section-tag">Midnight Stalker — Black Metal Sniper · Weapon Audio</h2>
+          <div class="section-line"></div>
+        </div>
+
+        <figure class="zap-figure zap-figure--icon">
+          <img src="../../assets/images/weapons/Midnight_Stalker_-_Schematic_-_Save_the_World.webp" alt="Midnight Stalker, a sniper rifle from the Black Metal set in Fortnite Save the World" width="512" height="512" loading="lazy" />
+          <figcaption>// Midnight Stalker</figcaption>
+        </figure>
+
+        <div class="zap-intro">
+          <div class="zap-text">
+            <p>Midnight Stalker is a sniper rifle from the Black Metal set in Fortnite Save the World.</p>
+            <p>The firing was built at three distances &mdash; close, medium and distant &mdash; with two variations at each, and the reload is split into start, in and end. This one also has handling sounds for the weapon being picked up and dropped.</p>
+            <p>Have a listen below.</p>
+          </div>
+        </div>
+
+        <div class="sound-cols">
+          <div class="sound-group">
+            <p class="sound-group-title">// Fire</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-fire-close-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Fire Close 02</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-fire-close-02.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+          <div class="sound-group">
+            <p class="sound-group-title">// Reload</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Reload Start 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-reload-start-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload In 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-reload-in-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Reload End 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-reload-end-01.mp3"></audio>
+              </div>
+            </div>
+          </div>
+
+          <!-- Handling sounds — the weapon being picked up off the ground and put down -->
+          <div class="sound-group">
+            <p class="sound-group-title">// Pick Up &amp; Drop</p>
+            <div class="sound-grid">
+              <div class="sound-item">
+                <span class="sound-item-label">Pick Up 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-pickup-01.mp3"></audio>
+              </div>
+              <div class="sound-item">
+                <span class="sound-item-label">Drop 01</span>
+                <audio controls preload="none" src="../../assets/audio/black-metal-sniper/blackmetal-sn-drop-01.mp3"></audio>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      </div>
+
+      <div class="cta" style="padding:0">
+        <a href="../weapons.html" class="btn btn--ghost">All Weapons &rarr;</a>
+        <a href="../contact.html" class="btn btn--cyan">Get in Touch &rarr;</a>
+      </div>
+
+
       <!-- Sequential navigation through the full credit list, newest to oldest -->
       <nav class="projnav" aria-label="Credit navigation">
         <a class="projnav-link projnav-prev" href="ascent.html">
